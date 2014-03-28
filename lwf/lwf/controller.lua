@@ -31,7 +31,7 @@ end
 
 -- Handle the Resuqt:
 function Controller:_handler(request,response,...)
-    local method=string.lower(ngx.var.request_method)
+    local method=string.lower(request.method)
 
 	local filename = table.concat({...})
 	local fp = load_fp(filename)
@@ -45,13 +45,13 @@ function Controller:_handler(request,response,...)
 		if type(handler)=="function" then
 			-----
 			if fp.before then
-				fp.before(request,response)
+				fp.before(request,response, unpack(args))
 			end
 			-----
 			handler(request, response, unpack(args))
 			-----
 			if fp.after then
-				fp.after(request,response)
+				fp.after(request,response, unpack(args))
 			end
 		end
 	end)
