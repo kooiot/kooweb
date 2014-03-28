@@ -5,6 +5,23 @@ local lwfdebug = require 'lwf.debug'
 
 local class = {}
 
+local function concat_path(base, path, default)
+	local path = path or default
+	if path[1] ~= '/' then
+		path = base..'/'..path
+	end
+	return path..'/'
+end
+
+local function translate_config(path, c)
+	c.config.templates = concat_path(path, c.config.templates, 'templates')
+	c.config.controller = concat_path(path, c.config.controller, 'controller')
+	local static = c.config.static
+	if static then
+		c.config.static = concat_path(path, static, 'static')
+	end
+end
+
 local function new(lwf, name, path)
 	local app = {
 		lwf = lwf,
@@ -16,6 +33,7 @@ local function new(lwf, name, path)
     local r, c = util.loadfile_with_env(app_config, app)
 	assert(r)
 	assert(c)
+	translate_config(c)
 	for k, v in pairs(c) do
 		app[k] = v
 	end
@@ -53,7 +71,6 @@ function class:init()
 end
 
 function class:dispatch()
-
     local uri = lwf.var.REQUEST_URI
 	local ctx = lwf.ctx
 

@@ -2,6 +2,9 @@
 local functional = require 'lwf.functional'
 local util = require 'lwf.util'
 local logger = require 'lwf.logger'
+local lwfstatic = require 'lwf.static'
+local controller = require 'controller'
+local auto_controller = require 'controller.auto'
 
 local function route_sorter(l, r)
 	local luri = l[1]
@@ -16,7 +19,8 @@ end
 
 local function _map(app, route_map, uri, func_name)
     local mod_name, fn = string.match(func_name, '^(.+)%.([^.]+)$')
-	local mod_file = app.app_path..'/app/'..mod_name..'.lua'
+	mod_name = mod_name:sub('%.', '/')
+	local mod_file = app.config.controller..mod_name..'.lua'
 	local _, h = util.loadfile_with_env(mod_file)
     local func = h[fn]
     if func then
@@ -44,13 +48,35 @@ local function create_map_func(app)
 	end
 end
 
+local function static(app, route_map, uri, func_name)
+	local s = lwfstatic.new(app, func_name)
+	table.insert(route_map, {uri, s})
+end
+
+local function create_static_func(app)
+	local static = static
+	local app = app
+	local route_map = app.route_map
+	return function(...)
+		static(app, route_map, ...)
+	end
+end
+
 local function setup(app, file)
 	app.route_map = app.route_map or {}
+	if app.config.static then
+		table.insert(app.route_map, {'^/static/(.+)', lwfstatic.new(app, app.config.static)})
+	end
 	local env = {}
 	env.map = create_map_func(app)
+	env.static = create_static_func(app)
 	env.print = print
 	
 	util.loadfile_with_env(file, env)
+
+	if app.config.route and  app.config.route == 'auto' then
+		table.insert(app.route_map, {'^/(.+)', controller.new(app, app.config.controller)})
+	end
 end
 
 function merge_routings(main_app, subapps)

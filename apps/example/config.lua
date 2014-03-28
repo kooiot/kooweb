@@ -4,12 +4,15 @@
 --
 return {
 	config={
-		templates="templates",
+		--templates = "templates", -- default is templates
+		--controller = 'controller', -- default is controller
+		static = 'static', -- default will not enable static file access
+		router = 'auto', -- auto: restful controller.
 	},
 
 	debug={
-		on=true,
-		to="response", -- "ngx.log"
+		on = true,
+		to = "response", -- "logger"
 	},
 
 	subapps={

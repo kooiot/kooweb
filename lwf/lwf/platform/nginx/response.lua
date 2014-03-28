@@ -7,9 +7,10 @@ local logger		= require 'lwf.logger'
 
 local Response={ltp=ltp}
 
-local function new(lwf)
+local function new(lwf, app)
     local ret={
 		lwf = lwf,
+		app = app,
         headers=ngx.header,
         _cookies={},
         _output={},
@@ -163,18 +164,18 @@ local ltp_templates_cache={}
 local function ltp_function(template)
     ret=ltp_templates_cache[template]
     if ret then return ret end
-    local tdata=util.read_all(ngx.var.LWF_APP_PATH .. "/templates/" .. template)
+    local tdata=util.read_all(self.app.config.templates.. template)
     -- find subapps' templates
     if not tdata then
         tdata=(function(appname)
-                   subapps=lwfvars.get(appname,"APP_CONFIG").subapps or {}
+                   subapps = self.app.subapps or {}
                    for k,v in pairs(subapps) do
-                       d=util.read_all(v.path .. "/templates/" .. template)
+                       d=util.read_all(v.config.templates .. template)
                        if d then return d end
                    end
-               end)(ngx.ctx.LWF_APP_NAME)
+               end)(self.app.app_name)
     end
-    local rfun = ltp.load_template(tdata, '<?lua','?>')
+    local rfun = ltp.load_template(tdata, '<?','?>')
     ltp_templates_cache[template]=rfun
     return rfun
 end
@@ -187,6 +188,11 @@ function Response:ltp(template,data)
     ltp.execute_template(rfun, data, output)
     self:write(output)
     return output
+end
+
+function Response:sendfile(filename)
+	local str = util.read_all(filename)
+	self:write(str)
 end
 
 return {
