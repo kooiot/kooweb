@@ -1,10 +1,11 @@
 
 local Request = {}
 
-local function new()
+local function new(lwf)
     local ngx_var = ngx.var
     local ngx_req = ngx.req
     local ret = {
+		lwf				= lwf,
         method          = ngx_var.request_method,
         schema          = ngx_var.schema,
         host            = ngx_var.host,

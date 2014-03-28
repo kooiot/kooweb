@@ -1,4 +1,5 @@
 
+local logger = require 'lwf.logger'
 local lpeg = require 'lpeg'
 --local cjson = require 'cjson.safe'
 local cjson = require 'cjson'
@@ -156,29 +157,6 @@ function _M.sendmail(args, config)
 end
 
 -----------------------------------------------------------------------------
--- Creates a logger instance.
------------------------------------------------------------------------------
-function _M.make_logger(module_name, params, level)
-   if module_name then
-      require("logging."..module_name)
-      local logger, err = logging[module_name](unpack(params))
-      assert(logger, "Could not initialize logger: "..(err or ""))
-      if level then 
-         require("logging")
-         logger:setLevel(logging[level])
-      end
-      return logger
-   else
-      return {
-         debug = function(...) end, -- do nothing
-         info  = function(...) end,
-         error = function(...) end,
-         warn  = function(...) end,
-      }
-   end
-end
-
------------------------------------------------------------------------------
 -- 
 -----------------------------------------------------------------------------
 function _M.build_url (parts)
@@ -283,18 +261,27 @@ do
 	end
 end
 
+function _M.read_all(filename)
+	local file = io.open(filename, "r")
+	local data = ((file and file:read("*a")) or nil)
+	if file then
+		file:close()
+	end
+	return data
+end
+
 function _M.loadfile_with_env(file, env)
 	local f, err = loadfile(file, nil, env)
 	if not f then
-		return nil, 'Loading file '..file..' failed, error: '..err
+		return nil, err
 	end
 
 	local r, re = pcall(f)
 	if not r then
-		return nil, 'Executing file '..file..' failed, error: '..re
+		assert(r, re)
 	end
 
-	return r, env
+	return r, re
 end
 
 function _M.to_json (obj)

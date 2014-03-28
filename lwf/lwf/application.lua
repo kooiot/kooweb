@@ -16,7 +16,9 @@ local function new(lwf, name, path)
     local r, c = util.loadfile_with_env(app_config, app)
 	assert(r)
 	assert(c)
-	app = c
+	for k, v in pairs(c) do
+		app[k] = v
+	end
 	assert(app.app_name)
 	assert(app.app_path)
 	assert(app.lwf)
@@ -52,7 +54,8 @@ end
 
 function class:dispatch()
 
-    local uri         = lwf.var.REQUEST_URI
+    local uri = lwf.var.REQUEST_URI
+	local ctx = lwf.ctx
 
     local page_found  = false
     -- match order by definition order
@@ -64,10 +67,10 @@ function class:dispatch()
         if args and #args>0 then
             page_found = true
 
-            local requ = lwf.Request.new()
-            local resp = lwf.Response.new()
-            ctx.request  = requ
-            ctx.response = resp
+            local requ = lwf.create_request()
+            local resp = lwf.create_response()
+            lwf.ctx.request  = requ
+            lwf.ctx.response = resp
 
             if type(v) == "function" then                
                 if lwfdebug then lwfdebug.debug_clear() end
@@ -82,6 +85,8 @@ function class:dispatch()
                 lwf.exit(500)
             end
             break
+		else
+			print('Matching '..uri..' '..k)
         end
     end
 

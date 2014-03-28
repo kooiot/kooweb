@@ -94,8 +94,7 @@ local function debug_utils()
 end
 
 
-local debug_hook, debug_clear, debug_info = debug_utils()
-
+_M.debug_hook, _M.debug_clear, _M.debug_info = debug_utils()
 
 function _M.debug_info2html()
     

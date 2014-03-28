@@ -1,13 +1,15 @@
 
-local util    = require('lwf.util')
-local lwfdebug   = require("lwf.debug")
-local functional = require('lwf.functional')
-local ltp        = require("ltp.template")
+local util			= require 'lwf.util'
+local lwfdebug		= require 'lwf.debug'
+local functional	= require 'lwf.functional'
+local ltp			= require 'ltp.template'
+local logger		= require 'lwf.logger'
 
 local Response={ltp=ltp}
 
-local function new()
+local function new(lwf)
     local ret={
+		lwf = lwf,
         headers=ngx.header,
         _cookies={},
         _output={},
@@ -41,19 +43,18 @@ function Response:do_defers()
         for _, f in ipairs(self._defer) do
             local ok, err = pcall(f)
             if not ok then
-                logger:e('Error while doing defers: %s', err)
+                logger:error('Error while doing defers: %s', err)
             end
         end
     else
-        ngx.log(ngx.ERR, "response is not finished")
+        logger:error("response is not finished")
     end
 end
 
 function Response:write(content)
     if self._eof==true then
         local error_info = "Moochine WARNING: The response has been explicitly finished before."
-        logger:w(error_info)
-        ngx.log(ngx.ERR, error_info)
+        logger:warn(error_info)
         return
     end
 
@@ -63,8 +64,7 @@ end
 function Response:writeln(content)
     if self._eof==true then
         local error_info = "Moochine WARNING: The response has been explicitly finished before."
-        logger:w(error_info)
-        ngx.log(ngx.ERR, error_info)
+        logger:warn(error_info)
         return
     end
 
@@ -108,14 +108,14 @@ function Response:set_cookie(key, value, encrypt, duration, path)
 end
 
 function Response:debug()
-    local debug_conf = util.get_config("debug")
-    local target = "ngx.log"
+    local debug_conf = self.lwf.debug
+    local target = "logger"
     if debug_conf and type(debug_conf)=="table" then target = debug_conf.to or target end
     if target=="response" and string.match(self.headers['Content-Type'] or '', '^text/.*html') then
         -- seems to be no way to get default_type?
         self:write(lwfdebug.debug_info2html())
-    elseif target=="ngx.log" then
-        ngx.log(ngx.DEBUG, lwfdebug.debug_info2text())
+    elseif target=="logger" then
+        logger:debug(lwfdebug.debug_info2text())
     end
     lwfdebug.debug_clear()
 end
@@ -127,8 +127,7 @@ function Response:error(info)
         self.headers['Content-Type'] = 'text/html; charset=utf-8'
         self:write(error_info)
     end
-    logger:e(error_info)
-    --ngx.log(ngx.ERR, error_info)
+    logger:error(error_info)
 end
 
 function Response:is_finished()
@@ -140,7 +139,7 @@ function Response:finish()
         return
     end
 
-    local debug_conf=util.get_config("debug")
+    local debug_conf = self.lwf.debug
     if debug_conf and type(debug_conf)=="table" and debug_conf.on then
         self:debug()
     end
@@ -150,7 +149,7 @@ function Response:finish()
     self._output = nil
     local ok, ret = pcall(ngx.eof)
     if not ok then
-        ngx.log(ngx.ERR, "ngx.eof() error:", ret)
+        logger:error("ngx.eof() error:", ret)
     end
 end
 
