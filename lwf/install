@@ -1,0 +1,34 @@
+#!/usr/bin/env lua
+
+HELP_INFO  = [==[
+Usage:
+      lwf new <APP_NAME> <APP_PATH> : create a new lwf app
+      lwf help                      : show this help
+]==]
+
+NGINX_CONF = [==[
+        location / {
+            #...
+            default_type text/html;
+            set $LWF_HOME '__LWF_HOME__';
+            set $LWF_APP_NAME  '__LWF_APP_NAME__'; 
+            set $LWF_APP_PATH  '__LWF_APP_PATH__';
+            access_by_lua_file '$LWF_HOME/lwf_acc.lua';
+            content_by_lua_file '$LWF_HOME/lwf.lua';
+            #...
+        }
+]==]
+
+AVAILABLE_CMD={"new","help"}
+
+function __FILE__() return debug.getinfo(2,'S').source end
+
+function show_help_and_exit()
+    print(HELP_INFO)
+    os.exit()
+end
+
+function new_app(name,path)
+end
+
+print(HELP_INFO)
