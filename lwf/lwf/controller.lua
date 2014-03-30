@@ -1,5 +1,7 @@
 
-local lwfdebug=require("lwf.debug")
+local lwfdebug = require 'lwf.debug'
+local util = require 'lwf.util'
+local logger = require 'lwf.logger'
 
 local function default_handler(request,response,...)
 	print('default_handler')
@@ -10,11 +12,11 @@ local Controller={}
 
 local function new(app, path)
 	local path = path or app.app_path..'/controller/'
-    local o = {app = app, path = path}
-    return setmetatable(o, {_class=Controller})
+    local o = {app = app, path = path, __name="Controller"}
+    return setmetatable(o, {__index=Controller})
 end
 
-function load_fp(filename)
+function Controller:__load_fp(filename)
 	local filename = self.path..filename..'.lua'
 	local r, fp = util.loadfile_with_env(filename)
 	if not r then
@@ -33,8 +35,14 @@ end
 function Controller:_handler(request,response,...)
     local method=string.lower(request.method)
 
-	local filename = table.concat({...})
-	local fp = load_fp(filename)
+	local app_name, filename = string.match(table.concat({...}), '^([^/]+)/?(.-)$')
+	app_name = app_name or self.app.app_name
+	assert(app_name == self.app.app_name)
+	if not filename or filename == "" then
+		filename = 'index'
+	end
+
+	local fp = self:__load_fp(filename)
     local handler= fp[method] or function(...) return 
 		self:dummy_handler(...)
 	end
@@ -59,10 +67,6 @@ function Controller:_handler(request,response,...)
     if not ok then
 		response:error(ret)
 	end
-
-    response:finish()
-    response:do_defers()
-    response:do_last_func()
 end
 
 return {

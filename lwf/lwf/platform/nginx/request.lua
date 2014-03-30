@@ -1,4 +1,5 @@
 
+local util = require 'lwf.util'
 local Request = {}
 
 local function new(lwf)
@@ -23,7 +24,8 @@ local function new(lwf)
         content_type    = ngx_var.content_type,
         content_length  = ngx_var.content_length,
         uri_args        = ngx_req.get_uri_args(),
-        socket          = ngx_req.socket
+        socket          = ngx_req.socket,
+		cookies			= nil,
     }
 
     return setmetatable(ret, {__index=Request})
@@ -82,15 +84,14 @@ function Request:read_body()
     self.post_args = ngx_req.get_post_args()
 end
 
-function Request:get_cookie(key, decrypt)
-    local value = ngx.var['cookie_'..key]
+function Request:get_cookie(key)
+	if self.cookies then
+		return self.cookies[key]
+	end
 
-    if value and value~="" and decrypt==true then
-        value = ndk.set_var.set_decode_base64(value)
-        value = ndk.set_var.set_decrypt_session(value)
-    end
-
-    return value
+	local s_cookie = self.headers['Cookie']
+	self.cookies = util.parse_cookie_string(s_cookie)
+	return self.cookies[key]
 end
 
 function Request:rewrite(uri, jump)

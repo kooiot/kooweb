@@ -7,10 +7,9 @@ local logger		= require 'lwf.logger'
 
 local Response={ltp=ltp}
 
-local function new(lwf, app)
+local function new(lwf)
     local ret={
 		lwf = lwf,
-		app = app,
         headers=ngx.header,
         _cookies={},
         _output={},
@@ -77,7 +76,7 @@ function Response:redirect(url, status)
     ngx.redirect(url, status)
 end
 
-function Response:_set_cookie(key, value, encrypt, duration, path)
+function Response:_set_cookie(key, value, duration, path)
     if not value then return nil end
     
     if not key or key=="" or not value then
@@ -92,20 +91,16 @@ function Response:_set_cookie(key, value, encrypt, duration, path)
         path = "/"
     end
 
-    if value and value~="" and encrypt==true then
-        value=ndk.set_var.set_encrypt_session(value)
-        value=ndk.set_var.set_encode_base64(value)
-    end
-
     local expiretime=ngx.time()+duration
     expiretime = ngx.cookie_time(expiretime)
     return table.concat({key, "=", value, "; expires=", expiretime, "; path=", path})
 end
 
-function Response:set_cookie(key, value, encrypt, duration, path)
-    local cookie=self:_set_cookie(key, value, encrypt, duration, path)
+function Response:set_cookie(key, value, duration, path)
+    local cookie=self:_set_cookie(key, value, duration, path)
     self._cookies[key]=cookie
-    ngx.header["Set-Cookie"]=lwf.functional.table_values(self._cookies)
+	print('Cookie :'..cookie)
+    ngx.header["Set-Cookie"] = functional.table_values(self._cookies)
 end
 
 function Response:debug()
@@ -161,33 +156,38 @@ LTP Template Support
 
 local ltp_templates_cache={}
 
-local function ltp_function(template)
+function Response:__ltp_function(template)
+	local lwf = self.lwf
     ret=ltp_templates_cache[template]
     if ret then return ret end
-    local tdata=util.read_all(self.app.config.templates.. template)
+    local tdata=util.read_all(lwf.app.config.templates.. template)
     -- find subapps' templates
     if not tdata then
         tdata=(function(appname)
-                   subapps = self.app.subapps or {}
+                   subapps = lwf.app.subapps or {}
                    for k,v in pairs(subapps) do
                        d=util.read_all(v.config.templates .. template)
                        if d then return d end
                    end
-               end)(self.app.app_name)
+               end)(lwf.app.app_name)
     end
-    local rfun = ltp.load_template(tdata, '<?','?>')
-    ltp_templates_cache[template]=rfun
-    return rfun
+	if not tdata then
+		tdata = "Template file is not exist"
+	end
+
+	local rfun = ltp.load_template(tdata, '<?','?>')
+	ltp_templates_cache[template]=rfun
+	return rfun
 end
 
 function Response:ltp(template,data)
-    local rfun=ltp_function(template)
+    local rfun = self:__ltp_function(template)
     local output = {}
-    local mt={__index=_G}
-    setmetatable(data,mt)
-    ltp.execute_template(rfun, data, output)
-    self:write(output)
-    return output
+	local mt={__index=_G}
+	setmetatable(data,mt)
+	ltp.execute_template(rfun, data, output)
+	self:write(output)
+	return output
 end
 
 function Response:sendfile(filename)

@@ -1,4 +1,6 @@
 
+local logger = require 'lwf.logger'
+
 local class = {}
 local _M = {}
 
@@ -13,6 +15,7 @@ end
 function class:_handler(request, response, filename)
 	if filename then
 		filename = self.path..filename
+		logger:debug('static file '..filename)
 		return response:sendfile(filename)
 	end
 	response:finish()

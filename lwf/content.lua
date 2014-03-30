@@ -4,6 +4,8 @@ local platform = require 'lwf.platform'
 local application = require 'lwf.application'
 local logger = require 'lwf.logger'
 
+local lwf = {}
+
 local function get_apps(app_name)
 	local inited = inited or {}
 	return inited[app_name]
@@ -21,7 +23,7 @@ local function setup_app(ctx)
 end
 
 local function content()
-	lwf = platform('nginx')
+	lwf = platform('nginx', lwf)
 
     local ctx = lwf.ctx
 

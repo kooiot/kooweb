@@ -1,7 +1,7 @@
 
-return function(platform)
+return function(platform, ...)
 	local pmn = 'lwf.platform.'..platform
 	local p = require(pmn)
-	return p.init(_M)
+	return p.init(...)
 end
 

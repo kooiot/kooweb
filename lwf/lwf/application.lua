@@ -2,6 +2,7 @@
 local util = require 'lwf.util'
 local router = require 'lwf.router'
 local lwfdebug = require 'lwf.debug'
+local session = require 'lwf.session'
 
 local class = {}
 
@@ -22,6 +23,11 @@ local function translate_config(path, c)
 	end
 end
 
+local function translate_session(c)
+	c.session.key = c.session.key or 'lwf_session'
+	assert(c.session.salt)
+end
+
 local function new(lwf, name, path)
 	local app = {
 		lwf = lwf,
@@ -33,7 +39,10 @@ local function new(lwf, name, path)
     local r, c = util.loadfile_with_env(app_config, app)
 	assert(r)
 	assert(c)
-	translate_config(c)
+	translate_config(path, c)
+	if c.session then
+		translate_session(c)
+	end
 	for k, v in pairs(c) do
 		app[k] = v
 	end
@@ -48,7 +57,7 @@ local function new(lwf, name, path)
 end
 
 function class:init()
-	local has_subapps = type(self.subapps) == "table"
+	local has_subapps = type(self.subapps) == "table" and #self.subapps ~= 0
     
     if has_subapps then
         for k, t in pairs(self.subapps) do
@@ -71,6 +80,7 @@ function class:init()
 end
 
 function class:dispatch()
+	local lwf = self.lwf
     local uri = lwf.var.REQUEST_URI
 	local ctx = lwf.ctx
 
@@ -82,6 +92,7 @@ function class:dispatch()
 
         local args = {string.match(uri, k)}
         if args and #args>0 then
+			--print('Matched '..uri..' '..k)
             page_found = true
 
             local requ = lwf.create_request()
@@ -89,25 +100,31 @@ function class:dispatch()
             lwf.ctx.request  = requ
             lwf.ctx.response = resp
 
+			lwf.ctx.session  = session.new(self.session)
+			lwf.ctx.session:read(requ)
+
             if type(v) == "function" then                
                 if lwfdebug then lwfdebug.debug_clear() end
                 local ok, ret = pcall(v, requ, resp, unpack(args))
                 if not ok then resp:error(ret) end
-                resp:finish()
-                resp:do_defers()
-                resp:do_last_func()
             elseif type(v) == "table" then
                 v:_handler(requ, resp, unpack(args))
             else
                 lwf.exit(500)
             end
+
+			lwf.ctx.session:write(resp)
+			resp:finish()
+			resp:do_defers()
+			resp:do_last_func()
             break
 		else
-			print('Matching '..uri..' '..k)
+			--print('Matching '..uri..' '..k)
         end
     end
 
     if not page_found then
+		--print('page_not_found uri:'..uri)
         lwf.exit(404)
     end
 end

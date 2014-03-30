@@ -3,8 +3,7 @@ local functional = require 'lwf.functional'
 local util = require 'lwf.util'
 local logger = require 'lwf.logger'
 local lwfstatic = require 'lwf.static'
-local controller = require 'controller'
-local auto_controller = require 'controller.auto'
+local controller = require 'lwf.controller'
 
 local function route_sorter(l, r)
 	local luri = l[1]
@@ -19,7 +18,7 @@ end
 
 local function _map(app, route_map, uri, func_name)
     local mod_name, fn = string.match(func_name, '^(.+)%.([^.]+)$')
-	mod_name = mod_name:sub('%.', '/')
+	mod_name = mod_name:gsub('%.', '/')
 	local mod_file = app.config.controller..mod_name..'.lua'
 	local _, h = util.loadfile_with_env(mod_file)
     local func = h[fn]
@@ -74,12 +73,13 @@ local function setup(app, file)
 	
 	util.loadfile_with_env(file, env)
 
-	if app.config.route and  app.config.route == 'auto' then
-		table.insert(app.route_map, {'^/(.+)', controller.new(app, app.config.controller)})
+	if app.config.router and  app.config.router == 'auto' then
+		table.insert(app.route_map, {'^/(.-)$', controller.new(app, app.config.controller)})
 	end
 end
 
 function merge_routings(main_app, subapps)
+	logger:debug('merge_routing............')
     local main_routings = main_app.route_map
 
     for k, sub in pairs(subapps) do

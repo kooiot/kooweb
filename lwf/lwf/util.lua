@@ -77,7 +77,7 @@ function _M.escape_url(text)
 end
 
 function _M.unescape_url(text)
-	return (string.gsub(s, "%%(%x%x)", function(hex)
+	return (string.gsub(text, "%%(%x%x)", function(hex)
 		return string.char(base.tonumber(hex, 16))
 	end))
 end
@@ -262,7 +262,7 @@ do
 end
 
 function _M.read_all(filename)
-	local file = io.open(filename, "r")
+	local file, err = io.open(filename, "r")
 	local data = ((file and file:read("*a")) or nil)
 	if file then
 		file:close()
