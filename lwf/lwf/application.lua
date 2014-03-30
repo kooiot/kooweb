@@ -24,7 +24,7 @@ local function translate_config(path, c)
 end
 
 local function translate_session(c)
-	c.session.key = c.session.key or 'lwf_session'
+	c.session.key = c.session.key or 'lwfsession'
 	assert(c.session.salt)
 end
 
@@ -36,7 +36,7 @@ local function new(lwf, name, path)
 	}
         
     local app_config = path .. "/config.lua"
-    local r, c = util.loadfile_with_env(app_config, app)
+    local r, c = util.loadfile(app_config, app)
 	assert(r)
 	assert(c)
 	translate_config(path, c)

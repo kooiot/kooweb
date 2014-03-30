@@ -18,7 +18,13 @@ end
 
 function Controller:__load_fp(filename)
 	local filename = self.path..filename..'.lua'
-	local r, fp = util.loadfile_with_env(filename)
+	local env = {
+		lwf=self.app.lwf,
+		app=self.app
+	}
+
+	local r, fp = util.loadfile(filename, env)
+	--local r, fp = util.loadfile_as_table(filename, env)
 	if not r then
 		logger:error(fp)
 	end
@@ -33,6 +39,8 @@ end
 
 -- Handle the Resuqt:
 function Controller:_handler(request,response,...)
+	local app = self.app
+	local lwf = self.app.lwf
     local method=string.lower(request.method)
 
 	local app_name, filename = string.match(table.concat({...}), '^([^/]+)/?(.-)$')

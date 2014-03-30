@@ -20,7 +20,7 @@ local function _map(app, route_map, uri, func_name)
     local mod_name, fn = string.match(func_name, '^(.+)%.([^.]+)$')
 	mod_name = mod_name:gsub('%.', '/')
 	local mod_file = app.config.controller..mod_name..'.lua'
-	local _, h = util.loadfile_with_env(mod_file)
+	local _, h = util.loadfile(mod_file)
     local func = h[fn]
     if func then
         table.insert(route_map, {uri, func})
@@ -71,7 +71,7 @@ local function setup(app, file)
 	env.static = create_static_func(app)
 	env.print = print
 	
-	util.loadfile_with_env(file, env)
+	util.loadfile(file, env)
 
 	if app.config.router and  app.config.router == 'auto' then
 		table.insert(app.route_map, {'^/(.-)$', controller.new(app, app.config.controller)})

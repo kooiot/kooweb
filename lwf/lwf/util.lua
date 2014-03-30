@@ -72,13 +72,13 @@ end
 function _M.escape_url(text)
    return text:gsub("[^a-zA-Z0-9]",
                     function(character) 
-                       return string.format("%%%x", string.byte(character))
+                       return string.format("%%%02x", string.byte(character))
                     end)
 end
 
 function _M.unescape_url(text)
 	return (string.gsub(text, "%%(%x%x)", function(hex)
-		return string.char(base.tonumber(hex, 16))
+		return string.char(tonumber(hex, 16))
 	end))
 end
 
@@ -270,7 +270,7 @@ function _M.read_all(filename)
 	return data
 end
 
-function _M.loadfile_with_env(file, env)
+function _M.loadfile(file, env)
 	local f, err = loadfile(file, nil, env)
 	if not f then
 		return nil, err
@@ -282,6 +282,23 @@ function _M.loadfile_with_env(file, env)
 	end
 
 	return r, re
+end
+
+function _M.loadfile_as_table(file, env)
+	local env = env or _ENV
+	local new_env = _M.auto_table(function() return env end)
+
+	local f, err = loadfile(file, nil, new_env)
+	if not f then
+		return nil, err
+	end
+
+	local r, re = pcall(f)
+	if not r then
+		assert(r, re)
+	end
+
+	return r, new_env--setmetatable(new_env, {__index={}})
 end
 
 function _M.to_json (obj)

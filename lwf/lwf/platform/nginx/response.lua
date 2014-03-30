@@ -82,6 +82,8 @@ function Response:_set_cookie(key, value, duration, path)
     if not key or key=="" or not value then
         return
     end
+	key = util.escape_url(key)
+	value = util.escape_url(value)
 
     if not duration or duration<=0 then
         duration=604800 -- 7 days, 7*24*60*60 seconds
