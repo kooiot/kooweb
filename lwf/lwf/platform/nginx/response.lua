@@ -160,11 +160,14 @@ end
 LTP Template Support
 --]]
 
-local ltp_templates_cache={}
+-- Uncomment this to enable cache in product env
+--local ltp_templates_cache={}
 
 function Response:__ltp_function(template)
 	local lwf = self.lwf
-    ret=ltp_templates_cache[template]
+	if ltp_templates_cache then
+		ret=ltp_templates_cache[template]
+	end
     if ret then return ret end
     local tdata=util.read_all(lwf.app.config.templates.. template)
     -- find subapps' templates
@@ -182,7 +185,9 @@ function Response:__ltp_function(template)
 	end
 
 	local rfun = ltp.load_template(tdata, '<?','?>')
-	ltp_templates_cache[template]=rfun
+	if ltp_templates_cache then
+		ltp_templates_cache[template]=rfun
+	end
 	return rfun
 end
 
