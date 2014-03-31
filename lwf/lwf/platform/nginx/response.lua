@@ -175,7 +175,7 @@ function Response:__ltp_function(template)
         tdata=(function(appname)
                    subapps = lwf.app.subapps or {}
                    for k,v in pairs(subapps) do
-                       d=util.read_all(v.config.templates .. template)
+                       d=util.read_all(v.app.config.templates .. template)
                        if d then return d end
                    end
                end)(lwf.app.app_name)
