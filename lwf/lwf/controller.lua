@@ -16,7 +16,14 @@ local function new(app, path)
     return setmetatable(o, {__index=Controller})
 end
 
+-- Uncomment following line to enable the controller cache, use it in production env when RAM is enough :)
+--local controller_fp_cache = {}
+
 function Controller:__load_fp(filename)
+	if controller_fp_cache and controller_fp_cache[filename] then
+		return fp_cache[filename]
+	end
+
 	local filename = self.path..filename..'.lua'
 	local env = {
 		lwf=self.app.lwf,
@@ -27,6 +34,9 @@ function Controller:__load_fp(filename)
 	--local r, fp = util.loadfile_as_table(filename, env)
 	if not r then
 		logger:error(fp)
+	end
+	if controller_fp_cache and fp then 
+		controller_fp_cache[filename] = fp
 	end
 	return fp or {}
 end

@@ -82,10 +82,11 @@ function Response:_set_cookie(key, value, duration, path)
     if not key or key=="" or not value then
         return
     end
+
 	key = util.escape_url(key)
 	value = util.escape_url(value)
 
-    if not duration or duration<=0 then
+    if not duration or duration < 0 then
         duration=604800 -- 7 days, 7*24*60*60 seconds
     end
 
@@ -93,15 +94,18 @@ function Response:_set_cookie(key, value, duration, path)
         path = "/"
     end
 
-    local expiretime=ngx.time()+duration
-    expiretime = ngx.cookie_time(expiretime)
-    return table.concat({key, "=", value, "; expires=", expiretime, "; path=", path})
+	if duration ~= 0 then
+		local expiretime = ngx.time() + duration
+		expiretime = ngx.cookie_time(expiretime)
+		return table.concat({key, "=", value, "; expires=", expiretime, "; path=", path})
+	else
+		return table.concat({key, "=", value, "; path=", path})
+	end
 end
 
 function Response:set_cookie(key, value, duration, path)
     local cookie=self:_set_cookie(key, value, duration, path)
     self._cookies[key]=cookie
-	print('Cookie :'..cookie)
     ngx.header["Set-Cookie"] = functional.table_values(self._cookies)
 end
 

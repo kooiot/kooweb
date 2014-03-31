@@ -15,6 +15,7 @@ local function concat_path(base, path, default)
 end
 
 local function translate_config(path, c)
+	c.config = c.config or {}
 	c.config.templates = concat_path(path, c.config.templates, 'templates')
 	c.config.controller = concat_path(path, c.config.controller, 'controller')
 	local static = c.config.static
@@ -77,6 +78,32 @@ function class:init()
     if self.debug and self.debug.on and lwfdebug then
         debug.sethook(debug.debug_hook, "cr")
     end
+	
+	if self.config.auth then
+		self.auth = require('lwf.auth.'..self.config.auth).new(self.lwf, self)
+		assert(self.auth)
+	end
+end
+
+function class:create_user()
+	local user = {
+		username = username,
+		-- TODO: more user meta
+	}
+	return user
+end
+
+function class:authenticate()
+	local session = self.lwf.ctx.session
+	local username = session:get('username')
+	local password = session:get('password')
+	if username and password then
+		local r, err = self.auth:autheticate(username, password)
+		if r then
+			local user = self:create_user()
+			self.lwf.ctx.user = user
+		end
+	end
 end
 
 function class:dispatch()
@@ -102,6 +129,9 @@ function class:dispatch()
 
 			lwf.ctx.session  = session.new(self.session)
 			lwf.ctx.session:read(requ)
+
+			-- Authentication
+			self:authenticate()
 
             if type(v) == "function" then                
                 if lwfdebug then lwfdebug.debug_clear() end

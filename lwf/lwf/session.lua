@@ -1,4 +1,5 @@
-
+-- Encrypto session module
+--
 local json = require 'cjson'
 local md5 = require 'md5'
 local base64 = require 'lwf.util.base64'
@@ -44,7 +45,7 @@ local function new(config)
 
 	function class:write(response)
 		if self.session then
-			response:set_cookie(config.key, encode_session(self.session, config.salt))
+			response:set_cookie(config.key, encode_session(self.session, config.salt), 0, '/')
 		end
 	end
 
@@ -54,6 +55,10 @@ local function new(config)
 
 	function class:set(key, value)
 		self.session[key] = value
+	end
+
+	function class:get(key)
+		return self.session[key]
 	end
 
 	function class:del(key)
