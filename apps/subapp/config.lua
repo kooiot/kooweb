@@ -3,9 +3,6 @@
 -- 
 --
 return {
-	--router = 'auto', -- auto: restful controller.
-	--templates = "templates", -- default is templates
-	--controller = 'controller', -- default is controller
 	static = 'static', -- default will not enable static file access
 
 	session={
@@ -20,6 +17,6 @@ return {
 	},
 
 	subapps={
-		demo3 = {path="/home/cch/kooweb/apps/subapp", config={}},
+		--subinsub = {path="/home/cch/kooweb/apps/subappinsub", config={}},
 	},
 }

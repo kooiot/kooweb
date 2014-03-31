@@ -8,7 +8,6 @@ local controller = require 'lwf.controller'
 local function route_sorter(l, r)
 	local luri = l[1]
 	local ruri = r[1]
-
     if #luri==#ruri then
         return luri < ruri
     else
@@ -79,14 +78,17 @@ local function setup(app, file)
 end
 
 function merge_routings(main_app, subapps)
-	logger:debug('merge_routing............')
     local main_routings = main_app.route_map
 
-    for k, sub in pairs(subapps) do
+    for _, sub in pairs(subapps) do
         local sub_routings = sub.app.route_map
 
-        for sk,sv in pairs(sub_routings) do
-			main_routings[sk]=sv
+        for _, map in pairs(sub_routings) do
+			local sk = map[1]
+			local sv = map[2]
+
+			sk = sk:match('%^/(.+)$') or sk
+			table.insert(main_routings, {'^/'..sub.name..'/'..sk, sv})
 		end
     end
 

@@ -53,10 +53,16 @@ function Controller:_handler(request,response,...)
 	local lwf = self.app.lwf
     local method=string.lower(request.method)
 
+	--[[
 	local app_name, filename = string.match(table.concat({...}), '^([^/]+)/?(.-)$')
 	app_name = app_name or self.app.app_name
 	assert(app_name == self.app.app_name)
 	if not filename or filename == "" then
+		filename = 'index'
+	end
+	]]--
+	local filename = table.concat({...})
+	if not filename or filename == '/' or filename == '' then
 		filename = 'index'
 	end
 
