@@ -3,11 +3,6 @@ local lwfdebug = require 'lwf.debug'
 local util = require 'lwf.util'
 local logger = require 'lwf.logger'
 
-local function default_handler(request,response,...)
-	print('default_handler')
-    ngx.exit(403)
-end
-
 local Controller={}
 
 local function new(app, path)
@@ -43,7 +38,7 @@ end
 
 -- HTTP Other Methods
 function Controller:dummy_handler(request,response,...)
-    default_handler(request,response,...)
+    self.app.lwf.exit(403)
 end
 
 

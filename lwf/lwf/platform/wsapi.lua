@@ -1,10 +1,32 @@
 local _M = {}
 local request = require 'lwf.platform.wsapi.request'
 local response = require 'lwf.platform.wsapi.response'
-local wsapi_response = require 'wsapi.response'
+
+local function say(lwf)
+	local lwf = lwf
+	return function(str)
+		lwf.ctx._res:write(str)
+	end
+end
+
+local function exit(lwf)
+	local lwf = lwf
+	return function(status)
+		lwf.ctx._res.status = status
+		lwf.ctx._aborted = true
+		lwf.ctx.response._eof = true
+	end
+end
+
+
+local function set_status(lwf)
+	local lwf = lwf
+	return function(status)
+		lwf.ctx._res.status = status
+	end
+end
 
 local function create_lwf()
-	local _res = wsapi_response.new()
 	local lwf = {
 		var = {
 			LWF_HOME = os.getenv('LWF_HOME'),
@@ -12,19 +34,12 @@ local function create_lwf()
 			LWF_APP_PATH = os.getenv('LWF_APP_PATH'),
 		},
 		ctx = {
-			_res = _res
+			_res = nil
 		},
 	}
-	lwf.say = function(str) lwf.ctx._res:write(str) end
-	lwf.exit = function(status)
-		lwf.ctx._res.status = status
-		lwf.ctx._aborted = true
-		lwf.ctx.response._eof = true
-	end
-	lwf.set_status = function(status)
-		lwf.ctx._res.status = status
-	end
-
+	lwf.say = say(lwf)
+	lwf.exit = exit(lwf)
+	lwf.set_status = set_status(lwf)
 	return lwf
 end
 

@@ -77,6 +77,7 @@ local function make_basic_lwf_app(config)
 
 	return function (wsapi_env)      
 		lwf.ctx.wsapi_env = wsapi_env
+		lwf.ctx._res = wsapi.response.new()
 		lwf.var.REQUEST_URI = wsapi_env.PATH_INFO
 		content()
 		local response = lwf.ctx._res
@@ -84,6 +85,14 @@ local function make_basic_lwf_app(config)
 			if response.status < 300 then
 				response.status = 302
 			end
+		end
+		if response.status ~= 200 then
+			response:write([[<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+			<HTML><HEAD>
+			<TITLE>]]..response.status..[[</TITLE>
+			</HEAD><BODY>
+			<H1>]]..response.status..[[</H1>
+			</BODY></HTML>]])
 		end
 		return response:finish()
 
@@ -188,9 +197,9 @@ local function new(config)
    local main_app = make_basic_lwf_app(config)
    local error_app = make_error_handling_app(config)
    local total_fail_app = make_oops_app()
-   --return make_safer_app(main_app, error_app) --make_safer_app(error_app, total_fail_app))
+   return make_safer_app(main_app, error_app) --make_safer_app(error_app, total_fail_app))
 
-   return main_app
+   --return main_app
 end
 
 
