@@ -94,6 +94,7 @@ function Request:get_cookie(key)
 	return self.cookies[key]
 end
 
+--[[
 function Request:rewrite(uri, jump)
     return ngx.req.set_uri(uri, jump)
 end
@@ -101,7 +102,7 @@ end
 function Request:set_uri_args(args)
     return ngx.req.set_uri_args(args)
 end
-
+]]--
 return {
 	new = new
 }
