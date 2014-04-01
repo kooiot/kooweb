@@ -4,13 +4,11 @@ local lwfdebug		= require 'lwf.debug'
 local functional	= require 'lwf.functional'
 local ltp			= require 'ltp.template'
 local logger		= require 'lwf.logger'
-local wsapi_response = require 'wsapi.response'
 
 local Response={ltp=ltp}
 
 local function new(lwf)
-	local _res = wsapi_response.new()
-	lwf.ctx._res = _res
+	local _res = lwf.ctx._res
     local ret={
 		lwf = lwf,
         headers = _res.headers,
@@ -127,7 +125,7 @@ function Response:debug()
 end
 
 function Response:error(info)
-    local error_info = "Moochine ERROR: " .. info
+    local error_info = "LWF ERROR: " .. info
     if self._eof==false then
         self._res.status=500
         self.headers['Content-Type'] = 'text/html; charset=utf-8'

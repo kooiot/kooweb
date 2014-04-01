@@ -1,5 +1,6 @@
 
 local util = require 'lwf.util'
+local wsapi_request = require 'wsapi.request'
 local Request = {}
 
 local get_headers = function(env)
@@ -15,8 +16,8 @@ local get_headers = function(env)
 end
 
 local function new(lwf)
-	assert(lwf.ctx.wsapi_env)
-	local wsapi_req = wsapi.request.new(lwf.ctx.wsapi_env)
+	assert(lwf.ctx.wsapi_env, 'No wsapi_env specified!!!!')
+	local wsapi_req = wsapi_request.new(lwf.ctx.wsapi_env)
 	local env = wsapi_req.env
 
     local ret = {
@@ -30,7 +31,7 @@ local function new(lwf)
         path            = wsapi_req.path_info, --ngx_var.uri,  -- the uri without query string
         filename        = wsapi_req.script_name,
         query_string    = wsapi_req.query_string,
-        headers         = get_headers(),
+        headers         = get_headers(env),
         user_agent      = env.HTTP_USER_AGENT,
         remote_addr     = env.REMOTE_ADDR,
         remote_port     = env.REMOTE_PORT,

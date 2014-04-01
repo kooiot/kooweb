@@ -1,15 +1,10 @@
 local _M = {}
 local request = require 'lwf.platform.wsapi.request'
 local response = require 'lwf.platform.wsapi.response'
-
-local function content_write(content)
-	content = content or {}
-	return function(str)
-		table.insert(content, str)
-	end
-end
+local wsapi_response = require 'wsapi.response'
 
 local function create_lwf()
+	local _res = wsapi_response.new()
 	local lwf = {
 		var = {
 			LWF_HOME = os.getenv('LWF_HOME'),
@@ -17,11 +12,18 @@ local function create_lwf()
 			LWF_APP_PATH = os.getenv('LWF_APP_PATH'),
 		},
 		ctx = {
-			content = {},
+			_res = _res
 		},
-		status = 200, -- the status saved for response
 	}
-	lwf.say = content_write(lwf.content)
+	lwf.say = function(str) lwf.ctx._res:write(str) end
+	lwf.exit = function(status)
+		lwf.ctx._res.status = status
+		lwf.ctx._aborted = true
+		lwf.ctx.response._eof = true
+	end
+	lwf.set_status = function(status)
+		lwf.ctx._res.status = status
+	end
 
 	return lwf
 end

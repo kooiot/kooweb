@@ -72,21 +72,21 @@ end
 -- make_safer_app() to make sure the errors get reported properly.
 -----------------------------------------------------------------------------
 local function make_basic_lwf_app(config)
-   lwf = platform('wsapi', lwf)
+	local lwf = platform('wsapi', {})
 	local content = setup(lwf)
 
-   return function (wsapi_env)      
-	   print('dddddddddddddddddddddd')
-	   lwf.ctx.wsapi_env = wsapi_env
-	   content()
-	   if lwf.ctx._res then
-		   print('aaaaaaaaaaaaaaa')
-		   return lwf.ctx._res:finish()
-	   else
-		   print('aaaaaaaaaaaaaaa222222222222')
-		   local response = wsapi.response.new()
-		   return response:finish()
-	   end
+	return function (wsapi_env)      
+		lwf.ctx.wsapi_env = wsapi_env
+		lwf.var.REQUEST_URI = wsapi_env.PATH_INFO
+		content()
+		local response = lwf.ctx._res
+		if response.headers["Location"] then
+			if response.status < 300 then
+				response.status = 302
+			end
+		end
+		return response:finish()
+
 	   --[[
       local request = wsapi.request.new(wsapi_env)
       request.ip = wsapi_env.REMOTE_ADDR
@@ -188,7 +188,9 @@ local function new(config)
    local main_app = make_basic_lwf_app(config)
    local error_app = make_error_handling_app(config)
    local total_fail_app = make_oops_app()
-   return make_safer_app(main_app, error_app) --make_safer_app(error_app, total_fail_app))
+   --return make_safer_app(main_app, error_app) --make_safer_app(error_app, total_fail_app))
+
+   return main_app
 end
 
 

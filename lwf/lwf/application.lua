@@ -121,6 +121,7 @@ function class:dispatch()
 		local k = map[1]
 		local v = map[2]
 
+
         local args = {string.match(uri, k)}
         if args and #args>0 then
 			print('Matched '..uri..' '..k)
@@ -153,7 +154,7 @@ function class:dispatch()
 			resp:do_last_func()
             break
 		else
-			--print('Matching '..uri..' '..k)
+			print('Matching '..uri..' '..k)
         end
     end
 
