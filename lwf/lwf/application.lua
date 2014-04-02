@@ -124,7 +124,7 @@ function class:dispatch()
 
         local args = {string.match(uri, k)}
         if args and #args>0 then
-			print('Matched '..uri..' '..k)
+			--print('Matched '..uri..' '..k)
             page_found = true
 
             local requ = lwf.create_request()
@@ -154,7 +154,7 @@ function class:dispatch()
 			resp:do_last_func()
             break
 		else
-			print('Matching '..uri..' '..k)
+			--print('Matching '..uri..' '..k)
         end
     end
 

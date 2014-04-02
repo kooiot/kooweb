@@ -2,9 +2,11 @@
 local util			= require 'lwf.util'
 local lwfdebug		= require 'lwf.debug'
 local functional	= require 'lwf.functional'
-local ltp			= require 'ltp.template'
+--local ltp			= require 'ltp.template'
+local ltp			= require 'lwf.template'
 local logger		= require 'lwf.logger'
 
+--local Response={ltp=ltp}
 local Response={ltp=ltp}
 
 local function new(lwf)
@@ -160,6 +162,7 @@ end
 LTP Template Support
 --]]
 
+--[[
 -- Uncomment this to enable cache in product env
 --local ltp_templates_cache={}
 
@@ -192,6 +195,7 @@ function Response:__ltp_function(template)
 end
 
 function Response:ltp(template,data)
+	local data = data or {}
     local rfun = self:__ltp_function(template)
     local output = {}
 	local mt={__index=_G}
@@ -200,6 +204,7 @@ function Response:ltp(template,data)
 	self:write(output)
 	return output
 end
+--]]
 
 function Response:sendfile(filename)
 	local str = util.read_all(filename)

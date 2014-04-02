@@ -2,7 +2,7 @@
 local util			= require 'lwf.util'
 local lwfdebug		= require 'lwf.debug'
 local functional	= require 'lwf.functional'
-local ltp			= require 'ltp.template'
+local ltp			= require 'lwf.template'
 local logger		= require 'lwf.logger'
 
 local Response={ltp=ltp}
@@ -149,52 +149,6 @@ function Response:finish()
     end
 
     self._eof = true
-end
-
-
---[[
-LTP Template Support
---]]
-
--- Uncomment this to enable cache in product env
---local ltp_templates_cache={}
-
-function Response:__ltp_function(template)
-	local lwf = self.lwf
-	if ltp_templates_cache then
-		ret=ltp_templates_cache[template]
-	end
-    if ret then return ret end
-    local tdata=util.read_all(lwf.app.config.templates.. template)
-    -- find subapps' templates
-    if not tdata then
-        tdata=(function(appname)
-                   subapps = lwf.app.subapps or {}
-                   for k,v in pairs(subapps) do
-                       d=util.read_all(v.app.config.templates .. template)
-                       if d then return d end
-                   end
-               end)(lwf.app.app_name)
-    end
-	if not tdata then
-		tdata = "Template file is not exist"
-	end
-
-	local rfun = ltp.load_template(tdata, '<?','?>')
-	if ltp_templates_cache then
-		ltp_templates_cache[template]=rfun
-	end
-	return rfun
-end
-
-function Response:ltp(template,data)
-    local rfun = self:__ltp_function(template)
-    local output = {}
-	local mt={__index=_G}
-	setmetatable(data,mt)
-	ltp.execute_template(rfun, data, output)
-	self:write(output)
-	return output
 end
 
 function Response:sendfile(filename)

@@ -1,0 +1,47 @@
+local ltp = require 'ltp.template'
+local util = require 'lwf.util'
+
+--[[
+-- Uncomment this to enable cache in product env
+-- --local ltp_templates_cache={}
+-- ]]--
+
+function __ltp_function(app, template)
+	if ltp_templates_cache then
+		ret=ltp_templates_cache[template]
+	end
+    if ret then return ret end
+    local tdata=util.read_all(app.config.templates.. template)
+    -- find subapps' templates
+    if not tdata then
+        tdata=(function(appname)
+                   subapps = app.subapps or {}
+                   for k,v in pairs(subapps) do
+                       d=util.read_all(v.app.config.templates .. template)
+                       if d then return d end
+                   end
+               end)(app.app_name)
+    end
+	if not tdata then
+		tdata = "Template file is not exist"
+	end
+
+	local rfun = ltp.load_template(tdata, '<?','?>')
+	if ltp_templates_cache then
+		ltp_templates_cache[template]=rfun
+	end
+	return rfun
+end
+
+return function (response, template, data)
+	local lwf = response.lwf
+	local data = data or {}
+    local rfun = __ltp_function(lwf.app, template)
+    local output = {}
+	local mt={__index=_G}
+	setmetatable(data,mt)
+	ltp.execute_template(rfun, data, output)
+	response:write(output)
+	return output
+end
+
