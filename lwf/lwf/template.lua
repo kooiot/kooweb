@@ -6,6 +6,45 @@ local util = require 'lwf.util'
 -- --local ltp_templates_cache={}
 -- ]]--
 
+
+local function out (s, i, f)
+	s = string.sub(s, i, f or -1)
+	if s == "" then return s end
+	-- we could use `%q' here, but this way we have better control
+	s = string.gsub(s, "([\\\n\'])", "\\%1")
+	-- substitute '\r' by '\'+'r' and let `loadstring' reconstruct it
+	s = string.gsub(s, "\r", "\\r")
+	return string.format(" %s('%s'); ", "out", s)
+end
+
+local function translate(s)
+	s = string.gsub(s, "^#![^\n]+\n", "")
+	s = string.gsub(s, "<%%(.-)%%>", "<?lua %1 ?>")
+	--s = string.gsub(s, "<%?([^l][^u][^a].-)%?>", "<?lua %1 ?>")
+	local res = {}
+	local start = 1   -- start of untranslated part in `s'
+	while true do
+		local ip, fp, target, exp, code = string.find(s, "<%?(%w*)[ \t]*(=?)(.-)%?>", start)
+		if not ip then break end
+		table.insert(res, out(s, start, ip-1))
+		if target ~= "" and target ~= "lua" then
+			-- not for Lua; pass whole instruction to the output
+			table.insert(res, out(s, ip, fp))
+		else
+			code = string.gsub(code, "(%-%-%[%[.-%]%]%-%-)", "")
+			code = string.gsub(code, "(%-%-.+)", "")
+			if exp == "=" then   -- expression?
+				table.insert(res, string.format(" %s(%s);", 'out', code))
+			else  -- command
+				table.insert(res, string.format(" %s ", code))
+			end
+		end
+		start = fp + 1
+	end
+	table.insert(res, out(s, start))
+	return table.concat(res)
+end
+
 function __ltp_function(app, template)
 	if ltp_templates_cache then
 		ret=ltp_templates_cache[template]
@@ -26,22 +65,76 @@ function __ltp_function(app, template)
 		tdata = "Template file is not exist"
 	end
 
-	local rfun = ltp.load_template(tdata, '<?','?>')
+	--local rfun = ltp.load_template(tdata, '<?','?>')
+	local rfun = translate(tdata)
 	if ltp_templates_cache then
 		ltp_templates_cache[template]=rfun
 	end
+	--print('rfun='..rfun)
 	return rfun
 end
 
-return function (response, template, data)
+local extend
+local include
+local function execute_template(response, rfun, data)
+	local output = {}
+
+	data.out = function (data)
+		table.insert(output, data)
+	end
+
+	local extends = {}
+	data.extend = function(file)
+		table.insert(extends, 1, file)
+	end
+
+	local f, err = load(rfun, nil, nil, data)
+	if not f then
+		return nil, err
+	end
+	f()
+
+	for _, f in pairs(extends) do
+		local extend = extend(response, data)
+		output = extend(f, output)
+	end
+
+	return output
+end
+
+local function process (response, template, data)
+	assert(template)
 	local lwf = response.lwf
 	local data = data or {}
+
+	data.include = include(response, data)
     local rfun = __ltp_function(lwf.app, template)
-    local output = {}
 	local mt={__index=_G}
 	setmetatable(data,mt)
-	ltp.execute_template(rfun, data, output)
+	--ltp.execute_template(rfun, data)
+	return execute_template(response, rfun, data)
+end
+
+extend = function (response, data)
+	return function(layout, contents)
+		--print('extending '..layout)
+		data.content = function()
+			return contents
+		end
+		return process(response, layout, data)
+	end
+end
+
+include = function (response, data)
+	return function(template)
+		--print('including '..template)
+		data.out(process(response, template, data))
+	end
+end
+
+return function(response, template, data)
+	local output = process(response, template, data)
+	--print('finished '..#output)
 	response:write(output)
-	return output
 end
 
