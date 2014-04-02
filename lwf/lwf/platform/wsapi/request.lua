@@ -12,6 +12,8 @@ local get_headers = function(env)
 	headers['Accept-Encodeing'] = env.HTTP_ACCEPT_ENCODING
 	headers['Cookie'] = env.HTTP_COOKIE
 	headers['Connection'] = env.HTTP_CONNECTION
+	headers['if-modified-since'] = env.IF_MODIFIED_SINCE
+	headers['last-modified'] = env.LAST_MODIFIED
 	return headers
 end
 

@@ -1,6 +1,7 @@
 local _M = {}
 local request = require 'lwf.platform.wsapi.request'
 local response = require 'lwf.platform.wsapi.response'
+local httpd = require 'lwf.platform.wsapi.httpd'
 
 local function say(lwf)
 	local lwf = lwf
@@ -14,7 +15,8 @@ local function exit(lwf)
 	return function(status)
 		lwf.ctx._res.status = status
 		lwf.ctx._aborted = true
-		lwf.ctx.response._eof = true
+		lwf.ctx._res:write(httpd.err[status])
+		lwf.ctx._res._eof = true
 	end
 end
 

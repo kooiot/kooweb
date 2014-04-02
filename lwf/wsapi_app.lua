@@ -86,14 +86,6 @@ local function make_basic_lwf_app(config)
 				response.status = 302
 			end
 		end
-		if response.status ~= 200 then
-			response:write([[<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-			<HTML><HEAD>
-			<TITLE>]]..response.status..[[</TITLE>
-			</HEAD><BODY>
-			<H1>]]..response.status..[[</H1>
-			</BODY></HTML>]])
-		end
 		return response:finish()
 
 	   --[[
