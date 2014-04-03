@@ -75,6 +75,7 @@ function Response:writeln(content)
 end
 
 function Response:redirect(url, status)
+	local status = status or ngx.HTTP_MOVED_TEMPORARILY
     ngx.redirect(url, status)
 end
 

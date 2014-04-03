@@ -22,7 +22,8 @@ function Controller:__load_fp(filename)
 	local filename = self.path..filename..'.lua'
 	local env = {
 		lwf=self.app.lwf,
-		app=self.app
+		app=self.app,
+		logger = logger,
 	}
 
 	local r, fp = util.loadfile(filename, env)

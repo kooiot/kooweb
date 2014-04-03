@@ -1,13 +1,3 @@
-<html>
 
-<img src="/static/img/logo.gif">
-
-Index page in <?=name ?>
-
-<? if username then ?>
-	username: <?=username ?>
-<? else ?>
-	Welcome Guest
-<? end ?>
-
-</html>
+<? extend('layout.html') ?>
+<? include('aaa.html') ?>
