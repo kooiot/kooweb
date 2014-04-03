@@ -1,10 +1,9 @@
 local ltp = require 'ltp.template'
 local util = require 'lwf.util'
 
---[[
+--
 -- Uncomment this to enable cache in product env
--- --local ltp_templates_cache={}
--- ]]--
+-- local ltp_templates_cache={}
 
 
 local function out (s, i, f)
@@ -126,9 +125,10 @@ extend = function (response, data)
 end
 
 include = function (response, data)
-	return function(template)
+	return function(template, tdata)
+		local tdata = tdata or data
 		--print('including '..template)
-		data.out(process(response, template, data))
+		data.out(process(response, template, tdata))
 	end
 end
 
