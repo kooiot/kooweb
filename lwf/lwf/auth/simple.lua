@@ -17,6 +17,15 @@ function class:authenticate(username, password)
 	if username == 'admin' and password == 'admin' then
 		return true
 	end
+	return false, 'Incorrect username or password'
+end
+
+function class:identity(username, identity)
+	return true
+end
+
+function class:get_identity(username)
+	return 'simple'
 end
 
 function class:set_password(username, password)
@@ -30,3 +39,5 @@ end
 
 function class:is_exists(username)
 end
+
+return _M

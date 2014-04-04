@@ -8,6 +8,6 @@ end
 addrule{ -- URI remapping example
   match = "^/static/(.+)",
   with = filehandler,
-  params = {baseDir = '/home/cch/kooweb/apps/example/'}
+  params = {baseDir = os.getenv('LWF_APP_PATH') or '/home/cch/kooweb/apps/store/'}
 }
 

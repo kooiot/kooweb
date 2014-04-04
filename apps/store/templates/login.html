@@ -1,7 +1,20 @@
 <? extend 'layout.html' ?>
 <script src="/static/js/login.js"></script>
 <div class="ui two column middle aligned relaxed grid basic segment">
+
+	<div class="center aligned column">
+		<div id="btn_signup" class="huge green ui labeled icon button">
+			<i class="signup icon"></i>
+			Sign Up
+		</div>
+	</div>
+	<div class="ui vertical divider">
+		Or
+	</div>
 	<div class="column">
+		<? if err then ?>
+		<div class="ui red message"><?=err ?></div>
+		<? end ?>
 		<form class="ui form segment" action="login" method="post">
 			<div class="field">
 				<label>Username</label>
@@ -27,15 +40,6 @@
 			<input type="submit" class="ui blue submit button" value="Submit"></input>
 		</div>
 		</form>
-	</div>
-	<div class="ui vertical divider">
-		Or
-	</div>
-	<div class="center aligned column">
-		<div id="btn_signup" class="huge green ui labeled icon button">
-			<i class="signup icon"></i>
-			Sign Up
-		</div>
 	</div>
 </div>
 

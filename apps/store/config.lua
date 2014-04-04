@@ -9,6 +9,8 @@ return {
 		salt		= 'tdzd77zTw3aHW8IqZgQteXUG3s5kFMQZQf2ODSXZ',
 	},
 
+	auth = 'simple',
+
 	debug={
 		on = true,
 		to = "response", -- "logger"

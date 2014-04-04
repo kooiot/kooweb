@@ -102,9 +102,9 @@ local function execute_template(response, rfun, data)
 end
 
 local function process (response, template, data)
+	assert(data)
 	assert(template)
 	local lwf = response.lwf
-	local data = data or {}
 
 	data.include = include(response, data)
     local rfun = __ltp_function(lwf.app, template)
@@ -133,8 +133,8 @@ include = function (response, data)
 end
 
 return function(response, template, data)
+	assert(data)
 	local output = process(response, template, data)
 	--print('finished '..#output)
 	response:write(output)
 end
-

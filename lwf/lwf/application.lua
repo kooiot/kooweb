@@ -4,6 +4,7 @@ local router = require 'lwf.router'
 local lwfdebug = require 'lwf.debug'
 local session = require 'lwf.session'
 local model = require 'lwf.model'
+local logger = require 'lwf.logger'
 
 local class = {}
 
@@ -83,13 +84,21 @@ function class:init()
         debug.sethook(debug.debug_hook, "cr")
     end
 	
-	if self.config.auth then
-		self.auth = require('lwf.auth.'..self.config.auth).new(self.lwf, self)
+	local authconfig = self.config.auth
+	if authconfig then
+		if type(authconfig) == 'string' then
+			--logger:info('Created authentication module['..authconfig..']')
+			self.auth = require('lwf.auth.'..authconfig).new(self.lwf, self)
+		elseif type(authconfig) == 'function' then
+			self.auth = authconfig(self.lwf, self)
+		else
+			assert('Incorrect configuration for auth')
+		end
 		assert(self.auth)
 	end
 end
 
-function class:create_user()
+function class:create_user(username)
 	local user = {
 		username = username,
 		-- TODO: more user meta
@@ -97,17 +106,57 @@ function class:create_user()
 	return user
 end
 
-function class:authenticate()
-	local session = self.lwf.ctx.session
+function class:identity()
+	local ctx = self.lwf.ctx
+	local session = ctx.session
 	local username = session:get('username')
-	local password = session:get('password')
-	if username and password then
-		local r, err = self.auth:autheticate(username, password)
+	local identity = session:get('identity')
+	if username and identity then
+		logger:info('Identity '..username..' '..identity)
+		local r, err = self.auth:identity(username, identity)
 		if r then
-			local user = self:create_user()
-			self.lwf.ctx.user = user
+			logger:info('Identity OK '..username..' '..identity)
+			-- Create user object
+			local user = self:create_user(username)
+			ctx.user = user
+		else
+			logger:info('Identity Failure '..username..' '..identity)
+			-- Clear session data
+			session:clear()
 		end
+	else
+		local err = 'Identity lack of '
+		if not username then
+			err = err..'username'
+		end
+		if not identity then
+			err = err..'identity'
+		end
+		logger:debug(err)
 	end
+end
+
+function class:authenticate(username, password, ...)
+	local auth = self.auth
+	if not auth then
+		--logger:error('No auth module configured in your config.lua')
+		return nil, 'No auth module configured in your config.lua'
+	end
+
+	local r, err = self.auth:authenticate(username, password, ...)
+	if not r then
+		return nil, err
+	end
+	local identity, err = self.auth:get_identity(username)
+	if not identity then
+		return nil, err
+	end
+
+	local session = self.lwf.ctx.session
+	session:set('username', username)
+	session:set('identity', identity)
+	print(username, ' ', identity)
+	return true
 end
 
 function class:dispatch()
@@ -135,8 +184,10 @@ function class:dispatch()
 			lwf.ctx.session  = session.new(self.config.session)
 			lwf.ctx.session:read(requ)
 
-			-- Authentication
-			self:authenticate()
+			if self.auth then
+				-- Authentication
+				self:identity()
+			end
 
             if type(v) == "function" then                
                 if lwfdebug then lwfdebug.debug_clear() end
@@ -148,7 +199,11 @@ function class:dispatch()
                 lwf.exit(500)
             end
 
+			if self.auth then
+				lwf.ctx.user = nil
+			end
 			lwf.ctx.session:write(resp)
+			lwf.ctx.session:clear()
 			resp:finish()
 			resp:do_defers()
 			resp:do_last_func()

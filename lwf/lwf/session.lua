@@ -50,7 +50,7 @@ local function new(config)
 	end
 
 	function class:clear()
-		self.session = nil
+		self.session = {}
 	end
 
 	function class:set(key, value)

@@ -10,6 +10,9 @@ function _M.init(lwf)
 	lwf.create_response = function()
 		return response.new(lwf)
 	end
+	lwf.set_status = function(status)
+		lwf.status = status
+	end
 	return lwf
 end
 
