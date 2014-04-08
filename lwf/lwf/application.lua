@@ -118,19 +118,20 @@ function class:identity()
 	local username = session:get('username')
 	local identity = session:get('identity')
 	if username and identity then
-		logger:info('Identity '..username..' '..identity)
+		--logger:info('Identity '..username..' '..identity)
 		local r, err = self.auth:identity(username, identity)
 		if r then
-			logger:info('Identity OK '..username..' '..identity)
+			--logger:info('Identity OK '..username..' '..identity)
 			-- Create user object
 			local user = self:__create_user(username)
 			ctx.user = user
 		else
-			logger:info('Identity Failure '..username..' '..identity)
+			--logger:info('Identity Failure '..username..' '..identity)
 			-- Clear session data
 			session:clear()
 		end
 	else
+		--[[
 		local err = 'Identity lack of '
 		if not username then
 			err = err..'username'
@@ -139,6 +140,7 @@ function class:identity()
 			err = err..'identity'
 		end
 		logger:debug(err)
+		]]--
 	end
 end
 
@@ -161,7 +163,7 @@ function class:authenticate(username, password, ...)
 	local session = self.lwf.ctx.session
 	session:set('username', username)
 	session:set('identity', identity)
-	print(username, ' ', identity)
+	--print(username, ' ', identity)
 
 	local user = self:__create_user(username)
 	self.lwf.ctx.user = user
