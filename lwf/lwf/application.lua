@@ -156,6 +156,9 @@ function class:authenticate(username, password, ...)
 	session:set('username', username)
 	session:set('identity', identity)
 	print(username, ' ', identity)
+
+	local user = self:create_user(username)
+	self.lwf.ctx.user = user
 	return true
 end
 

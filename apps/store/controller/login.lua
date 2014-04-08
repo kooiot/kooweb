@@ -10,9 +10,11 @@ return {
 		local r, err
 		if username and password then
 			r, err = app:authenticate(username, password)
+			--[[
 			if r then
-				return res:redirect('/')
+				return res:redirect('/', 303)
 			end
+			]]--
 		else
 			err = 'Incorrect Post Message!!'
 		end

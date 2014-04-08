@@ -7,7 +7,8 @@ semantic.button.ready = function() {
 	var
 		$buttons = $('.ui.buttons .button'),
 		$signup  = $('#btn_signup'),
-		$button  = $('.ui.button').not($buttons).not($signup),
+		$logout  = $('#btn_logout'),
+		$button  = $('.ui.button').not($buttons).not($signup).not($logout),
 		// alias
 		handler = {
 
@@ -29,6 +30,17 @@ semantic.button.ready = function() {
 	$signup
 		.on('click', function() {
 			window.location = "/register";
+		});
+	;
+
+	$logout
+		.on('click', function() {
+			window.location = "/logout";
+			/*
+			alert('click logout');
+			$.post('/logout', {}, function(result) {
+			});
+			*/
 		});
 	;
 };

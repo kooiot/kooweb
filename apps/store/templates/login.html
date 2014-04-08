@@ -1,5 +1,6 @@
 <? extend 'layout.html' ?>
 <script src="/static/js/login.js"></script>
+<? if not lwf.ctx.user then ?>
 <div class="ui two column middle aligned relaxed grid basic segment">
 
 	<div class="center aligned column">
@@ -42,5 +43,23 @@
 		</form>
 	</div>
 </div>
+<? else ?>
+<div class="ui two column middle aligned relaxed grid basic segment">
+	<div class="center aligned column">
+		<div class="ui blue message">Welcome <?=lwf.ctx.user.username ?></div>
+		<div class="link" link="/"> Home </div>
+	</div>
 
+	<div class="ui vertical divider">
+		Or
+	</div>
+
+	<div class="center aligned column">
+		<div id="btn_logout" class="huge green ui labeled icon button ">
+			<i class="help icon"></i>
+			Logout
+		</div>
+	</div>
+</div>
+<? end ?>
 

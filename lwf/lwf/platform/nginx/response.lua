@@ -76,7 +76,13 @@ end
 
 function Response:redirect(url, status)
 	local status = status or ngx.HTTP_MOVED_TEMPORARILY
-    ngx.redirect(url, status)
+	if status == ngx.HTTP_MOVED_TEMPORARILY or status == ngx.HTTP_MOVED_PERMANENTLY then
+		ngx.redirect(url, status)
+	else
+		ngx.header.location = url
+		--ngx.status = status
+		ngx.exit(status)
+	end
 end
 
 function Response:_set_cookie(key, value, duration, path)
