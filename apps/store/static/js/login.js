@@ -36,11 +36,6 @@ semantic.button.ready = function() {
 	$logout
 		.on('click', function() {
 			window.location = "/logout";
-			/*
-			alert('click logout');
-			$.post('/logout', {}, function(result) {
-			});
-			*/
 		});
 	;
 };

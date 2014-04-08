@@ -133,6 +133,7 @@ include = function (response, data)
 end
 
 return function(response, template, data)
+	local data = data or {lwf=response.lwf, app=response.lwf.app}
 	assert(data)
 	local output = process(response, template, data)
 	--print('finished '..#output)

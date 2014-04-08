@@ -1,7 +1,7 @@
 
 return {
 	get = function(req, res)
-		res:ltp('login.html', {lwf=lwf, app=app})
+		res:ltp('login.html')
 	end,
 	post = function(req, res)
 		req:read_body()

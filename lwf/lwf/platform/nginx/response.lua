@@ -132,7 +132,7 @@ function Response:debug()
 end
 
 function Response:error(info)
-    local error_info = "Moochine ERROR: " .. info
+    local error_info = "LWF ERROR: " .. info
     if self._eof==false then
         ngx.status=500
         self.headers['Content-Type'] = 'text/html; charset=utf-8'

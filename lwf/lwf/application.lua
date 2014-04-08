@@ -98,10 +98,16 @@ function class:init()
 	end
 end
 
-function class:create_user(username)
+function class:__create_user(username)
 	local user = {
+		app = self,
 		username = username,
 		-- TODO: more user meta
+		logout = function(self)
+			assert(self and self.app)
+			self.app.lwf.ctx.session:clear()
+			self.app.lwf.ctx.user = nil
+		end
 	}
 	return user
 end
@@ -117,7 +123,7 @@ function class:identity()
 		if r then
 			logger:info('Identity OK '..username..' '..identity)
 			-- Create user object
-			local user = self:create_user(username)
+			local user = self:__create_user(username)
 			ctx.user = user
 		else
 			logger:info('Identity Failure '..username..' '..identity)
@@ -157,7 +163,7 @@ function class:authenticate(username, password, ...)
 	session:set('identity', identity)
 	print(username, ' ', identity)
 
-	local user = self:create_user(username)
+	local user = self:__create_user(username)
 	self.lwf.ctx.user = user
 	return true
 end
