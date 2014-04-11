@@ -6,26 +6,37 @@
 		<a class="active item" href="/">
 			<i class="home icon"></i> Home
 		</a>
+		<? if lwf.ctx.user then ?>
 		<div class="ui dropdown item">
-			<i class="mail icon"></i> Messages
+			<i class="mail icon"></i> Messages 
+			<div class="ui label">51</div>
 			<div class="menu">
-				<a class="item" href="/news"><i class="mail icon"></i> News</a>
-				<a class="item"><i class="mail icon"></i> App Update</a>
+				<a class="item" href="/msg/inbox">
+					<i class="mail icon"></i> Inbox
+					<div class="ui label">25</div>
+				</a>
+				<a class="item" href="/msg/updates">
+					<i class="mail icon"></i> Updates
+					<div class="ui label">26</div>
+				</a>
 			</div>
 		</div>
+		<? end ?>
 
 		<div class="right menu">
+			<? if lwf.ctx.user then ?>
 			<div class="item">
 				<div class="ui icon input">
 					<input placeholder="Search..." type="text">
 					<i class="search link icon"></i>
 				</div>
 			</div>
+			<? end ?>
 			<div class="ui dropdown item">
 				<i class="icon globe"></i>
 				<div class="menu">
-					<a class="item">English</a>
-					<a class="item">中文</a>
+					<a class="item" href="/lang/en">English</a>
+					<a class="item" href="/lang/zh">中文</a>
 				</div>
 			</div>
 			<? if not lwf.ctx.user then ?>
@@ -36,9 +47,9 @@
 			<div class="ui dropdown item">
 				<i class="icon tint"></i> <?=lwf.ctx.user.username ?>
 				<div class="menu">
-					<a class="item"><i class="edit icon"></i> Edit Profile</a>
-					<a class="item"><i class="settings icon"></i> Account Settings</a>
-					<a class="item"><i class="settings icon"></i> Logout</a>
+					<a class="item" href="/profile"><i class="edit icon"></i> Edit Profile</a>
+					<a class="item" href="/accout"><i class="settings icon"></i> Account Settings</a>
+					<a class="item" href="/logout"><i class="settings icon"></i> Logout</a>
 				</div>
 			</div>
 			<? end ?>

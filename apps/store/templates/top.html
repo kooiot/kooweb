@@ -1,10 +1,46 @@
-<div class="segment">
+<div class="tab segment">
 	<div class="container">
 		<div class="introduction">
-			<h1 class="ui dividing header">
-				Application Store
-			</h1>
-			<p>SymLink V3 Application Store <a href='/'>Home</a></p>
+			<div class="ui tab active" data-tab="news">
+				<h1 class="ui dividing header">
+					News
+				</h1>
+				<p> News desc </p>
+			</div>
+			<div class="ui tab" data-tab="applications">
+				<h1 class="ui dividing header">
+					Applications
+				</h1>
+				<p> V3 Applications <a href="/install" class="ui tiny blue">Install</a> </p>
+			</div>
+
+			<div class="ui tab" data-tab="document">
+				<h1 class="ui dividing header">
+					Usages
+				</h1>
+				<p> Usage desc </p>
+			</div>
+			<div class="ui tab" data-tab="contribute">
+				<h1 class="ui dividing header">
+					Contribute
+				</h1>
+				<p> Contribute desc </p>
+			</div>
+		</div>
+
+		<!-- desktop menu -->
+		<div class="four item tabular ui menu">
+			<a class="item active" data-tab="news">News</a>
+			<a class="item" data-tab="applications">Applications</a>
+			<a class="item" data-tab="document">Document</a>
+			<a class="item" data-tab="contribute">Contribute</a>
+		</div>
+		<!-- Phone menu, Small screen -->
+		<div class="fluid vertical ui menu">
+			<a class="item active" data-tab="news">News</a>
+			<a class="item" data-tab="applications">Applications</a>
+			<a class="item" data-tab="document">Document</a>
+			<a class="item" data-tab="contribute">Contribute</a>
 		</div>
 	</div>
 </div>

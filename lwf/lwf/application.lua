@@ -172,8 +172,9 @@ end
 
 function class:dispatch()
 	local lwf = self.lwf
-    local uri = lwf.var.REQUEST_URI
 	local ctx = lwf.ctx
+	local requ = lwf.create_request()
+    local path = requ.path
 
     local page_found  = false
     -- match order by definition order
@@ -182,12 +183,11 @@ function class:dispatch()
 		local v = map[2]
 
 
-        local args = {string.match(uri, k)}
+        local args = {string.match(path, k)}
         if args and #args>0 then
-			--print('Matched '..uri..' '..k)
+			--print('Matched '..path..' '..k)
             page_found = true
 
-            local requ = lwf.create_request()
             local resp = lwf.create_response()
             lwf.ctx.request  = requ
             lwf.ctx.response = resp
@@ -220,12 +220,12 @@ function class:dispatch()
 			resp:do_last_func()
             break
 		else
-			--print('Matching '..uri..' '..k)
+			--print('Matching '..path..' '..k)
         end
     end
 
     if not page_found then
-		--print('page_not_found uri:'..uri)
+		--print('page_not_found path:'..path)
         lwf.exit(404)
     end
 end

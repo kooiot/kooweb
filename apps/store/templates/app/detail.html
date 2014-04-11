@@ -1,5 +1,5 @@
 <? extend 'layout.html' ?>
-<? include 'top.html' ?>
+<? include('app/top.html', {name=name}) ?>
 <div class="main container">
 	<div style="" class="sticky-wrapper"><div class="peek">
 			<div class="ui vertical pointing secondary menu">
@@ -11,7 +11,6 @@
 			</div>
 		</div>
 	</div>
-	<h2 class="ui dividing header">Cards</h2>
 	<? include 'widget/rating.html' ?>
 	<? include 'widget/cards.html' ?>
 	<? include 'widget/feeds.html' ?>

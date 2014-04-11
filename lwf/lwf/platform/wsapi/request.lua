@@ -29,7 +29,7 @@ local function new(lwf)
         schema          = 'http',
         host            = env.HTTP_HOST,
         hostname        = env.HTTP_HOST:match('^[^:]+.*&'),
-        uri             = wsapi_req.path_info, --ngx_var.request_uri, --the full uri
+        uri             = wsapi_req.path_info..'?'..wsapi_req.query_string, --ngx_var.request_uri, --the full uri
         path            = wsapi_req.path_info, --ngx_var.uri,  -- the uri without query string
         filename        = wsapi_req.script_name,
         query_string    = wsapi_req.query_string,

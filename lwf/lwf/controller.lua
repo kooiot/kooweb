@@ -25,6 +25,7 @@ function Controller:__load_fp(filename)
 		app=self.app,
 		logger = logger,
 	}
+	setmetatable(env, {__index=_G})
 
 	local r, fp = util.loadfile(filename, env)
 	--local r, fp = util.loadfile_as_table(filename, env)
