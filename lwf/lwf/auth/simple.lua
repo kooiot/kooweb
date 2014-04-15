@@ -37,7 +37,7 @@ end
 function class:get_metadata(username, key)
 end
 
-function class:is_exists(username)
+function class:has(username)
 end
 
 return _M

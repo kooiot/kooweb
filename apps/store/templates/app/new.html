@@ -1,0 +1,42 @@
+
+<? extend 'layout.html' ?>
+<? include('app/top.html', {name='creating'}) ?>
+<div class="main container">
+
+	<script src="static/js/library/jquery.form.min.js"> </script>
+	<h2 class="ui dividing header">Cards</h2>
+	<form action="" method="post" enctype="multipart/form-data">
+		<label>Install App:</label>
+		<input type="file" name="file">
+		<label>App Name:</label>
+		<input type="text" name="appname" value="">
+		<input type="submit" value="Upload">
+	</form>
+
+	<div class="ui progress">
+		<div class="bar"></div>
+	</div>
+
+	<div id="status"></div>
+
+	<script>
+(function() {
+
+ var status = $('#status');
+
+ $('form').ajaxForm({
+beforeSend: function() {
+status.empty();
+},
+uploadProgress: function(event, position, total, percentComplete) {
+},
+success: function() {
+},
+complete: function(xhr) {
+status.html(xhr.responseText);
+}
+}); 
+ })();       
+	</script>
+
+</div>

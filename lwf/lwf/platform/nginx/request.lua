@@ -78,10 +78,69 @@ function Request:get_arg(name, default)
     return self:get_post_arg(name, default) or self:get_uri_arg(name, default)
 end
 
+local function parse_multipart()
+	local out = { }
+	local upload = require 'resty.upload'
+	local input, err = upload:new(8192)
+	if not (input) then
+		return nil, err
+	end
+
+	input:set_timeout(1000)
+
+	local current = {
+		content = { }
+	}
+
+	while true do
+		local typ, res, err = input:read()
+
+		if "body" == typ then
+			table.insert(current.content, res)
+		elseif "header" == typ then
+			local name, value = unpack(res)
+			if name == "Content-Disposition" then
+				do
+					local params = util.parse_content_disposition(value)
+					if params then
+						for _index_0 = 1, #params do
+							local tuple = params[_index_0]
+							current[tuple[1]] = tuple[2]
+						end
+					end
+				end
+			else
+				current[name:lower()] = value
+			end
+		elseif "part_end" == typ then
+			current.content = table.concat(current.content)
+			if current.name then
+				if current["content-type"] then
+					out[current.name] = current
+				else
+					out[current.name] = current.content
+				end
+			end
+			current = {
+				content = { }
+			}
+		elseif "eof" == typ then
+			break
+		else
+			return nil, err or "failed to read upload"
+		end
+	end
+	return out
+end
+
 function Request:read_body()
-    local ngx_req = ngx.req
-    ngx_req.read_body()
-    self.post_args = ngx_req.get_post_args()
+	local ngx_req = ngx.req
+	if (self.headers["content-type"] or ""):match(util.escape_pattern("multipart/form-data")) then
+		self.post_args =  parse_multipart() or { }
+	else
+		ngx_req.read_body()
+		self.post_args = ngx_req.get_post_args()
+	end
 end
 
 function Request:get_cookie(key)

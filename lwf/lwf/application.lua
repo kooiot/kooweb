@@ -60,7 +60,7 @@ local function new(lwf, name, path)
 end
 
 function class:init()
-	self.model = model.new(lwf, self)
+	self.model = model.new(lwf, self.config.model)
 
 	local has_subapps = self.config.subapps and type(self.config.subapps) == "table"
     

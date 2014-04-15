@@ -6,21 +6,26 @@
 		<a class="active item" href="/">
 			<i class="home icon"></i> Home
 		</a>
-		<? if lwf.ctx.user then ?>
+		<? if lwf.ctx.user and applist then ?>
 		<div class="ui dropdown item">
-			<i class="mail icon"></i> Messages 
-			<div class="ui label">51</div>
+			<i class="folder icon"></i> My Apps
 			<div class="menu">
-				<a class="item" href="/msg/inbox">
-					<i class="mail icon"></i> Inbox
-					<div class="ui label">25</div>
+				<a class="item" href="/app/new">
+					<i class="cloud upload icon"></i> Create New
 				</a>
-				<a class="item" href="/msg/updates">
-					<i class="mail icon"></i> Updates
-					<div class="ui label">26</div>
-				</a>
+				<? for k, v in pairs(applist) do
+					local name = '/app/'..v.info.path
+					?>
+					<a class="item" href="<?=name ?>">
+						<i class="leaf icon"></i> <?=v.name ?>
+					</a>
+				<? end ?>
 			</div>
 		</div>
+		<? else ?>
+		<a class="item" href="/app/new">
+			<i class="cloud upload icon"></i> Create New
+		</a>
 		<? end ?>
 
 		<div class="right menu">
@@ -41,12 +46,18 @@
 			</div>
 			<? if not lwf.ctx.user then ?>
 			<div class="item">
-				<div id="btn_login" class="ui teal button">Sign Up</div>
+				<div id="btn_login" class="ui teal button"><i class="sign in icon"></i>Sign In</div>
 			</div>
 			<? else ?>
 			<div class="ui dropdown item">
 				<i class="icon tint"></i> <?=lwf.ctx.user.username ?>
+				<div class="ui label">25</div>
 				<div class="menu">
+					<a class="item" href="/msg">
+						<i class="mail icon"></i> Messages
+						<div class="ui label">25</div>
+					</a>
+
 					<a class="item" href="/profile"><i class="edit icon"></i> Edit Profile</a>
 					<a class="item" href="/accout"><i class="settings icon"></i> Account Settings</a>
 					<a class="item" href="/logout"><i class="settings icon"></i> Logout</a>

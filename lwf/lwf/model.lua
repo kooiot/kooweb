@@ -6,10 +6,12 @@ local logger = require 'lwf.logger'
 local _M = {}
 local class = {}
 
-function _M.new (lwf, app)
+function _M.new (lwf, path)
+	assert(lwf)
+	assert(path)
 	local obj = {
 		lwf = lwf,
-		app = app,
+		path = path,
 		-- _cache = {},
 	}
 	return setmetatable(obj, {__index=class})
@@ -20,10 +22,14 @@ function class:get(name)
 		return self._cache[name](self)
 	end
 
-	local filename = self.app.config.model..name..'.lua'
+	local filename = self.path..name..'.lua'
 	local r, model = util.loadfile(filename)
 	if not r then
 		logger:error('Failed to load model '..name, model)
+		return nil
+	end
+	if not model then
+		logger:error('You should add return table in your model '..name, model)
 		return nil
 	end
 
