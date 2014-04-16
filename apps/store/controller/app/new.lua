@@ -18,6 +18,9 @@ local function save_app(path, file)
 	return nil, err
 end
 
+local TYPES = {'IO', 'APP'}
+local CATES = {'Industrial', 'Home Automation'}
+
 return {
 	get = function(req, res)
 		if lwf.ctx.user then
@@ -31,23 +34,41 @@ return {
 		if lwf.ctx.user then
 			local file = req.post_args['file']
 			local appname = req.post_args['appname']
-			if file and appname then 
+			local apptype = req.post_args['apptype']
+			local version = req.post_args['version']
+			local category = req.post_args['category']
+			version = version:match('(%d+)%.(%d+)%.(%d+)')
+			local info = 'Error:'
+			if file and appname and version then 
+				local version = version or '1.0.0'
+				print(appname..'-'..apptype..'-'..category)
+				local apptype = TYPES[tonumber(apptype) or 1]
+				local category = CATES[tonumber(category) or 1]
+				print(appname..'-'..apptype..'-'..category)
 				local username = lwf.ctx.user.username
 				local db = app.model:get('db')
 				db:init()
 				local info = db:get_app(username, appname)
-				if not info then
+				--if not info then
 					local path = username..'/'..appname
 					local r, err = save_app(path, file)
 					if r then
-						db:create_app(username, appname, {path=path})
+						db:create_app(username, appname, {path=path, name=appname, version=version, category=category})
 					end
+				--end
+				res:redirect('app/detail?'..appname)
+			else
+				if not appname then
+					info = info..'\n Application name not specified'
+				end
+				if not version then
+					info = info..'\n Application version not specified or incorrect'
 				end
 			end
-			res:ltp('app/new.html')
+			res:ltp('app/new.html', {app=app, lwf=lwf, info=info})
 			--
 		else
-			lwf.exit(404)
+			res:redirect('/login')
 		end
 	end
 }

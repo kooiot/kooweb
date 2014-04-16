@@ -1,4 +1,5 @@
 return {
+	--[[
 	get = function(req, res)
 		local folder = (app.config.static or app.app_path..'/static')..'/releases'
 		local f, err = loadfile(folder..'/release.lua')
@@ -18,5 +19,14 @@ return {
 				res:write(cjson.encode(t))
 			end
 		end
+	end
+	]]--
+	get = function(req, res)
+		local db = app.model:get('db')
+		db:init()
+		local apps = db:list_all()
+		local cjson = require 'cjson'
+		res.headers['Content-Type'] = 'application/json'
+		res:write(cjson.encode(apps))
 	end
 }

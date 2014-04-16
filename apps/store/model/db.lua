@@ -60,6 +60,22 @@ function class:list_apps(username)
 	end
 end
 
+function class:list_all()
+	local apps = {}
+	local con = self.con
+	if con then
+		local users, err = con:keys('applist.*')
+		for _, user in pairs(users) do
+			local user = user:match('^applist%.(.+)$')
+			if user then
+				print(user)
+				apps[user] = self:list_apps(user)
+			end
+		end
+	end
+	return apps
+end
+
 function class:get_app(username, appname)
 	assert(appname)
 	local con = self.con
