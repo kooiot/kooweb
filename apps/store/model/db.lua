@@ -95,4 +95,11 @@ function class:create_app(username, appname, info)
 	end
 end
 
+function class:update_app(username, appname, info)
+	local con = self.con
+	if con then
+		return con:set('appinfo.'..username..'.'..appname, cjson.encode(info))
+	end
+end
+
 return _M
