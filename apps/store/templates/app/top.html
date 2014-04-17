@@ -1,11 +1,17 @@
 <div class="segment">
 	<div class="container">
 		<div class="introduction">
+			<? if info then ?>
 			<h1 class="ui dividing header">
-				Application <?=name or 'Unkonwn' ?>
+				Application <?=info.name or 'Unkonwn' ?>
 			</h1>
-			<p>SymLink V3 Application xxxxx</p>
+			<p>SymLink V3 Application by <a class="ui tiny blue" href="/user/<?=info.username ?>" > <?=info.username ?> </a> </p>
 			<a href="/install" class="ui button blue">Install</a>
+			<? else ?>
+			<h1 class="ui dividing header">
+				Creating Application
+			</h1>
+			<? end ?>
 		</div>
 	</div>
 </div>

@@ -49,18 +49,16 @@ return {
 				local db = app.model:get('db')
 				db:init()
 				local info = db:get_app(username, appname)
-				--if not info then
-					local path = username..'/'..appname
-					local r, err = save_app(path, file)
-					if r then
-						if not info then
-							db:create_app(username, appname, {path=path, name=appname, version=version, category=category})
-						else
-							db:update_app(username, appname, {path=path, name=appname, version=version, category=category})
-						end
+				local path = username..'/'..appname
+				local r, err = save_app(path, file)
+				if r then
+					if not info then
+						db:create_app(username, appname, {path=path, name=appname, version=version, category=category})
+					else
+						db:update_app(username, appname, {path=path, name=appname, version=version, category=category})
 					end
-				--end
-				res:redirect('/app/detail?app='..appname)
+				end
+				res:redirect('/app/detail/'..path)
 			else
 				if not appname then
 					info = info..'\n Application name not specified'

@@ -1,7 +1,7 @@
 -----------------------------------------------
 -- 1.simple function mapping
-map('^/1/hello%?name=(.*)',"d1_test.hello")
-map('^/1/ltp$',"d1_test.ltp")
+map('^/1/hello%?name=(.*)',"d1_test:hello")
+map('^/1/ltp$',"d1_test:ltp")
 
 
 -- 2.mch controller mapping

@@ -15,9 +15,9 @@
 					<i class="cloud upload icon"></i> Create New
 				</a>
 				<? for k, v in pairs(applist) do
-					local name = '/app/'..v.info.path
+					local path = '/app/detail/'..v.info.path
 					?>
-					<a class="item" href="<?=name ?>">
+					<a class="item" href="<?=path ?>">
 						<i class="leaf icon"></i> <?=v.name ?>
 					</a>
 				<? end ?>
