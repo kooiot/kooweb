@@ -37,6 +37,7 @@ return {
 			local apptype = req.post_args['apptype']
 			local version = req.post_args['version']
 			local category = req.post_args['category']
+			local desc = req.post_args['desc']
 			version = version:match('(%d+%.%d+%.%d+)')
 			local info = 'Error:'
 			if file and appname and version then 
@@ -53,9 +54,9 @@ return {
 				local r, err = save_app(path, file)
 				if r then
 					if not info then
-						db:create_app(username, appname, {path=path, name=appname, version=version, category=category})
+						db:create_app(username, appname, {path=path, name=appname, version=version, category=category, desc=desc})
 					else
-						db:update_app(username, appname, {path=path, name=appname, version=version, category=category})
+						db:update_app(username, appname, {path=path, name=appname, version=version, category=category, desc=desc})
 					end
 				end
 				res:redirect('/app/detail/'..path)

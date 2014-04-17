@@ -13,7 +13,7 @@ semantic.item.ready = function() {
 		handler = {
 			onclick: function() {
 				var id = $(this).attr("id");
-				window.location = "/app/detail?app="+id;
+				window.location = "/app/detail/"+id;
 			}
 
 		}

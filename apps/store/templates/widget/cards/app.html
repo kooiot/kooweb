@@ -1,88 +1,21 @@
 
 <? 
-local data = {
-	{
-		category= 'Industrial',
-		items = {
-			{
-				path='symtech/modbus',
-				version='1.0.1',
-				author='Symtech',
-				desc='Modbus protocol base',
-				name='Modbus'
-			},
-			{
-				path='symtech/s5500',
-				version='1.0.1',
-				author='Symtech',
-				desc='Modbus protocol base',
-				name='S5500'
-			},
-			{
-				path='symtech/modbus',
-				version='1.0.1',
-				author='Symtech',
-				desc='Modbus protocol base',
-				name='Modbus'
-			},
-			{
-				path='symtech/modbus',
-				version='1.0.1',
-				author='Symtech',
-				desc='Modbus protocol base',
-				name='Modbus'
-			},
-			{
-				path='symtech/modbus',
-				version='1.0.1',
-				author='Symtech',
-				desc='Modbus protocol base',
-				name='Modbus'
-			},
-		}
-	},
-	{
-		category= 'Home Automation',
-		items = {
-			{
-				path='symtech/bacnet',
-				version='1.0.1',
-				author='Symtech',
-				desc='BACnet protocol base',
-				name='BACnet'
-			},
-			{
-				path='symtech/modbus',
-				version='1.0.1',
-				author='Symtech',
-				desc='Modbus protocol base',
-				name='Modbus'
-			},
-			{
-				path='symtech/modbus',
-				version='1.0.1',
-				author='Symtech',
-				desc='Modbus protocol base',
-				name='Modbus'
-			},
-			{
-				path='symtech/modbus',
-				version='1.0.1',
-				author='Symtech',
-				desc='Modbus protocol base',
-				name='Modbus'
-			},
-		}
-	}
-}
+local list = {}
+for user, v in pairs(apps) do 
+	for k, v in pairs(v) do
+		local category = v.info.category
+		list[category] = list[category] or {}
+		table.insert(list[category], v.info)
+	end
+end
 ?>
 
 <script src="/static/js/app.js"></script>
 <link rel="stylesheet" type="text/css" href="/static/css/app.css">
 <?
-for _, v in pairs(data) do 
-	local category = v.category
-	local items = v.items
+for k, v in pairs(list) do 
+	local category = k
+	local items = v
 ?>
 <h2 class="ui dividing header"><? = category or 'Unkown Category' ?></h2>
 <div class="ui stackable items">
@@ -93,7 +26,7 @@ for _, v in pairs(data) do
 		local desc = v.desc
 		local votes = v.votes or 0
 	?>
-	<div class="app item" id="<?=v.name?>">
+	<div class="app item" id="<?=v.path?>">
 		<div class="image">
 			<img src="<?=img ?>">
 			<a class="like ui corner label">

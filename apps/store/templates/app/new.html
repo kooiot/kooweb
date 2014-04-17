@@ -4,7 +4,7 @@
 <div class="main container">
 
 	<script src="static/js/library/jquery.form.min.js"> </script>
-	<h2 class="ui dividing header">Inputs</h2>
+	<h2 class="ui dividing header">Information:</h2>
 
 	<? if info then ?>
 	<div class="ui warning message">
@@ -24,7 +24,6 @@
 			</div>
 		</div>
 
-
 		<div class="ui labeled input">
 			<input placeholder="Version..." name="version" type="text">
 			<div class="ui corner label">
@@ -42,7 +41,6 @@
 			</div>
 		</div>
 
-
 		<label>Category:</label>
 		<div class="ui selection dropdown">
 			<input name="category" type="hidden">
@@ -51,6 +49,13 @@
 			<div class="menu">
 				<div class="item" data-value="1">Industrial</div>
 				<div class="item" data-value="2">Home Automation</div>
+			</div>
+		</div>
+
+		<div class="ui fluid labeled input">
+			<input placeholder="Description..." name="desc" type="text">
+			<div class="ui corner label">
+				<i class="asterisk icon"></i>
 			</div>
 		</div>
 
