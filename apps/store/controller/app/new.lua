@@ -1,18 +1,19 @@
 local function get_full_path(path)
-	local filename = app.config.static..'releases/'..path
-	os.execute('mkdir -p '..filename)
-	filename = filename..'/latest.lpk'
-	-- No version detection?
-	return filename
+	local path = app.config.static..'releases/'..path
+	os.execute('mkdir -p '..path)
+	return path
 end
 
-local function save_app(path, file)
-	local filename = get_full_path(path)
-	print(filename)
+local function save_app(path, file, version)
+	local path = get_full_path(path)
+	filename = path..'/latest.lpk'
+	vfilename = path..'/'..version..'.lpk'
+	print(filename, vfilename)
 	local f, err = io.open(filename, 'w+')
 	if f then
 		f:write(file.content)
 		f:close()
+		os.execute('cp '..filename..' '..vfilename)
 		return true
 	end
 	return nil, err
@@ -51,7 +52,7 @@ return {
 				db:init()
 				local info = db:get_app(username, appname)
 				local path = username..'/'..appname
-				local r, err = save_app(path, file)
+				local r, err = save_app(path, file, version)
 				if r then
 					if not info then
 						db:create_app(username, appname, {path=path, name=appname, version=version, category=category, desc=desc})
