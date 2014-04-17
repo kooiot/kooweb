@@ -12,7 +12,13 @@ return {
 			else
 				local info = db:get_app(username, appname)
 				info.username = username
-				res:ltp('app/detail.html', {app=app, lwf=lwf, info=info})
+
+				local user = lwf.ctx.user
+				local applist = {}
+				if user then
+					applist = db:list_apps(user.username)
+				end
+				res:ltp('app/detail.html', {app=app, lwf=lwf, info=info, applist=applist})
 			end
 		end
 	end
