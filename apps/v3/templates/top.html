@@ -1,0 +1,65 @@
+<div class="tab segment">
+	<div class="container">
+		<div class="introduction">
+			<? if lwf.ctx.user then ?>
+			<div class="ui tab active" data-tab="news">
+				<h1 class="ui dividing header">
+					News
+				</h1>
+				<p> News desc </p>
+			</div>
+			<div class="ui tab" data-tab="applications">
+				<h1 class="ui dividing header">
+					Applications
+				</h1>
+				<p> V3 Applications <a href="/install" class="ui tiny blue">Install</a> </p>
+			</div>
+			<? else ?>
+			<div class="ui tab active" data-tab="applications">
+				<h1 class="ui dividing header">
+					Applications
+				</h1>
+				<p> V3 Applications <a href="/install" class="ui tiny blue">Install</a> </p>
+			</div>
+			<? end ?>
+
+			<div class="ui tab" data-tab="document">
+				<h1 class="ui dividing header">
+					Usages
+				</h1>
+				<p> Usage desc </p>
+			</div>
+			<div class="ui tab" data-tab="contribute">
+				<h1 class="ui dividing header">
+					Contribute
+				</h1>
+				<p> Contribute desc </p>
+			</div>
+		</div>
+
+		<!-- desktop menu -->
+		<div class="four item tabular ui menu">
+			<? if lwf.ctx.user then ?>
+			<a class="item active" data-tab="news">News</a>
+			<a class="item" data-tab="applications">Applications</a>
+			<? else ?>
+			<a class="item active" data-tab="applications">Applications</a>
+			<? end ?>
+
+			<a class="item" data-tab="document">Document</a>
+			<a class="item" data-tab="contribute">Contribute</a>
+		</div>
+		<!-- Phone menu, Small screen -->
+		<div class="fluid vertical ui menu">
+			<? if lwf.ctx.user then ?>
+			<a class="item active" data-tab="news">News</a>
+			<a class="item" data-tab="applications">Applications</a>
+			<? else ?>
+			<a class="item active" data-tab="applications">Applications</a>
+			<? end ?>
+
+			<a class="item" data-tab="document">Document</a>
+			<a class="item" data-tab="contribute">Contribute</a>
+		</div>
+	</div>
+</div>

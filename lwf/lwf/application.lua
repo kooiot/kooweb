@@ -41,7 +41,7 @@ local function new(lwf, name, path)
         
     local app_config = path .. "/config.lua"
     local r, c = util.loadfile(app_config, app)
-	assert(r)
+	assert(r, c)
 	assert(c)
 	translate_config(path, c)
 	if c.session then

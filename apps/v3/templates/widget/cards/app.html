@@ -1,0 +1,46 @@
+
+<? 
+local list = {}
+for user, v in pairs(apps) do 
+	for k, v in pairs(v) do
+		local category = v.info.category
+		list[category] = list[category] or {}
+		table.insert(list[category], v.info)
+	end
+end
+?>
+
+<script src="/static/js/app.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/app.css">
+<?
+for k, v in pairs(list) do 
+	local category = k
+	local items = v
+?>
+<h2 class="ui dividing header"><? = category or 'Unkown Category' ?></h2>
+<div class="ui stackable items">
+	<? for k, v in pairs(items) do 
+		local img = '/static/releases/'..v.path:lower()..'/icon.jpg'
+		local meta = 'v'..v.version
+		local name = v.name
+		local desc = v.desc
+		local votes = v.votes or 0
+	?>
+	<div class="app item" id="<?=v.path?>">
+		<div class="image">
+			<img src="<?=img ?>">
+			<a class="like ui corner label">
+				<i class="star icon"></i>
+			</a>
+		</div>
+		<div class="content">
+			<div class="meta"><?=meta?></div>
+			<div class="name"><?=name?></div>
+			<div class="extra right">
+				<?=votes?> votes
+			</div>
+		</div>
+	</div>
+	<? end ?>
+</div>
+<? end ?>
