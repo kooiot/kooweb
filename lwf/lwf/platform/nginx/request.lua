@@ -90,14 +90,14 @@ local function parse_multipart()
 	input:set_timeout(1000)
 
 	local current = {
-		content = { }
+		contents = { }
 	}
 
 	while true do
 		local typ, res, err = input:read()
 
 		if "body" == typ then
-			table.insert(current.content, res)
+			table.insert(current.contents, res)
 		elseif "header" == typ then
 			local name, value = unpack(res)
 			if name == "Content-Disposition" then
@@ -114,16 +114,16 @@ local function parse_multipart()
 				current[name:lower()] = value
 			end
 		elseif "part_end" == typ then
-			current.content = table.concat(current.content)
+			current.contents = table.concat(current.contents)
 			if current.name then
 				if current["content-type"] then
 					out[current.name] = current
 				else
-					out[current.name] = current.content
+					out[current.name] = current.contents
 				end
 			end
 			current = {
-				content = { }
+				contents = { }
 			}
 		elseif "eof" == typ then
 			break

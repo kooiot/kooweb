@@ -11,7 +11,7 @@ local function save_app(path, file, version)
 	print(filename, vfilename)
 	local f, err = io.open(filename, 'w+')
 	if f then
-		f:write(file.content)
+		f:write(file.contents)
 		f:close()
 		os.execute('cp '..filename..' '..vfilename)
 		return true
@@ -48,18 +48,8 @@ return {
 				local category = CATES[tonumber(category) or 1]
 				print(appname..'-'..apptype..'-'..category)
 				local username = lwf.ctx.user.username
-				local db = app.model:get('db')
-				db:init()
-				local info = db:get_app(username, appname)
 				local path = username..'/'..appname
 				local r, err = save_app(path, file, version)
-				if r then
-					if not info then
-						db:create_app(username, appname, {path=path, name=appname, version=version, category=category, desc=desc})
-					else
-						db:update_app(username, appname, {path=path, name=appname, version=version, category=category, desc=desc})
-					end
-				end
 				res:redirect('/app/detail/'..path)
 			else
 				if not appname then

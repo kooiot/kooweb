@@ -11,7 +11,7 @@ local function save_app(path, file, version)
 	print(filename, vfilename)
 	local f, err = io.open(filename, 'w+')
 	if f then
-		f:write(file.content)
+		f:write(file.contents)
 		f:close()
 		os.execute('cp '..filename..' '..vfilename)
 		return true
