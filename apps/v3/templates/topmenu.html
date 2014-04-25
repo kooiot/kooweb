@@ -6,39 +6,13 @@
 		<a class="active item" href="/">
 			<i class="home icon"></i> Home
 		</a>
-		<? if lwf.ctx.user then
-		if applist and #applist ~= 0 then ?>
-		<div class="ui dropdown item">
-			<i class="folder icon"></i> My Apps
-			<div class="menu">
-				<a class="item" href="/app/new">
-					<i class="cloud upload icon"></i> Create New
-				</a>
-				<? for k, v in pairs(applist) do
-					local path = '/app/detail/'..v.info.path
-					?>
-					<a class="item" href="<?=path ?>">
-						<i class="leaf icon"></i> <?=v.name ?>
-					</a>
-				<? end ?>
-			</div>
-		</div>
-		<? else ?>
+		<? if lwf.ctx.user then ?>
 		<a class="item" href="/app/new">
-			<i class="cloud upload icon"></i> Create New
+			<i class="cloud download icon"></i> Install
 		</a>
-		<? end
-		end?>
+		<? end ?>
 
 		<div class="right menu">
-			<? if lwf.ctx.user then ?>
-			<div class="item">
-				<div class="ui icon input">
-					<input placeholder="Search..." type="text">
-					<i class="search link icon"></i>
-				</div>
-			</div>
-			<? end ?>
 			<div class="ui dropdown item">
 				<i class="icon globe"></i>
 				<div class="menu">
@@ -46,6 +20,11 @@
 					<a class="item" href="/lang/zh">中文</a>
 				</div>
 			</div>
+			<? if lwf.ctx.user then ?>
+			<a class="item" href="/advance">
+				<i class="grid layout icon"></i> More
+			</a>
+			<? end ?>
 			<? if not lwf.ctx.user then ?>
 			<div class="item">
 				<div id="btn_login" class="ui teal button"><i class="sign in icon"></i>Sign In</div>
@@ -60,8 +39,6 @@
 						<div class="ui label">25</div>
 					</a>
 
-					<a class="item" href="/profile"><i class="edit icon"></i> Edit Profile</a>
-					<a class="item" href="/accout"><i class="settings icon"></i> Account Settings</a>
 					<a class="item" href="/logout"><i class="settings icon"></i> Logout</a>
 				</div>
 			</div>
