@@ -12,8 +12,8 @@ semantic.item.ready = function() {
 		// alias
 		handler = {
 			onclick: function() {
-				var id = $(this).attr("id");
-				window.location = "/app/detail/"+id;
+				var id = $(this).attr("lname");
+				window.location = "/apps/"+id;
 			}
 
 		}

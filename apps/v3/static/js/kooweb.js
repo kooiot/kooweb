@@ -98,74 +98,6 @@ semantic.ready = function() {
       }
     },
 
-    create: {
-      tick: function() {
-
-      },
-      examples: function(json) {
-        var
-          types      = json['Types'],
-          text       = json['Text'],
-          states     = json['States'],
-          variations = json['Variations'],
-
-          $element,
-          html
-        ;
-        $.each(types, function(name, type){
-          html += '<h2 class="ui dividing header">' + name + '</h2';
-          if($.isPlainObject(type)) {
-            $.each(type, function(name, subType) {
-              $element = $.zc(subType);
-              $element = handler.create.text($element, text);
-              html += '<h3 class="ui header">' + name + '</h3';
-              html += handler.create.variations($element, variations);
-            });
-          }
-          else {
-            $element = $.zc(type);
-            $element = handler.create.text($element);
-            html += handler.create.variations($element, variations);
-          }
-        });
-        // Each TYPE
-        //   show type name
-        //   html = koan (html)
-        //   each text
-        //     find label
-        //     if(obj)
-        //       replace random text
-        //     else
-        //       replace text
-        //   end
-        //   Each variation
-        //     (if obj)
-        //       each
-        //         add class
-        //     (else)
-        //       add class
-        //     label = property
-        //     class = class
-        //     show html
-        //   end
-        // end
-      },
-      element: function(koan, type, text, variation) {
-
-      },
-      variations: function($element, variations) {
-        $.each(variations, function(name, variation){
-
-        });
-      },
-      text: function($element, text) {
-        $.each(text, function(selector, text) {
-          $element.find(selector).text(text);
-        });
-        return $element;
-      }
-    },
-
     font: {
 
       increase: function() {
@@ -187,56 +119,6 @@ semantic.ready = function() {
         ;
       }
     },
-    overviewMode: function() {
-      var
-        $button  = $(this),
-        $body    = $('body'),
-        $example = $('.example')
-      ;
-      $body.toggleClass('overview');
-      $button.toggleClass('active');
-      if($body.hasClass('overview')) {
-        $developer.addClass('disabled').popup('destroy');
-        $designer.addClass('disabled').popup('destroy');
-        $example.each(function() {
-          $(this).children().not('.ui.header:eq(0), .example p:eq(0), .annotation').hide();
-        });
-        $example.filter('.another').hide();
-      }
-      else {
-        $developer.removeClass('disabled').popup();
-        $designer.removeClass('disabled').popup();
-        $example.each(function() {
-          $(this).children().not('.ui.header:eq(0), .example p:eq(0), .annotation').show();
-        });
-        $example.filter('.another').show();
-      }
-    },
-    developerMode: function() {
-      var
-        $example = $('.example').not('.no')
-      ;
-      $developer.addClass('active');
-      $designer.removeClass('active');
-      $example
-        .each(function() {
-          $.proxy(handler.createCode, $(this))('developer');
-        })
-      ;
-    },
-    designerMode: function() {
-      var
-        $example = $('.example').not('.no')
-      ;
-      $designer.addClass('active');
-      $developer.removeClass('active');
-      $example
-        .each(function() {
-          $.proxy(handler.createCode, $(this))('designer');
-        })
-      ;
-    },
-
     getIndent: function(text) {
       var
         lines           = text.split("\n"),
@@ -263,78 +145,6 @@ semantic.ready = function() {
       return indent || 4;
     },
 
-    generateCode: function() {
-      var
-        $example    = $(this).closest('.example'),
-        $annotation = $example.find('.annotation'),
-        $code       = $annotation.find('.code'),
-        $header     = $example.children('.ui.header:first-of-type').eq(0).add('p:first-of-type'),
-        $demo       = $example.children().not($header).not('i.code:first-child, .code, .instructive, .language.label, .annotation, br, .ignore, .ignored'),
-        code        = ''
-      ;
-      if( $code.size() === 0) {
-        $demo
-          .each(function(){
-            var $this = $(this).clone(false);
-            if($this.not('br')) {
-              code += $this.removeAttr('style').get(0).outerHTML + "\n";
-            }
-          })
-        ;
-      }
-      $example.data('code', code);
-      return code;
-    },
-    createCode: function(type) {
-      var
-        $example    = $(this).closest('.example'),
-        $header     = $example.children('.ui.header:first-of-type').eq(0).add('p:first-of-type'),
-        $annotation = $example.find('.annotation'),
-        $code       = $annotation.find('.code'),
-        $demo       = $example.children().not($header).not('i.code:first-child, .code, .instructive, .language.label, .annotation, br, .ignore, .ignored'),
-        code        = $example.data('code') || $.proxy(handler.generateCode, this)()
-      ;
-
-      if( $code.hasClass('existing') ) {
-        $annotation.show();
-        $code.removeClass('existing');
-        $.proxy(handler.initializeCode, $code)();
-      }
-
-      if($annotation.size() === 0) {
-        $annotation = $('<div/>')
-          .addClass('annotation')
-          .appendTo($example)
-        ;
-      }
-
-      if( $example.find('.ace_editor').size() === 0) {
-        $code = $('<div/>')
-          .data('type', 'html')
-          .addClass('code')
-          .html(code)
-          .hide()
-            .appendTo($annotation)
-        ;
-        $.proxy(handler.initializeCode, $code)();
-      }
-
-      if( ($demo.first().is(':visible') || type == 'developer') && type != 'designer' ) {
-        $demo.hide();
-        $header.show();
-        $annotation.fadeIn(500);
-      }
-      else {
-        $annotation.hide();
-        if($demo.size() > 1) {
-          $demo.show();
-        }
-        else {
-          $demo.fadeIn(500);
-        }
-      }
-    },
-
     createAnnotation: function() {
       if(!$(this).data('type')) {
         $(this).data('type', 'html');
@@ -347,35 +157,9 @@ semantic.ready = function() {
     },
 
     resizeCode: function() {
-      $('.ace_editor')
-        .each(function() {
-          var
-            $code = $(this),
-            padding     = 20,
-            editor,
-            editorSession,
-            codeHeight
-          ;
-          $code.css('height', 'auto');
-          editor        = ace.edit($code[0]);
-          editorSession = editor.getSession();
-          codeHeight = editorSession.getScreenLength() * editor.renderer.lineHeight + padding;
-          $code.css('height', codeHeight);
-          editor.resize();
-        })
-      ;
     },
 
     makeCode: function() {
-      if(window.ace !== undefined) {
-        $code
-          .filter(':visible')
-          .each(handler.initializeCode)
-        ;
-        $existingCode
-          .each(handler.createAnnotation)
-        ;
-      }
     },
 
     makeStickyColumns: function() {
@@ -394,102 +178,6 @@ semantic.ready = function() {
       // apparently this doesnt refresh on first hit
       $.waypoints('refresh');
       $.waypoints('refresh');
-    },
-
-    initializeCode: function() {
-      var
-        $code        = $(this).show(),
-        code         = $code.html(),
-        existingCode = $code.hasClass('existing'),
-        contentType  = $code.data('type')    || 'javascript',
-        title        = $code.data('title')   || false,
-        demo         = $code.data('demo')    || false,
-        preview      = $code.data('preview') || false,
-        label        = $code.data('label')   || false,
-        displayType  = {
-          html       : 'HTML',
-          javascript : 'Javascript',
-          css        : 'CSS',
-          text       : 'Command Line',
-          sh         : 'Command Line'
-        },
-        indent     = handler.getIndent(code) || 4,
-        padding    = 20,
-        whiteSpace,
-        $label,
-        editor,
-        editorSession,
-        codeHeight
-      ;
-
-      // trim whitespace
-      whiteSpace = new RegExp('\\n\\s{' + indent + '}', 'g');
-      code = $.trim(code).replace(whiteSpace, '\n');
-
-      if(contentType == 'html') {
-        $code.text(code);
-      }
-      else {
-        $code.html(code);
-      }
-
-      // evaluate if specified
-      if($code.hasClass('evaluated')) {
-        eval(code);
-      }
-
-      // initialize
-      editor        = ace.edit($code[0]);
-      editorSession = editor.getSession();
-
-      editor.setTheme('ace/theme/github');
-      editor.setShowPrintMargin(false);
-      editor.setReadOnly(true);
-      editor.renderer.setShowGutter(false);
-      editor.setHighlightActiveLine(false);
-      editorSession.setMode('ace/mode/'+ contentType);
-      editorSession.setUseWrapMode(true);
-      editorSession.setTabSize(2);
-      editorSession.setUseSoftTabs(true);
-
-      codeHeight = editorSession.getScreenLength() * editor.renderer.lineHeight + padding;
-      $(this)
-        .height(codeHeight + 'px')
-        .wrap('<div class="ui instructive segment">')
-      ;
-      // add label
-      if(title) {
-        $('<div>')
-          .addClass('ui attached top label')
-          .html('<span class="title">' + title + '</span>' + '<em>' + (displayType[contentType] || contentType) + '</em>')
-          .prependTo( $(this).parent() )
-        ;
-      }
-      if(label) {
-        $('<div>')
-          .addClass('ui pointing below label')
-          .html(displayType[contentType] || contentType)
-          .insertBefore ( $(this).parent() )
-        ;
-      }
-      // add run code button
-      if(demo) {
-        $('<a>')
-          .addClass('ui pointing below black label')
-          .html('Run Code')
-          .on('click', function() {
-            eval(code);
-          })
-          .insertBefore ( $(this).parent() )
-        ;
-      }
-      // add preview if specified
-      if(preview) {
-        $(code)
-          .insertAfter( $(this).parent() )
-        ;
-      }
-      editor.resize();
     },
 
     movePeek: function() {
@@ -678,16 +366,6 @@ semantic.ready = function() {
 
   handler.createIcon();
 
-  $example
-    .one('mousemove', handler.generateCode)
-    .find('i.code')
-      .on('click', handler.createCode)
-  ;
-
-  $shownExample
-    .each(handler.createCode)
-  ;
-
   $helpPopup
     .popup()
   ;
@@ -701,16 +379,6 @@ semantic.ready = function() {
   ;
   $decreaseFont
     .on('click', handler.font.decrease)
-  ;
-
-  $developer
-    .on('click', handler.developerMode)
-  ;
-  $designer
-    .on('click', handler.designerMode)
-  ;
-  $overview
-    .on('click', handler.overviewMode)
   ;
 
   $menuPopup
