@@ -74,8 +74,9 @@ function Response:writeln(content)
 end
 
 function Response:redirect(url, status)
-	self._res.status = status
+	self._res.status = status or 302
 	self._res:redirect(url)
+	self:finish()
 end
 
 function Response:_set_cookie(key, value, duration, path)

@@ -23,7 +23,7 @@ function class:get(name)
 	end
 
 	local filename = self.path..name..'.lua'
-	local r, model = util.loadfile(filename)
+	local r, model = util.loadfile(filename, _ENV)
 	if not r then
 		logger:error('Failed to load model '..name, model)
 		return nil
