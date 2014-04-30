@@ -13,7 +13,6 @@ addrule{ -- URI remapping example
   params = {baseDir = os.getenv('LWF_APP_PATH') or '/home/cch/kooweb/apps/example/'}
 }
 
-
 local launcher_params = {
 	isolated = true,
 	reload = reload,

@@ -1,4 +1,4 @@
 export LWF_ROOT=$(pwd)/../lwf
-export LWF_APP_NAME='v3'
-export LWF_APP_PATH='/home/cch/kooweb/apps/v3'
+export LWF_APP_NAME='example'
+export LWF_APP_PATH='/home/cch/kooweb/apps/example'
 wsapi --config=xavante.conf.lua

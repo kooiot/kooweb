@@ -50,16 +50,28 @@ function __ltp_function(app, template)
 	end
     if ret then return ret end
     local tdata=util.read_all(app.config.templates.. template)
+	--[[ WE need not loading sub apps template for the param app's
     -- find subapps' templates
     if not tdata then
         tdata=(function(appname)
                    subapps = app.subapps or {}
                    for k,v in pairs(subapps) do
-                       d=util.read_all(v.app.config.templates .. template)
+                       local d=util.read_all(v.app.config.templates .. template)
                        if d then return d end
                    end
                end)(app.app_name)
     end
+	]]--
+	if not tdata  then
+		local capp = app.base_app
+		while capp do
+			tdata = util.read_all(capp.config.templates .. template)
+			if tdata then
+				break
+			end
+			capp = capp.base_app
+		end
+	end
 	if not tdata then
 		tdata = "Template file is not exist"
 	end
@@ -107,7 +119,7 @@ local function process (response, template, data)
 	local lwf = response.lwf
 
 	data.include = include(response, data)
-    local rfun = __ltp_function(lwf.app, template)
+    local rfun = __ltp_function(lwf.ctx.app, template)
 	local mt={__index=_G}
 	setmetatable(data,mt)
 	--ltp.execute_template(rfun, data)
@@ -133,7 +145,8 @@ include = function (response, data)
 end
 
 return function(response, template, data)
-	local data = data or {lwf=response.lwf, app=response.lwf.app}
+	local lwf = response.lwf
+	local data = data or {lwf=lwf, app=lwf.ctx.app}
 	assert(data)
 	local output = process(response, template, data)
 	--print('finished '..#output)

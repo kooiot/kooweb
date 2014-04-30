@@ -50,6 +50,8 @@ function Controller:_handler(request,response,...)
 	local lwf = self.app.lwf
     local method=string.lower(request.method)
 
+	-- Set the context app here used in templates
+	lwf.ctx.app = app
 	--[[
 	local app_name, filename = string.match(table.concat({...}), '^([^/]+)/?(.-)$')
 	app_name = app_name or self.app.app_name

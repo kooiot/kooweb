@@ -67,7 +67,9 @@ function class:init()
     if has_subapps then
 		self.subapps = {}
         for k, t in pairs(self.config.subapps) do
-			table.insert(self.subapps, {name=k, app = new(self.lwf, k, t.path)})
+			local subapp = new(self.lwf, k, t.path)
+			subapp.base_app = self
+			table.insert(self.subapps, {name=k, app = subapp})
         end
     end
 

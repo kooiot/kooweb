@@ -17,9 +17,9 @@ local function setup(lwf)
 		local app_name = lwf.var.LWF_APP_NAME
 		local app_path = lwf.var.LWF_APP_PATH
 
-		lwf.app = application.new(lwf, app_name, app_path)
+		lwf.current_app = application.new(lwf, app_name, app_path)
 
-		return lwf.app
+		return lwf.current_app
 	end
 
 	local function content()
