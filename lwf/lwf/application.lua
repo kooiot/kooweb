@@ -67,9 +67,14 @@ function class:init()
     if has_subapps then
 		self.subapps = {}
         for k, t in pairs(self.config.subapps) do
-			local subapp = new(self.lwf, k, t.path)
-			subapp.base_app = self
-			table.insert(self.subapps, {name=k, app = subapp})
+			local r, subapp = pcall(new, self.lwf, k, t.path)
+			if r then
+				local subapp = new(self.lwf, k, t.path)
+				subapp.base_app = self
+				table.insert(self.subapps, {name=k, app = subapp})
+			else
+				print('Loading sub application failed, error:'..subapp)
+			end
         end
     end
 
