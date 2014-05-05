@@ -147,6 +147,7 @@ end
 return function(response, template, data)
 	local lwf = response.lwf
 	local data = data or {lwf=lwf, app=lwf.ctx.app}
+	data.escape_url = util.escape_url
 	assert(data)
 	local output = process(response, template, data)
 	--print('finished '..#output)

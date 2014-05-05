@@ -86,6 +86,8 @@ local function make_basic_lwf_app(config)
 				response.status = 302
 			end
 		end
+		-- Make sure response does have body, or it will make the wsapi takes memory
+		response:write('')
 		return response:finish()
 
 	   --[[

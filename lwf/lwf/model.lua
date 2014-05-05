@@ -17,7 +17,7 @@ function _M.new (lwf, path)
 	return setmetatable(obj, {__index=class})
 end
 
-function class:get(name)
+function class:get(name, ...)
 	if self._cache and self._cache[name] then
 		return self._cache[name](self)
 	end
@@ -37,7 +37,7 @@ function class:get(name)
 		if self._cache then
 			self._cache[name] = model.new
 		end
-		return model.new(self)
+		return model.new(self, ...)
 	end
 end
 
