@@ -180,6 +180,7 @@ end
 function class:dispatch()
 	local lwf = self.lwf
 	local ctx = lwf.ctx
+	ctx.app = self
 	local requ = lwf.create_request()
     local path = requ.path
 
