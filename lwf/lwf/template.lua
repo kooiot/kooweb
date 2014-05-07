@@ -128,6 +128,7 @@ end
 
 extend = function (response, data)
 	return function(layout, contents)
+		data.escape_url = data.escape_url or util.escape_url
 		--print('extending '..layout)
 		data.content = function()
 			return contents
@@ -139,6 +140,7 @@ end
 include = function (response, data)
 	return function(template, tdata)
 		local tdata = tdata or data
+		tdata.escape_url = tdata.escape_url or util.escape_url
 		--print('including '..template)
 		data.out(process(response, template, tdata))
 	end
