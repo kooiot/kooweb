@@ -1,10 +1,22 @@
 return {
 	get = function(req, res)
+		req:read_body()
+		local path = req:get_arg('path')
+		if not path then
+			lwf.exit(404)
+		end
+
+		local db = app.model:get('db')
+		db:init()
+		local username, appname = path:match('^([^/]+)/(.+)$')
+		local appinfo = db:get_app(username, appname)
+		db:close()
+
 		local info = {
-			author = 'admin',
-			name = "modbus",
-			['type'] = 'app.io',
-			desc = "test dddd",
+			author = username,
+			name = appname,
+			['type'] = appinfo.apptype or 'app',
+			desc = appinfo.desc,
 			comments = [[
 			<div class="comment">
 			<div class="content">

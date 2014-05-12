@@ -1,0 +1,37 @@
+
+<? extend 'layout.html' ?>
+<div class="segment">
+	<div class="container">
+		<div class="introduction">
+			<h1 class="ui dividing header">
+				User profile edit
+			</h1>
+		</div>
+	</div>
+</div>
+<div class="main container">
+	<h2 class="ui dividing header">Profile:</h2>
+
+	<? if info then ?>
+	<div class="ui warning message">
+		<i class="close icon"></i>
+		<div class="header">
+			Warning!!
+		</div>
+		<?=info ?>
+	</div>
+	<? end ?>
+
+	<label> Current Avatar: </label>
+	<? local img_link = '/static/upload/avatar/'..lwf.ctx.user.username..'.jpg' ?>
+	<img class="rounded ui small image" src="<?=img_link?>">
+	<img class="circular ui small image" src="<?=img_link?>">
+
+	<form action="" method="post" enctype="multipart/form-data">
+		<label>Your Avatar:</label>
+		<input type="file" name="file">
+		<input type="submit" value="Upload">
+	</form>
+
+	<div id="status"></div>
+</div>

@@ -1,6 +1,6 @@
 return {
 	get = function(req, res)
-		res:ltp('register.html', {lwf=lwf, app=app})
+		res:ltp('user/register.html', {lwf=lwf, app=app})
 	end,
 	post = function(req, res)
 		req:read_body()
@@ -18,6 +18,6 @@ return {
 		else
 			err = 'Incorrect Post Message!!'
 		end
-		res:ltp('login.html', {app=app, lwf=lwf, err=err})
+		res:ltp('user/login.html', {app=app, lwf=lwf, err=err})
 	end,
 }

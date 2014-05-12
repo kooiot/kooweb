@@ -2,5 +2,6 @@ tmp
 *~
 *.swp
 /apps/store/static/releases
+/apps/store/static/upload
 /apps/v3/static/releases
 /wsapi/shared

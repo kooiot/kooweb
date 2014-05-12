@@ -19,7 +19,7 @@ local function save_app(path, file, version)
 	return nil, err
 end
 
-local TYPES = {'IO', 'APP'}
+local TYPES = {'app.io', 'app'}
 local CATES = {'Industrial', 'Home Automation'}
 
 return {
@@ -55,11 +55,12 @@ return {
 				local r, err = save_app(path, file, version)
 				if r then
 					if not info then
-						db:create_app(username, appname, {path=path, name=appname, version=version, category=category, desc=desc})
+						db:create_app(username, appname, {path=path, name=appname, version=version, apptype=apptype, category=category, desc=desc})
 					else
-						db:update_app(username, appname, {path=path, name=appname, version=version, category=category, desc=desc})
+						db:update_app(username, appname, {path=path, name=appname, version=version, apptype=apptype, category=category, desc=desc})
 					end
 				end
+				db:close()
 				--res:redirect('/app/detail/'..path)
 				res:write('/app/detail/'..path)
 			else
