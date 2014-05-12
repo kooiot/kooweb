@@ -170,7 +170,7 @@ function class:authenticate(username, password, ...)
 	local session = self.lwf.ctx.session
 	session:set('username', username)
 	session:set('identity', identity)
-	--print(username, ' ', identity)
+	--logger:info(username, ', ', identity)
 
 	local user = self:__create_user(username)
 	self.lwf.ctx.user = user

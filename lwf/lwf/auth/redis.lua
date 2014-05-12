@@ -30,7 +30,7 @@ function class:authenticate(username, password)
 	if pw and pw == password then
 		return true
 	end
-	print(username, password, pw, err)
+	--logger:debug('authenticate: '..username..' Input:'..password..' DB:'..(tostring(pw) or 'nil')..' Error:'..(err or ''))
 	if not pw or pw == ngx.null then
 		if username == 'admin' and password == 'admin' then
 			return true
@@ -40,7 +40,15 @@ function class:authenticate(username, password)
 end
 
 function class:identity(username, identity)
-	return true
+	local dbidentity = self.red:get('user_identity.'..username)
+	if not dbidentity or dbidentity ~= ngx.null then
+		local ridentity = md5.sumhexa(username..'TODODO')
+		--logger:debug('dbidentity '..dbidentity..' ridentity:'..ridentity)
+		return dbidentity == ridentity
+	else
+		--logger:debug('identity failure ', username, ' ', identity)
+		return false
+	end
 end
 
 function class:get_identity(username)
@@ -48,7 +56,7 @@ function class:get_identity(username)
 	if not identity or identity == ngx.null then
 		identity = md5.sumhexa(username..'TODODO')
 		self.red:set('user_identity.'..username, identity)
-		print(identity)
+		--logger:debug('Creates identity:'..identity..' for user:'..username)
 	end
 	return identity
 end
