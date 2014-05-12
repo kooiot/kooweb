@@ -60,7 +60,8 @@ return {
 						db:update_app(username, appname, {path=path, name=appname, version=version, category=category, desc=desc})
 					end
 				end
-				res:redirect('/app/detail/'..path)
+				--res:redirect('/app/detail/'..path)
+				res:write('/app/detail/'..path)
 			else
 				if not appname then
 					info = info..'\n Application name not specified'
@@ -68,8 +69,8 @@ return {
 				if not version then
 					info = info..'\n Application version not specified or incorrect'
 				end
+				res:ltp('app/new.html', {app=app, lwf=lwf, info=info})
 			end
-			res:ltp('app/new.html', {app=app, lwf=lwf, info=info})
 			--
 		else
 			res:redirect('/login')
