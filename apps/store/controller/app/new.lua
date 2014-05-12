@@ -73,7 +73,7 @@ return {
 			end
 			--
 		else
-			res:redirect('/login')
+			res:redirect('/user/login')
 		end
 	end
 }

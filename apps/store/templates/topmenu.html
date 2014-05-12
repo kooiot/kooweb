@@ -48,7 +48,7 @@
 			</div>
 			<? if not lwf.ctx.user then ?>
 			<div class="item">
-				<div id="btn_login" class="ui teal button"><i class="sign in icon"></i>Sign In</div>
+				<a class="ui teal button" href="/user/login"><i class="sign in icon"></i>Sign In</a>
 			</div>
 			<? else ?>
 			<div class="ui dropdown item">
@@ -60,9 +60,8 @@
 						<div class="ui label">25</div>
 					</a>
 
-					<a class="item" href="/profile"><i class="edit icon"></i> Edit Profile</a>
-					<a class="item" href="/accout"><i class="settings icon"></i> Account Settings</a>
-					<a class="item" href="/logout"><i class="settings icon"></i> Logout</a>
+					<a class="item" href="/user/profile"><i class="edit icon"></i> Edit Profile</a>
+					<a class="item" href="/user/logout"><i class="sign out icon"></i> Logout</a>
 				</div>
 			</div>
 			<? end ?>
