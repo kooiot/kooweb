@@ -6,9 +6,7 @@ semantic.button.ready = function() {
 	// selector cache
 	var
 		$buttons = $('.ui.buttons .button'),
-		$signup  = $('#btn_signup'),
-		$logout  = $('#btn_logout'),
-		$button  = $('.ui.button').not($buttons).not($signup).not($logout),
+		$button  = $('.ui.button').not($buttons),
 		// alias
 		handler = {
 
@@ -26,18 +24,6 @@ semantic.button.ready = function() {
 	$buttons
 		.on('click', handler.activate)
 		;
-
-	$signup
-		.on('click', function() {
-			window.location = "/register";
-		});
-	;
-
-	$logout
-		.on('click', function() {
-			window.location = "/logout";
-		});
-	;
 };
 
 

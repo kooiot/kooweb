@@ -4,10 +4,10 @@
 <div class="ui two column middle aligned relaxed grid basic segment">
 
 	<div class="center aligned column">
-		<div id="btn_signup" class="huge green ui labeled icon button">
+		<a class="huge green ui labeled icon button" href="/user/register">
 			<i class="signup icon"></i>
 			Sign Up
-		</div>
+		</a>
 	</div>
 	<div class="ui vertical divider">
 		Or
@@ -16,7 +16,7 @@
 		<? if err then ?>
 		<div class="ui red message"><?=err ?></div>
 		<? end ?>
-		<form class="ui form segment" action="login" method="post">
+		<form class="ui form segment" action="/user/login" method="post">
 			<div class="field">
 				<label>Username</label>
 				<div class="ui left labeled icon input">
