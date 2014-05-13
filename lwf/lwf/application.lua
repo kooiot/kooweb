@@ -114,7 +114,7 @@ function class:__create_user(username)
 			assert(self and self.app)
 			self.app.lwf.ctx.session:clear()
 			self.app.lwf.ctx.user = nil
-			self.app.auth:clear_identity()
+			self.app.auth:clear_identity(self.username)
 		end
 	}
 	return user
@@ -126,7 +126,7 @@ function class:identity()
 	local username = session:get('username')
 	local identity = session:get('identity')
 	if username and identity then
-		--logger:info('Identity '..username..' '..identity)
+		logger:info('Identity '..username..' '..identity)
 		local r, err = self.auth:identity(username, identity)
 		if r then
 			--logger:info('Identity OK '..username..' '..identity)
