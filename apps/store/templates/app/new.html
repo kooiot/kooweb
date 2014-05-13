@@ -15,45 +15,66 @@
 	<? end ?>
 	<form class="ui form" action="" method="post" enctype="multipart/form-data">
 
-		<div class="ui labeled input">
-			<input placeholder="App name..." name="appname" type="text">
-			<div class="ui corner label">
-				<i class="asterisk icon"></i>
+		<div class="four fields">
+			<div class="field">
+				<div class="ui labeled input">
+					<input placeholder="App name..." name="appname" type="text">
+					<div class="ui corner label">
+						<i class="asterisk icon"></i>
+					</div>
+				</div>
+			</div>
+
+			<div class="field">
+				<div class="ui labeled input">
+					<input placeholder="Version..." name="version" type="text"/>
+					<div class="ui corner label">
+						<i class="asterisk icon"></i>
+					</div>
+				</div>
+			</div>
+
+			<div class="inline field">
+				<label>Type:</label>
+				<div class="ui selection labeled dropdown" onChange="changeType(this);">
+					<input id="apptype" name="apptype" type="hidden"/>
+					<div class="default text">...</div>
+					<i class="dropdown icon"></i>
+					<div class="menu">
+						<div class="item" data-value="1">App</div>
+						<div class="item" data-value="2">IO</div>
+						<div class="item" data-value="3">IO.CONFIG</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="inline field">
+				<label>Category:</label>
+				<div class="ui selection dropdown">
+					<input id="category" name="category" type="hidden"/>
+					<div class="default text">Industial</div>
+					<i class="dropdown icon"></i>
+					<div class="menu">
+						<div class="item" data-value="1">Industrial</div>
+						<div class="item" data-value="2">Home Automation</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<div class="ui labeled input">
-			<input placeholder="Version..." name="version" type="text"/>
-			<div class="ui corner label">
-				<i class="asterisk icon"></i>
+		<div class="two fields">
+			<div class="field">
+				<div class="ui input">
+					<input placeholder="Description..." name="desc" type="text"/>
+					<div class="ui corner label">
+						<i class="asterisk icon"></i>
+					</div>
+				</div>
 			</div>
-		</div>
-
-		<div class="ui selection labeled dropdown">
-			<input name="apptype" type="hidden"/>
-			<div class="default text">...</div>
-			<i class="dropdown icon"></i>
-			<div class="menu">
-				<div class="item" data-value="1">IO</div>
-				<div class="item" data-value="2">App</div>
-			</div>
-		</div>
-
-		<label>Category:</label>
-		<div class="ui selection dropdown">
-			<input name="category" type="hidden"/>
-			<div class="default text">Industial</div>
-			<i class="dropdown icon"></i>
-			<div class="menu">
-				<div class="item" data-value="1">Industrial</div>
-				<div class="item" data-value="2">Home Automation</div>
-			</div>
-		</div>
-
-		<div class="ui fluid labeled input">
-			<input placeholder="Description..." name="desc" type="text"/>
-			<div class="ui corner label">
-				<i class="asterisk icon"></i>
+			<div class="field" id="depends" hidden=true>
+				<div class="ui input">
+					<input placeholder="Depends..." name="depends" type="text"/>
+				</div>
 			</div>
 		</div>
 
@@ -95,6 +116,15 @@
 			}
 		}); 
 	 })();       
+	function changeType(obj) {
+		var c = $('#apptype');
+		var val = c.attr('value');
+		if ( val == '3' ) {
+			$('#depends').show();
+		} else {
+			$('#depends').hide();
+		}
+	};
 	</script>
 
 </div>

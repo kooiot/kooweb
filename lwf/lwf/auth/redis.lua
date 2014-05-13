@@ -42,9 +42,8 @@ end
 function class:identity(username, identity)
 	local dbidentity = self.red:get('user_identity.'..username)
 	if not dbidentity or dbidentity ~= ngx.null then
-		local ridentity = md5.sumhexa(username..'TODODO')
-		logger:debug('dbidentity '..dbidentity..' ridentity:'..ridentity)
-		return dbidentity == ridentity
+		logger:debug('dbidentity '..dbidentity..' identity:'..identity)
+		return dbidentity == identity
 	else
 		logger:debug('identity failure ', username, ' ', identity)
 		return false

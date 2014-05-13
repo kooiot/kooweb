@@ -17,6 +17,7 @@ return {
 			name = appname,
 			['type'] = appinfo.apptype or 'app',
 			desc = appinfo.desc,
+			depends = {appinfo.depends},
 		}
 		local cjson = require 'cjson'
 		res.headers['Content-Type'] = 'application/json; charset=utf-8'
