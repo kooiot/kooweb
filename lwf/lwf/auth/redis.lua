@@ -54,7 +54,7 @@ end
 function class:get_identity(username)
 	local identity = self.red:get('user_identity.'..username)
 	if not identity or identity == ngx.null then
-		identity = md5.sumhexa(username..'TODODO')
+		identity = md5.sumhexa(username..os.date())
 		self.red:set('user_identity.'..username, identity)
 		--logger:debug('Creates identity:'..identity..' for user:'..username)
 	end
