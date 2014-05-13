@@ -40,7 +40,7 @@ return {
 			local category = req.post_args['category']
 			local desc = req.post_args['desc']
 			version = version:match('(%d+%.%d+%.%d+)')
-			local info = 'Error:'
+			local err = 'Error:'
 			if file and appname and version then 
 				local version = version or '1.0.0'
 				print(appname..'-'..apptype..'-'..category)
@@ -65,12 +65,12 @@ return {
 				res:write('/app/detail/'..path)
 			else
 				if not appname then
-					info = info..'\n Application name not specified'
+					err = err..'\n Application name not specified'
 				end
 				if not version then
-					info = info..'\n Application version not specified or incorrect'
+					err = err..'\n Application version not specified or incorrect'
 				end
-				res:ltp('app/new.html', {app=app, lwf=lwf, info=info})
+				res:ltp('app/new.html', {app=app, lwf=lwf, err=err})
 			end
 			--
 		else

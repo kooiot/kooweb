@@ -61,6 +61,11 @@ function class:get_identity(username)
 	return identity
 end
 
+function class:clear_identity(username)
+	self.red:set('user_identity.'..username, '')
+	return true
+end
+
 function class:set_password(username, password)
 	local r, err = self.red:set('user.'..username, password)
 	return r, err

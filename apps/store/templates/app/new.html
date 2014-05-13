@@ -4,16 +4,16 @@
 <div class="main container">
 	<h2 class="ui dividing header">Information:</h2>
 
-	<? if info then ?>
+	<? if err then ?>
 	<div class="ui warning message">
 		<i class="close icon"></i>
 		<div class="header">
 			Warning!!
 		</div>
-		<?=info ?>
+		<?=err ?>
 	</div>
 	<? end ?>
-	<form action="" method="post" enctype="multipart/form-data">
+	<form class="ui form" action="" method="post" enctype="multipart/form-data">
 
 		<div class="ui labeled input">
 			<input placeholder="App name..." name="appname" type="text">
@@ -23,14 +23,14 @@
 		</div>
 
 		<div class="ui labeled input">
-			<input placeholder="Version..." name="version" type="text">
+			<input placeholder="Version..." name="version" type="text"/>
 			<div class="ui corner label">
 				<i class="asterisk icon"></i>
 			</div>
 		</div>
 
 		<div class="ui selection labeled dropdown">
-			<input name="apptype" type="hidden">
+			<input name="apptype" type="hidden"/>
 			<div class="default text">...</div>
 			<i class="dropdown icon"></i>
 			<div class="menu">
@@ -41,7 +41,7 @@
 
 		<label>Category:</label>
 		<div class="ui selection dropdown">
-			<input name="category" type="hidden">
+			<input name="category" type="hidden"/>
 			<div class="default text">Industial</div>
 			<i class="dropdown icon"></i>
 			<div class="menu">
@@ -51,7 +51,7 @@
 		</div>
 
 		<div class="ui fluid labeled input">
-			<input placeholder="Description..." name="desc" type="text">
+			<input placeholder="Description..." name="desc" type="text"/>
 			<div class="ui corner label">
 				<i class="asterisk icon"></i>
 			</div>
@@ -59,8 +59,8 @@
 
 		</br>
 		<label>Package:</label>
-		<input type="file" name="file">
-		<input type="submit" value="Upload">
+		<input type="file" name="file"/>
+		<input type="submit" value="Upload"/>
 	</form>
 
 	<div class="ui progress">

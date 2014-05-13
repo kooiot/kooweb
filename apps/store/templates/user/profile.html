@@ -27,10 +27,26 @@
 	<img class="rounded ui small image" src="<?=img_link?>">
 	<img class="circular ui small image" src="<?=img_link?>">
 
-	<form action="" method="post" enctype="multipart/form-data">
+	<form class="ui form" action="" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="action" value="avatar"/>
 		<label>Your Avatar:</label>
-		<input type="file" name="file">
-		<input type="submit" value="Upload">
+		<input type="file" name="file"/>
+		<input type="submit" value="Upload"/>
+	</form>
+
+	<form class="ui form" action="" method="post" >
+		<input type="hidden" name="action" value="passwd"/>
+		<label>Original Pass:</label>
+		<div class="ui input">
+			<input type="password" name="org_pass" placeholder="original password" value=""/>
+		</div>
+		<div class="ui input">
+			<input type="password" name="new_pass" placeholder="new password" value=""/>
+		</div>
+		<div class="ui input">
+			<input type="password" name="new_pass2" placeholder="new password retype" value=""/>
+		</div>
+		<input class="ui button" type="submit" value="Change"/>
 	</form>
 
 	<div id="status"></div>

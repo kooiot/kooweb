@@ -28,6 +28,10 @@ function class:get_identity(username)
 	return 'simple'
 end
 
+function class:clear_identity(username)
+	return true
+end
+
 function class:set_password(username, password)
 end
 

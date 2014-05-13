@@ -1,17 +1,33 @@
 <? extend 'layout.html' ?>
-<? include('app/top.html', {info=info}) ?>
+<? include('app/top.html', {lwf=lwf, info=info, showbuttons=true}) ?>
 <div class="main container">
+	<!---
 	<div style="" class="sticky-wrapper"><div class="peek">
 			<div class="ui vertical pointing secondary menu">
-				<!--<a class="item active">Cards</a>-->
+				<a class="item active">Cards</a>
 				<a class="item">Feeds</a>
-				<!--<a class="item">FQA</a>-->
-				<!--<a class="item">Links</a>-->
+				<a class="item">FQA</a>
+				<a class="item">Links</a>
 				<a class="item">Comments</a>
 			</div>
 		</div>
 	</div>
 	<? include 'widget/rating.html' ?>
 	<? include 'widget/feeds.html' ?>
-	<? include 'widget/comments.html' ?>
+	-->
+
+	<h3>
+	<a class="ui tiny blue" href="/users/<?=info.username ?>" ><i class="ui user icon"></i> <?=info.username ?></a>
+	</h3>
+	<div><i class="ui comment icon"></i><i><?=info.desc ?></i> </div>
+	<? if lwf.ctx.user and info.username == lwf.ctx.user.username  then ?>
+	<a href="/app/modify/<?=info.path?>" class="ui small floated right button blue">
+		<i class="ui settings icon"></i>Modify
+	</a>
+	<? end ?>
+	<a href="/static/releases/<?=info.path ?>/latest.lpk" class="ui small floated right button red">
+		<i class="ui cloud download icon"></i>Download
+	</a>
+
+	<? include('widget/comments.html', {lwf=lwf, app=app, comment_key=info.path, comment_title=info.name, comment_url='app/detail/'..info.path}) ?>
 </div>

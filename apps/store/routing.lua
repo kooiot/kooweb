@@ -2,4 +2,5 @@
 -----------------------------------------------
 
 map('^/app/detail/(.*)', 'app/detail')
+map('^/app/modify/(.*)', 'app/modify')
 map('^/users/(.*)', 'user/detail')

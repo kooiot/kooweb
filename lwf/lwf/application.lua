@@ -114,6 +114,7 @@ function class:__create_user(username)
 			assert(self and self.app)
 			self.app.lwf.ctx.session:clear()
 			self.app.lwf.ctx.user = nil
+			self.app.auth:clear_identity()
 		end
 	}
 	return user
