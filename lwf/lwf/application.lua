@@ -37,6 +37,8 @@ local function new(lwf, name, path)
 		lwf = lwf,
 		app_name = name,
 		app_path = path,
+		io = io,
+		assert = assert,
 	}
         
     local app_config = path .. "/config.lua"

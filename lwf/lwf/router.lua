@@ -2,7 +2,6 @@
 local functional = require 'lwf.functional'
 local util = require 'lwf.util'
 local logger = require 'lwf.logger'
-local lwfstatic = require 'lwf.static'
 local controller = require 'lwf.controller'
 
 local function route_sorter(l, r)
@@ -57,9 +56,13 @@ local function create_map_func(app)
 	end
 end
 
-local function static(app, route_map, uri, func_name)
-	local s = lwfstatic.new(app, func_name)
-	table.insert(route_map, {uri, s})
+local function static(app, route_map, uri, basedir)
+	local lwf = app.lwf
+
+	if lwf.static_handler then
+		local s = lwf.static_handler(app, basedir)
+		table.insert(route_map, {uri, s})
+	end
 end
 
 local function create_static_func(app)
@@ -74,7 +77,7 @@ end
 local function setup(app, file)
 	app.route_map = app.route_map or {}
 	if app.config.static then
-		table.insert(app.route_map, {'^/static/(.+)', lwfstatic.new(app, app.config.static)})
+		static(app, app.route_map, '^/static/(.+)', app.config.static)
 	end
 	local env = {}
 	env.map = create_map_func(app)
