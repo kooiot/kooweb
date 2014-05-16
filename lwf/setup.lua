@@ -17,9 +17,13 @@ local function setup(lwf)
 		local app_name = lwf.var.LWF_APP_NAME
 		local app_path = lwf.var.LWF_APP_PATH
 
-		lwf.current_app = application.new(lwf, app_name, app_path)
+		lwf.master_app = application.new(lwf, app_name, app_path)
+		lwf.folk_app = function(name, path)
+			local lwffolkapp = require 'lwf.folkapp'
+			return lwffolkapp.new(lwf, lwf.master_app, name, path)
+		end
 
-		return lwf.current_app
+		return lwf.master_app
 	end
 
 	local function content()

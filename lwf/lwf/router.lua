@@ -28,7 +28,7 @@ local function _map(app, route_map, uri, func_name)
 	if fn and fn ~= '' then
 		h = h[fn]
 	else
-		h = h.handler or h.get
+		h = h and (h.handler or h.get) or nil
 	end
 
 	if h then
@@ -84,7 +84,9 @@ local function setup(app, file)
 	env.static = create_static_func(app)
 	env.print = print
 	
-	util.loadfile(file, env)
+	if file then
+		util.loadfile(file, env)
+	end
 
 	if app.config.router and  app.config.router == 'auto' then
 		table.insert(app.route_map, {'^/(.-)$', controller.new(app, app.config.controller)})

@@ -40,9 +40,9 @@ local function new(lwf, name, path)
 		io = io,
 		assert = assert,
 	}
-        
-    local app_config = path .. "/config.lua"
-    local r, c = util.loadfile(app_config, app)
+
+	local app_config = path .. "/config.lua"
+	local r, c = util.loadfile(app_config, app)
 	assert(r, c)
 	assert(c)
 	translate_config(path, c)
@@ -80,16 +80,16 @@ function class:init()
         end
     end
 
-    -- load the main-app's routing
-    local rfile = self.app_path .. "/routing.lua"
+	-- load the main-app's routing
+	local rfile = self.app_path .. "/routing.lua"
 	router.setup(self, rfile)
-    
+
     if self.subapps and #self.subapps ~= 0 then
 		-- merge routings
 		router.merge_routings(self, self.subapps or {})
 	end
 
-    if self.debug and self.debug.on and lwfdebug then
+    if self.config.debug and self.config.debug.on and lwfdebug then
         debug.sethook(debug.debug_hook, "cr")
     end
 	
