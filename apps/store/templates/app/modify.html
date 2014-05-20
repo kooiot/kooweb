@@ -14,14 +14,72 @@
 	</div>
 	<? end ?>
 
-	<label> Current ICON: </label>
-	<? local img_link = '/static/releases/'..info.path..'/icon.jpg' ?>
-	<img class="rounded ui small image" src="<?=img_link?>">
+	<div class="ui segment">
+		<div class="ui header"> ICON </div>
+		<? local img_link = '/static/releases/'..info.path..'/icon.jpg' ?>
+		<img class="rounded ui small image" src="<?=img_link?>">
 
-	<form class="ui form" action="/app/modify" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="path" value="<?=info.path?>"/>
-		<label>ICON:</label>
-		<input type="file" name="file"/>
-		<input type="submit" value="Upload"/>
-	</form>
+		<form class="ui form" action="/app/modify" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="path" value="<?=info.path?>"/>
+			<label>ICON:</label>
+			<input type="file" name="file"/>
+			<input type="submit" class="ui tiny class button" value="Change"/>
+		</form>
+	</div>
+
+	<div class="ui segment">
+		<div class="ui header"> Upload New Version </div>
+		<form id="upgradeform" class="ui form" action="/app/new" method="post" enctype="multipart/form-data">
+			<div class="two fields">
+				<div class="field">
+					<div class="ui labeled input">
+						<input placeholder="Version..." name="version" type="text" value="<?=info.version ?>"/>
+						<div class="ui corner label">
+							<i class="asterisk icon"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<input name="appname" type="hidden" value="<?=info.name?>"/>
+			<input name="action" type="hidden" value="upgrade"/>
+			<label>Package:</label>
+			<input type="file" name="file"/>
+			<input type="submit" class="ui tiny class button" value="Upload"/>
+		</form>
+	</div>
+	<div class="ui progress">
+		<div class="bar"></div>
+	</div>
+	<div id="status"></div>
+
+	<script>
+	(function() {
+		var status = $('#status');
+		var bar = $('.bar');
+		$('#upgradeform').ajaxForm({
+			beforeSend: function() {
+				status.empty();
+			},
+			uploadProgress: function(event, position, total, percentComplete) {
+				var percentVal = percentComplete + '%';
+				bar.width(percentVal);
+				status.text(percentVal);
+			},
+			success: function() {
+				var percentVal = '100%';
+				bar.width(percentVal);
+				status.text(percentVal);
+			},
+			complete: function(xhr) {
+				status.html('<br>'+xhr.responseText);
+			},
+			error: function(xhr) {
+				status.html(xhr.responseText);
+			}
+		}); 
+	 })();       
+	</script>
+
+
 </div>

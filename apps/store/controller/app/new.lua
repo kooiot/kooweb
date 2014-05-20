@@ -35,43 +35,58 @@ return {
 		if lwf.ctx.user then
 			local file = req.post_args['file']
 			local appname = req.post_args['appname']
-			local apptype = req.post_args['apptype']
 			local version = req.post_args['version']
-			local category = req.post_args['category']
 			local depends = req.post_args['depends']
-			local desc = req.post_args['desc']
 			version = version:match('(%d+%.%d+%.%d+)')
-			local err = 'Error:'
+			local err = nil
 			if file and appname and version then 
-				local version = version or '1.0.0'
-				print(appname..'-'..apptype..'-'..category)
-				local apptype = TYPES[tonumber(apptype) or 1]
-				local category = CATES[tonumber(category) or 1]
-				print(appname..'-'..apptype..'-'..category)
+				local action = req.post_args['action'] or 'new'
 				local username = lwf.ctx.user.username
+				local path = username..'/'..appname
+
 				local db = app.model:get('db')
 				db:init()
 				local info = db:get_app(username, appname)
-				local path = username..'/'..appname
-				local r, err = save_app(path, file, version)
-				if r then
-					if not info then
+				if action == 'new' and not info then
+					local category = req.post_args['category']
+					local apptype = req.post_args['apptype']
+					local desc = req.post_args['desc']
+					local version = version or '1.0.0'
+
+					local apptype = TYPES[tonumber(apptype) or 1]
+					local category = CATES[tonumber(category) or 1]
+					local r, err_f = save_app(path, file, version)
+					if r then
 						db:create_app(username, appname, {path=path, name=appname, version=version, apptype=apptype, category=category, desc=desc, depends=depends})
 					else
-						db:update_app(username, appname, {path=path, name=appname, version=version, apptype=apptype, category=category, desc=desc, depends=depends})
+						err = err_f
+					end
+				elseif action ~= 'new' and info then
+					info.version = version
+					info.depends = depends
+					local r, err_f = db:update_app(username, appname, info)
+					err = err_f
+				else
+					if action == 'new' then
+						err = 'ERROR:<br> The application '..appname..' exists, If you want to upload a new version, go to'
+						err = err .. '<a class="ui link" href="/app/modify/'..path..'"> Here </a>'
+					else
+						err = "The application "..appname.." not exists!!!!"
 					end
 				end
 				db:close()
-				--res:redirect('/app/detail/'..path)
-				res:write('/app/detail/'..path)
+				err = err or ([[Uploaded successfully, details here <a class="ui link" href="/app/detail/]]..path..[["> Here </a>]])
+				res:write(err)
 			else
+				err = "Error:"
 				if not appname then
-					err = err..'\n Application name not specified'
+					err = err..'<br> Application name not specified'
 				end
 				if not version then
-					err = err..'\n Application version not specified or incorrect'
+					err = err..'<br> Application version not specified or incorrect'
 				end
-				res:ltp('app/new.html', {app=app, lwf=lwf, err=err})
+				res:write(err)
+				--res:ltp('app/new.html', {app=app, lwf=lwf, err=err})
 			end
 			--
 		else

@@ -15,6 +15,7 @@ return {
 		local info = {
 			author = username,
 			name = appname,
+			version = appinfo.version or '0.0.0',
 			['type'] = appinfo.apptype or 'app',
 			desc = appinfo.desc,
 			depends = {appinfo.depends},

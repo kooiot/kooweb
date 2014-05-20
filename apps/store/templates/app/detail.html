@@ -19,6 +19,7 @@
 	<h3>
 	<a class="ui tiny blue" href="/users/<?=info.username ?>" ><i class="ui user icon"></i> <?=info.username ?></a>
 	</h3>
+	<div><i class="ui save icon"></i><i><?=info.version ?> </i> </div>
 	<div><i class="ui comment icon"></i><i><?=info.desc ?></i> </div>
 	<? if lwf.ctx.user and info.username == lwf.ctx.user.username  then ?>
 	<a href="/app/modify/<?=info.path?>" class="ui small floated right button blue">

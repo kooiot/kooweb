@@ -109,7 +109,7 @@
 				status.text(percentVal);
 			},
 			complete: function(xhr) {
-				status.html('<br> Uploaded successfully, details here <a class="ui link" href="' + xhr.responseText + '"> Here </a>');
+				status.html('<br>'+xhr.responseText);
 			},
 			error: function(xhr) {
 				status.html(xhr.responseText);
