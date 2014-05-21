@@ -11,7 +11,12 @@ return {
 		local db = app.model:get('db')
 		db:init()
 		local username, appname = path:match('^([^/]+)/(.+)$')
-		local appinfo = db:get_app(username, appname)
+		local appinfo, err = db:get_app(username, appname)
+		if not appinfo then
+			res:write(err)
+			lwf.exit(403)
+			return
+		end
 		db:close()
 
 		local info = {

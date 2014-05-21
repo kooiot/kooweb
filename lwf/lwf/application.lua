@@ -185,7 +185,7 @@ function class:dispatch()
 	local ctx = lwf.ctx
 	ctx.app = self
 	local requ = lwf.create_request()
-    local path = requ.path
+    local path = util.unescape_url(requ.path)
 
     local page_found  = false
     -- match order by definition order
