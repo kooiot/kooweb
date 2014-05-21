@@ -5,6 +5,8 @@ return {
 		if not path then
 			lwf.exit(404)
 		end
+		local version = req:get_arg('version')
+		-- TODO:
 
 		local db = app.model:get('db')
 		db:init()
