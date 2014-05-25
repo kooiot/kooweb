@@ -5,6 +5,7 @@ local lwfdebug = require 'lwf.debug'
 local session = require 'lwf.session'
 local model = require 'lwf.model'
 local logger = require 'lwf.logger'
+local i18n = require 'lwf.i18n'
 
 local class = {}
 
@@ -55,11 +56,44 @@ function class:init()
     if self.debug and self.debug.on and lwfdebug then
         debug.sethook(debug.debug_hook, "cr")
     end
+
+	-- I18N loading
+	if self.base_app.config.i18n then
+		local po = require 'lwf.util.po'
+		local dir = require 'lwf.util.dir'
+		dir.do_each(self.app_path..'/i18n', function(path)
+			local lang = path:match('.+/[^/]+$')
+			po.attach(path, lang)
+			--- 
+		end)
+		self.translations = po.get_translations()
+	else
+		self.translations = {}
+	end
 end
 
 function class:authenticate(username, password, ...)
 	return self.base_app:authenticate(username, password, ...)
 end
+
+function class:get_translator()
+	local session = self.ctx.session 
+	local lang = nil
+	if session then
+		lang = session:get('lang')
+	end
+
+	if self.base_app then
+		local ft = self.base_app.translations
+		local translator = i18n.make_translator(self.translations, lang or 'zh_CN')
+		local basetransaltor = i18n.make_translator(ft, lang or 'zh_CN')
+		return i18n.make_translator(translator, basetransaltor)
+	else
+		return i18n.make_translator(self.translations, lang or 'zh_CN')
+	end
+end
+
+
 
 function class:dispatch(requ, resp, path)
 	local lwf = self.lwf

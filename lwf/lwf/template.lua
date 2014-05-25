@@ -5,6 +5,15 @@ local util = require 'lwf.util'
 -- Uncomment this to enable cache in product env
 -- local ltp_templates_cache={}
 
+local function init_data_env(lwf, data)
+	local data = data or {lwf=lwf, app=lwf.ctx.app}
+	data.escape_url = data.escape_url or util.escape_url
+	local t = lwf.ctx.app:get_translator()
+	data.translate = t.translate
+	data.translatef = t.translatef
+	data._ = data._ or data.translate
+	return data
+end
 
 local function out (s, i, f)
 	s = string.sub(s, i, f or -1)
@@ -128,7 +137,7 @@ end
 
 extend = function (response, data)
 	return function(layout, contents)
-		data.escape_url = data.escape_url or util.escape_url
+		local data = init_data_env(response.lwf, data)
 		--print('extending '..layout)
 		data.content = function()
 			return contents
@@ -140,7 +149,7 @@ end
 include = function (response, data)
 	return function(template, tdata)
 		local tdata = tdata or data
-		tdata.escape_url = tdata.escape_url or util.escape_url
+		tdata = init_data_env(response.lwf, tdata)
 		--print('including '..template)
 		data.out(process(response, template, tdata))
 	end
@@ -150,9 +159,9 @@ return function(response, template, data)
 	local lwf = response.lwf
 	assert(lwf)
 	assert(lwf.ctx.app)
-	local data = data or {lwf=lwf, app=lwf.ctx.app}
-	data.escape_url = util.escape_url
-	assert(data)
+
+	local data = init_data_env(lwf, data)
+
 	local output = process(response, template, data)
 	--print('finished '..#output)
 	response:write(output)
