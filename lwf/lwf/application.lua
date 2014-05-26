@@ -207,7 +207,7 @@ function class:get_translator()
 		local ft = self.base_app.translations
 		local translator = i18n.make_translator(self.translations, lang)
 		local basetransaltor = i18n.make_translator(ft, lang)
-		return i18n.make_translator(translator, basetransaltor)
+		return i18n.make_fallback(translator, basetransaltor)
 	else
 		return i18n.make_translator(self.translations, lang)
 	end

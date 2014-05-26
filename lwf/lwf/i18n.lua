@@ -110,9 +110,14 @@ end
 function _M.make_fallback(translator, fallback_translator)
 	local function translate(key)
 		local trans, lang = translator.translate(key)
-		if not lang then
-			return fallback_translator(key)
+		--print(trans, lang)
+		if lang then
+			return trans, lang
 		end
+
+		--print('getting from fallback')
+		--print(fallback_translator.translate(key))
+		return fallback_translator.translate(key)
 	end
 	local function translatef(key, ...)
 		return tostring(translate(key)):format(...)

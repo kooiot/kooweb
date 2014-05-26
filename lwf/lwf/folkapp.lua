@@ -62,7 +62,7 @@ function class:init()
 		local po = require 'lwf.util.po'
 		local dir = require 'lwf.util.dir'
 		dir.do_each(self.app_path..'/i18n', function(path)
-			local lang = path:match('.+/[^/]+$')
+			local lang = path:match('.+/([^/]+)$')
 			po.attach(path, lang)
 			--- 
 		end)
@@ -77,17 +77,19 @@ function class:authenticate(username, password, ...)
 end
 
 function class:get_translator()
-	local session = self.ctx.session 
+	local session = self.lwf.ctx.session 
 	local lang = nil
 	if session then
 		lang = session:get('lang') or util.guess_lang(self.lwf.ctx.request)
+	else
+		lang = 'en_US'
 	end
 
 	if self.base_app then
 		local ft = self.base_app.translations
 		local translator = i18n.make_translator(self.translations, lang)
 		local basetransaltor = i18n.make_translator(ft, lang)
-		return i18n.make_translator(translator, basetransaltor)
+		return i18n.make_fallback(translator, basetransaltor)
 	else
 		return i18n.make_translator(self.translations, lang)
 	end

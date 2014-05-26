@@ -16,6 +16,7 @@ _M.translations = {
 
 function _M.attach(directory, lang, reload)
 	if not reload and  _M.loaded[directory] then
+		print('folder already attached ', directory)
 		return
 	end
 
@@ -30,9 +31,11 @@ function _M.attach(directory, lang, reload)
 			lang = path:match('([^/]+)/[^/]+%.po$')
 		end
 		if lang:len() ~= 2 and lang:len() ~= 5 then
+			print('lang name is incorrect ', lang)
 			return
 		end
 		if lang:len() == 5 and not lang:match('.+_.+') then
+			print('lang name is incorrect5 ', lang)
 			return
 		end
 		---
