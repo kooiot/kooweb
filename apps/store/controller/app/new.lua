@@ -64,7 +64,10 @@ return {
 				elseif action ~= 'new' and info then
 					info.version = version
 					info.depends = depends
-					local r, err_f = db:update_app(username, appname, info)
+					local r, err_f = save_app(path, file, version)
+					if t then
+						r, err_f = db:update_app(username, appname, info)
+					end
 					err = err_f
 				else
 					if action == 'new' then
