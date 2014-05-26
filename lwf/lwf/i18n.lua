@@ -49,6 +49,7 @@ end
 -- the text with their translations.
 -------------------------------------------------------------------------------
 function _M.make_translator(translations, language, fallback_table)
+	--print('Make translator ', #translations, language)
 	if not fallback_table then
 		fallback_table = translations.FALLBACKS or {}
 	end

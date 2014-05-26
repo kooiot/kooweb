@@ -13,10 +13,10 @@ local parse = function(path)
 		if not id then
 			id = l:match('^msgid%s+"(.+)"$')
 		elseif id then
-			print(id)
+	--		print(id)
 			local str = l:match('^msgstr%s+"(.*)"$')
 			if str then
-				print(str)
+	--			print(str)
 				t[id] = str
 				id = nil
 			end

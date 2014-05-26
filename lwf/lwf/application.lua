@@ -113,7 +113,7 @@ function class:init()
 		local dir = require 'lwf.util.dir'
 		dir.do_each(self.app_path..'/i18n', function(path)
 			local lang = path:match('.+/([^/]+)$')
-			print('TTTTTTTTTTTTTTTTTT', path, ':', lang)
+			--print('loading i18n from ', path, ':', lang)
 			po.attach(path, lang)
 			--- 
 		end)
@@ -200,16 +200,16 @@ function class:get_translator()
 	local session = self.lwf.ctx.session 
 	local lang = nil
 	if session then
-		lang = session:get('lang')
+		lang = session:get('lang') or util.guess_lang(self.lwf.ctx.request)
 	end
 
 	if self.base_app then
 		local ft = self.base_app.translations
-		local translator = i18n.make_translator(self.translations, lang or 'zh_CN')
-		local basetransaltor = i18n.make_translator(ft, lang or 'zh_CN')
+		local translator = i18n.make_translator(self.translations, lang)
+		local basetransaltor = i18n.make_translator(ft, lang)
 		return i18n.make_translator(translator, basetransaltor)
 	else
-		return i18n.make_translator(self.translations, lang or 'zh_CN')
+		return i18n.make_translator(self.translations, lang)
 	end
 end
 

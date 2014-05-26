@@ -80,16 +80,16 @@ function class:get_translator()
 	local session = self.ctx.session 
 	local lang = nil
 	if session then
-		lang = session:get('lang')
+		lang = session:get('lang') or util.guess_lang(self.lwf.ctx.request)
 	end
 
 	if self.base_app then
 		local ft = self.base_app.translations
-		local translator = i18n.make_translator(self.translations, lang or 'zh_CN')
-		local basetransaltor = i18n.make_translator(ft, lang or 'zh_CN')
+		local translator = i18n.make_translator(self.translations, lang)
+		local basetransaltor = i18n.make_translator(ft, lang)
 		return i18n.make_translator(translator, basetransaltor)
 	else
-		return i18n.make_translator(self.translations, lang or 'zh_CN')
+		return i18n.make_translator(self.translations, lang)
 	end
 end
 
