@@ -16,7 +16,7 @@ _M.translations = {
 
 function _M.attach(directory, lang, reload)
 	if not reload and  _M.loaded[directory] then
-		print('folder already attached ', directory)
+--		print('folder already attached ', directory)
 		return
 	end
 

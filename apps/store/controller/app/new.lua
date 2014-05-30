@@ -8,7 +8,7 @@ local function save_app(path, file, version)
 	local path = get_full_path(path)
 	filename = path..'/latest.lpk'
 	vfilename = path..'/'..version..'.lpk'
-	print(filename, vfilename)
+	--print(filename, vfilename)
 	local f, err = io.open(filename, 'w+')
 	if f then
 		f:write(file.contents)
@@ -65,7 +65,7 @@ return {
 					info.version = version
 					info.depends = depends
 					local r, err_f = save_app(path, file, version)
-					if t then
+					if r then
 						r, err_f = db:update_app(username, appname, info)
 					end
 					err = err_f

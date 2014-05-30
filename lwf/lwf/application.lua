@@ -144,7 +144,7 @@ function class:identity()
 	local username = session:get('username')
 	local identity = session:get('identity')
 	if username and identity then
-		logger:info('Identity '..username..' '..identity)
+		--logger:info('Identity '..username..' '..identity)
 		local r, err = self.auth:identity(username, identity)
 		if r then
 			--logger:info('Identity OK '..username..' '..identity)

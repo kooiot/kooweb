@@ -14,6 +14,7 @@ local get_headers = function(env)
 	headers['Connection'] = env.HTTP_CONNECTION
 	headers['if-modified-since'] = env.IF_MODIFIED_SINCE
 	headers['last-modified'] = env.LAST_MODIFIED
+	headers['Referer'] = env.HTTP_REFERER
 	return headers
 end
 
