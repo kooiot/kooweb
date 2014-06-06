@@ -3,7 +3,15 @@ local CHUNK_LENGTH=78
 
 local base64_loaded, base64 = pcall(require, "base64")
 if not base64_loaded then
-   base64 = require("lwf.util.base64_implementation")
+	local mime_loaded, mime = pcall(require, 'mime')
+	if mime_loaded then
+		base64 = {
+			encode = mime.b64,
+			decode = mime.unb64,
+		}
+	else
+		base64 = require("lwf.util.base64_implementation")
+	end
 end
 
 return {

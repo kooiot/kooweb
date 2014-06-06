@@ -1,5 +1,3 @@
-module(..., package.seeall)
-
 -----------------------------------------------------------------------------
 -- Implements base64 encoding and decoding
 --
@@ -99,3 +97,8 @@ function decode(to_decode)
     return decoded
 end
 
+
+return {
+	encode = encode,
+	decode = decode,
+}

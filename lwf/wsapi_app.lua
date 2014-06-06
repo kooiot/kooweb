@@ -133,7 +133,8 @@ end
 local function make_error_handling_app(config)
    return function(wsapi_env, err)
       -- Try to log this error.
-      local ok, logger = copcall(util.make_logger, config.LOGGER,
+	  local make_logger = require 'lwf.logger'
+      local ok, logger = copcall(make_logger, config.LOGGER,
                                  config.LOGGER_PARAMS, config.LOGGER_LEVEL)
       if ok then
          logger:error(err)

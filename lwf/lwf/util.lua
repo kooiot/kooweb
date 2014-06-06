@@ -271,6 +271,12 @@ function _M.read_all(filename)
 end
 
 function _M.loadfile(file, env)
+	local loadfile = loadfile
+	if _VERSION == 'Lua 5.1' then
+		local CE = require 'lwf.util.compat_env'
+		loadfile = CE.loadfile
+	end
+
 	local f, err = loadfile(file, nil, env)
 	if not f then
 		return nil, err
@@ -287,6 +293,12 @@ end
 function _M.loadfile_as_table(file, env)
 	local env = env or _ENV
 	local new_env = _M.auto_table(function() return env end)
+
+	local loadfile = loadfile
+	if _VERSION == 'Lua 5.1' then
+		local CE = require 'lwf.util.compat_env'
+		loadfile = CE.loadfile
+	end
 
 	local f, err = loadfile(file, nil, new_env)
 	if not f then

@@ -108,6 +108,12 @@ local function execute_template(response, rfun, data)
 		table.insert(extends, 1, file)
 	end
 
+	local load = load
+	if _VERSION == 'Lua 5.1' then
+		local CE = require 'lwf.util.compat_env'
+		load     = CE.load
+	end
+
 	local f, err = load(rfun, nil, nil, data)
 	if not f then
 		return nil, err

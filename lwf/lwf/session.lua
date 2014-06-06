@@ -11,7 +11,7 @@ end
 local encode_session = function(session, salt)
 	local s = base64.encode(json.encode(session))
 	if salt then
-		s = s .. "\n--" .. tostring(hmac(s, salt))
+		s = s .. "--" .. tostring(hmac(s, salt))
 	end
 	return s
 end
@@ -20,18 +20,21 @@ local get_session = function(config, request)
   local cookie = request:get_cookie(config.key)
   if cookie then
 	  if config.salt then
-		  local real_cookie, sig = cookie:match("^(.*)\n%-%-(.*)$")
+		  local real_cookie, sig = cookie:match("^(.*)%-%-(.*)$")
 		  if not (real_cookie and sig == hmac(real_cookie, config.salt)) then
 			  return { }
 		  end
 		  cookie = real_cookie
 	  end
 	  --local session, err = json.decode(base64.decode(cookie))
-	  local _, session = pcall(function()
+	  local ok, session = pcall(function()
 		  return json.decode((base64.decode(cookie)))
 	  end)
 
-	  return session or { }
+	  if not ok then
+		  print(session)
+	  end
+	  return ok and session or { }
   end
   return {}
 end
@@ -40,6 +43,7 @@ local function new(config)
 	local class = {}
 	function class:read(request)
 		self.session = get_session(config, request)
+		assert(type(self.session) == 'table')
 		return self.session
 	end
 
