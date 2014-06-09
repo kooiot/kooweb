@@ -50,7 +50,7 @@ local function new(lwf, baseapp, name, path)
 end
 
 function class:init()
-	self.model = model.new(lwf, self.config.model)
+	self.model = model.new(self.lwf, self.config.model)
 	router.setup(self)
     
     if self.debug and self.debug.on and lwfdebug then
