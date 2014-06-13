@@ -11,7 +11,7 @@ local function init_data_env(lwf, data)
 	local t = lwf.ctx.app:get_translator()
 	data.translate = t.translate
 	data.translatef = t.translatef
-	data._ = data._ or data.translate
+	data._ = data._ or function(...) local r = data.translate(...) return r end
 	return data
 end
 
