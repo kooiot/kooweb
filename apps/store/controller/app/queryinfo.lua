@@ -1,15 +1,23 @@
 return {
 	get = function(req, res)
 		req:read_body()
-		local path = req:get_arg('path')
-		if not path then
-			lwf.exit(404)
-		end
-		local version = req:get_arg('version')
-		-- TODO:
+		local key = req:get_arg('userkey')
 
 		local db = app.model:get('db')
 		db:init()
+
+		if not db:find_user_key(key) then
+			return lwf.exit(404)
+		end
+
+		local path = req:get_arg('path')
+		if not path then
+			return lwf.exit(404)
+		end
+
+		local version = req:get_arg('version')
+		-- TODO:
+
 		local username, appname = path:match('^([^/]+)/(.+)$')
 		local appinfo, err = db:get_app(username, appname)
 		if not appinfo then

@@ -10,8 +10,6 @@
 	</div>
 </div>
 <div class="main container">
-	<h2 class="ui dividing header">Profile:</h2>
-
 	<? if info then ?>
 	<div class="ui warning message">
 		<i class="close icon"></i>
@@ -22,18 +20,16 @@
 	</div>
 	<? end ?>
 
-	<label> Current Avatar: </label>
-	<? local img_link = '/static/upload/avatar/'..lwf.ctx.user.username..'.jpg' ?>
-	<img class="rounded ui small image" src="<?=img_link?>">
-	<img class="circular ui small image" src="<?=img_link?>">
-
-	<form class="ui form" action="" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="action" value="avatar"/>
-		<label>Your Avatar:</label>
-		<input type="file" name="file"/>
-		<input type="submit" value="Upload"/>
+	<h3 class="ui dividing header">Auth Key:</h3>
+	<form class="ui form" action="" method="post">
+		<input type="hidden" name="action" value="userkey"/>
+		<label>Your Auth Key:</label>
+		<input type="text" id="authkey" name="key" readonly="readonly" value="<?=userkey or ''?>"/>
+		<div class="ui teal button" onclick="generate_authkey();">Generate</div>
+		<input class="ui submit button" type="submit" value="Apply"/>
 	</form>
 
+	<h3 class="ui dividing header">Password:</h3>
 	<form class="ui form" action="" method="post" >
 		<input type="hidden" name="action" value="passwd"/>
 		<label>Original Pass:</label>
@@ -46,8 +42,40 @@
 		<div class="ui input">
 			<input type="password" name="new_pass2" placeholder="new password retype" value=""/>
 		</div>
-		<input class="ui button" type="submit" value="Change"/>
+		<input class="ui submit button" type="submit" value="Change"/>
 	</form>
 
+	<h3 class="ui dividing header">Current Avatar:</h3>
+	<? local img_link = '/static/upload/avatar/'..lwf.ctx.user.username..'.jpg' ?>
+	<img class="rounded ui small image" src="<?=img_link?>">
+	<img class="circular ui small image" src="<?=img_link?>">
+
+	<form class="ui form" action="" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="action" value="avatar"/>
+		<label>Your Avatar:</label>
+		<input type="file" name="file"/>
+		<input class="ui submit button", type="submit" value="Upload"/>
+	</form>
+
+
 	<div id="status"></div>
+	<script>
+		function generateUUID() {
+			var d = new Date().getTime();
+			var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+				var r = (d + Math.random()*16)%16 | 0;
+				d = Math.floor(d/16);
+				return (c=='x' ? r : (r&0x7|0x8)).toString(16);
+			});
+			return uuid;
+		};
+
+		function generate_authkey() {
+			var input = $('#authkey');
+			var uuid = generateUUID();
+			//alert(uuid);
+			input.val(uuid);
+		};
+	</script>
 </div>
+

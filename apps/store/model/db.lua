@@ -102,4 +102,50 @@ function class:update_app(username, appname, info)
 	end
 end
 
+function class:check_user_key(key)
+	local con = self.con
+	if con then
+		local r, err = con:get('userkey.key.'..key)
+		if r == ngx.null then
+			return nil, 'No exists'
+		else
+			return r, err
+		end
+	else
+		return nil, 'Database connection is not initialized'
+	end
+end
+
+function class:get_user_key(username)
+	local con = self.con
+	if con then
+		local r, err = con:get('userkey.user.'..username)
+		if r == ngx.null then
+			return nil, 'No exists'
+		else
+			return r, err
+		end
+	else
+		return nil, 'Database connection is not initialized'
+	end
+end
+
+function class:set_user_key(username, key)
+	local con = self.con
+	if con then
+		local uname = self:check_user_key(key)
+		if uname and uname ~= username then
+			return nil, 'The auth key has been used by other user'..uname
+		end
+
+		local r, err = con:set('userkey.key.'..key, username)
+		if not r then
+			return nil, err
+		end
+		r, err = con:set('userkey.user.'..username, key)
+		return r, err
+	end
+	return nil, 'Database connection is not initialized'
+end
+
 return _M

@@ -138,6 +138,19 @@ function Request:read_body()
 	local ngx_req = ngx.req
 	if (self.headers["content-type"] or ""):match(util.escape_pattern("multipart/form-data")) then
 		self.post_args =  parse_multipart() or { }
+	elseif (self.headers["content-type"] or ""):match(util.escape_pattern("application/json")) then
+		ngx_req.read_body()
+		self.post_args = {}
+
+		local file = ngx_req.get_body_file()
+		if file then
+			local f, err = io.open(file)
+			if f then
+				self.post_args['json'] = f:read('*a')
+			end
+		else
+			self.post_args['json'] = ngx_req.get_body_data() or ''
+		end
 	else
 		ngx_req.read_body()
 		self.post_args = ngx_req.get_post_args()
