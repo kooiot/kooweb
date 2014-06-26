@@ -6,7 +6,7 @@ return {
 		local db = app.model:get('db')
 		db:init()
 
-		if not db:find_user_key(key) then
+		if key and not db:check_user_key(key) then
 			return lwf.exit(404)
 		end
 

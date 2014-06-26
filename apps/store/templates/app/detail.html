@@ -15,20 +15,56 @@
 	<? include 'widget/rating.html' ?>
 	<? include 'widget/feeds.html' ?>
 	-->
+	<h2 class="ui dividing header">
+		<a class="ui tiny blue" href="/users/<?=info.username ?>" ><i class="ui user icon"></i> <?=info.username ?></a>
+	</h2>
 
-	<h3>
-	<a class="ui tiny blue" href="/users/<?=info.username ?>" ><i class="ui user icon"></i> <?=info.username ?></a>
-	</h3>
-	<div><i class="ui save icon"></i><i><?=info.version ?> </i> </div>
-	<div><i class="ui comment icon"></i><i><?=info.desc ?></i> </div>
-	<? if lwf.ctx.user and info.username == lwf.ctx.user.username  then ?>
-	<a href="/app/modify/<?=info.path?>" class="ui small floated right button blue">
-		<i class="ui settings icon"></i>Modify
-	</a>
-	<? end ?>
-	<a href="/static/releases/<?=info.path ?>/latest.lpk" class="ui small floated right button red">
-		<i class="ui cloud download icon"></i>Download
-	</a>
+	<div class="ui basic segment">
+		<div><i class="ui save icon"></i><i><?=info.version ?> </i> </div>
+		<div><i class="ui comment icon"></i><i><?=info.desc ?></i> </div>
+		<? if lwf.ctx.user and info.username == lwf.ctx.user.username  then ?>
+		<a href="/app/modify/<?=info.path?>" class="ui small floated right button blue">
+			<i class="ui settings icon"></i>Modify
+		</a>
+		<? end ?>
+		<a href="/static/releases/<?=info.path ?>/latest.lpk" class="ui small floated right button red">
+			<i class="ui cloud download icon"></i>Download
+		</a>
+	</div>
 
+	<div class="ui fluid accordion">
+		<div class="title">
+			<i class="dropdown icon"></i> <?=_("Device Templates")?>
+		</div>
+		<div class="content">
+			<table class="ui table segment">
+				<thead>
+					<tr>
+						<th><?=_("Name")?></th>
+						<th><?=_("Description")?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<? 
+					local counts = 0
+					for k, v in pairs(tplist) do
+						counts = counts + 1
+					?>
+					<tr>
+						<td><?=k?></td>
+						<td><?=v?></td>
+					</tr>
+					<? end ?>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th><?=_("Total")?> <?=counts?></th>
+						<th></th>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+	
 	<? include('widget/comments.html', {lwf=lwf, app=app, comment_key=info.path, comment_title=info.path, comment_url='app/detail/'..info.path}) ?>
 </div>
