@@ -39,7 +39,7 @@
 
 		<!-- desktop menu -->
 		<div class="four item tabular ui menu">
-			<? if lwf.ctx.user then ?>
+			<? if lwf.ctx.user and false then ?>
 			<a class="item active" data-tab="news">News</a>
 			<a class="item" data-tab="applications">Applications</a>
 			<? else ?>
@@ -51,7 +51,7 @@
 		</div>
 		<!-- Phone menu, Small screen -->
 		<div class="fluid vertical ui menu">
-			<? if lwf.ctx.user then ?>
+			<? if lwf.ctx.user and false then ?>
 			<a class="item active" data-tab="news">News</a>
 			<a class="item" data-tab="applications">Applications</a>
 			<? else ?>

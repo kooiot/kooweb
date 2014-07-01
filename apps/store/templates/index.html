@@ -2,7 +2,7 @@
 <? include 'top.html' ?>
 <div class="main container">
 
-	<? if lwf.ctx.user then ?>
+	<? if lwf.ctx.user and false then ?>
 	<div class="ui tab active" data-tab="news">
 		<? include('widget/feeds.html', {}) ?>
 		<? include('widget/activities.html') ?>
