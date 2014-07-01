@@ -64,7 +64,16 @@
 					<tr>
 						<td><?=k?></td>
 						<td><?=v?></td>
-						<td><div class="ui tiny teal button" onclick="remove_tpl('<?=v?>')"><?=_("Delete")?></div></td>
+						<td>
+							<?
+							local username = v:match('^[^/]+/.+')
+							if lwf.ctx.user and lwf.ctx.username == username then
+							?>
+								<div class="ui tiny teal button" onclick="remove_tpl('<?=v?>')"><?=_("Delete")?></div>
+							<? else ?>
+								<div class="ui tiny teal button disabled"><?=_("Delete")?></div>
+							<? end ?>
+						</td>
 					</tr>
 					<? end ?>
 				</tbody>
