@@ -33,15 +33,16 @@
 	</div>
 
 	<div class="ui fluid accordion">
-		<div class="title">
+		<div class="active title">
 			<i class="dropdown icon"></i> <?=_("Device Templates")?>
 		</div>
-		<div class="content">
+		<div class="active content">
 			<table class="ui table segment">
 				<thead>
 					<tr>
 						<th><?=_("Name")?></th>
 						<th><?=_("Description")?></th>
+						<th><?=_("Actions")?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -53,6 +54,7 @@
 					<tr>
 						<td><?=k?></td>
 						<td><?=v?></td>
+						<td><div class="ui tiny teal button" onclick="remove_tpl('<?=v?>')"><?=_("Delete")?></div></td>
 					</tr>
 					<? end ?>
 				</tbody>
@@ -65,6 +67,21 @@
 			</table>
 		</div>
 	</div>
+
+	<script>
+	function remove_tpl(name) {
+		$.post("/tpl/remove", {app_path:'<?=info.path?>', path:name}, function(data) {
+				window.location.reload();
+				})
+		.done(function() {
+				})
+		.fail(function() {
+				alert("Failed to send delete request!!");
+				});
+
+	};
+	</script>
 	
 	<? include('widget/comments.html', {lwf=lwf, app=app, comment_key=info.path, comment_title=info.path, comment_url='app/detail/'..info.path}) ?>
 </div>
+

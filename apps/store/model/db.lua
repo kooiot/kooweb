@@ -163,7 +163,9 @@ function class:del_tpl(app_path, tpl_path)
 	if con then
 		local r, err = con:del('tpl.of.'..app_path..'/'..tpl_path)
 		r, err = con:srem('tpl.set.of.'..app_path, tpl_path)
+		return r, err
 	end
+	return nil, 'Database connection is not initialized'
 end
 
 function class:add_tpl(app_path, tpl, force)
