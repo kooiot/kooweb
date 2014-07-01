@@ -37,6 +37,7 @@ return {
 			local appname = req.post_args['appname']
 			local version = req.post_args['version']
 			local depends = req.post_args['depends']
+			local comments = req.post_args['comments']
 			version = version:match('(%d+%.%d+%.%d+)')
 			local err = nil
 			if file and appname and version then 
@@ -57,13 +58,14 @@ return {
 					local category = CATES[tonumber(category) or 1]
 					local r, err_f = save_app(path, file, version)
 					if r then
-						db:create_app(username, appname, {path=path, name=appname, version=version, apptype=apptype, category=category, desc=desc, depends=depends})
+						db:create_app(username, appname, {path=path, name=appname, version=version, apptype=apptype, category=category, desc=desc, depends=depends, comments=comments})
 					else
 						err = err_f
 					end
 				elseif action ~= 'new' and info then
 					info.version = version
 					info.depends = depends
+					info.comments = comments or info.comments
 					local r, err_f = save_app(path, file, version)
 					if r then
 						r, err_f = db:update_app(username, appname, info)

@@ -23,14 +23,20 @@
 			<input type="hidden" name="path" value="<?=info.path?>"/>
 			<label>ICON:</label>
 			<input type="file" name="file"/>
-			<input type="submit" class="ui tiny class button" value="Change"/>
+			<input type="submit" class="ui tiny teal submit button" value="Change"/>
 		</form>
 	</div>
 
 	<div class="ui segment">
 		<div class="ui header"> Upload New Version </div>
 		<form id="upgradeform" class="ui form" action="/app/new" method="post" enctype="multipart/form-data">
+			<input name="appname" type="hidden" value="<?=info.name?>"/>
+			<input name="action" type="hidden" value="upgrade"/>
+
 			<div class="two fields">
+				<div class="two wide field">
+					<div class="ui label">Version:</div>
+				</div>
 				<div class="field">
 					<div class="ui labeled input">
 						<input placeholder="Version..." name="version" type="text" value="<?=info.version ?>"/>
@@ -41,11 +47,14 @@
 				</div>
 			</div>
 
-			<input name="appname" type="hidden" value="<?=info.name?>"/>
-			<input name="action" type="hidden" value="upgrade"/>
-			<label>Package:</label>
+			<label>File:</label>
 			<input type="file" name="file"/>
-			<input type="submit" class="ui tiny class button" value="Upload"/>
+			<input type="submit" class="ui tiny teal submit button" value="Upload"/>
+
+			<div class="field">
+				<div class="ui label">Comments</div>
+				<textarea class="ui full filled fluid textarea" name="comments"><?=info.comments or ""?></textarea>
+			</div>
 		</form>
 	</div>
 	<div class="ui progress">

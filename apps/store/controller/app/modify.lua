@@ -25,7 +25,7 @@ return {
 				local path = req.post_args['path']
 				if path and path:match('([^/]+)/.+') == lwf.ctx.user.username then
 					local file_path = app.config.static..'releases/'
-					local filename = file_path..path..'/icon.jpg'
+					local filename = file_path..path..'/icon.png'
 					local f
 					f, err = io.open(filename, 'w+')
 					if f then

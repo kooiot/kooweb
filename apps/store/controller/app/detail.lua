@@ -13,6 +13,11 @@ return {
 				local info = db:get_app(username, appname)
 				info.username = username
 
+				--- Escape the string for avoid attach by input
+				local lwfutil = require 'lwf.util'
+				info.comments = lwfutil.escape(info.comments)
+				info.desc = lwfutil.escape(info.desc)
+
 				local user = lwf.ctx.user
 				local applist = {}
 				if user then
