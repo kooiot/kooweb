@@ -34,11 +34,11 @@
 
 		<? if lwf.ctx.user and info.username == lwf.ctx.user.username  then ?>
 		<a href="/app/modify/<?=info.path?>" class="ui small floated right button blue">
-			<i class="ui settings icon"></i>Modify
+			<i class="ui settings icon"></i><?=_("Modify")?>
 		</a>
 		<? end ?>
 		<a href="/static/releases/<?=info.path ?>/latest.lpk" class="ui small floated right button red">
-			<i class="ui cloud download icon"></i>Download
+			<i class="ui cloud download icon"></i><?=_("Download")?>
 		</a>
 	</div>
 

@@ -4,7 +4,7 @@
 		<a class="launch item"><i class="icon list layout"></i> Content</a>
 
 		<a class="active item" href="/">
-			<i class="home icon"></i> Home
+			<i class="home icon"></i> <?=_('Home')?>
 		</a>
 		<? if lwf.ctx.user then
 		if applist and #applist ~= 0 then ?>
@@ -12,7 +12,7 @@
 			<i class="folder icon"></i> <?=_('My Apps')?>
 			<div class="menu">
 				<a class="item" href="/app/new">
-					<i class="cloud upload icon"></i> Create New
+					<i class="cloud upload icon"></i> <?=_("Create New")?>
 				</a>
 				<? for k, v in pairs(applist) do
 					local path = '/app/detail/'..v.info.path
@@ -25,7 +25,7 @@
 		</div>
 		<? else ?>
 		<a class="item" href="/app/new">
-			<i class="cloud upload icon"></i> Create New
+			<i class="cloud upload icon"></i> <?=_("Create New")?>
 		</a>
 		<? end
 		end?>
@@ -48,7 +48,7 @@
 			</div>
 			<? if not lwf.ctx.user then ?>
 			<div class="item">
-				<a class="ui teal button" href="/user/login"><i class="sign in icon"></i>Sign In</a>
+				<a class="ui teal button" href="/user/login"><i class="sign in icon"></i><?=_("Sign In")?></a>
 			</div>
 			<? else ?>
 			<div class="ui dropdown item">
@@ -56,12 +56,12 @@
 				<div class="ui label">25</div>
 				<div class="menu">
 					<a class="item" href="/msg">
-						<i class="mail icon"></i> Messages
+						<i class="mail icon"></i> <?=_("Messages")?>
 						<div class="ui label">25</div>
 					</a>
 
-					<a class="item" href="/user/profile"><i class="edit icon"></i> Edit Profile</a>
-					<a class="item" href="/user/logout"><i class="sign out icon"></i> Logout</a>
+					<a class="item" href="/user/profile"><i class="edit icon"></i> <?=_("Edit Profile")?></a>
+					<a class="item" href="/user/logout"><i class="sign out icon"></i> <?=_("Logout")?></a>
 				</div>
 			</div>
 			<? end ?>

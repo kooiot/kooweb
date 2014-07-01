@@ -4,62 +4,62 @@
 			<? if lwf.ctx.user then ?>
 			<div class="ui tab active" data-tab="news">
 				<h1 class="ui dividing header">
-					News
+					<?=_("News")?>
 				</h1>
-				<p> News desc </p>
+				<p> <?=_("News desc")?> </p>
 			</div>
 			<div class="ui tab" data-tab="applications">
 				<h1 class="ui dividing header">
-					Applications
+					<?=_("Applications")?>
 				</h1>
-				<p> V3 Applications <a href="/install" class="ui tiny blue">Install</a> </p>
+				<p> <?=_("V3 Applications")?> <a href="/install" class="ui tiny blue"><?=_("Install")?></a> </p>
 			</div>
 			<? else ?>
 			<div class="ui tab active" data-tab="applications">
 				<h1 class="ui dividing header">
-					Applications
+					<?=_("Applications")?>
 				</h1>
-				<p> V3 Applications <a href="/install" class="ui tiny blue">Install</a> </p>
+				<p> <?=_("V3 Applications")?> <a href="/install" class="ui tiny blue"><?=_("Install")?></a> </p>
 			</div>
 			<? end ?>
 
 			<div class="ui tab" data-tab="document">
 				<h1 class="ui dividing header">
-					Usages
+					<?=_("Usages")?>
 				</h1>
-				<p> Usage desc </p>
+				<p> <?=_("Usage desc")?> </p>
 			</div>
 			<div class="ui tab" data-tab="contribute">
 				<h1 class="ui dividing header">
-					Contribute
+					<?=_("Contribute")?>
 				</h1>
-				<p> Contribute desc </p>
+				<p> <?=_("Contribute desc")?> </p>
 			</div>
 		</div>
 
 		<!-- desktop menu -->
 		<div class="four item tabular ui menu">
 			<? if lwf.ctx.user and false then ?>
-			<a class="item active" data-tab="news">News</a>
-			<a class="item" data-tab="applications">Applications</a>
+			<a class="item active" data-tab="news"><?=_("News")?></a>
+			<a class="item" data-tab="applications"><?=_("Applications")?></a>
 			<? else ?>
-			<a class="item active" data-tab="applications">Applications</a>
+			<a class="item active" data-tab="applications"><?=_("Applications")?></a>
 			<? end ?>
 
-			<a class="item" data-tab="document">Document</a>
-			<a class="item" data-tab="contribute">Contribute</a>
+			<a class="item" data-tab="document"><?=_("Document")?></a>
+			<a class="item" data-tab="contribute"><?=_("Contribute")?></a>
 		</div>
 		<!-- Phone menu, Small screen -->
 		<div class="fluid vertical ui menu">
 			<? if lwf.ctx.user and false then ?>
-			<a class="item active" data-tab="news">News</a>
-			<a class="item" data-tab="applications">Applications</a>
+			<a class="item active" data-tab="news"><?=_("News")?></a>
+			<a class="item" data-tab="applications"><?=_("Applications")?></a>
 			<? else ?>
-			<a class="item active" data-tab="applications">Applications</a>
+			<a class="item active" data-tab="applications"><?=_("Applications")?></a>
 			<? end ?>
 
-			<a class="item" data-tab="document">Document</a>
-			<a class="item" data-tab="contribute">Contribute</a>
+			<a class="item" data-tab="document"><?=_("Document")?></a>
+			<a class="item" data-tab="contribute"><?=_("Contribute")?></a>
 		</div>
 	</div>
 </div>
