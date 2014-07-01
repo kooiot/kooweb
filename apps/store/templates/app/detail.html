@@ -66,8 +66,9 @@
 						<td><?=v?></td>
 						<td>
 							<?
-							local username = v:match('^[^/]+/.+')
-							if lwf.ctx.user and lwf.ctx.username == username then
+							local username = v:match('^([^/]+)/.+')
+							local user = lwf.ctx.user
+							if user and (user.username == username or user.username == info.username) then
 							?>
 								<div class="ui tiny teal button" onclick="remove_tpl('<?=v?>')"><?=_("Delete")?></div>
 							<? else ?>
