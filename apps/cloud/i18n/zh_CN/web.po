@@ -1,0 +1,218 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "About"
+msgstr "关于"
+
+msgid "Actions"
+msgstr "动作"
+
+msgid "App"
+msgstr "应用"
+
+msgid "Applications"
+msgstr "应用列表"
+
+msgid "Apply"
+msgstr "应用"
+
+msgid "Auth Key"
+msgstr "认证密匙"
+
+msgid "Beginner"
+msgstr "初学者"
+
+msgid "Category"
+msgstr "分类"
+
+msgid "Change"
+msgstr "更改"
+
+msgid "Close Menu"
+msgstr "关闭菜单"
+
+msgid "Comments"
+msgstr "说明"
+
+msgid "Contribute"
+msgstr "贡献"
+
+msgid "Contribute desc"
+msgstr "贡献一份力量"
+
+msgid "Create New"
+msgstr "创建新应用"
+
+msgid "Current Avatar"
+msgstr "当前头像"
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "Description"
+msgstr "描述"
+
+msgid "Development Docs"
+msgstr "开发者文档"
+
+msgid "Device Templates"
+msgstr "设备模版"
+
+msgid "Document"
+msgstr "文档"
+
+msgid "Download"
+msgstr "下载"
+
+msgid "Edit Profile"
+msgstr "档案编辑"
+
+msgid "File"
+msgstr "文件"
+
+msgid "First Name"
+msgstr "名字"
+
+msgid "Forum"
+msgstr "论坛"
+
+msgid "Generate"
+msgstr "生成"
+
+msgid "Home"
+msgstr "主页"
+
+msgid "Home Automation"
+msgstr "家居自动化"
+
+msgid "How To Contributing"
+msgstr "如何加入"
+
+msgid "I agree to the terms and conditions"
+msgstr "我同意使用条款"
+
+msgid "IO"
+msgstr "设备"
+
+msgid "IO.CONFIG"
+msgstr "设备配置"
+
+msgid "Industrial"
+msgstr "工业"
+
+msgid "Information"
+msgstr "信息"
+
+msgid "Install"
+msgstr "安装"
+
+msgid "Installtion"
+msgstr "安装"
+
+msgid "Last Name"
+msgstr "姓氏"
+
+msgid "Logout"
+msgstr "登出"
+
+msgid "Messages"
+msgstr "信息"
+
+msgid "Modify"
+msgstr "更新"
+
+msgid "My Apps"
+msgstr "我的应用"
+
+msgid "Name"
+msgstr "名称"
+
+msgid "New Password"
+msgstr "新密码"
+
+msgid "News"
+msgstr "新闻"
+
+msgid "News desc"
+msgstr "今日要闻"
+
+msgid "Original Password"
+msgstr "旧密码"
+
+msgid "Others"
+msgstr "其它"
+
+msgid "PLC"
+msgstr "PLC"
+
+msgid "Password"
+msgstr "密码"
+
+msgid "Platform"
+msgstr "平台"
+
+msgid "Sign In"
+msgstr "登入"
+
+msgid "Sign Up"
+msgstr "注册"
+
+msgid "Sign With Google"
+msgstr "使用谷歌账户登入"
+
+msgid "Sign With QQ"
+msgstr "使用QQ账户登入"
+
+msgid "Submit"
+msgstr "提交"
+
+msgid "Suggestion"
+msgstr "建议"
+
+msgid "Total"
+msgstr "总共"
+
+msgid "Type"
+msgstr "类型"
+
+msgid "Upload"
+msgstr "上传"
+
+msgid "Upload Application"
+msgstr "上传应用"
+
+msgid "Upload New Version"
+msgstr "上传新版本"
+
+msgid "Usage desc"
+msgstr "使用说明"
+
+msgid "Usages"
+msgstr "使用"
+
+msgid "User details"
+msgstr "用户详情"
+
+msgid "User profile edit"
+msgstr "用户档案编辑"
+
+msgid "Username"
+msgstr "用户名"
+
+msgid "V3 Applications"
+msgstr "V3应用程序"
+
+msgid "Version"
+msgstr "版本"
+
+msgid "Website"
+msgstr "网站"
+
+msgid "Welcome"
+msgstr "欢迎"
+
+msgid "Your Auth Key"
+msgstr "您的认证密匙"
+
+msgid "Your Avatar"
+msgstr "您的头像"

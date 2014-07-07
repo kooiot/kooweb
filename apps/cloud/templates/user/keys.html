@@ -1,0 +1,81 @@
+
+<? extend 'layout.html' ?>
+<div class="segment">
+	<div class="container">
+		<div class="introduction">
+			<h1 class="ui dividing header">
+				<?=_("Manage User Keys")?>
+			</h1>
+		</div>
+	</div>
+</div>
+<div class="main container">
+	<? if info then ?>
+	<div class="ui warning message">
+		<i class="close icon"></i>
+		<div class="header">
+			Warning!!
+		</div>
+		<?=info ?>
+	</div>
+	<? end ?>
+
+	<div id="status"></div>
+
+	<form class="ui form" method="post">
+		<input type="hidden" name="action" value="add"/>
+		<div class="ui input inline field">
+			<label><?=_("UUID Key")?>:</label>
+			<input type="text" name="key" placeholder="Key..." value=""/>
+		</div>
+		<input class="ui submit button" type="submit" value="<?=_('Add')?>"/>
+	</form>
+
+	<table class="ui sortable table segment">
+		<thead>
+			<tr>
+				<th><?=_("NO.")?></th>
+				<th><?=_("KEY")?></th>
+				<th><?=_("Controls")?></th>
+			</tr>
+		</thead>
+		<tbody>
+		<?
+		for i, key in pairs(userkeys) do
+		?>
+		<tr>
+			<td><?=tostring(i)?></td>
+			<td>
+				<?=key?>
+			</td>
+			<td>
+				<a class="ui mini button" onclick="delete_key('<?=key?>')"> <?=_("Delete")?></a>
+			</td>
+		</tr>
+		<? end ?>
+
+		</tbody>
+		<tfoot>
+			<tr>
+				<th>Total <?=#userkeys?></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</tfoot>
+	</table>
+
+	<script>
+		function delete_key(key) {
+			$.post("/user/keys", {action:'delete', key:key}, function(data) {
+					alert(data);
+					window.location.reload();
+					})
+			.done(function() {
+					})
+			.fail(function() {
+					alert("<?=_('Failed to send delete key request!!')?>");
+					});
+		}
+	</script>
+</div>
+

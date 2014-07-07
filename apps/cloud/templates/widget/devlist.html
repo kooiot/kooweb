@@ -1,0 +1,44 @@
+<script src="/static/js/table.js"></script>
+
+<table class="ui table segment">
+	<thead>
+		<tr>
+			<th><?=_("NO.")?></th>
+			<th><?=_("SN")?></th>
+			<th><?=_("Controls")?></th>
+		</tr>
+	</thead>
+	<tbody>
+	<?
+	local counts = 0
+	for k, v in pairs(devlist) do 
+		counts = counts + 1
+	?>
+		<tr>
+			<td>
+				<?=tostring(counts)?>
+			</td>
+			<td>
+				<i><?=k?></i>
+				<? if v.online then ?>
+				<i class="teal leaf icon"></i>
+				<? else ?>
+				<i class="red attention icon"></i>
+				<? end ?>
+			</td>
+			<td>
+				<a class="ui mini button" href="/devices/<?=k?>"> <?=_("View")?></a>
+			</td>
+		</tr>
+	<? end ?>
+
+	</tbody>
+	<tfoot>
+		<tr>
+			<th><?=_("Total")?> <?=counts?></th>
+			<th></th>
+			<th></th>
+		</tr>
+	</tfoot>
+</table>
+

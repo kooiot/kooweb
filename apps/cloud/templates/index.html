@@ -1,0 +1,14 @@
+<? extend 'layout.html' ?>
+<? include 'top.html' ?>
+<div class="main container">
+
+	<div class="ui tab active" data-tab="news">
+		<? include('widget/feeds.html', {}) ?>
+		<? include('widget/activities.html') ?>
+	</div>
+	<? if lwf.ctx.user then ?>
+	<div class="ui tab" data-tab="devices">
+		<? include('widget/devlist.html', {devlist = devlist}) ?>
+	</div>
+	<? end ?>
+</div>
