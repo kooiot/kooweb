@@ -1,0 +1,43 @@
+
+<table id="loglist" class="ui sortable table segment">
+	<thead>
+		<tr>
+			<th><?=_("Level")?></th>
+			<th><?=_("Source")?></th>
+			<th><?=_("Timestamp")?></th>
+			<th><?=_("Content")?></th>
+		</tr>
+	</thead>
+	<tbody>
+	<?
+	local counts = 0
+	for i, v in ipairs(logs) do
+		counts = counts + 1
+	?>
+		<tr>
+			<td>
+				<?=v.level?>
+			</td>
+			<td>
+				<i> <?=v.src?> </i>
+			</td>
+			<td>
+				<i> <?=os.date('%c', (v.timestamp / 1000))?> <?=tostring(v.timestamp % 1000) ?> </i>
+			</td>
+			<td>
+				<i> <?=v.content?> </i>
+			</td>
+		</tr>
+	<? end ?>
+
+	</tbody>
+	<tfoot>
+		<tr>
+			<th><?=_("Total")?> <?=counts?></th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+	</tfoot>
+</table>
+

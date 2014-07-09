@@ -1,0 +1,72 @@
+<form class="ui form" method="post" action="/device/ctrl_api">
+	<input type="hidden" name="action" value="list_services"/>
+	<input type="hidden" name="key" value="<?=key?>"/>
+	<input class="ui submit button" type="submit" value="<?=_('Refresh Services')?>"/>
+</form>
+
+<table id="applist" class="ui sortable table segment">
+	<thead>
+		<tr>
+			<th><?=_("Name")?></th>
+			<th><?=_("Description")?></th>
+			<th><?=_("Status")?></th>
+			<th><?=_("PID")?></th>
+			<th><?=_("Result")?></th>
+			<th><?=_("Output")?></th>
+			<th><?=_("Actions")?></th>
+		</tr>
+	</thead>
+	<tbody>
+		<?
+		local counts = 0
+		for i, v in ipairs(services.list) do
+			counts = counts + 1
+		?>
+			<tr>
+				<td>
+					<?=v.name?>
+				</td>
+				<td>
+					<i> <?=v.desc?> </i>
+				</td>
+				<td>
+					<i> <?=v.status?> </i>
+				</td>
+				<td>
+					<i> <?=v.pid?> </i>
+				</td>
+				<td>
+					<i> <?=v.result?> </i>
+				</td>
+				<td>
+					<i> <?=v.output?> </i>
+				</td>
+				<td>
+					<form class="ui form" method="post" action="/device/ctrl_api">
+						<input type="hidden" name="action" value="abort_service"/>
+						<input type="hidden" name="key" value="<?=key?>"/>
+						<input type="hidden" name="insname" value="<?=v.name?>"/>
+						<input class="ui mini red submit button" type="submit" value="<?=_('Abort')?>"/>
+					</form>
+				</td>
+			</tr>
+		<? end ?>
+
+		</tbody>
+		<tfoot>
+			<tr>
+				<th><?=_("Total")?> <?=counts?></th>
+				<th>
+					Last Updated:
+				</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th>
+					<?=services.ts?>
+				</th>
+				<th></th>
+			</tr>
+		</tfoot>
+	</table>
+

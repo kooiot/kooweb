@@ -1,0 +1,87 @@
+	<div class="ui two column middle aligned relaxed grid basic segment">
+		<div class="center aligned four wide column">
+			<form class="ui form" method="post" action="/device/ctrl_api">
+				<input type="hidden" name="action" value="list"/>
+				<input type="hidden" name="key" value="<?=key?>"/>
+				<input class="ui submit button" type="submit" value="<?=_('Refresh List')?>"/>
+			</form>
+		</div>
+
+		<div class="center aligned twelve wide column">
+			<form class="ui form" method="post" action="/device/ctrl_api">
+				<input type="hidden" name="action" value="install"/>
+				<input type="hidden" name="key" value="<?=key?>"/>
+				<div class="ui inline field">
+					<div class="ui input">
+						<input placeholder="App Path" name="app_path" type="text">
+					</div>
+					<div class="ui input">
+						<input placeholder="Instance Name" type="text" name="insname">
+					</div>
+					<input class="ui submit button" type="submit" value="<?=_('Install')?>"/>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<table id="applist" class="ui sortable table segment">
+		<thead>
+			<tr>
+				<th><?=_("Name")?></th>
+				<th><?=_("AppPath")?></th>
+				<th><?=_("Description")?></th>
+				<th><?=_("Author")?></th>
+				<th><?=_("version")?></th>
+				<th><?=_("Actions")?></th>
+			</tr>
+		</thead>
+		<tbody>
+		<?
+		local counts = 0
+		for i, v in ipairs(apps.list) do
+			counts = counts + 1
+		?>
+			<tr>
+				<td>
+					<a href="http://172.30.1.121:8080/app/detail/<? =(v.app.path) ?>" target="_blank"><b><?=v.insname?></b></a>
+				</td>
+				<td>
+					<i> <?=v.app.path?> </i>
+				</td>
+				<td>
+					<i> <?=v.app.desc?> </i>
+				</td>
+				<td>
+					<i> <?=v.app.author?> </i>
+				</td>
+				<td>
+					<i> <?=v.app.version?> </i>
+				</td>
+				<td>
+					<form class="ui form" method="post" action="/device/ctrl_api">
+						<input type="hidden" name="action" value="uninstall"/>
+						<input type="hidden" name="key" value="<?=key?>"/>
+						<input type="hidden" name="insname" value="<?=v.insname?>"/>
+						<input class="ui mini red submit button" type="submit" value="<?=_('Remove')?>"/>
+					</form>
+				</td>
+			</tr>
+		<? end ?>
+
+		</tbody>
+		<tfoot>
+			<tr>
+				<th><?=_("Total")?> <?=counts?></th>
+				<th>
+					Last Updated:
+				</th>
+				<th>
+					<?=apps.ts?>
+				</th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</tfoot>
+	</table>
+

@@ -1,0 +1,54 @@
+
+<table id="applist" class="ui sortable table segment">
+	<thead>
+		<tr>
+			<th><?=_("Name")?></th>
+			<th><?=_("Description")?></th>
+			<th><?=_("Value")?></th>
+			<th><?=_("Path")?></th>
+			<? if view then ?>
+			<th><?=_("Actions")?></th>
+			<? end ?>
+		</tr>
+	</thead>
+	<tbody>
+	<?
+	local counts = 0
+	for _, v in pairs(list) do
+		counts = counts + 1
+	?>
+		<tr>
+			<td>
+				<? = v.name ?>
+			</td>
+			<td>
+				<i> <?=v.desc?> </i> - 
+			</td>
+			<td>
+				<i> <?=v.value?> </i> - 
+			</td>
+			<td>
+				<i> <?=v.path?> </i> - 
+			</td>
+			<? if view then ?>
+			<td>
+				<a class="ui teal mini button" href="/data/<?=key?>?path=<?=escape_url(v.path)?>"><?=translate('View History') ?> </a>
+			</td>
+			<? end ?>
+		</tr>
+	<? end ?>
+
+	</tbody>
+	<tfoot>
+		<tr>
+			<th><?=_("Total")?> <?=counts?></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<? if view then ?>
+			<th></th>
+			<? end ?>
+		</tr>
+	</tfoot>
+</table>
+

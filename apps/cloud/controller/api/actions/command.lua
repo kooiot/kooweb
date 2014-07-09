@@ -1,6 +1,6 @@
 return {
 	get = function(req, res)
-		print('command')
+--		print('command')
 		res:write('')
 	end
 }

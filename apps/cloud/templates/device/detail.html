@@ -1,0 +1,78 @@
+<? extend 'layout.html' ?>
+<div class="segment">
+	<div class="container">
+		<div class="introduction">
+			<h1 class="ui dividing header">
+				<?=_("Device details")?> - <?=key?>
+			</h1>
+		</div>
+	</div>
+</div>
+<div class="main container">
+
+	<div class="ui fluid accordion">
+		<? for k, v in pairs(devlist) do ?>
+		<div class="active title">
+			<i class="dropdown icon"></i> <?=_("Device")?> - <? = k ?>
+		</div>
+		<div class="active content">
+			<div>
+				<?=_("Name")?> - <?=v.name?>	
+			</div>
+			<div>
+				<?=_("Description")?> - <?=v.desc?>	
+			</div>
+			<div>
+				<?=_("Path")?> - <?=v.path?>	
+			</div>
+			<a class="ui tiny teal button" href="/device/ctrl/<?=key?>"><?=_("Remote Control")?> </a>
+
+			<div class="active title">
+				<i class="dropdown icon"></i> <?=_("Inputs")?>
+			</div>
+			<div class="active content">
+				<? include('device/tlist.html', {list=v.inputs, key=key, view=true}) ?>
+			</div>
+
+			<div class="title">
+				<i class="dropdown icon"></i> <?=_("Outputs")?>
+			</div>
+			<div class="content">
+				<? include('device/tlist.html', {list=v.outputs}) ?>
+			</div>
+
+			<div class="title">
+				<i class="dropdown icon"></i> <?=_("Commands")?>
+			</div>
+			<div class="content">
+				<? include('device/tlist.html', {list=v.commands}) ?>
+			</div>
+		</div>
+		<? end ?>
+	</div>
+
+	<div class="ui icon message">
+		<i class="inbox icon"></i>
+		<div class="content">
+			<div class="header">
+				<div id="setting_status">
+					<? = err ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function() {
+				$('form').ajaxForm({
+					success: function(data) {
+						$('#setting_status').html('<i>' + data + '</i>');
+					},
+					error: function(data) {
+						$('#setting_status').html('<b>' + data + '</b>');
+					},
+				});
+		});
+	</script>
+
+</div>

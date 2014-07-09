@@ -7,38 +7,30 @@
 			<i class="home icon"></i> <?=_('Home')?>
 		</a>
 		<? if lwf.ctx.user then
-		if applist and #applist ~= 0 then ?>
+		if devlist and #devlist ~= 0 then ?>
 		<div class="ui dropdown item">
-			<i class="folder icon"></i> <?=_('My Apps')?>
+			<i class="folder icon"></i> <?=_('My Devices')?>
 			<div class="menu">
 				<a class="item" href="/app/new">
 					<i class="cloud upload icon"></i> <?=_("Create New")?>
 				</a>
-				<? for k, v in pairs(applist) do
-					local path = '/app/detail/'..v.info.path
+				<? for k, v in pairs(devlist) do
+					local path = '/devices/'..v.key
 					?>
 					<a class="item" href="<?=path ?>">
-						<i class="leaf icon"></i> <?=v.name ?>
+						<i class="leaf icon"></i> <?=v.name or v.key ?>
 					</a>
 				<? end ?>
 			</div>
 		</div>
 		<? else ?>
-		<a class="item" href="/app/new">
-			<i class="cloud upload icon"></i> <?=_("Create New")?>
+		<a class="item" href="/#/devices">
+			<i class="cloud upload icon"></i> <?=_("Devices")?>
 		</a>
 		<? end
 		end?>
 
 		<div class="right menu">
-			<? if lwf.ctx.user then ?>
-			<div class="item">
-				<div class="ui icon input">
-					<input placeholder="Search..." type="text">
-					<i class="search link icon"></i>
-				</div>
-			</div>
-			<? end ?>
 			<div class="ui dropdown item">
 				<i class="icon globe"></i>
 				<div class="menu">

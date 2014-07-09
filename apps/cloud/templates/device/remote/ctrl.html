@@ -1,0 +1,33 @@
+<div class="ui segment">
+	<div class="ui teal ribbon label"> <?=_("Logs")?> </div>
+	<p>
+	<form class="ui form" method="post" action="/device/ctrl_api">
+		<input type="hidden" name="action" value="logs"/>
+		<input type="hidden" name="enable" value="true"/>
+		<input type="hidden" name="key" value="<?=key?>"/>
+		<input class="ui tiny teal submit button" type="submit" value="<?=_('Enable')?>"/>
+	</form>
+	<form class="ui form" method="post" action="/device/ctrl_api">
+		<input type="hidden" name="action" value="logs"/>
+		<input type="hidden" name="enable" value="false"/>
+		<input type="hidden" name="key" value="<?=key?>"/>
+		<input class="ui tiny red submit button" type="submit" value="<?=_('Disable')?>"/>
+	</form>
+	</p>
+	<div class="ui teal ribbon label"> <?=_("Packets")?> </div>
+	<p>
+	<form class="ui form" method="post" action="/device/ctrl_api">
+		<input type="hidden" name="action" value="packets"/>
+		<input type="hidden" name="enable" value="true"/>
+		<input type="hidden" name="key" value="<?=key?>"/>
+		<input class="ui tiny teal submit button" type="submit" value="<?=_('Enable')?>"/>
+	</form>
+
+	<form class="ui form" method="post" action="/device/ctrl_api">
+		<input type="hidden" name="action" value="packets"/>
+		<input type="hidden" name="enable" value="false"/>
+		<input type="hidden" name="key" value="<?=key?>"/>
+		<input class="ui tiny red submit button" type="submit" value="<?=_('Disable')?>"/>
+	</form>
+	</p>
+</div>

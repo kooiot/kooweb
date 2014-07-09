@@ -1,0 +1,84 @@
+<? extend 'layout.html' ?>
+
+<div class="tab segment">
+	<div class="container">
+		<div class="introduction">
+			<div class="ui active tab" data-tab="apps">
+				<h1 class="ui dividing header">
+					<?=_("Applications")?> - <?=key?>
+				</h1>
+			</div>
+			<div class="ui tab" data-tab="services">
+				<h1 class="ui dividing header">
+					<?=_("Services")?> - <?=key?>
+				</h1>
+			</div>
+			<div class="ui tab" data-tab="ctrl">
+				<h1 class="ui dividing header">
+					<?=_("Controls")?> - <?=key?>
+				</h1>
+			</div>
+			<div class="ui tab" data-tab="diags">
+				<h1 class="ui dividing header">
+					<?=_("Diagnostics")?> - <?=key?>
+				</h1>
+			</div>
+		</div>
+
+		<!-- desktop menu -->
+		<div class="four item tabular ui menu">
+			<a class="item active" data-tab="apps"><?=_("Applictions")?></a>
+			<a class="item" data-tab="services"><?=_("Services")?></a>
+			<a class="item" data-tab="ctrl"><?=_("Controls")?></a>
+			<a class="item" data-tab="diags"><?=_("Diagnostics")?></a>
+		</div>
+		<!-- Phone menu, Small screen -->
+		<div class="fluid vertical ui menu">
+			<a class="item active" data-tab="apps"><?=_("Applictions")?></a>
+			<a class="item" data-tab="services"><?=_("Services")?></a>
+			<a class="item" data-tab="ctrl"><?=_("Controls")?></a>
+			<a class="item" data-tab="diags"><?=_("Diagnostics")?></a>
+		</div>
+	</div>
+</div>
+<div class="main container">
+	<div class="ui tab active" data-tab="apps">
+		<? include('device/remote/apps.html', {lwf=lwf, app=app, key=key, apps=apps, err=err}) ?>
+	</div>
+	<div class="ui tab" data-tab="services">
+		<? include('device/remote/services.html', {lwf=lwf, app=app, key=key, services=services, err=err}) ?>
+	</div>
+	<div class="ui tab" data-tab="ctrl">
+		<? include('device/remote/ctrl.html', {lwf=lwf, app=app, key=key, err=err}) ?>
+	</div>
+	<div class="ui tab" data-tab="diags">
+		<? include('device/remote/diags.html', {lwf=lwf, app=app, key=key, logs=logs, err=err}) ?>
+	</div>
+	<div class="ui icon message">
+		<i class="inbox icon"></i>
+		<div class="content">
+			<div class="header">
+				<div id="setting_status">
+					<? = err or '' ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function() {
+				$('form').ajaxForm({
+					success: function(data) {
+						$('#setting_status').html('<i>' + data + '</i>');
+					},
+					error: function(data) {
+						$('#setting_status').html('<b>' + data + '</b>');
+					},
+				});
+		});
+	</script>
+
+
+</div>
+
+

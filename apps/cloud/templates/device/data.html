@@ -1,0 +1,50 @@
+<? extend 'layout.html' ?>
+<div class="tab segment">
+	<div class="container">
+		<div class="introduction">
+			<h1 class="ui dividing header">
+				<?=_("Device Data")?> - <?=key?> - <?=path?>
+			</h1>
+		</div>
+		<div class="ui breadcrumb">
+			<a class="section" href="/">Home</a>
+			<i class="right arrow icon divider"></i>
+			<a class="section" href="/#/devices">Devices</a>
+			<i class="right arrow icon divider"></i>
+			<a class="section" href="/devices/<?=key?>">Device Details</a>
+		</div>
+	</div>
+</div>
+<div class="main container">
+	<table id="datalist" class="ui table segment">
+		<thead>
+			<tr>
+				<th><?=_("Timestamp")?></th>
+				<th><?=_("Value")?></th>
+				<th><?=_("Quality")?></th>
+			</tr>
+		</thead>
+		<tbody>
+		<?
+		local counts = 0
+		for _, v in pairs(data) do
+			counts = counts + 1
+		?>
+			<tr>
+				<td><? = os.date('%c', (v.timestamp/1000)) ?> <?=v.timestamp%1000?></td>
+				<td><? = v.value ?></td>
+				<td><? = v.quality ?></td>
+			</tr>
+		<? end ?>
+
+		</tbody>
+		<tfoot>
+			<tr>
+				<th><?=_("Total")?> <?=counts?></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</tfoot>
+	</table>
+
+</div>
