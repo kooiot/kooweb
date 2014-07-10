@@ -17,9 +17,9 @@ return {
 		local db = app.model:get('data')
 		db:init()
 
-		for _, name in ipairs(list) do
-			local devobj, err = devices:get(key, name)
-			devlist[name] = devobj
+		for _, path in ipairs(list) do
+			local devobj, err = devices:get(key, path)
+			devlist[path] = devobj
 
 			local inputs = devobj.inputs
 			for k, v in pairs(inputs) do

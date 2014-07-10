@@ -89,12 +89,12 @@ function class:add(key, device_obj)
 	local device = cjson.encode(device_obj)
 
 	--- TODO: FIX
-	local r, err = self.con:sadd('devices.set.'..key, device_obj.name)
+	local r, err = self.con:sadd('devices.set.'..key, device_obj.path)
 	if not r then
 		return nil, err
 	end
 
-	r, err = self.con:set('devices.info.'..key..'.'..device_obj.name, device)
+	r, err = self.con:set('devices.info.'..key..'.'..device_obj.path, device)
 	return r, err
 end
 
@@ -109,8 +109,8 @@ function class:list(key)
 	return r
 end
 
-function class:get(key, device_name)
-	local device, err = self.con:get('devices.info.'..key..'.'..device_name)
+function class:get(key, device_path)
+	local device, err = self.con:get('devices.info.'..key..'.'..device_path)
 	if not device then
 		return nil, err
 	end

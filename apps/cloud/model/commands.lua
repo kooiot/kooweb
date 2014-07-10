@@ -29,7 +29,7 @@ function class:init()
 		logger:error(err)
 		return nil, err
 	end
-	con:select(10)
+	con:select(12)
 	self.con = con
 	return true
 end
@@ -40,12 +40,17 @@ function class:close()
 	self.con = nil
 end
 
+local function gen_id()
+	local uuid = require 'lwf.util.uuid'
+	return uuid()
+end
+
 function class:list(key)
 	if not self.con then
 		return nil, 'Db not initialized'
 	end
 
-	local r, err = self.con:smembers('actions.set.'..key)
+	local r, err = self.con:smembers('commands.set.'..key)
 	if not r then
 		return nil, err or 'No value in db'
 	end
@@ -54,7 +59,7 @@ function class:list(key)
 	end
 	local list = {}
 	for _, v in ipairs(r) do
-		local r, err = self.con:get('action.info.'..v)
+		local r, err = self.con:get('command.info.'..v)
 		if r and r ~= ngx.null then
 			list[#list + 1] = cjson.decode(r)
 		else
@@ -65,24 +70,19 @@ function class:list(key)
 	return list
 end
 
-local function gen_id()
-	local uuid = require 'lwf.util.uuid'
-	return uuid()
-end
-
-function class:add(key, action)
+function class:add(key, command)
 	if not self.con then
 		return nil, 'Db not initialized'
 	end
-	assert(action.name)
-	action.id = action.id or gen_id()
-	action.status = action.status or 'WAITING'
+	assert(command.path)
+	command.id = command.id or gen_id()
+	command.status = command.status or 'WAITING'
 
-	local r, err = self.con:sadd('actions.set.'..key, action.id)
+	local r, err = self.con:sadd('commands.set.'..key, command.id)
 	if not r then
 		return nil, err
 	end
-	local r, err = self.con:set('action.info.'..action.id, cjson.encode(action))
+	local r, err = self.con:set('command.info.'..command.id, cjson.encode(command))
 	return r, err
 end
 
@@ -91,8 +91,8 @@ function class:finish(key, id, result, err)
 		return nil, 'Db not initialized'
 	end
 	assert(key and id)
-	self.con:sadd('actions.set.done.'..key, id)
-	r, err = self.con:srem('actions.set.'..key, id)
+	self.con:sadd('commands.set.done.'..key, id)
+	r, err = self.con:srem('commands.set.'..key, id)
 	if result then
 		self:set_status(id, 'DONE')
 	else
@@ -104,14 +104,14 @@ function class:set_status(id, status, err)
 	if not self.con then
 		return nil, 'Db not initialized'
 	end
-	local r, err = self.con:get('action.info.'..id)
+	local r, err = self.con:get('command.info.'..id)
 	if not r or r == ngx.null then
 		return nil, err or 'Not exits'
 	end
-	local action = cjson.decode(r)
-	action.status = status
-	action.err = err
-	local r, err = self.con:set('action.info.'..id, cjson.encode(action))
+	local command = cjson.decode(r)
+	command.status = status
+	command.err = err
+	local r, err = self.con:set('command.info.'..id, cjson.encode(command))
 end
 
 return _M

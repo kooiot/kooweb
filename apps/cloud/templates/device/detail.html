@@ -31,21 +31,21 @@
 				<i class="dropdown icon"></i> <?=_("Inputs")?>
 			</div>
 			<div class="content">
-				<? include('device/tlist.html', {list=v.inputs, key=key, view=true}) ?>
+				<? include('device/tlist.html', {list=v.inputs, key=key, type='inputs'}) ?>
 			</div>
 
 			<div class="title">
 				<i class="dropdown icon"></i> <?=_("Outputs")?>
 			</div>
 			<div class="content">
-				<? include('device/tlist.html', {list=v.outputs}) ?>
+				<? include('device/tlist.html', {list=v.outputs, key=key, type='outputs'}) ?>
 			</div>
 
 			<div class="title">
 				<i class="dropdown icon"></i> <?=_("Commands")?>
 			</div>
 			<div class="content">
-				<? include('device/tlist.html', {list=v.commands}) ?>
+				<? include('device/tlist.html', {list=v.commands, key=key, type='commands'}) ?>
 			</div>
 		</div>
 		<? end ?>
@@ -69,7 +69,7 @@
 						$('#setting_status').html('<i>' + data + '</i>');
 					},
 					error: function(data) {
-						$('#setting_status').html('<b>' + data + '</b>');
+						$('#setting_status').html('<i>' + data.responseText + '</i>');
 					},
 				});
 		});

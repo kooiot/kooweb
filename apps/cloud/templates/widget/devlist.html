@@ -4,6 +4,7 @@
 	<thead>
 		<tr>
 			<th><?=_("NO.")?></th>
+			<th><?=_("Status")?></th>
 			<th><?=_("SN")?></th>
 			<th><?=_("Controls")?></th>
 		</tr>
@@ -19,13 +20,15 @@
 				<?=tostring(counts)?>
 			</td>
 			<td>
-				<i><?=v.key?></i>
 				<? if v.online then ?>
 				<i class="teal leaf icon"></i>
 				<? else ?>
 				<i class="red attention icon"></i>
 				<? end ?>
 			</td>
+			</td>
+			<td>
+				<i><?=v.key?></i>
 			<td>
 				<a class="ui mini blue button" href="/devices/<?=v.key?>"> <?=_("Device Tree")?></a>
 				<a class="ui mini teal button" href="/device/ctrl/<?=v.key?>"><?=_("Remote Control")?> </a>
@@ -37,6 +40,7 @@
 	<tfoot>
 		<tr>
 			<th><?=_("Total")?> <?=counts?></th>
+			<th></th>
 			<th></th>
 			<th></th>
 		</tr>

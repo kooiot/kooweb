@@ -4,9 +4,11 @@
 		<tr>
 			<th><?=_("Name")?></th>
 			<th><?=_("Description")?></th>
+			<? if type == 'inputs' then ?>
 			<th><?=_("Value")?></th>
+			<? end ?>
 			<th><?=_("Path")?></th>
-			<? if view then ?>
+			<? if type then ?>
 			<th><?=_("Actions")?></th>
 			<? end ?>
 		</tr>
@@ -14,7 +16,7 @@
 	<tbody>
 	<?
 	local counts = 0
-	for _, v in pairs(list) do
+	for i, v in pairs(list) do
 		counts = counts + 1
 	?>
 		<tr>
@@ -24,17 +26,48 @@
 			<td>
 				<i> <?=v.desc?> </i>
 			</td>
+			<? if type == 'inputs' then ?>
 			<td>
 				<i> <?=v.value?> </i> 
 			</td>
+			<? end ?>
 			<td>
 				<i> <?=v.path?> </i> 
 			</td>
-			<? if view then ?>
+			<? if type == 'inputs' then ?>
 			<td>
 				<a class="ui teal mini button" href="/data/<?=key?>?path=<?=escape_url(v.path)?>"><?=translate('View History') ?> </a>
 			</td>
 			<? end ?>
+			<? if type == 'outputs' then ?>
+			<td>
+				<form class="ui form" method="post" action="/device/output_api">
+					<input type="hidden" name="key" value="<?=key?>"/>
+					<input type="hidden" name="path" value="<?=v.path?>"/>
+					<div class="inline field">
+						<div class="ui mini input">
+							<input placeholder="<?=_('New Value')?>" name="value" type="text">
+						</div>
+						<input type="submit" class="ui mini blue submit button" value="<?=_('Write')?>"/>
+					</div>
+				</form>
+			</td>
+			<? end ?>
+			<? if type == 'commands' then ?>
+			<td>
+				<form class="ui form" method="post" action="/device/command_api">
+					<input type="hidden" name="key" value="<?=key?>"/>
+					<input type="hidden" name="path" value="<?=v.path?>"/>
+					<div class="inline field">
+						<div class="ui mini input">
+							<input placeholder="<?=_('Args Json Text')?>" name="args" type="text">
+						</div>
+						<input type="submit" class="ui tiny blue submit button" value="<?=_('Send')?>"/>
+					</div>
+				</form>
+			</td>
+			<? end ?>
+
 		</tr>
 	<? end ?>
 
@@ -43,9 +76,11 @@
 		<tr>
 			<th><?=_("Total")?> <?=counts?></th>
 			<th></th>
+			<? if type == 'inputs' then?>
 			<th></th>
+			<? end ?>
 			<th></th>
-			<? if view then ?>
+			<? if type then ?>
 			<th></th>
 			<? end ?>
 		</tr>

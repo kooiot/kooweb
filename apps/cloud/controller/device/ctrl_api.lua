@@ -5,7 +5,8 @@ return {
 		local action = req:get_arg('action')
 
 		if not key or not action then
-			return lwf.exit(404)
+			res:write('No key or action specified')
+			return lwf.set_status(403)
 		end
 
 		local info = {}

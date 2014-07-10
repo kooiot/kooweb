@@ -66,7 +66,7 @@ function class:list_all()
 		for _, user in pairs(users) do
 			local user = user:match('^app%.set%.of%.(.+)$')
 			if user then
-				print(user)
+				--print(user)
 				apps[user] = self:list_apps(user)
 			end
 		end

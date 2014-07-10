@@ -29,7 +29,7 @@ function class:init()
 		logger:error(err)
 		return nil, err
 	end
-	con:select(10)
+	con:select(11)
 	self.con = con
 	return true
 end
@@ -45,7 +45,7 @@ function class:list(key)
 		return nil, 'Db not initialized'
 	end
 
-	local r, err = self.con:smembers('actions.set.'..key)
+	local r, err = self.con:smembers('outputs.set.'..key)
 	if not r then
 		return nil, err or 'No value in db'
 	end
@@ -54,7 +54,7 @@ function class:list(key)
 	end
 	local list = {}
 	for _, v in ipairs(r) do
-		local r, err = self.con:get('action.info.'..v)
+		local r, err = self.con:get('output.info.'..v)
 		if r and r ~= ngx.null then
 			list[#list + 1] = cjson.decode(r)
 		else
@@ -70,19 +70,20 @@ local function gen_id()
 	return uuid()
 end
 
-function class:add(key, action)
+function class:add(key, output)
 	if not self.con then
 		return nil, 'Db not initialized'
 	end
-	assert(action.name)
-	action.id = action.id or gen_id()
-	action.status = action.status or 'WAITING'
+	assert(output.path)
+	assert(output.value)
+	output.id = output.id or gen_id()
+	output.status = output.status or 'WAITING'
 
-	local r, err = self.con:sadd('actions.set.'..key, action.id)
+	local r, err = self.con:sadd('outputs.set.'..key, output.id)
 	if not r then
 		return nil, err
 	end
-	local r, err = self.con:set('action.info.'..action.id, cjson.encode(action))
+	local r, err = self.con:set('output.info.'..output.id, cjson.encode(output))
 	return r, err
 end
 
@@ -91,8 +92,8 @@ function class:finish(key, id, result, err)
 		return nil, 'Db not initialized'
 	end
 	assert(key and id)
-	self.con:sadd('actions.set.done.'..key, id)
-	r, err = self.con:srem('actions.set.'..key, id)
+	self.con:sadd('outputs.set.done.'..key, id)
+	r, err = self.con:srem('outputs.set.'..key, id)
 	if result then
 		self:set_status(id, 'DONE')
 	else
@@ -104,14 +105,14 @@ function class:set_status(id, status, err)
 	if not self.con then
 		return nil, 'Db not initialized'
 	end
-	local r, err = self.con:get('action.info.'..id)
+	local r, err = self.con:get('output.info.'..id)
 	if not r or r == ngx.null then
 		return nil, err or 'Not exits'
 	end
-	local action = cjson.decode(r)
-	action.status = status
-	action.err = err
-	local r, err = self.con:set('action.info.'..id, cjson.encode(action))
+	local output = cjson.decode(r)
+	output.status = status
+	output.err = err
+	local r, err = self.con:set('output.info.'..id, cjson.encode(output))
 end
 
 return _M
