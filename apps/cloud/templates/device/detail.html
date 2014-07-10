@@ -12,10 +12,10 @@
 
 	<div class="ui fluid accordion">
 		<? for k, v in pairs(devlist) do ?>
-		<div class="active title">
+		<div class="title">
 			<i class="dropdown icon"></i> <?=_("Device")?> - <? = k ?>
 		</div>
-		<div class="active content">
+		<div class="content">
 			<div>
 				<?=_("Name")?> - <?=v.name?>	
 			</div>
@@ -27,10 +27,10 @@
 			</div>
 			<a class="ui tiny teal button" href="/device/ctrl/<?=key?>"><?=_("Remote Control")?> </a>
 
-			<div class="active title">
+			<div class="title">
 				<i class="dropdown icon"></i> <?=_("Inputs")?>
 			</div>
-			<div class="active content">
+			<div class="content">
 				<? include('device/tlist.html', {list=v.inputs, key=key, view=true}) ?>
 			</div>
 
