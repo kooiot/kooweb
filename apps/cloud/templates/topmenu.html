@@ -11,8 +11,8 @@
 		<div class="ui dropdown item">
 			<i class="folder icon"></i> <?=_('Devices')?>
 			<div class="menu">
-				<a class="item" href="/user/keys">
-					<i class="cloud upload icon"></i> <?=_("Add Keys")?>
+				<a class="item" href="/user/devkeys">
+					<i class="qr code icon"></i> <?=_("Add Keys")?>
 				</a>
 				<? for k, v in pairs(devlist) do
 					local path = '/devices/'..v.key
@@ -29,7 +29,7 @@
 		</div>
 		<? else ?>
 		<a class="item" href="/#/devices">
-			<i class="cloud upload icon"></i> <?=_("Devices")?>
+			<i class="list icon"></i> <?=_("Devices")?>
 		</a>
 		<? end
 		end?>

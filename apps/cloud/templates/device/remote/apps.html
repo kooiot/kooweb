@@ -12,8 +12,16 @@
 				<input type="hidden" name="action" value="install"/>
 				<input type="hidden" name="key" value="<?=key?>"/>
 				<div class="ui inline field">
-					<div class="ui input">
-						<input placeholder="App Path" name="app_path" type="text">
+					<div class="ui label"> Application: </div>
+					<div class="ui selection labeled dropdown">
+						<input id="app_path" name="app_path" type="hidden"/>
+						<div class="default text"><?=app_list[1]?></div>
+						<i class="dropdown icon"></i>
+						<div class="menu">
+							<? for i, v in ipairs(app_list) do  ?>
+								<div class="item" data-value="<?=v?>"><?=v?></div>
+							<? end ?>
+						</div>
 					</div>
 					<div class="ui input">
 						<input placeholder="Instance Name" type="text" name="insname">
@@ -43,7 +51,12 @@
 		?>
 			<tr>
 				<td>
-					<a href="http://172.30.1.121:8080/app/detail/<? =(v.app.path) ?>" target="_blank"><b><?=v.insname?></b></a>
+					<? if v.run then ?>
+					<i class="teal circle icon"></i>
+					<? else ?>
+					<i class="red attention icon"></i>
+					<? end ?>
+					<a href="/app/detail/<? =(v.app.path) ?>" target="_blank"><b><?=v.insname?></b></a>
 				</td>
 				<td>
 					<i> <?=v.app.path?> </i>

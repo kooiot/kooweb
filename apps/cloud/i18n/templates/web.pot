@@ -78,19 +78,7 @@ msgid "Content"
 msgstr ""
 
 
-msgid "Contribute"
-msgstr ""
-
-
-msgid "Contribute desc"
-msgstr ""
-
-
 msgid "Controls"
-msgstr ""
-
-
-msgid "Create New"
 msgstr ""
 
 
@@ -147,6 +135,10 @@ msgstr ""
 
 
 msgid "Document"
+msgstr ""
+
+
+msgid "Documentation"
 msgstr ""
 
 
@@ -267,6 +259,10 @@ msgstr ""
 
 
 msgid "Name"
+msgstr ""
+
+
+msgid "New App"
 msgstr ""
 
 
@@ -403,14 +399,6 @@ msgstr ""
 
 
 msgid "Upload New Version"
-msgstr ""
-
-
-msgid "Usage desc"
-msgstr ""
-
-
-msgid "Usages"
 msgstr ""
 
 

@@ -7,7 +7,7 @@ return {
 		local db = app.model:get('keys')
 		db:init()
 		local userkeys = db:list(lwf.ctx.user.username)
-		res:ltp('user/keys.html', {lwf=lwf, app=app, userkeys=userkeys})
+		res:ltp('user/devkeys.html', {lwf=lwf, app=app, userkeys=userkeys})
 	end,
 	post = function(req, res)
 		if not lwf.ctx.user then

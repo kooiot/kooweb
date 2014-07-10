@@ -29,6 +29,17 @@ return {
 		local loglist, err = logs:list(key)
 		loglist = loglist or {}
 
-		res:ltp('device/remote.html', {lwf=lwf, app=app, apps=alist, services=slist, logs=loglist, key=key})
+		local applist = {}
+		local db = app.model:get('db')
+		if db:init() then
+			local apps = db:list_all()
+			for k, v in pairs(apps) do
+				for k, v in pairs(v) do
+					applist[#applist + 1] = v.info.path
+				end
+			end
+		end
+
+		res:ltp('device/remote.html', {lwf=lwf, app=app, apps=alist, services=slist, logs=loglist, app_list=applist, key=key})
 	end,
 }

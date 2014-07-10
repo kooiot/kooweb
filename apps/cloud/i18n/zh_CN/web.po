@@ -58,17 +58,8 @@ msgstr "说明"
 msgid "Content"
 msgstr "内容"
 
-msgid "Contribute"
-msgstr "贡献"
-
-msgid "Contribute desc"
-msgstr "贡献一份力量"
-
 msgid "Controls"
 msgstr "控制"
-
-msgid "Create New"
-msgstr "创建新应用"
 
 msgid "Current Avatar"
 msgstr "当前头像"
@@ -110,6 +101,9 @@ msgid "Disable"
 msgstr "禁用"
 
 msgid "Document"
+msgstr "文档"
+
+msgid "Documentation"
 msgstr "文档"
 
 msgid "Download"
@@ -201,6 +195,9 @@ msgstr "序号"
 
 msgid "Name"
 msgstr "名称"
+
+msgid "New App"
+msgstr "新应用"
 
 msgid "New Password"
 msgstr "新密码"
@@ -303,12 +300,6 @@ msgstr "上传应用"
 
 msgid "Upload New Version"
 msgstr "上传新版本"
-
-msgid "Usage desc"
-msgstr "使用说明"
-
-msgid "Usages"
-msgstr "使用"
 
 msgid "User details"
 msgstr "用户详情"
