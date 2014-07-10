@@ -15,9 +15,9 @@ return {
 				for _, v in ipairs(list) do
 					local l, err = db:is_online(v)
 					if l then
-						devlist[v] = {online=true}
+						devlist[#devlist + 1] = {key=v, online=true}
 					else
-						devlist[v] = {online=false}
+						devlist[#devlist + 1] = {key=v, online=false}
 					end
 				end
 			end

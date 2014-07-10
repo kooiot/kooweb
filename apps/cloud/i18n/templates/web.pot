@@ -2,6 +2,10 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
 
+msgid "Abort"
+msgstr ""
+
+
 msgid "About"
 msgstr ""
 
@@ -10,7 +14,11 @@ msgid "Actions"
 msgstr ""
 
 
-msgid "App"
+msgid "Add"
+msgstr ""
+
+
+msgid "AppPath"
 msgstr ""
 
 
@@ -18,19 +26,15 @@ msgid "Applications"
 msgstr ""
 
 
-msgid "Apply"
+msgid "Applictions"
 msgstr ""
 
 
-msgid "Auth Key"
+msgid "Author"
 msgstr ""
 
 
 msgid "Beginner"
-msgstr ""
-
-
-msgid "Category"
 msgstr ""
 
 
@@ -42,15 +46,15 @@ msgid "Close Menu"
 msgstr ""
 
 
-msgid "Comments"
+msgid "Commands"
 msgstr ""
 
 
-msgid "Contribute"
+msgid "Content"
 msgstr ""
 
 
-msgid "Contribute desc"
+msgid "Controls"
 msgstr ""
 
 
@@ -74,11 +78,27 @@ msgid "Development Docs"
 msgstr ""
 
 
-msgid "Device Templates"
+msgid "Device"
 msgstr ""
 
 
-msgid "Document"
+msgid "Device Data"
+msgstr ""
+
+
+msgid "Device Tree"
+msgstr ""
+
+
+msgid "Device details"
+msgstr ""
+
+
+msgid "Devices"
+msgstr ""
+
+
+msgid "Disable"
 msgstr ""
 
 
@@ -86,11 +106,19 @@ msgid "Download"
 msgstr ""
 
 
+msgid "Edit Keys"
+msgstr ""
+
+
 msgid "Edit Profile"
 msgstr ""
 
 
-msgid "File"
+msgid "Enable"
+msgstr ""
+
+
+msgid "Failed to send delete key request!!"
 msgstr ""
 
 
@@ -99,10 +127,6 @@ msgstr ""
 
 
 msgid "Forum"
-msgstr ""
-
-
-msgid "Generate"
 msgstr ""
 
 
@@ -122,19 +146,11 @@ msgid "I agree to the terms and conditions"
 msgstr ""
 
 
-msgid "IO"
-msgstr ""
-
-
-msgid "IO.CONFIG"
-msgstr ""
-
-
 msgid "Industrial"
 msgstr ""
 
 
-msgid "Information"
+msgid "Inputs"
 msgstr ""
 
 
@@ -146,7 +162,19 @@ msgid "Installtion"
 msgstr ""
 
 
+msgid "KEY"
+msgstr ""
+
+
 msgid "Last Name"
+msgstr ""
+
+
+msgid "Level"
+msgstr ""
+
+
+msgid "List"
 msgstr ""
 
 
@@ -154,15 +182,19 @@ msgid "Logout"
 msgstr ""
 
 
+msgid "Logs"
+msgstr ""
+
+
+msgid "Manage User Keys"
+msgstr ""
+
+
 msgid "Messages"
 msgstr ""
 
 
-msgid "Modify"
-msgstr ""
-
-
-msgid "My Apps"
+msgid "NO."
 msgstr ""
 
 
@@ -178,10 +210,6 @@ msgid "News"
 msgstr ""
 
 
-msgid "News desc"
-msgstr ""
-
-
 msgid "Original Password"
 msgstr ""
 
@@ -190,7 +218,23 @@ msgid "Others"
 msgstr ""
 
 
+msgid "Output"
+msgstr ""
+
+
+msgid "Outputs"
+msgstr ""
+
+
+msgid "PID"
+msgstr ""
+
+
 msgid "PLC"
+msgstr ""
+
+
+msgid "Packets"
 msgstr ""
 
 
@@ -198,7 +242,43 @@ msgid "Password"
 msgstr ""
 
 
+msgid "Path"
+msgstr ""
+
+
 msgid "Platform"
+msgstr ""
+
+
+msgid "Quality"
+msgstr ""
+
+
+msgid "Refresh List"
+msgstr ""
+
+
+msgid "Refresh Services"
+msgstr ""
+
+
+msgid "Remote Control"
+msgstr ""
+
+
+msgid "Remove"
+msgstr ""
+
+
+msgid "Result"
+msgstr ""
+
+
+msgid "SN"
+msgstr ""
+
+
+msgid "Services"
 msgstr ""
 
 
@@ -218,6 +298,14 @@ msgid "Sign With QQ"
 msgstr ""
 
 
+msgid "Source"
+msgstr ""
+
+
+msgid "Status"
+msgstr ""
+
+
 msgid "Submit"
 msgstr ""
 
@@ -226,31 +314,19 @@ msgid "Suggestion"
 msgstr ""
 
 
+msgid "Timestamp"
+msgstr ""
+
+
 msgid "Total"
 msgstr ""
 
 
-msgid "Type"
+msgid "UUID Key"
 msgstr ""
 
 
 msgid "Upload"
-msgstr ""
-
-
-msgid "Upload Application"
-msgstr ""
-
-
-msgid "Upload New Version"
-msgstr ""
-
-
-msgid "Usage desc"
-msgstr ""
-
-
-msgid "Usages"
 msgstr ""
 
 
@@ -266,11 +342,11 @@ msgid "Username"
 msgstr ""
 
 
-msgid "V3 Applications"
+msgid "Value"
 msgstr ""
 
 
-msgid "Version"
+msgid "View History"
 msgstr ""
 
 
@@ -282,11 +358,11 @@ msgid "Welcome"
 msgstr ""
 
 
-msgid "Your Auth Key"
+msgid "Your Avatar"
 msgstr ""
 
 
-msgid "Your Avatar"
+msgid "version"
 msgstr ""
 
 

@@ -1,29 +1,32 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
+msgid "Abort"
+msgstr "停止"
+
 msgid "About"
 msgstr "关于"
 
 msgid "Actions"
 msgstr "动作"
 
-msgid "App"
-msgstr "应用"
+msgid "Add"
+msgstr "添加"
+
+msgid "AppPath"
+msgstr "应用路径"
 
 msgid "Applications"
 msgstr "应用列表"
 
-msgid "Apply"
-msgstr "应用"
+msgid "Applictions"
+msgstr "应用程序"
 
-msgid "Auth Key"
-msgstr "认证密匙"
+msgid "Author"
+msgstr "作者"
 
 msgid "Beginner"
 msgstr "初学者"
-
-msgid "Category"
-msgstr "分类"
 
 msgid "Change"
 msgstr "更改"
@@ -31,14 +34,14 @@ msgstr "更改"
 msgid "Close Menu"
 msgstr "关闭菜单"
 
-msgid "Comments"
-msgstr "说明"
+msgid "Commands"
+msgstr "命令"
 
-msgid "Contribute"
-msgstr "贡献"
+msgid "Content"
+msgstr "内容"
 
-msgid "Contribute desc"
-msgstr "贡献一份力量"
+msgid "Controls"
+msgstr "控制"
 
 msgid "Create New"
 msgstr "创建新应用"
@@ -55,29 +58,44 @@ msgstr "描述"
 msgid "Development Docs"
 msgstr "开发者文档"
 
-msgid "Device Templates"
-msgstr "设备模版"
+msgid "Device"
+msgstr "设备"
 
-msgid "Document"
-msgstr "文档"
+msgid "Device Data"
+msgstr "设备数据"
+
+msgid "Device Tree"
+msgstr "设备树"
+
+msgid "Device details"
+msgstr "设备详情"
+
+msgid "Devices"
+msgstr "设备列表"
+
+msgid "Disable"
+msgstr "禁用"
 
 msgid "Download"
 msgstr "下载"
 
+msgid "Edit Keys"
+msgstr "编辑密匙"
+
 msgid "Edit Profile"
 msgstr "档案编辑"
 
-msgid "File"
-msgstr "文件"
+msgid "Enable"
+msgstr "开启"
+
+msgid "Failed to send delete key request!!"
+msgstr "发送删除密匙请求失败"
 
 msgid "First Name"
 msgstr "名字"
 
 msgid "Forum"
 msgstr "论坛"
-
-msgid "Generate"
-msgstr "生成"
 
 msgid "Home"
 msgstr "主页"
@@ -91,17 +109,11 @@ msgstr "如何加入"
 msgid "I agree to the terms and conditions"
 msgstr "我同意使用条款"
 
-msgid "IO"
-msgstr "设备"
-
-msgid "IO.CONFIG"
-msgstr "设备配置"
-
 msgid "Industrial"
 msgstr "工业"
 
-msgid "Information"
-msgstr "信息"
+msgid "Inputs"
+msgstr "输入"
 
 msgid "Install"
 msgstr "安装"
@@ -109,20 +121,32 @@ msgstr "安装"
 msgid "Installtion"
 msgstr "安装"
 
+msgid "KEY"
+msgstr "密匙"
+
 msgid "Last Name"
 msgstr "姓氏"
+
+msgid "Level"
+msgstr "等级"
+
+msgid "List"
+msgstr "列表"
 
 msgid "Logout"
 msgstr "登出"
 
+msgid "Logs"
+msgstr "日志"
+
+msgid "Manage User Keys"
+msgstr "管理用户密匙"
+
 msgid "Messages"
 msgstr "信息"
 
-msgid "Modify"
-msgstr "更新"
-
-msgid "My Apps"
-msgstr "我的应用"
+msgid "NO."
+msgstr "序号"
 
 msgid "Name"
 msgstr "名称"
@@ -133,23 +157,59 @@ msgstr "新密码"
 msgid "News"
 msgstr "新闻"
 
-msgid "News desc"
-msgstr "今日要闻"
-
 msgid "Original Password"
 msgstr "旧密码"
 
 msgid "Others"
 msgstr "其它"
 
+msgid "Output"
+msgstr "输出"
+
+msgid "Outputs"
+msgstr "输出"
+
+msgid "PID"
+msgstr "PID"
+
 msgid "PLC"
 msgstr "PLC"
+
+msgid "Packets"
+msgstr "报文"
 
 msgid "Password"
 msgstr "密码"
 
+msgid "Path"
+msgstr "路径"
+
 msgid "Platform"
 msgstr "平台"
+
+msgid "Quality"
+msgstr "质量戳"
+
+msgid "Refresh List"
+msgstr "刷新列表"
+
+msgid "Refresh Services"
+msgstr "刷新服务列表"
+
+msgid "Remote Control"
+msgstr "远程控制"
+
+msgid "Remove"
+msgstr "删除"
+
+msgid "Result"
+msgstr "结果"
+
+msgid "SN"
+msgstr "序列号"
+
+msgid "Services"
+msgstr "服务列表"
 
 msgid "Sign In"
 msgstr "登入"
@@ -163,32 +223,29 @@ msgstr "使用谷歌账户登入"
 msgid "Sign With QQ"
 msgstr "使用QQ账户登入"
 
+msgid "Source"
+msgstr "源"
+
+msgid "Status"
+msgstr "状态"
+
 msgid "Submit"
 msgstr "提交"
 
 msgid "Suggestion"
 msgstr "建议"
 
+msgid "Timestamp"
+msgstr "时间戳"
+
 msgid "Total"
 msgstr "总共"
 
-msgid "Type"
-msgstr "类型"
+msgid "UUID Key"
+msgstr "UUID密匙"
 
 msgid "Upload"
 msgstr "上传"
-
-msgid "Upload Application"
-msgstr "上传应用"
-
-msgid "Upload New Version"
-msgstr "上传新版本"
-
-msgid "Usage desc"
-msgstr "使用说明"
-
-msgid "Usages"
-msgstr "使用"
 
 msgid "User details"
 msgstr "用户详情"
@@ -199,11 +256,11 @@ msgstr "用户档案编辑"
 msgid "Username"
 msgstr "用户名"
 
-msgid "V3 Applications"
-msgstr "V3应用程序"
+msgid "Value"
+msgstr "值"
 
-msgid "Version"
-msgstr "版本"
+msgid "View History"
+msgstr "查看历史数据"
 
 msgid "Website"
 msgstr "网站"
@@ -211,8 +268,86 @@ msgstr "网站"
 msgid "Welcome"
 msgstr "欢迎"
 
-msgid "Your Auth Key"
-msgstr "您的认证密匙"
-
 msgid "Your Avatar"
 msgstr "您的头像"
+
+msgid "version"
+msgstr "版本"
+
+#~ msgid "My Devices"
+#~ msgstr "我的设备列表"
+
+#~ msgid "App"
+#~ msgstr "应用"
+
+#~ msgid "Apply"
+#~ msgstr "应用"
+
+#~ msgid "Auth Key"
+#~ msgstr "认证密匙"
+
+#~ msgid "Category"
+#~ msgstr "分类"
+
+#~ msgid "Comments"
+#~ msgstr "说明"
+
+#~ msgid "Contribute"
+#~ msgstr "贡献"
+
+#~ msgid "Contribute desc"
+#~ msgstr "贡献一份力量"
+
+#~ msgid "Device Templates"
+#~ msgstr "设备模版"
+
+#~ msgid "Document"
+#~ msgstr "文档"
+
+#~ msgid "File"
+#~ msgstr "文件"
+
+#~ msgid "Generate"
+#~ msgstr "生成"
+
+#~ msgid "IO"
+#~ msgstr "设备"
+
+#~ msgid "IO.CONFIG"
+#~ msgstr "设备配置"
+
+#~ msgid "Information"
+#~ msgstr "信息"
+
+#~ msgid "Modify"
+#~ msgstr "更新"
+
+#~ msgid "My Apps"
+#~ msgstr "我的应用"
+
+#~ msgid "News desc"
+#~ msgstr "今日要闻"
+
+#~ msgid "Type"
+#~ msgstr "类型"
+
+#~ msgid "Upload Application"
+#~ msgstr "上传应用"
+
+#~ msgid "Upload New Version"
+#~ msgstr "上传新版本"
+
+#~ msgid "Usage desc"
+#~ msgstr "使用说明"
+
+#~ msgid "Usages"
+#~ msgstr "使用"
+
+#~ msgid "V3 Applications"
+#~ msgstr "V3应用程序"
+
+#~ msgid "Version"
+#~ msgstr "版本"
+
+#~ msgid "Your Auth Key"
+#~ msgstr "您的认证密匙"

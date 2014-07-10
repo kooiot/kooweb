@@ -18,9 +18,9 @@
 					<?=_("Controls")?> - <?=key?>
 				</h1>
 			</div>
-			<div class="ui tab" data-tab="diags">
+			<div class="ui tab" data-tab="logs">
 				<h1 class="ui dividing header">
-					<?=_("Diagnostics")?> - <?=key?>
+					<?=_("Logs")?> - <?=key?>
 				</h1>
 			</div>
 		</div>
@@ -30,14 +30,14 @@
 			<a class="item active" data-tab="apps"><?=_("Applictions")?></a>
 			<a class="item" data-tab="services"><?=_("Services")?></a>
 			<a class="item" data-tab="ctrl"><?=_("Controls")?></a>
-			<a class="item" data-tab="diags"><?=_("Diagnostics")?></a>
+			<a class="item" data-tab="logs"><?=_("Logs")?></a>
 		</div>
 		<!-- Phone menu, Small screen -->
 		<div class="fluid vertical ui menu">
 			<a class="item active" data-tab="apps"><?=_("Applictions")?></a>
 			<a class="item" data-tab="services"><?=_("Services")?></a>
 			<a class="item" data-tab="ctrl"><?=_("Controls")?></a>
-			<a class="item" data-tab="diags"><?=_("Diagnostics")?></a>
+			<a class="item" data-tab="logs"><?=_("Logs")?></a>
 		</div>
 	</div>
 </div>
@@ -51,8 +51,8 @@
 	<div class="ui tab" data-tab="ctrl">
 		<? include('device/remote/ctrl.html', {lwf=lwf, app=app, key=key, err=err}) ?>
 	</div>
-	<div class="ui tab" data-tab="diags">
-		<? include('device/remote/diags.html', {lwf=lwf, app=app, key=key, logs=logs, err=err}) ?>
+	<div class="ui tab" data-tab="logs">
+		<? include('device/remote/logs.html', {lwf=lwf, app=app, key=key, logs=logs, err=err}) ?>
 	</div>
 	<div class="ui icon message">
 		<i class="inbox icon"></i>

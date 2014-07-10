@@ -9,16 +9,20 @@
 		<? if lwf.ctx.user then
 		if devlist and #devlist ~= 0 then ?>
 		<div class="ui dropdown item">
-			<i class="folder icon"></i> <?=_('My Devices')?>
+			<i class="folder icon"></i> <?=_('Devices')?>
 			<div class="menu">
-				<a class="item" href="/app/new">
-					<i class="cloud upload icon"></i> <?=_("Create New")?>
+				<a class="item" href="/user/keys">
+					<i class="cloud upload icon"></i> <?=_("Add Keys")?>
 				</a>
 				<? for k, v in pairs(devlist) do
 					local path = '/devices/'..v.key
 					?>
 					<a class="item" href="<?=path ?>">
-						<i class="leaf icon"></i> <?=v.name or v.key ?>
+						<? if v.online then ?>
+						<i class="leaf green icon"></i> <?=v.name or v.key ?>
+						<? else ?>
+						<i class="leaf red icon"></i> <?=v.name or v.key ?>
+						<? end ?>
 					</a>
 				<? end ?>
 			</div>

@@ -19,7 +19,7 @@
 				<?=tostring(counts)?>
 			</td>
 			<td>
-				<i><?=k?></i>
+				<i><?=v.key?></i>
 				<? if v.online then ?>
 				<i class="teal leaf icon"></i>
 				<? else ?>
@@ -27,8 +27,8 @@
 				<? end ?>
 			</td>
 			<td>
-				<a class="ui mini blue button" href="/devices/<?=k?>"> <?=_("Device Tree")?></a>
-				<a class="ui mini teal button" href="/device/ctrl/<?=k?>"><?=_("Remote Control")?> </a>
+				<a class="ui mini blue button" href="/devices/<?=v.key?>"> <?=_("Device Tree")?></a>
+				<a class="ui mini teal button" href="/device/ctrl/<?=v.key?>"><?=_("Remote Control")?> </a>
 			</td>
 		</tr>
 	<? end ?>
