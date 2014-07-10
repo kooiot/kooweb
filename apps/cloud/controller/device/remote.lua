@@ -35,7 +35,7 @@ return {
 			local apps = db:list_all()
 			for k, v in pairs(apps) do
 				for k, v in pairs(v) do
-					applist[#applist + 1] = v.info.path
+					applist[v.info.path] = v.info
 				end
 			end
 		end

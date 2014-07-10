@@ -31,6 +31,9 @@ msgstr "应用程序"
 msgid "Apply"
 msgstr "应用"
 
+msgid "Args Json Text"
+msgstr "命令参数(JSON)"
+
 msgid "Auth Key"
 msgstr "认证密匙"
 
@@ -166,6 +169,12 @@ msgstr "安装"
 msgid "KEY"
 msgstr "密匙"
 
+msgid "Key has been added"
+msgstr "密匙添加成功"
+
+msgid "Key has been deleted"
+msgstr "密匙删除成功"
+
 msgid "Last Name"
 msgstr "姓氏"
 
@@ -201,6 +210,9 @@ msgstr "新应用"
 
 msgid "New Password"
 msgstr "新密码"
+
+msgid "New Value"
+msgstr "新的值"
 
 msgid "News"
 msgstr "新闻"
@@ -256,6 +268,9 @@ msgstr "结果"
 msgid "SN"
 msgstr "序列号"
 
+msgid "Send"
+msgstr "发送"
+
 msgid "Services"
 msgstr "服务列表"
 
@@ -292,6 +307,9 @@ msgstr "总共"
 msgid "Type"
 msgstr "类型"
 
+msgid "Upgrade to"
+msgstr "升级到"
+
 msgid "Upload"
 msgstr "上传"
 
@@ -325,6 +343,9 @@ msgstr "网站"
 msgid "Welcome"
 msgstr "欢迎"
 
+msgid "Write"
+msgstr "写入"
+
 msgid "Your Auth Key"
 msgstr "您的认证密匙"
 
@@ -333,4 +354,3 @@ msgstr "您的头像"
 
 msgid "version"
 msgstr "版本"
-

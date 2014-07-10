@@ -10,18 +10,6 @@
 	</div>
 </div>
 <div class="main container">
-	<? if info then ?>
-	<div class="ui warning message">
-		<i class="close icon"></i>
-		<div class="header">
-			Warning!!
-		</div>
-		<?=info ?>
-	</div>
-	<? end ?>
-
-	<div id="status"></div>
-
 	<form class="ui form" method="post">
 		<input type="hidden" name="action" value="add"/>
 		<div class="ui input inline field">
@@ -64,10 +52,22 @@
 		</tfoot>
 	</table>
 
+	<div class="ui icon message">
+		<i class="inbox icon"></i>
+		<div class="content">
+			<div class="header">
+				<div id="status">
+					<? = err ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<script>
 		function delete_key(key) {
-			$.post("/user/keys", {action:'delete', key:key}, function(data) {
-					alert(data);
+			$.post("", {action:'delete', key:key}, function(data) {
+					alert('<?=_("Key has been deleted")?>');
 					window.location.reload();
 					})
 			.done(function() {
@@ -76,6 +76,18 @@
 					alert("<?=_('Failed to send delete key request!!')?>");
 					});
 		}
+		$(document).ready(function() {
+				$('form').ajaxForm({
+					success: function(data) {
+						alert('<?=_("Key has been added")?>');
+						window.location.reload();
+					},
+					error: function(data) {
+						$('#status').html('<i>' + data.responseText + '</i>');
+					},
+				});
+		});
+
 	</script>
 </div>
 

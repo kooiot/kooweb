@@ -58,7 +58,7 @@
 		<i class="inbox icon"></i>
 		<div class="content">
 			<div class="header">
-				<div id="setting_status">
+				<div id="remote_status">
 					<? = err or '' ?>
 				</div>
 			</div>
@@ -69,10 +69,10 @@
 		$(document).ready(function() {
 				$('form').ajaxForm({
 					success: function(data) {
-						$('#setting_status').html('<i>' + data + '</i>');
+						$('#remote_status').html('<i>' + data + '</i>');
 					},
 					error: function(data) {
-						$('#setting_status').html('<b>' + data.responseText + '</b>');
+						$('#remote_status').html('<b>' + data.responseText + '</b>');
 					},
 				});
 		});

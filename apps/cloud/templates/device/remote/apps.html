@@ -15,11 +15,11 @@
 					<div class="ui label"> Application: </div>
 					<div class="ui selection labeled dropdown">
 						<input id="app_path" name="app_path" type="hidden"/>
-						<div class="default text"><?=app_list[1]?></div>
+						<div class="default text"></div>
 						<i class="dropdown icon"></i>
 						<div class="menu">
-							<? for i, v in ipairs(app_list) do  ?>
-								<div class="item" data-value="<?=v?>"><?=v?></div>
+							<? for k, v in pairs(app_list) do  ?>
+								<div class="item" data-value="<?=k?>"><?=k?></div>
 							<? end ?>
 						</div>
 					</div>
@@ -71,12 +71,22 @@
 					<i> <?=v.app.version?> </i>
 				</td>
 				<td>
-					<form class="ui form" method="post" action="/device/ctrl_api">
-						<input type="hidden" name="action" value="uninstall"/>
-						<input type="hidden" name="key" value="<?=key?>"/>
-						<input type="hidden" name="insname" value="<?=v.insname?>"/>
-						<input class="ui mini red submit button" type="submit" value="<?=_('Remove')?>"/>
-					</form>
+					<div class="ui tiny icon buttons">
+						<div class="ui button" onclick="start_app('<?=v.insname?>');">
+							<i class="ui teal play icon"></i>
+						</div>
+						<div class="ui button" onclick="stop_app('<?=v.insname?>');">
+							<i class="ui orange stop icon"></i>
+						</div>
+						<div class="ui button" onclick="remove_app('<?=v.insname?>');">
+							<i class="ui red trash icon"></i>
+						</div>
+						<? if app_list[v.app.path] and app_list[v.app.path].version ~= v.app.version then?>
+						<div class="ui button" onclick="upgrade_app('<?=v.insname?>', '<?=app_list[v.app.path].version?>');">
+							<i class="ui pruple circle up icon"></i>
+						</div>
+						<? end ?>
+					</div>
 				</td>
 			</tr>
 		<? end ?>
@@ -97,4 +107,48 @@
 			</tr>
 		</tfoot>
 	</table>
+	<script>
+		function start_app(insname) {
+			$.post("/device/ctrl_api", {action:'app_start', key:'<?=key?>', insname:insname}, function(data) {
+					$('#remote_status').html('<i>' + data + '</i>');
+					})
+			.done(function() {
+					})
+			.fail(function() {
+					$('#remote_status').html('<i>Failed to send start application request </i>');
+					});
+		};
+
+		function stop_app(insname) {
+			$.post("/device/ctrl_api", {action:'app_stop', key:'<?=key?>', insname:insname}, function(data) {
+					$('#remote_status').html('<i>' + data + '</i>');
+					})
+			.done(function() {
+					})
+			.fail(function() {
+					$('#remote_status').html('<i>Failed to send stop application request </i>');
+					});
+		};
+
+		function remove_app(insname) {
+			$.post("/device/ctrl_api", {action:'uninstall', key:'<?=key?>', insname:insname}, function(data) {
+					$('#remote_status').html('<i>' + data + '</i>');
+					})
+			.done(function() {
+					})
+			.fail(function() {
+					$('#remote_status').html('<i>Failed to send remove application request </i>');
+					});
+		};
+		function upgrade_app(insname, version) {
+			$.post("/device/ctrl_api", {action:'upgrade', key:'<?=key?>', insname:insname, version:version}, function(data) {
+					$('#remote_status').html('<i>' + data + '</i>');
+					})
+			.done(function() {
+					})
+			.fail(function() {
+					$('#remote_status').html('<i>Failed to send upgrade application request </i>');
+					});
+		};
+	</script>
 

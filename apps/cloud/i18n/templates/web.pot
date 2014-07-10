@@ -42,6 +42,10 @@ msgid "Apply"
 msgstr ""
 
 
+msgid "Args Json Text"
+msgstr ""
+
+
 msgid "Auth Key"
 msgstr ""
 
@@ -222,6 +226,14 @@ msgid "KEY"
 msgstr ""
 
 
+msgid "Key has been added"
+msgstr ""
+
+
+msgid "Key has been deleted"
+msgstr ""
+
+
 msgid "Last Name"
 msgstr ""
 
@@ -267,6 +279,10 @@ msgstr ""
 
 
 msgid "New Password"
+msgstr ""
+
+
+msgid "New Value"
 msgstr ""
 
 
@@ -342,6 +358,10 @@ msgid "SN"
 msgstr ""
 
 
+msgid "Send"
+msgstr ""
+
+
 msgid "Services"
 msgstr ""
 
@@ -390,6 +410,10 @@ msgid "Type"
 msgstr ""
 
 
+msgid "Upgrade to"
+msgstr ""
+
+
 msgid "Upload"
 msgstr ""
 
@@ -431,6 +455,10 @@ msgstr ""
 
 
 msgid "Welcome"
+msgstr ""
+
+
+msgid "Write"
 msgstr ""
 
 

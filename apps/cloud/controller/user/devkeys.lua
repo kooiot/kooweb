@@ -25,12 +25,19 @@ return {
 			local r, err
 			if action == 'add' then
 				r, err = db:add(lwf.ctx.user.username, key)
+				print(r, err)
 			elseif action == 'delete' then
 				r, err = db:delete(lwf.ctx.user.username, key)
+			else
+				err = 'Action is not known to us'
 			end
 			if not r then
-				return res:write(err or 'No action')
+				res:write(err)
+				return lwf.set_status(403)
 			end
+		else
+			res:write('No key sepecified')
+			return lwf.set_status(403)
 		end
 		res:write('DONE')
 	end

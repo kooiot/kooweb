@@ -19,6 +19,14 @@ return {
 			info.insname = req:get_arg('insname')
 		elseif action == 'logs' then
 			info.enable = (req:get_arg('enable') == 'true')
+		elseif action == 'upgrade' then
+			info.insname = req:get_arg('insname')
+			info.version = req:get_arg('version')
+		elseif action =='app_start' then
+			info.insname = req:get_arg('insname')
+			info.debug = req:get_arg('debug')
+		elseif action =='app_stop' then
+			info.insname = req:get_arg('insname')
 		end
 
 		local actions = app.model:get('actions')

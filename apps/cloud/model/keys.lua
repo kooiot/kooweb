@@ -70,8 +70,12 @@ function class:add(username, key)
 	local con = self.con
 	if con then
 		local uname = self:get_user(key)
-		if uname and uname ~= username then
-			return nil, 'The auth key has been used by other user'..uname
+		if uname then
+			if uname ~= username then
+				return nil, 'The auth key has been used by other user'..uname
+			else
+				return nil, 'The keys exists!!!'
+			end
 		end
 
 		local r, err = con:set('userkey.key.'..key, username)
