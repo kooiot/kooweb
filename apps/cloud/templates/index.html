@@ -11,4 +11,8 @@
 		<? include('widget/devlist.html', {devlist = devlist}) ?>
 	</div>
 	<? end ?>
+	<div class="ui tab" data-tab="applications">
+		<? include('widget/sticky.html', {items = { _('Home Automation'), _('Industrial')}}) ?>
+		<? include('widget/cards/app.html', {apps=apps}) ?>
+	</div>
 </div>

@@ -1,5 +1,15 @@
 return {
 	get = function(req, res)
+		local applist = {}
+		local apps = {}
+		local user = lwf.ctx.user
+		local db = app.model:get('db')
+		if db:init() then
+			if user then
+				applist = db:list_apps(user.username)
+			end
+			apps = db:list_all()
+		end
 		local user = lwf.ctx.user
 
 		local devlist = {}
@@ -22,6 +32,7 @@ return {
 				end
 			end
 		end
-		res:ltp('index.html', {app=app, lwf=lwf, devlist=devlist})
+
+		res:ltp('index.html', {app=app, lwf=lwf, devlist=devlist, applist=applist, apps=apps})
 	end
 }

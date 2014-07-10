@@ -33,8 +33,38 @@
 		</a>
 		<? end
 		end?>
-
+		<? if lwf.ctx.user then
+		if applist and #applist ~= 0 then ?>
+		<div class="ui dropdown item">
+			<i class="folder icon"></i> <?=_('My Apps')?>
+			<div class="menu">
+				<a class="item" href="/app/new">
+					<i class="cloud upload icon"></i> <?=_("New App")?>
+				</a>
+				<? for k, v in pairs(applist) do
+					local path = '/app/detail/'..v.info.path
+					?>
+					<a class="item" href="<?=path ?>">
+						<i class="leaf icon"></i> <?=v.name ?>
+					</a>
+				<? end ?>
+			</div>
+		</div>
+		<? else ?>
+		<a class="item" href="/app/new">
+			<i class="cloud upload icon"></i> <?=_("New App")?>
+		</a>
+		<? end
+		end?>
 		<div class="right menu">
+			<? if lwf.ctx.user then ?>
+			<div class="item">
+				<div class="ui icon input">
+					<input placeholder="Search..." type="text">
+					<i class="search link icon"></i>
+				</div>
+			</div>
+			<? end ?>
 			<div class="ui dropdown item">
 				<i class="icon globe"></i>
 				<div class="menu">
@@ -57,7 +87,7 @@
 					</a>
 
 					<a class="item" href="/user/profile"><i class="edit icon"></i> <?=_("Edit Profile")?></a>
-					<a class="item" href="/user/keys"><i class="key icon"></i> <?=_("Edit Keys")?></a>
+					<a class="item" href="/user/devkeys"><i class="key icon"></i> <?=_("Device Keys")?></a>
 					<a class="item" href="/user/logout"><i class="sign out icon"></i> <?=_("Logout")?></a>
 				</div>
 			</div>

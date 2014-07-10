@@ -1,0 +1,108 @@
+<? extend 'layout.html' ?>
+<? include('app/top.html', {lwf=lwf, info=info, showbuttons=true}) ?>
+<div class="main container">
+	<!---
+	<div style="" class="sticky-wrapper"><div class="peek">
+			<div class="ui vertical pointing secondary menu">
+				<a class="item active">Cards</a>
+				<a class="item">Feeds</a>
+				<a class="item">FQA</a>
+				<a class="item">Links</a>
+				<a class="item">Comments</a>
+			</div>
+		</div>
+	</div>
+	<? include 'widget/rating.html' ?>
+	<? include 'widget/feeds.html' ?>
+	-->
+	<h2 class="ui dividing header">
+		<a class="ui tiny blue" href="/users/<?=info.username ?>" ><i class="ui user icon"></i> <?=info.username ?></a>
+	</h2>
+
+	<div class="ui basic segment">
+		<div><i class="ui save icon"></i><i><?=info.version ?> </i> </div>
+		<div><i class="ui comment icon"></i><i><?=info.desc ?></i> </div>
+
+		<div class="ui basic accordion">
+			<div class="active title">
+				<i class="dropdown icon"></i> <?=_("Comments")?>
+			</div>
+			<div class="active content">
+				<div><?=info.comments or ""?></div>
+			</div>
+		</div>
+
+		<? if lwf.ctx.user and info.username == lwf.ctx.user.username  then ?>
+		<a href="/app/modify/<?=info.path?>" class="ui small floated right button blue">
+			<i class="ui settings icon"></i><?=_("Modify")?>
+		</a>
+		<? end ?>
+		<a href="/static/releases/<?=info.path ?>/latest.lpk" class="ui small floated right button red">
+			<i class="ui cloud download icon"></i><?=_("Download")?>
+		</a>
+	</div>
+
+	<div class="ui fluid accordion">
+		<div class="active title">
+			<i class="dropdown icon"></i> <?=_("Device Templates")?>
+		</div>
+		<div class="active content">
+			<table class="ui table segment">
+				<thead>
+					<tr>
+						<th><?=_("Name")?></th>
+						<th><?=_("Description")?></th>
+						<th><?=_("Actions")?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<? 
+					local counts = 0
+					for k, v in pairs(tplist) do
+						counts = counts + 1
+					?>
+					<tr>
+						<td><?=k?></td>
+						<td><?=v?></td>
+						<td>
+							<?
+							local username = v:match('^([^/]+)/.+')
+							local user = lwf.ctx.user
+							if user and (user.username == username or user.username == info.username) then
+							?>
+								<div class="ui tiny teal button" onclick="remove_tpl('<?=v?>')"><?=_("Delete")?></div>
+							<? else ?>
+								<div class="ui tiny teal button disabled"><?=_("Delete")?></div>
+							<? end ?>
+						</td>
+					</tr>
+					<? end ?>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th><?=_("Total")?> <?=counts?></th>
+						<th></th>
+						<th></th>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+
+	<script>
+	function remove_tpl(name) {
+		$.post("/tpl/remove", {app_path:'<?=info.path?>', path:name}, function(data) {
+				window.location.reload();
+				})
+		.done(function() {
+				})
+		.fail(function() {
+				alert("Failed to send delete request!!");
+				});
+
+	};
+	</script>
+	
+	<? include('widget/comments.html', {lwf=lwf, app=app, comment_key=info.path, comment_title=info.path, comment_url='app/detail/'..info.path}) ?>
+</div>
+

@@ -29,7 +29,7 @@ function class:init()
 		logger:error(err)
 		return nil, err
 	end
-	con:select(9)
+	con:select(7)
 	self.con = con
 	return true
 end

@@ -18,6 +18,14 @@ msgid "Add"
 msgstr ""
 
 
+msgid "Add Keys"
+msgstr ""
+
+
+msgid "App"
+msgstr ""
+
+
 msgid "AppPath"
 msgstr ""
 
@@ -30,11 +38,23 @@ msgid "Applictions"
 msgstr ""
 
 
+msgid "Apply"
+msgstr ""
+
+
+msgid "Auth Key"
+msgstr ""
+
+
 msgid "Author"
 msgstr ""
 
 
 msgid "Beginner"
+msgstr ""
+
+
+msgid "Category"
 msgstr ""
 
 
@@ -50,7 +70,19 @@ msgid "Commands"
 msgstr ""
 
 
+msgid "Comments"
+msgstr ""
+
+
 msgid "Content"
+msgstr ""
+
+
+msgid "Contribute"
+msgstr ""
+
+
+msgid "Contribute desc"
 msgstr ""
 
 
@@ -86,7 +118,19 @@ msgid "Device Data"
 msgstr ""
 
 
+msgid "Device Keys"
+msgstr ""
+
+
+msgid "Device Templates"
+msgstr ""
+
+
 msgid "Device Tree"
+msgstr ""
+
+
+msgid "Device UUID Key"
 msgstr ""
 
 
@@ -102,11 +146,11 @@ msgid "Disable"
 msgstr ""
 
 
-msgid "Download"
+msgid "Document"
 msgstr ""
 
 
-msgid "Edit Keys"
+msgid "Download"
 msgstr ""
 
 
@@ -122,11 +166,19 @@ msgid "Failed to send delete key request!!"
 msgstr ""
 
 
+msgid "File"
+msgstr ""
+
+
 msgid "First Name"
 msgstr ""
 
 
 msgid "Forum"
+msgstr ""
+
+
+msgid "Generate"
 msgstr ""
 
 
@@ -146,7 +198,19 @@ msgid "I agree to the terms and conditions"
 msgstr ""
 
 
+msgid "IO"
+msgstr ""
+
+
+msgid "IO.CONFIG"
+msgstr ""
+
+
 msgid "Industrial"
+msgstr ""
+
+
+msgid "Information"
 msgstr ""
 
 
@@ -174,10 +238,6 @@ msgid "Level"
 msgstr ""
 
 
-msgid "List"
-msgstr ""
-
-
 msgid "Logout"
 msgstr ""
 
@@ -186,11 +246,19 @@ msgid "Logs"
 msgstr ""
 
 
-msgid "Manage User Keys"
+msgid "Manage Device Keys"
 msgstr ""
 
 
 msgid "Messages"
+msgstr ""
+
+
+msgid "Modify"
+msgstr ""
+
+
+msgid "My Apps"
 msgstr ""
 
 
@@ -322,11 +390,27 @@ msgid "Total"
 msgstr ""
 
 
-msgid "UUID Key"
+msgid "Type"
 msgstr ""
 
 
 msgid "Upload"
+msgstr ""
+
+
+msgid "Upload Application"
+msgstr ""
+
+
+msgid "Upload New Version"
+msgstr ""
+
+
+msgid "Usage desc"
+msgstr ""
+
+
+msgid "Usages"
 msgstr ""
 
 
@@ -346,6 +430,10 @@ msgid "Value"
 msgstr ""
 
 
+msgid "Version"
+msgstr ""
+
+
 msgid "View History"
 msgstr ""
 
@@ -355,6 +443,10 @@ msgstr ""
 
 
 msgid "Welcome"
+msgstr ""
+
+
+msgid "Your Auth Key"
 msgstr ""
 
 

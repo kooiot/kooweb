@@ -6,7 +6,11 @@
 					<?=_("News")?>
 				</h1>
 			</div>
-
+			<div class="ui tab" data-tab="applications">
+				<h1 class="ui dividing header">
+					<?=_("Applications")?>
+				</h1>
+			</div>
 			<? if lwf.ctx.user then ?>
 			<div class="ui tab" data-tab="devices">
 				<h1 class="ui dividing header">
@@ -14,21 +18,30 @@
 				</h1>
 			</div>
 			<? end ?>
+			<div class="ui tab" data-tab="document">
+				<h1 class="ui dividing header">
+					<?=_("Documentation")?>
+				</h1>
+			</div>
 		</div>
 
 		<!-- desktop menu -->
 		<div class="four item tabular ui menu">
 			<a class="item active" data-tab="news"><?=_("News")?></a>
+			<a class="item" data-tab="applications"><?=_("Applications")?></a>
 			<? if lwf.ctx.user then ?>
 			<a class="item" data-tab="devices"><?=_("Devices")?></a>
 			<? end ?>
+			<a class="item" data-tab="document"><?=_("Document")?></a>
 		</div>
 		<!-- Phone menu, Small screen -->
 		<div class="fluid vertical ui menu">
 			<a class="item active" data-tab="news"><?=_("News")?></a>
+			<a class="item" data-tab="applications"><?=_("Applications")?></a>
 			<? if lwf.ctx.user then ?>
 			<a class="item" data-tab="devices"><?=_("Devices")?></a>
 			<? end ?>
+			<a class="item" data-tab="document"><?=_("Document")?></a>
 		</div>
 	</div>
 </div>
