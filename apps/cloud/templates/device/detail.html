@@ -9,7 +9,7 @@
 	</div>
 </div>
 <div class="main container">
-
+	<a class="ui teal button" href="/device/ctrl/<?=key?>"><?=_("Remote Control")?> </a>
 	<div class="ui fluid accordion">
 		<? for k, v in pairs(devlist) do ?>
 		<div class="title">
@@ -17,16 +17,8 @@
 		</div>
 		<div class="content">
 			<div>
-				<?=_("Name")?> - <?=v.name?>	
+				<?=v.desc?>	
 			</div>
-			<div>
-				<?=_("Description")?> - <?=v.desc?>	
-			</div>
-			<div>
-				<?=_("Path")?> - <?=v.path?>	
-			</div>
-			<a class="ui tiny teal button" href="/device/ctrl/<?=key?>"><?=_("Remote Control")?> </a>
-
 			<div class="title">
 				<i class="dropdown icon"></i> <?=_("Inputs")?>
 			</div>
