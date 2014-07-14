@@ -17,7 +17,7 @@ return {
 
 		local cjson = require 'cjson'
 		res.headers['Content-Type'] = 'application/json; charset=utf-8'
-		print(cjson.encode(list))
+		--print(cjson.encode(list))
 		res:write(cjson.encode(list))
 	end,
 	post = function(req, res)

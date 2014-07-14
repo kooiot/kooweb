@@ -1,0 +1,46 @@
+<script type="text/javascript" src="/static/js/library/canvasjs.min.js"></script>
+<script type="text/javascript">
+	var updateChart;
+	$(document).ready(function() {
+		var dps = [];
+		var darray = JSON.parse('<?=line_data?>'); 
+		for (var i=0; i < darray.length; i++) {
+			dps.push({x:new Date(darray[i].x), y:darray[i].y});
+		};
+		var chart = new CanvasJS.Chart("chartContainer",{
+			zoomEnabled: true,
+			panEnabled: true,
+			legend: {
+				horizontalAlign: "right",
+				verticalAlign: "center"
+			},
+			title :{text: "<?=_('History Data')?>"},
+			axisX: {title: "<?=_('Timestamp')?>"},
+			axisY: {					
+				title: "<?=_('Value')?>",
+				includeZero: false
+			},
+			data: [{
+				type: "line",
+				dataPoints : dps
+			}]
+		});
+
+		chart.render();
+		var xVal = dps.length + 1;
+		var yVal = 15;	
+		var updateInterval = 1000;
+
+		updateChart = function () {
+			//dps = [{x: 1, y: 10}, {x: 2, y: 13}, {x: 3, y: 18}];
+			//dps.shift();
+			dps.length = 0;
+			chart.render();		
+		};
+		// update chart after specified time. 
+		//setInterval(function(){updateChart()}, updateInterval); 
+	});
+</script>
+
+<!--input type="button" onclick="updateChart();" value="Refresh"/-->
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
