@@ -1,3 +1,5 @@
+--- The actions saved the redis first then will be polled by device
+--
 local redis = require 'resty.redis'
 local logger = require 'lwf.logger'
 local cjson = require 'cjson'

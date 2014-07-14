@@ -1,3 +1,5 @@
+--- List the applications installed in devcies
+--
 local redis = require 'resty.redis'
 local logger = require 'lwf.logger'
 local cjson = require 'cjson'

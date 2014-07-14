@@ -121,4 +121,15 @@ function class:get(key, device_path)
 	return cjson.decode(device)
 end
 
+function class:clean(key)
+	local l, err = self:list(key)
+	if not l then 
+		return err
+	end
+	for _, path in pairs(l) do
+		self.con:del('devices.info.'..key..'.'..path)
+	end
+	self.con:del('devices.set.'..key)
+end
+
 return _M

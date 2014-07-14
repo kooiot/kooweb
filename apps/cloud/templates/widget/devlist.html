@@ -32,6 +32,7 @@
 			<td>
 				<a class="ui mini blue button" href="/devices/<?=v.key?>"> <?=_("Device Tree")?></a>
 				<a class="ui mini teal button" href="/device/ctrl/<?=v.key?>"><?=_("Remote Control")?> </a>
+				<div class="ui mini teal button" onclick="clean_device('<?=v.key?>');"><?=_("Clean")?> </div>
 			</td>
 		</tr>
 	<? end ?>
@@ -47,3 +48,15 @@
 	</tfoot>
 </table>
 
+<script>
+	function clean_device(key) {
+		$.post("/device/clean", {key:key}, function(data) {
+				window.location.reload();
+				})
+		.done(function() {
+				})
+		.fail(function() {
+				alert('Failed to send start application request');
+				});
+	};
+</script>
