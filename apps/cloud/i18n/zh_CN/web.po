@@ -49,6 +49,9 @@ msgstr "分类"
 msgid "Change"
 msgstr "更改"
 
+msgid "Clean"
+msgstr "清理"
+
 msgid "Close Menu"
 msgstr "关闭菜单"
 
@@ -132,6 +135,9 @@ msgstr "论坛"
 
 msgid "Generate"
 msgstr "生成"
+
+msgid "History Data"
+msgstr "历史数据"
 
 msgid "Home"
 msgstr "主页"
@@ -259,9 +265,6 @@ msgstr "刷新服务列表"
 msgid "Remote Control"
 msgstr "远程控制"
 
-msgid "Remove"
-msgstr "删除"
-
 msgid "Result"
 msgstr "结果"
 
@@ -307,9 +310,6 @@ msgstr "总共"
 msgid "Type"
 msgstr "类型"
 
-msgid "Upgrade to"
-msgstr "升级到"
-
 msgid "Upload"
 msgstr "上传"
 
@@ -354,3 +354,9 @@ msgstr "您的头像"
 
 msgid "version"
 msgstr "版本"
+
+#~ msgid "Remove"
+#~ msgstr "删除"
+
+#~ msgid "Upgrade to"
+#~ msgstr "升级到"

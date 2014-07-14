@@ -66,6 +66,10 @@ msgid "Change"
 msgstr ""
 
 
+msgid "Clean"
+msgstr ""
+
+
 msgid "Close Menu"
 msgstr ""
 
@@ -175,6 +179,10 @@ msgstr ""
 
 
 msgid "Generate"
+msgstr ""
+
+
+msgid "History Data"
 msgstr ""
 
 
@@ -346,10 +354,6 @@ msgid "Remote Control"
 msgstr ""
 
 
-msgid "Remove"
-msgstr ""
-
-
 msgid "Result"
 msgstr ""
 
@@ -407,10 +411,6 @@ msgstr ""
 
 
 msgid "Type"
-msgstr ""
-
-
-msgid "Upgrade to"
 msgstr ""
 
 
