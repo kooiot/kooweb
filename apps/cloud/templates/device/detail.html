@@ -19,26 +19,33 @@
 			<div>
 				<?=v.desc?>	
 			</div>
+
+			<? if next(v.inputs) ~= nil then ?>
 			<div class="title">
 				<i class="dropdown icon"></i> <?=_("Inputs")?>
 			</div>
 			<div class="content">
 				<? include('device/tlist.html', {list=v.inputs, key=key, type='inputs'}) ?>
 			</div>
+			<? end ?>
 
+			<? if next(v.outputs) ~= nil then ?>
 			<div class="title">
 				<i class="dropdown icon"></i> <?=_("Outputs")?>
 			</div>
 			<div class="content">
 				<? include('device/tlist.html', {list=v.outputs, key=key, type='outputs'}) ?>
 			</div>
+			<? end ?>
 
+			<? if next(v.commands) ~= nil then ?>
 			<div class="title">
 				<i class="dropdown icon"></i> <?=_("Commands")?>
 			</div>
 			<div class="content">
 				<? include('device/tlist.html', {list=v.commands, key=key, type='commands'}) ?>
 			</div>
+			<? end ?>
 		</div>
 		<? end ?>
 	</div>
