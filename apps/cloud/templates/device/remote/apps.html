@@ -56,10 +56,12 @@
 					<? else ?>
 					<i class="red attention icon"></i>
 					<? end ?>
-					<a href="/app/detail/<? =(v.app.path) ?>" target="_blank"><b><?=v.insname?></b></a>
+					<b><?=v.insname?></b>
 				</td>
 				<td>
-					<i> <?=v.app.path?> </i>
+					<a href="/app/detail/<? =(v.app.path) ?>" target="_blank">
+						<b><i> <?=v.app.path?> </i></b>
+					</a>
 				</td>
 				<td>
 					<i> <?=v.app.desc?> </i>
