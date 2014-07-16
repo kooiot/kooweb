@@ -52,7 +52,12 @@
 			<tr>
 				<td>
 					<? if v.run then ?>
+					<? if v.run ~= 'UNKNOWN' then ?>
 					<i class="teal circle icon"></i>
+					<?else?>
+					<i class="question icon"></i>
+					<?else?>
+					<? end ?>
 					<? else ?>
 					<i class="red attention icon"></i>
 					<? end ?>
