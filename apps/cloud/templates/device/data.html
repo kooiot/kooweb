@@ -18,8 +18,7 @@
 <div class="main container">
 	<? if has_line_data then ?>
 	<? include 'widget/dataline.html' ?>
-	<? end ?>
-	<? if #data ~= 0 then ?>
+	<? else ?>
 	<table id="datalist" class="ui table segment">
 		<thead>
 			<tr>

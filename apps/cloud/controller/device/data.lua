@@ -1,3 +1,29 @@
+local function get_type(app, key, path)
+	local devices = app.model:get('devices')
+	devices:init()
+	local devpath, t, k = path:match('^([^/]+/[^/]+)/([^/]+)/([^/]+)')
+	print(path)
+	if not ( devpath and t and k ) then
+		return nil, 'Path incorrect'
+	end
+
+	print(devpath, t, k)
+	local devobj = devices:get(key, devpath)
+	if not devobj then
+		return nil, 'Device not found'
+	end
+
+	local obj = devobj[t][k]
+	if not obj then
+		return nil, 'Object not found in devices'
+	end
+
+	if obj.props['type'] and obj.props['type'].value then
+		return obj.props['type'].value
+	end
+	return nil, 'Type props not found'
+end
+
 return {
 	get = function(req, res, key)
 		local key = key or req:get_arg('key')
@@ -7,6 +33,12 @@ return {
 		end
 		if not lwf.ctx.user then
 			return res:redirect('/user/login')
+		end
+
+		local path = req:get_arg('path')
+		if not path then
+			res:write('Need Path')
+			return lwf.set_status(403)
 		end
 
 		local username = lwf.ctx.user.username
@@ -23,8 +55,13 @@ return {
 
 		local path = req:get_arg('path')
 		if not path then
-			res:write('Need Key')
+			res:write('Need Path')
 			return lwf.set_status(403)
+		end
+
+		local data_type, err = get_type(app, key, path)
+		if not data_type then
+			data_type = "number"
 		end
 
 		local data = app.model:get('data')
@@ -37,24 +74,24 @@ return {
 		local cjson = require 'cjson'
 		res:write(cjson.encode(list))
 		]]--
-		local line_table = {}
-		local string_table = {}
-		local has_line_data = false
-		for _, v in pairs(list) do
-			if type(v.value) == 'number' then
+		local line_data = nil
+		local has_line_data = nil
+
+		if data_type:match("^number") then
+			local line_table = {}
+			has_line_data = true
+			for _, v in pairs(list) do
 				local mc = nil
 				if not v.quality then
 					mc = "red"
 				end
-				has_line_data = true
-				line_table[#line_table + 1] = {x=v.timestamp, y=v.value, markerColor=mc}
-			else
-				string_table[#string_table + 1] = v
+				line_table[#line_table + 1] = {x=v.timestamp, y=tonumber(v.value), markerColor=mc}
 			end
-		end
-		local cjson = require 'cjson'
-		local line_data = cjson.encode(line_table)
 
-		res:ltp('device/data.html', {lwf=lwf,app=app, data=string_table, line_data=line_data, has_line_data=has_line_data, key=key, path=path, key_alias=key_alias})
+			local cjson = require 'cjson'
+			line_data = cjson.encode(line_table)
+		end
+
+		res:ltp('device/data.html', {lwf=lwf,app=app, data=list, line_data=line_data, has_line_data=has_line_data, key=key, path=path, key_alias=key_alias})
 	end,
 }
