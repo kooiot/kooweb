@@ -12,11 +12,18 @@
 <div class="main container">
 	<form class="ui form" method="post">
 		<input type="hidden" name="action" value="add"/>
-		<div class="ui input inline field">
-			<label><?=_("Device UUID Key")?>:</label>
-			<input type="text" name="key" placeholder="Key..." value=""/>
+		<div class="inline fields">
+			<div class="inline field">
+				<label><?=_("Device UUID Key")?>:</label>
+				<input type="text" name="key" placeholder="<?=_('Key')?>..." value=""/>
+			</div>
+			<div class="field">
+				<input type="text" name="alias" placeholder="<?=_('Alias')?>..." value=""/>
+			</div>
+			<div class="field">
+				<input class="ui small teal submit button" type="submit" value="<?=_('Add')?>"/>
+			</div>
 		</div>
-		<input class="ui submit button" type="submit" value="<?=_('Add')?>"/>
 	</form>
 
 	<table class="ui sortable table segment">
@@ -24,11 +31,13 @@
 			<tr>
 				<th><?=_("NO.")?></th>
 				<th><?=_("KEY")?></th>
+				<th><?=_("ALIAS")?></th>
 				<th><?=_("Controls")?></th>
 			</tr>
 		</thead>
 		<tbody>
 		<?
+		if not alias_list then alias_list = {} end
 		for i, key in pairs(userkeys) do
 		?>
 		<tr>
@@ -37,7 +46,23 @@
 				<?=key?>
 			</td>
 			<td>
-				<a class="ui mini button" onclick="delete_key('<?=key?>')"> <?=_("Delete")?></a>
+				<form class="ui small fluid form" method="post">
+					<div class="inline fields">
+						<input name="action" type="hidden" value="alias"/>
+						<input name="key" type="hidden" value="<?=key?>"/>
+						<div class="field">
+							<div class="ui mini input">
+								<input name="alias" type="text" value="<?=alias_list[key]?>"/>
+							</div>
+						</div>
+						<div class="field">
+							<input type="submit" class="ui mini teal submit button" value="<?=_('Change')?>"/>
+						</div>
+					</div>
+				</form>
+			</td>
+			<td>
+				<a class="ui tiny button" onclick="delete_key('<?=key?>')"> <?=_("Delete")?></a>
 			</td>
 		</tr>
 		<? end ?>
@@ -46,6 +71,7 @@
 		<tfoot>
 			<tr>
 				<th>Total <?=#userkeys?></th>
+				<th></th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -79,7 +105,7 @@
 		$(document).ready(function() {
 				$('form').ajaxForm({
 					success: function(data) {
-						alert('<?=_("Key has been added")?>');
+						alert('<?=_("Request compeleted")?>');
 						window.location.reload();
 					},
 					error: function(data) {

@@ -24,10 +24,11 @@ return {
 			if list then
 				for _, v in ipairs(list) do
 					local l, err = db:is_online(v)
+					local alias = keys:alias(user.username, v)
 					if l then
-						devlist[#devlist + 1] = {key=v, online=true}
+						devlist[#devlist + 1] = {key=v, alias=alias, online=true}
 					else
-						devlist[#devlist + 1] = {key=v, online=false}
+						devlist[#devlist + 1] = {key=v, alias=alias, online=false}
 					end
 				end
 			end

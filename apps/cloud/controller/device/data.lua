@@ -5,6 +5,22 @@ return {
 			res:write('Need Key')
 			return lwf.set_status(403)
 		end
+		if not lwf.ctx.user then
+			return res:redirect('/user/login')
+		end
+
+		local username = lwf.ctx.user.username
+		local key_alias = nil
+		if username then
+			local keys = app.model:get('keys')
+			keys:init()
+			local r, err = keys:alias(username, key)
+			if r then
+				key_alias = r
+			end
+		end
+
+
 		local path = req:get_arg('path')
 		if not path then
 			res:write('Need Key')
@@ -39,6 +55,6 @@ return {
 		local cjson = require 'cjson'
 		local line_data = cjson.encode(line_table)
 
-		res:ltp('device/data.html', {lwf=lwf,app=app, data=string_table, line_data=line_data, has_line_data=has_line_data, key=key, path=path})
+		res:ltp('device/data.html', {lwf=lwf,app=app, data=string_table, line_data=line_data, has_line_data=has_line_data, key=key, path=path, key_alias=key_alias})
 	end,
 }

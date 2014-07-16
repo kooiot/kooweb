@@ -19,9 +19,9 @@
 					?>
 					<a class="item" href="<?=path ?>">
 						<? if v.online then ?>
-						<i class="leaf green icon"></i> <?=v.name or v.key ?>
+						<i class="leaf green icon"></i> <?=v.alias or v.key ?>
 						<? else ?>
-						<i class="leaf red icon"></i> <?=v.name or v.key ?>
+						<i class="leaf red icon"></i> <?=v.alias or v.key ?>
 						<? end ?>
 					</a>
 				<? end ?>

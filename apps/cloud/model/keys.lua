@@ -66,7 +66,7 @@ function class:list(username)
 	end
 end
 
-function class:add(username, key)
+function class:add(username, key, alias)
 	local con = self.con
 	if con then
 		local uname = self:get_user(key)
@@ -82,10 +82,32 @@ function class:add(username, key)
 		if not r then
 			return nil, err
 		end
+		if alias then
+			local r, err = con:set('userkey.alias.'..key, alias)
+			if not r then 
+				return nil, err
+			end
+		end
 		r, err = con:sadd('userkey.user.'..username, key)
 		return r, err
 	end
 	return nil, 'Database connection is not initialized'
+end
+
+function class:set_alias(username, key, alias)
+	local r, err = self.con:set('userkey.alias.'..key, alias)
+	if not r then 
+		return nil, err
+	end
+	return true
+end
+
+function class:alias(username, key)
+	local r, err = self.con:get('userkey.alias.'..key, alias)
+	if not r or r == ngx.null then 
+		return nil, err or 'Not exists'
+	end
+	return r
 end
 
 function class:delete(username, key)

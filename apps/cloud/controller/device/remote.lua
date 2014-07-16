@@ -8,6 +8,17 @@ return {
 			return res:redirect('/user/login')
 		end
 
+		local username = lwf.ctx.user.username
+		local key_alias = nil
+		if username then
+			local keys = app.model:get('keys')
+			keys:init()
+			local r, err = keys:alias(username, key)
+			if r then
+				key_alias = r
+			end
+		end
+
 		local apps = app.model:get('apps')
 		apps:init()
 
@@ -40,6 +51,6 @@ return {
 			end
 		end
 
-		res:ltp('device/remote.html', {lwf=lwf, app=app, apps=alist, services=slist, logs=loglist, app_list=applist, key=key})
+		res:ltp('device/remote.html', {lwf=lwf, app=app, apps=alist, services=slist, logs=loglist, app_list=applist, key=key, key_alias=key_alias})
 	end,
 }

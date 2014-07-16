@@ -7,6 +7,16 @@ return {
 		if not lwf.ctx.user then
 			return res:redirect('/user/login')
 		end
+		local username = lwf.ctx.user.username
+		local key_alias = nil
+		if username then
+			local keys = app.model:get('keys')
+			keys:init()
+			local r, err = keys:alias(username, key)
+			if r then
+				key_alias = r
+			end
+		end
 
 		local devices = app.model:get('devices')
 		devices:init()
@@ -30,6 +40,6 @@ return {
 			end
 		end
 
-		res:ltp('device/detail.html', {lwf=lwf, app=app, devlist=devlist, key=key})
+		res:ltp('device/detail.html', {lwf=lwf, app=app, devlist=devlist, key=key, key_alias=key_alias})
 	end
 }

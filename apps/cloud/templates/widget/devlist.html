@@ -5,6 +5,7 @@
 		<tr>
 			<th><?=_("NO.")?></th>
 			<th><?=_("Status")?></th>
+			<th><?=_("ALIAS")?></th>
 			<th><?=_("SN")?></th>
 			<th><?=_("Controls")?></th>
 		</tr>
@@ -26,9 +27,12 @@
 				<i class="red attention icon"></i>
 				<? end ?>
 			</td>
+			<td>
+				<i><?=v.alias?></i>
 			</td>
 			<td>
 				<i><?=v.key?></i>
+			</td>
 			<td>
 				<a class="ui mini blue button" href="/devices/<?=v.key?>"> <?=_("Device Tree")?></a>
 				<a class="ui mini teal button" href="/device/ctrl/<?=v.key?>"><?=_("Remote Control")?> </a>
@@ -41,6 +45,7 @@
 	<tfoot>
 		<tr>
 			<th><?=_("Total")?> <?=counts?></th>
+			<th></th>
 			<th></th>
 			<th></th>
 			<th></th>
