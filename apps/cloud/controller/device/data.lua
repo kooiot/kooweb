@@ -2,12 +2,12 @@ local function get_type(app, key, path)
 	local devices = app.model:get('devices')
 	devices:init()
 	local devpath, t, k = path:match('^([^/]+/[^/]+)/([^/]+)/([^/]+)')
-	print(path)
+	--print(path)
 	if not ( devpath and t and k ) then
 		return nil, 'Path incorrect'
 	end
 
-	print(devpath, t, k)
+	--print(devpath, t, k)
 	local devobj = devices:get(key, devpath)
 	if not devobj then
 		return nil, 'Device not found'
@@ -75,12 +75,12 @@ return {
 		res:write(cjson.encode(list))
 		]]--
 		local line_data = nil
-		local has_line_data = nil
+		local has_line_data = false
 
 		if data_type:match("^number") then
 			local line_table = {}
 			has_line_data = true
-			for _, v in pairs(list) do
+			for _, v in ipairs(list) do
 				local mc = nil
 				if not v.quality then
 					mc = "red"
