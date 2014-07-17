@@ -41,7 +41,11 @@ return {
 			data:init()
 
 			for _, v in ipairs(list) do
-				local r, err = data:add(key, v.path, v.values)
+				local values = {}
+				for _, val in ipairs(v.values) do
+					values[#values + 1] = {timestamp = val.timestamp, value=val.value, quality=val.quality}
+				end
+				local r, err = data:add(key, v.path, values)
 				if not r then
 					res:write(err)
 					lwf.set_status(403)
