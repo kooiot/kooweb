@@ -67,7 +67,7 @@ return {
 		local data = app.model:get('data')
 		data:init()
 
-		local list = data:list(key, path, 10240)
+		local list = data:list(key, path, 102400)
 
 		--[[
 		res.headers['Content-Type'] = 'application/json; charset=utf-8'
