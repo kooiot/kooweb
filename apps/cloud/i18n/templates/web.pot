@@ -2,6 +2,10 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
 
+msgid "ALIAS"
+msgstr ""
+
+
 msgid "Abort"
 msgstr ""
 
@@ -19,6 +23,10 @@ msgstr ""
 
 
 msgid "Add Keys"
+msgstr ""
+
+
+msgid "Alias"
 msgstr ""
 
 
@@ -154,6 +162,10 @@ msgid "Download"
 msgstr ""
 
 
+msgid "Dump to JSON"
+msgstr ""
+
+
 msgid "Edit Profile"
 msgstr ""
 
@@ -234,7 +246,7 @@ msgid "KEY"
 msgstr ""
 
 
-msgid "Key has been added"
+msgid "Key"
 msgstr ""
 
 
@@ -351,6 +363,10 @@ msgstr ""
 
 
 msgid "Remote Control"
+msgstr ""
+
+
+msgid "Request compeleted"
 msgstr ""
 
 

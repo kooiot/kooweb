@@ -37,6 +37,7 @@
 			<? if type == 'inputs' then ?>
 			<td>
 				<a class="ui teal mini button" href="/data/<?=key?>?path=<?=escape_url(v.path)?>"><?=translate('View History') ?> </a>
+				<a class="ui gray mini button" href="/dumpdata/<?=key?>?path=<?=escape_url(v.path)?>"><?=translate('Dump to JSON') ?> </a>
 			</td>
 			<? end ?>
 			<? if type == 'outputs' then ?>

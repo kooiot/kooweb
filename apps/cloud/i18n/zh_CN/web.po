@@ -1,6 +1,9 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
+msgid "ALIAS"
+msgstr "别名"
+
 msgid "Abort"
 msgstr "停止"
 
@@ -15,6 +18,9 @@ msgstr "添加"
 
 msgid "Add Keys"
 msgstr "增加密匙"
+
+msgid "Alias"
+msgstr "别名"
 
 msgid "App"
 msgstr "应用"
@@ -115,6 +121,9 @@ msgstr "文档"
 msgid "Download"
 msgstr "下载"
 
+msgid "Dump to JSON"
+msgstr "获取数据(JSON)"
+
 msgid "Edit Profile"
 msgstr "档案编辑"
 
@@ -175,8 +184,8 @@ msgstr "安装"
 msgid "KEY"
 msgstr "密匙"
 
-msgid "Key has been added"
-msgstr "密匙添加成功"
+msgid "Key"
+msgstr "密匙"
 
 msgid "Key has been deleted"
 msgstr "密匙删除成功"
@@ -264,6 +273,9 @@ msgstr "刷新服务列表"
 
 msgid "Remote Control"
 msgstr "远程控制"
+
+msgid "Request compeleted"
+msgstr "请求已完成"
 
 msgid "Result"
 msgstr "结果"
@@ -354,6 +366,9 @@ msgstr "您的头像"
 
 msgid "version"
 msgstr "版本"
+
+#~ msgid "Key has been added"
+#~ msgstr "密匙添加成功"
 
 #~ msgid "Remove"
 #~ msgstr "删除"
