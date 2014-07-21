@@ -12,7 +12,7 @@
 			<i class="folder icon"></i> <?=_('My Apps')?>
 			<div class="menu">
 				<a class="item" href="/app/new">
-					<i class="cloud upload icon"></i> <?=_("Create New")?>
+					<i class="cloud upload icon"></i> <?=_("New App")?>
 				</a>
 				<? for k, v in pairs(applist) do
 					local path = '/app/detail/'..v.info.path
@@ -25,7 +25,7 @@
 		</div>
 		<? else ?>
 		<a class="item" href="/app/new">
-			<i class="cloud upload icon"></i> <?=_("Create New")?>
+			<i class="cloud upload icon"></i> <?=_("New App")?>
 		</a>
 		<? end
 		end?>
