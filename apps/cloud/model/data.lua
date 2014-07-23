@@ -88,9 +88,12 @@ function class:add(key, path, list)
 	local k = 'data.list.'..key..'.'..path
 
 	for _, v in ipairs(list) do
-		local r, err = self.con:rpush(k, cjson.encode(v))
-		if not r then
+		local count, err = self.con:rpush(k, cjson.encode(v))
+		if not count then
 			return nil, err
+		end
+		if count > 100000 then
+			self.con:lpop()
 		end
 	end
 

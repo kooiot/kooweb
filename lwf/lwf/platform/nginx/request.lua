@@ -143,14 +143,31 @@ function Request:read_body()
 		self.post_args = {}
 
 		local file = ngx_req.get_body_file()
+		local json_text = nil
 		if file then
 			local f, err = io.open(file)
 			if f then
-				self.post_args['json'] = f:read('*a')
+				json_text = f:read('*a')
 			end
 		else
-			self.post_args['json'] = ngx_req.get_body_data() or ''
+			json_text = ngx_req.get_body_data() or ''
 		end
+
+		--- Decode the compressed content
+		if self.headers["content-encoding"] == 'gzip' and string.len(json_text) > 0 then
+			local zlib = require 'zlib'
+
+			assert(string.len(json_text) == tonumber(self.headers["content-length"]))
+
+			local decoded_json, err = zlib.decompress(json_text, 15 + 16)
+			if not decoded_json or decode_json == cjson.null then
+				print(string.len(json_text), err)
+			end
+
+			json_text = decoded_json or ''
+		end
+
+		self.post_args['json'] = json_text
 	else
 		ngx_req.read_body()
 		self.post_args = ngx_req.get_post_args()
