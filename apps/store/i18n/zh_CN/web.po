@@ -37,12 +37,6 @@ msgstr "说明"
 msgid "Contribute"
 msgstr "贡献"
 
-msgid "Contribute desc"
-msgstr "贡献一份力量"
-
-msgid "Create New"
-msgstr "创建新应用"
-
 msgid "Current Avatar"
 msgstr "当前头像"
 
@@ -127,14 +121,14 @@ msgstr "我的应用"
 msgid "Name"
 msgstr "名称"
 
+msgid "New App"
+msgstr ""
+
 msgid "New Password"
 msgstr "新密码"
 
 msgid "News"
 msgstr "新闻"
-
-msgid "News desc"
-msgstr "今日要闻"
 
 msgid "Original Password"
 msgstr "旧密码"
@@ -184,9 +178,6 @@ msgstr "上传应用"
 msgid "Upload New Version"
 msgstr "上传新版本"
 
-msgid "Usage desc"
-msgstr "使用说明"
-
 msgid "Usages"
 msgstr "使用"
 
@@ -216,3 +207,15 @@ msgstr "您的认证密匙"
 
 msgid "Your Avatar"
 msgstr "您的头像"
+
+#~ msgid "Contribute desc"
+#~ msgstr "贡献一份力量"
+
+#~ msgid "Create New"
+#~ msgstr "创建新应用"
+
+#~ msgid "News desc"
+#~ msgstr "今日要闻"
+
+#~ msgid "Usage desc"
+#~ msgstr "使用说明"

@@ -50,14 +50,6 @@ msgid "Contribute"
 msgstr ""
 
 
-msgid "Contribute desc"
-msgstr ""
-
-
-msgid "Create New"
-msgstr ""
-
-
 msgid "Current Avatar"
 msgstr ""
 
@@ -170,15 +162,15 @@ msgid "Name"
 msgstr ""
 
 
+msgid "New App"
+msgstr ""
+
+
 msgid "New Password"
 msgstr ""
 
 
 msgid "News"
-msgstr ""
-
-
-msgid "News desc"
 msgstr ""
 
 
@@ -243,10 +235,6 @@ msgstr ""
 
 
 msgid "Upload New Version"
-msgstr ""
-
-
-msgid "Usage desc"
 msgstr ""
 
 

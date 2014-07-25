@@ -298,6 +298,10 @@ msgid "New App"
 msgstr ""
 
 
+msgid "New Core"
+msgstr ""
+
+
 msgid "New Password"
 msgstr ""
 
@@ -439,6 +443,10 @@ msgstr ""
 
 
 msgid "Upload New Version"
+msgstr ""
+
+
+msgid "Upload System Core"
 msgstr ""
 
 

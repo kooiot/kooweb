@@ -223,6 +223,9 @@ msgstr "名称"
 msgid "New App"
 msgstr "新应用"
 
+msgid "New Core"
+msgstr "更新内核"
+
 msgid "New Password"
 msgstr "新密码"
 
@@ -330,6 +333,9 @@ msgstr "上传应用"
 
 msgid "Upload New Version"
 msgstr "上传新版本"
+
+msgid "Upload System Core"
+msgstr "上传新的核心程序"
 
 msgid "User details"
 msgstr "用户详情"
