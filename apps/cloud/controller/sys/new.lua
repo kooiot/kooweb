@@ -24,7 +24,11 @@ return {
 		if not lwf.ctx.user then
 			return res:redirect('/user/login')
 		end
-		res:ltp('/sys/new.html')
+		local db = app.model:get('sys')
+		db:init()
+		local list, err = db:list()
+		db:close()
+		res:ltp('/sys/new.html', {lwf=lwf,app=app,list=list})
 	end,
 	post = function(req, res)
 		if not lwf.ctx.user then
