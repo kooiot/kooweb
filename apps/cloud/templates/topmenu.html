@@ -54,8 +54,13 @@
 		<a class="item" href="/app/new">
 			<i class="cloud upload icon"></i> <?=_("New App")?>
 		</a>
-		<? end
-		end?>
+		<? end ?>
+		<? if lwf.ctx.user.username == 'admin' then ?>
+		<a class="item" href="/sys/new">
+			<i class="cloud upload icon"></i> <?=_("New Core")?>
+		</a>
+		<? end ?>
+		<? end?>
 		<div class="right menu">
 			<? if lwf.ctx.user then ?>
 			<div class="item">

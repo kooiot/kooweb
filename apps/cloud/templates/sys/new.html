@@ -1,0 +1,63 @@
+
+<? extend 'layout.html' ?>
+<div class="segment">
+	<div class="container">
+		<div class="introduction">
+			<h1 class="ui dividing header">
+				<?=_("Upload System Core")?>
+			</h1>
+		</div>
+	</div>
+</div>
+<div class="main container">
+
+	<? if err then ?>
+	<h2 class="ui dividing header"><?=_("Information")?>:</h2>
+	<div class="ui warning message">
+		<i class="close icon"></i>
+		<div class="header">
+			Warning!!
+		</div>
+		<?=err ?>
+	</div>
+	<? end ?>
+	<form class="ui form" action="" method="post" enctype="multipart/form-data">
+		<input type="file" name="file"/>
+		<input type="submit" value="<?=_('Upload')?>"/>
+	</form>
+
+	<div class="ui progress">
+		<div class="bar"></div>
+	</div>
+
+	<div id="status"></div>
+
+	<script>
+	(function() {
+		var status = $('#status');
+		var bar = $('.bar');
+		$('form').ajaxForm({
+			beforeSend: function() {
+				status.empty();
+			},
+			uploadProgress: function(event, position, total, percentComplete) {
+				var percentVal = percentComplete + '%';
+				bar.width(percentVal);
+				status.text(percentVal);
+			},
+			success: function() {
+				var percentVal = '100%';
+				bar.width(percentVal);
+				status.text(percentVal);
+			},
+			complete: function(xhr) {
+				status.html('<br>'+xhr.responseText);
+			},
+			error: function(xhr) {
+				status.html(xhr.responseText);
+			}
+		}); 
+	 })();       
+	</script>
+
+</div>

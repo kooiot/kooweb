@@ -6,8 +6,8 @@ end
 
 local function save_app(path, file, version)
 	local path = get_full_path(path)
-	filename = path..'/latest.lpk'
-	vfilename = path..'/'..version..'.lpk'
+	local filename = path..'/latest.lpk'
+	local vfilename = path..'/'..version..'.lpk'
 	--print(filename, vfilename)
 	local f, err = io.open(filename, 'w+')
 	if f then
