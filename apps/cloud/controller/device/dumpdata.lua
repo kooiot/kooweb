@@ -33,7 +33,8 @@ return {
 			return lwf.set_status(403)
 		end
 
-		local data = app.model:get('data')
+		--local data = app.model:get('data')
+		local data = app.model:get('influx')
 		data:init()
 
 		local list = data:list(key, path, 102400)

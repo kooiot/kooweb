@@ -64,10 +64,15 @@ return {
 			data_type = "number"
 		end
 
-		local data = app.model:get('data')
+	--	local data = app.model:get('data')
+		local data = app.model:get('influx')
 		data:init()
 
-		local list = data:list(key, path, 102400)
+		local list, err = data:list(key, path, 102400)
+		if not list then
+			res:write(err)
+			return
+		end
 
 		--[[
 		res.headers['Content-Type'] = 'application/json; charset=utf-8'

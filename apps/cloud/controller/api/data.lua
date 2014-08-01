@@ -11,7 +11,8 @@ return {
 			return lwf.set_status(403)
 		end
 
-		local data = app.model:get('data')
+		--local data = app.model:get('data')
+		local data = app.model:get('influx')
 		data:init()
 
 		local list = data:list(key, path)
@@ -37,7 +38,8 @@ return {
 			local cjson = require'cjson'
 			local list = cjson.decode(json)
 	
-			local data = app.model:get('data')
+			--local data = app.model:get('data')
+			local data = app.model:get('influx')
 			data:init()
 
 			for _, v in ipairs(list) do
