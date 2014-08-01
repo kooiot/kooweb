@@ -161,7 +161,7 @@ function Request:read_body()
 			assert(string.len(json_text) == tonumber(self.headers["content-length"]))
 
 			local decoded_json, err = zlib.decompress(json_text, 15 + 16)
-			if not decoded_json or decode_json == cjson.null then
+			if not decoded_json then
 				print(string.len(json_text), err)
 			end
 

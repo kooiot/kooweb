@@ -24,7 +24,8 @@ return {
 
 		local devlist = {}
 
-		local db = app.model:get('data')
+		--local db = app.model:get('data')
+		local db = app.model:get('influx')
 		db:init()
 
 		for _, path in ipairs(list) do

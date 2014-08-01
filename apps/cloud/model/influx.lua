@@ -108,6 +108,9 @@ function class:list(key, path, len)
 			return nil, data
 		end
 
+		if #jdata == 0 then
+			return nil, 'No value in database'
+		end
 		assert(#jdata == 1)
 		local points = jdata[1].points
 		local rdata = {}
@@ -122,7 +125,11 @@ function class:list(key, path, len)
 end
 
 function class:get(key, path)
-	return self:list(key, path, 1)
+	local r, err = self:list(key, path, 1)
+	if r then
+		return r[1]
+	end
+	return nil, err
 end
 
 function class:add(key, path, list)
@@ -136,7 +143,9 @@ function class:add(key, path, list)
 	local r, err = api.post({data})
 	if not r then 
 		print(err)
+		return nil, err
 	end
+	return true
 end
 
 return _M
