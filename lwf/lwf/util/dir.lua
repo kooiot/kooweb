@@ -2,11 +2,18 @@ local _M = {}
 
 function _M.scan(directory)
 	local t = {}
-	for filename in io.popen('ls -a "'..directory..'"'):lines() do
+	local f, err = io.popen('ls -a "'..directory..'"')
+	if not f then
+		return nil, err
+	end
+
+	for filename in f:lines() do
 		if filename ~= '.' and filename ~= '..' then
 			t[#t + 1] = directory..'/'..filename
 		end
 	end
+	f:close()
+
 	return t
 end
 

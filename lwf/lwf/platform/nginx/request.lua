@@ -148,6 +148,7 @@ function Request:read_body()
 			local f, err = io.open(file)
 			if f then
 				json_text = f:read('*a')
+				f:close()
 			end
 		else
 			json_text = ngx_req.get_body_data() or ''
