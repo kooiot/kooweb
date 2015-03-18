@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <!-- Standard Meta -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="image_src" type="image/jpeg" href="/static/img/logo.png">
+
+<!-- Site Properities -->
+<title>Tab | Semantic UI</title>
+
+<script>
+(function () {
+  var
+    eventSupport = ('querySelector' in document && 'addEventListener' in window)
+    jsonSupport  = (typeof JSON !== 'undefined'),
+    jQuery       = (eventSupport && jsonSupport)
+      ? '/static/library/jquery.min.js'
+      : '/static/library/jquery.legacy.min.js'
+  ;
+  document.write('<script src="' + jQuery + '"><\/script>');
+}());
+</script><script src="/static/library/jquery.min.js"></script>
+
+<script src="/static/library/easing.min.js"></script>
+<script src="/static/library/highlight.min.js"></script>
+<script src="/static/library/highlight.languages.min.js"></script>
+<script src="/static/library/history.min.js"></script>
+<script src="/static/library/tablesort.min.js"></script>
+
+<script src="/static/semantic/semantic.js"></script>
+
+<script src="/static/js/docs.js"></script>
+  
+<link rel="stylesheet" type="text/css" class="ui" href="/static/semantic/semantic.css">
+
+<link rel="stylesheet" type="text/css" href="/static/css/docs.css">
+<link rel="stylesheet" type="text/css" href="/static/css/rtl.css">
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44039803-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  
+<script type="text/javascript">
+  window.liveSettings = {
+    api_key    : '9ede3015b9f84c1aabc81ab839c55d74',
+    parse_attr : [
+      'data-title',
+      'data-content'
+    ],
+    detectlang   : false,
+    autocollect  : true,
+    ignore_tags  : ['i', 'code', 'pre'],
+    parse_attr   : ['data-title', 'data-content', 'data-text'],
+    ignore_class : ['code', 'anchor']
+  };
+</script>
+<script type="text/javascript" src="/static/library/live.js"></script>
+
+<body id="example" class="pushable" ontouchstart="">
+
+	<div class="ui vertical inverted sidebar menu left" id="toc">
+		<div class="item">
+			<a class="ui logo icon image" href="http://semantic-ui.com/">
+				<img src="/static/img/logo.png">
+			</a>
+			<a href="http://semantic-ui.com/"><b>UI Docs</b></a>
+		</div>
+		<a class="item" href="https://github.com/Semantic-Org/Semantic-UI/archive/1.11.4.zip">
+			<i class="download icon"></i> <b>Download</b>
+		</a>
+		<a class="item" href="http://semantic-ui.com/kitchen-sink.html">
+			<i class="cubes icon"></i> <b>All UI</b>
+		</a>
+		<div class="item">
+			<div class="ui small  inverted header">Globals</div>
+			<div class="menu"> 
+				<a class="item" href="http://semantic-ui.com/globals/reset.html">
+					Reset
+				</a>
+				<a class="item" href="http://semantic-ui.com/globals/site.html">
+					Site
+				</a>
+
+			</div>
+		</div>
+		<div class="item">
+			<div class="ui small  inverted header">Elements</div>
+			<div class="menu">
+				<a class="item" href="http://semantic-ui.com/elements/button.html">
+					Button
+				</a>
+				<a class="item" href="http://semantic-ui.com/elements/step.html">
+					Step
+				</a>
+			</div>
+		</div>
+		<div class="item">
+			<div class="ui small  inverted header">Collections</div>
+			<div class="menu">
+				<a class="item" href="http://semantic-ui.com/collections/breadcrumb.html">
+					Breadcrumb
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="ui black big launch right attached fixed button">
+		<i class="content icon"></i>
+		<span class="text">Menu</span>
+	</div>
+
+	<div class="ui fixed inverted main menu">
+		<div class="container">
+			<a class="launch item">
+				<i class="content icon"></i>
+				Menu
+			</a>
+
+			<div class="title item">
+				<b>UI Module:</b> Tab
+			</div>
+
+			<a class="icon item" href="http://semantic-ui.com/modules/sticky.html"><i class="left chevron icon"></i></a>
+
+			<div class="section ui page dropdown link item">
+				<span class="count">14 of 16</span>
+				<div class="menu">
+
+					<a class="item" href="http://semantic-ui.com/modules/accordion.html">
+						Accordion
+					</a>
+
+					<a class="item" href="http://semantic-ui.com/modules/checkbox.html">
+						Checkbox
+					</a>
+
+					<a class="item" href="http://semantic-ui.com/modules/dimmer.html">
+						Dimmer
+					</a>
+
+					<a class="item" href="http://semantic-ui.com/modules/dropdown.html">
+						Dropdown
+					</a>
+
+				</div>
+			</div>
+
+			<a class="icon item" href="http://semantic-ui.com/modules/transition.html"><i class="right chevron icon"></i></a>
+
+
+			<div class="right menu">
+				<div class="vertically fitted borderless item">
+					<iframe class="github" src="http://ghbtns.com/github-btn.html?user=semantic-org&amp;repo=semantic-ui&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
+				</div>
+				<a class="popup icon music item" data-content="Play Music">
+					<i class="alternate music icon"></i>
+				</a>
+				<a class="popup icon github item" data-content="View project on GitHub" href="https://github.com/Semantic-Org/Semantic-UI">
+					<i class="alternate github icon"></i>
+				</a>
+				<div class="ui language dropdown item" id="languages" data-content="Select Language">
+					<i class="world icon"></i>
+					<div class="menu">
+						<div class="item" data-percent="100" data-value="en" data-english="English">English</div>
+						<div class="item" data-percent="34" data-value="zh" data-english="Chinese">简体中文</div>
+						<div class="item" data-percent="54" data-value="zh_TW" data-english="Chinese (Taiwan)">中文 (臺灣)</div>
+					</div>
+				</div>
+    </div>
+  </div>
+</div>
+<div class="pusher">
+	<div class="full height">
+		<script src="/static/library/sinon.js"></script>
+		<script src="/static/js/tab.js"></script>
+
+
+
+		<div class="tab  header segment">
+			<div class="container">
+				<div class="introduction">
+
+					<h1 class="ui header">
+						Tab
+					</h1>
+					<p>A tab is a hidden section of content activated by a menu</p>
+
+					<div tabindex="0" class="ui right floated floating overview dropdown basic button">
+						<span class="text">Definition Type</span>
+						<div tabindex="-1" class="menu">
+							<div data-value="design" class="active item">Design</div>
+							<div data-value="code" class="item">Code</div>
+							<div data-value="overview" class="item">Summary</div>
+						</div>
+					</div>
+
+					<div class="ui download primary button">
+						Download
+					</div>
+					<div class="ui flowing download popup">
+						<div class="ui divided equal height relaxed center aligned choice grid">
+							<div class="framework column">
+								<h4 class="ui center aligned header">UI Framework</h4>
+								<div class="ui list">
+									<div class="item"><i class="green check icon"></i> Themable</div>
+									<div class="item"><i class="green check icon"></i> Build Tools</div>
+								</div>
+								<div class="ui primary fluid button">Choose</div>
+							</div>
+							<div class="standalone column">
+								<h4 class="ui center aligned header">Standalone</h4>
+								<div class="ui list">
+									<div class="item">Default Theme</div>
+									<div class="item">Precompiled</div>
+								</div>
+								<div class="ui fluid button basic">Choose</div>
+							</div>
+						</div>
+						<div class="ui divided equal height relaxed center aligned framework grid">
+							<div class="column">
+								<div class="ui header">Semantic UI</div>
+								<a class="ui primary button" href="https://github.com/Semantic-Org/Semantic-UI/archive/master.zip">
+									Download ZIP
+								</a>
+								<a class="ui button" href="http://learnsemantic.com/guide/expert.html">Getting Started</a>
+								<h4 class="ui header">Package Managers</h4>
+								<div class="ui form"><!--
+								<div class="field">
+								<label>Bower</label>
+								<div class="ui fluid input">
+								<input type="text" readonly="readonly" placeholder="Copy Link" value="bower install semantic-ui">
+								</div>
+								</div> -->
+								<div class="field">
+									<label>NPM</label>
+									<div class="ui fluid input">
+										<input readonly="readonly" placeholder="Copy Link" value="npm install semantic-ui" type="text">
+									</div>
+								</div>
+								<div class="field">
+									<label>Git</label>
+									<div class="ui fluid input">
+										<input readonly="readonly" placeholder="Copy Link" value="https://github.com/Semantic-Org/Semantic-UI.git" type="text">
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+						<div class="ui divided equal height relaxed center aligned standalone grid">
+							<div class="column">
+								<div class="ui header">Standalone Tab</div>
+								<a class="ui primary button" href="https://github.com/Semantic-Org/UI-Tab/archive/master.zip">
+									Download ZIP
+								</a>
+								<a class="ui button" href="https://github.com/Semantic-Org/UI-Tab/">
+									View GitHub
+								</a>
+								<h4 class="ui header">Package Managers</h4>
+								<div class="ui form">
+									<div class="field">
+										<label>Bower</label>
+										<div class="ui fluid input">
+											<input readonly="readonly" placeholder="Copy Link" value="bower install semantic-ui-tab" type="text">
+										</div>
+									</div>
+									<div class="field">
+										<label>NPM</label>
+										<div class="ui fluid input">
+											<input readonly="readonly" placeholder="Copy Link" value="npm install semantic-ui-tab" type="text">
+										</div>
+									</div>
+									<div class="field">
+										<label>Git</label>
+										<div class="ui fluid input">
+											<input readonly="readonly" placeholder="Copy Link" value="https://github.com/Semantic-Org/UI-Tab.git" type="text">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="four item tabular ui menu">
+					<a class="item" data-tab="definition">Definition</a>
+					<a class="item" data-tab="examples">Examples</a>
+					<a class="item" data-tab="usage">Usage</a>
+					<a class="item active" data-tab="settings">Settings</a>
+				</div>
+
+				<div class="fluid vertical ui menu">
+					<a class="item" data-tab="definition">Definition</a>
+					<a class="item" data-tab="examples">Examples</a>
+					<a class="item" data-tab="usage">Usage</a>
+					<a class="item active" data-tab="settings">Settings</a>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="main container">
+
+			<div class="ui tab" data-tab="definition">
+				<h2 class="ui header">Type<a id="type" class="anchor"></a></h2>
+
+				<div class="example">
+					<h4 class="ui header">Tab</h4>
+					<i class="icon code"></i>
+					<a id="tab" class="anchor"></a>
+
+					<p>A basic tab</p>
+					<div class="ui ignored info message">
+						A tab is hidden by default, and will only become visible when given the class name <code>active</code> or when activated with javascript. For more information, see the usage section.
+					</div>
+				</div>
+			</div>
+
+			<div class="ui tab" data-tab="examples">
+				<h2 class="ui dividing header">Examples<a id="examples" class="anchor"></a></h2>
+
+				<div class="first example">
+					<h4 class="ui header">Basic Tabs</h4><i class="icon code"></i><a id="basic-tabs" class="anchor"></a>
+				</div>
+
+				<div class="dynamic no example">
+					<h4 class="header">Retreiving Remote Tab Content</h4><i class="icon code"></i><a id="retreiving-remote-tab-content" class="anchor"></a>
+					<p>Using <code>auto: true</code> will load the tab's path from 
+					your server with additional headers to specify an in-page request. 
+					Additional requests will automatically be loaded from cache without a 
+					server request.</p>
+				</div>
+
+
+				<div class="context example">
+					<h4 class="ui header">Multiple Tabs on Same Page</h4><i class="icon code"></i><a id="multiple-tabs-on-same-page" class="anchor"></a>
+					<p>There are a several of ways to include independent tab groups 
+					on the same page, even with history. One of the easiest ways is provide a
+					specific parent context for each tab group.</p>
+				</div>
+			</div>
+
+
+			<div class="ui intro tab" data-tab="usage">
+
+				<h2 class="ui dividing header">Initializing Tabs<a id="initializing-tabs" class="anchor"></a></h2>
+
+				<div class="no example">
+					<h4 class="ui header">...with Menus</h4><i class="icon code"></i><a id="with-menus" class="anchor"></a>
+					<p>Tabs are usually used in concert with an element that activates
+					the tab. Tabs are initialized on the activating item instead of the 
+					tab.</p>
+				</div>
+
+				<div class="no example">
+					<h4 class="ui header">...without Menus</h4><i class="icon code"></i><a id="without-menus" class="anchor"></a>
+					<p>If there are no menus that activate tab elements on the page, tabs can be initialized globally by using <code>$.tab()</code> and activated programmatically using <code>$.tab('change tab', path);</code></p>
+				</div>
+
+				<div class="no example">
+					<div class="ignored ui info message">
+						<h4 class="ui header">Default Tabs</h4>
+						<p>After any tab is opened it will look for a default tab to 
+						open inside of the current tab. This is the first tab that begins with 
+						the same stem url as the parent tab. For example a tab with the path <code>data-tab="home"</code> might open a tab automatically <code>data-tab="/home/inbox"</code>.</p>
+						<p>This will happen recursively for every tab open, allowing as many levels of tabs as you like.</p>
+					</div>
+				</div>
+
+
+				<h2 class="ui dividing header">Managing State<a id="managing-state" class="anchor"></a></h2>
+
+				<div class="no example">
+					<h4 class="ui header">...with Hash Tags</h4><i class="icon code"></i><a id="with-hash-tags" class="anchor"></a>
+
+					<p>Hash tags use in page links and <code>onhashstatechange</code> 
+					to create history events for each tab. This is sometimes easier to use 
+					than the more advanced push state, because it does not require you to 
+					route those URLs on your server. All in page links will route to the 
+					same url.</p>
+				</div>
+
+				<div class="no example">
+					<h4 class="ui header">...with HTML5 State</h4><i class="icon code"></i><a id="with-html5-state" class="anchor"></a>
+					<p>Tabs can can use html5 push state to manage page state without using <code>#/foo</code>
+					links. When a user refreshes a page using push state the server will be
+					queried for the new url. This means you must set up appropriate routes 
+					in your backend to match each link.</p>
+				</div>
+
+				<div class="no example">
+					<h4 class="ui header">Setting Paths</h4><i class="icon code"></i><a id="setting-paths" class="anchor"></a>
+					<p>Using <code>historyType: state</code> requires specifying a <b>base URL without any internal state</b>. This cannot be set automatically to <code>window.location</code> because all tabs with html5 state will appear as normal page urls, and route accordingly.</p>
+				</div>
+
+				<h2 class="ui dividing header">AJAX Content<a id="ajax-content" class="anchor"></a></h2>
+
+				<div class="no example">
+					<h3 class="ui header">...with automatic routing</h3>
+
+					<i class="icon code"></i><p>Specifying the setting <code>auto: true</code>, will automatically retrieve content at a remote url matching the url set in the browser.</p>
+				</div>
+
+				<div class="no example">
+					<h4 class="ui header">...with an API Behavior</h4><i class="icon code"></i><a id="with-an-api-behavior" class="anchor"></a>
+
+				</div>
+
+				<h2 class="ui dividing header">Behavior<a id="behavior" class="anchor"></a></h2>
+
+				All the following behaviors can be called using the syntax <code>$('.foo').tab('behavior name', argumentOne, argumentTwo)</code>
+
+			</div>
+
+
+			<div class="ui tab active" data-tab="settings">
+				<h3 class="ui header">
+					Tab Settings
+					<div class="sub header">Form settings modify the tab behavior</div>
+				</h3>
+			</div>
+
+		</div>
+	</div>
+	<div class="ui inverted black footer vertical segment">
+		<div class="container">
+			<div class="ui stackable inverted divided relaxed grid">
+				<div class="eight wide column">
+					<h3 class="ui inverted header">Help Make Semantic UI Better</h3>
+					<p>Maintaining an open source UI library is no small task. 
+					Support for the continued development of Semantic UI comes directly from
+					the community.</p>
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+						<input name="cmd" value="_s-xclick" type="hidden">
+						<input name="hosted_button_id" value="7ZAF2Q8DBZAQL" type="hidden">
+						<button type="submit" class="ui teal button">Donate Today</button>
+					</form>
+				</div>
+				<div class="four wide column">
+					<h5 class="ui teal inverted header">Contribute</h5>
+					<div class="ui inverted link list">
+						<a class="item" href="https://www.transifex.com/organization/semantic-org/" target="_blank">Translation Hub</a>
+						<a class="item" href="https://github.com/Semantic-Org/Semantic-UI" target="_blank">Issue Tracker</a>
+						<a class="item" href="http://semantic-ui.com/cla.html" target="_blank">CLA</a>
+						<a class="disabled item">Create Themes</a>
+					</div>
+				</div>
+				<div class="four wide column">
+					<h5 class="ui teal inverted header">Semantic Network</h5>
+					<div class="ui inverted link list">
+						<a class="item" href="http://legacy.semantic-ui.com/">Legacy Docs</a>
+						<a class="item" href="http://www.learnsemantic.com/">Learn Semantic</a>
+						<a class="disabled item">Semantic Themes</a>
+						<a class="disabled item">Semantic Layouts</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="ui basic language modal">
+	<i class="close icon"></i>
+	<div class="header">The <span class="name"></span> Translation Needs Your Help</div>
+	<div class="content">
+		<div class="middle aligned image">
+			<i class="world icon"></i>
+		</div>
+		<div class="description">
+			<p>This translation is only <b><span class="complete"></span>%</b> complete!</p>
+			<div class="ui inverted indicating progress">
+				<div class="bar"></div>
+			</div>
+			<p>We need your help to make Semantic available to  people who speak your language.</p>
+			<p>Our translation tools are easy to use and allow you to translate text without having to leave the site.
+			</p>
+		</div>
+	</div>
+	<div class="actions">
+		<div class="ui inverted cancel button">No Thanks</div>
+		<a href="https://github.com/Semantic-Org/Semantic-UI/wiki/Translating-Semantic-UI-Docs" target="_blank" class="ui inverted approve teal button">
+			<i class="mail icon"></i>
+			Help Translate
+		</a>
+	</div>
+</div>
+
+<div class="ui basic chinese modal">
+	<i class="close icon"></i>
+	<div class="header">Would you like to visit the mirror site?</div>
+	<div class="content">
+		<div class="middle aligned image">
+			<i class="question icon"></i>
+		</div>
+		<div class="description">
+			<p>Semantic is available at <a href="http://www.semantic-ui.cn/">semantic-ui.cn</a> a mirror site hosted inside China. This should make browsing much faster for those visiting from mainland China.
+			</p>
+		</div>
+	</div>
+	<div class="actions">
+		<div class="ui inverted red cancel button">No Thanks</div>
+		<a href="http://www.semantic-ui.cn/" class="ui inverted green approve button">
+			<i class="mail icon"></i>
+			Yes, take me to the mirror
+		</a>
+	</div>
+</div>
+<div class="ui demo page dimmer">
+	<div class="content">
+		<div class="center">
+			<h2 class="ui inverted icon header">
+				<i class="mail icon"></i>
+				Dimmer Message
+				<div class="sub header">Dimmer sub-header</div>
+			</h2>
+		</div>
+	</div>
+</div>
+<script>
+window.less = {
+	async        : true,
+	environment  : 'production',
+	fileAsync    : false,
+	onReady      : false,
+	useFileCache : true
+};
+</script>
+
+<script src="/static/library/less.min.js"></script>
+
+</body></html>

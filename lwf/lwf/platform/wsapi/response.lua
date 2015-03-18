@@ -131,6 +131,7 @@ function Response:error(info)
         self._res.status=500
         self.headers['Content-Type'] = 'text/html; charset=utf-8'
         self:write(error_info)
+		self:write(debug.traceback())
     end
     logger:error(error_info)
 end
