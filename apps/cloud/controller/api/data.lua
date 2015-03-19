@@ -7,7 +7,7 @@ return {
 		end
 		local path = req:get_arg('path')
 		if not path then
-			res:write('Need Key')
+			res:write('Need Path')
 			return lwf.set_status(403)
 		end
 
