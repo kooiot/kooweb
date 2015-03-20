@@ -62,7 +62,7 @@ msgid "Author"
 msgstr ""
 
 
-msgid "Beginner"
+msgid "CLA"
 msgstr ""
 
 
@@ -78,10 +78,6 @@ msgid "Clean"
 msgstr ""
 
 
-msgid "Close Menu"
-msgstr ""
-
-
 msgid "Commands"
 msgstr ""
 
@@ -94,7 +90,19 @@ msgid "Content"
 msgstr ""
 
 
+msgid "Contribute"
+msgstr ""
+
+
 msgid "Controls"
+msgstr ""
+
+
+msgid "Create Applicatoin"
+msgstr ""
+
+
+msgid "Create an new application"
 msgstr ""
 
 
@@ -111,6 +119,10 @@ msgstr ""
 
 
 msgid "Development Docs"
+msgstr ""
+
+
+msgid "Development Reference"
 msgstr ""
 
 
@@ -170,6 +182,10 @@ msgid "Edit Profile"
 msgstr ""
 
 
+msgid "Edit information"
+msgstr ""
+
+
 msgid "Enable"
 msgstr ""
 
@@ -191,6 +207,18 @@ msgstr ""
 
 
 msgid "Generate"
+msgstr ""
+
+
+msgid "Go home"
+msgstr ""
+
+
+msgid "Help"
+msgstr ""
+
+
+msgid "Help Make KooIoT Better"
 msgstr ""
 
 
@@ -238,7 +266,7 @@ msgid "Install"
 msgstr ""
 
 
-msgid "Installtion"
+msgid "Issue Tracker"
 msgstr ""
 
 
@@ -254,11 +282,23 @@ msgid "Key has been deleted"
 msgstr ""
 
 
+msgid "KooIoT Network"
+msgstr ""
+
+
+msgid "KooIoT is an open source platform for internet of things stuff. Please follow us on GitHub!!!"
+msgstr ""
+
+
 msgid "Last Name"
 msgstr ""
 
 
 msgid "Level"
+msgstr ""
+
+
+msgid "Login"
 msgstr ""
 
 
@@ -274,6 +314,10 @@ msgid "Manage Device Keys"
 msgstr ""
 
 
+msgid "Menu"
+msgstr ""
+
+
 msgid "Messages"
 msgstr ""
 
@@ -283,6 +327,10 @@ msgstr ""
 
 
 msgid "My Apps"
+msgstr ""
+
+
+msgid "My Devices"
 msgstr ""
 
 
@@ -314,11 +362,11 @@ msgid "News"
 msgstr ""
 
 
-msgid "Original Password"
+msgid "ODM"
 msgstr ""
 
 
-msgid "Others"
+msgid "Original Password"
 msgstr ""
 
 
@@ -334,10 +382,6 @@ msgid "PID"
 msgstr ""
 
 
-msgid "PLC"
-msgstr ""
-
-
 msgid "Packets"
 msgstr ""
 
@@ -350,11 +394,11 @@ msgid "Path"
 msgstr ""
 
 
-msgid "Platform"
+msgid "Quality"
 msgstr ""
 
 
-msgid "Quality"
+msgid "Re-Password"
 msgstr ""
 
 
@@ -390,6 +434,10 @@ msgid "Services"
 msgstr ""
 
 
+msgid "Shows your own devices"
+msgstr ""
+
+
 msgid "Sign In"
 msgstr ""
 
@@ -406,6 +454,10 @@ msgid "Sign With QQ"
 msgstr ""
 
 
+msgid "Smart Home"
+msgstr ""
+
+
 msgid "Source"
 msgstr ""
 
@@ -418,15 +470,15 @@ msgid "Submit"
 msgstr ""
 
 
-msgid "Suggestion"
-msgstr ""
-
-
 msgid "Timestamp"
 msgstr ""
 
 
 msgid "Total"
+msgstr ""
+
+
+msgid "Translation Hub"
 msgstr ""
 
 
@@ -447,6 +499,14 @@ msgstr ""
 
 
 msgid "Upload System Core"
+msgstr ""
+
+
+msgid "Upload new application"
+msgstr ""
+
+
+msgid "User Documents"
 msgstr ""
 
 
@@ -471,10 +531,6 @@ msgstr ""
 
 
 msgid "View History"
-msgstr ""
-
-
-msgid "Website"
 msgstr ""
 
 

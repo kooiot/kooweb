@@ -124,7 +124,7 @@
 				<b>KooIoT:</b> Cloud
 			</div>
 
-			<a class="popup icon item" data-content="Go home" href="/">
+			<a class="popup icon item" data-content="<?=_('Go home')?>" href="/">
 				<i class="home icon"></i> <?=_('Home')?>
 			</a>
 
@@ -151,7 +151,7 @@
 				</div>
 			</div>
 			<? else ?>
-			<a class="icon item" href="/#/devices">
+			<a class="popup icon item" data-content="<?=_('Shows your own devices')?>" href="/#/devices">
 				<i class="list icon"></i> <?=_("Devices")?>
 			</a>
 			<? end ?>
@@ -174,7 +174,7 @@
 				</div>
 			</div>
 			<? else ?>
-			<a class="icon item" href="/app/new">
+			<a class="icon item" data-content="<?=_('Create an new application')?>" href="/app/new">
 				<i class="cloud upload icon"></i> <?=_("New App")?>
 			</a>
 			<? end ?>
