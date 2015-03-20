@@ -14,7 +14,7 @@ _M.new = function(lwf, app)
 	red:set_timeout(500)
 	local ok, err = red:connect('127.0.0.1', 6379)
 	if not ok then
-		logger:error(err)
+		logger:error('Authentification module [Redis] got Error -'..tostring(err))
 	end
 	local obj = {
 		lwf = lwf,
