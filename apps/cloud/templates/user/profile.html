@@ -1,36 +1,38 @@
 
 <? extend 'layout.html' ?>
-<div class="segment">
+<div class="tab header segment">
 	<div class="container">
 		<div class="introduction">
 			<h1 class="ui dividing header">
 				<?=_("User profile edit")?>
 			</h1>
+			<? if info then ?>
+			<div class="ui warning message">
+				<i class="close icon"></i>
+				<div class="header">
+				Warning!!
+				</div>
+				<?=info ?>
+			</div>
+			<? end ?>
+			<br>
 		</div>
 	</div>
 </div>
 <div class="main container">
-	<? if info then ?>
-	<div class="ui warning message">
-		<i class="close icon"></i>
-		<div class="header">
-			Warning!!
-		</div>
-		<?=info ?>
-	</div>
-	<? end ?>
 
-	<h3 class="ui dividing header"><?=_("Auth Key")?>:</h3>
-	<form class="ui form" action="" method="post">
+
+	<h2 class="ui dividing header"><?=_("Auth Key")?>:</h2>
+	<form class="ui compact segment form" action="" method="post">
 		<input type="hidden" name="action" value="userkey"/>
 		<label><?=_("Your Auth Key")?>:</label>
 		<input type="text" id="authkey" name="key" value="<?=userkey or ''?>"/>
 		<div class="ui teal button" onclick="generate_authkey();"><?=_("Generate")?></div>
-		<input class="ui submit button" type="submit" value="<?=_('Apply')?>"/>
+		<input class="ui right floated submit red button" type="submit" value="<?=_('Apply')?>"/>
 	</form>
 
-	<h3 class="ui dividing header"><?=_("Password")?>:</h3>
-	<form class="ui form" action="" method="post" >
+	<h2 class="ui dividing header"><?=_("Password")?>:</h2>
+	<form class="ui compact segment form" action="" method="post" >
 		<input type="hidden" name="action" value="passwd"/>
 		<div class="ui input inline field">
 			<label><?=_("Original Password")?>:</label>
@@ -48,17 +50,19 @@
 		<input class="ui submit button" type="submit" value="<?=_('Change')?>"/>
 	</form>
 
-	<h3 class="ui dividing header"><?=_("Current Avatar")?>:</h3>
-	<? local img_link = '/static/upload/avatar/'..lwf.ctx.user.username..'.jpg' ?>
-	<img class="rounded ui small image" src="<?=img_link?>">
-	<img class="circular ui small image" src="<?=img_link?>">
+	<h2 class="ui dividing header"><?=_("Current Avatar")?>:</h2>
+	<div class="ui segment">
+		<? local img_link = '/static/upload/avatar/'..lwf.ctx.user.username..'.jpg' ?>
+		<img class="rounded ui small image" src="<?=img_link?>">
+		<img class="circular ui small image" src="<?=img_link?>">
 
-	<form class="ui form" action="" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="action" value="avatar"/>
-		<label><?=_("Your Avatar")?>:</label>
-		<input type="file" name="file"/>
-		<input class="ui submit button", type="submit" value="<?=_('Upload')?>"/>
-	</form>
+		<form class="ui segment form" action="" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="action" value="avatar"/>
+			<label><?=_("Your Avatar")?>:</label>
+			<input type="file" name="file"/>
+			<input class="ui submit button", type="submit" value="<?=_('Upload')?>"/>
+		</form>
+	</div>
 
 
 	<div id="status"></div>

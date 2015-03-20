@@ -2,7 +2,7 @@
 <? extend 'layout.html' ?>
 <? include('app/top.html') ?>
 <div class="main container">
-	<h2 class="ui dividing header"><?=_("Information")?>:</h2>
+	<h2 class="ui dividing header"><?=_("Upload new application")?></h2>
 
 	<? if err then ?>
 	<div class="ui warning message">
@@ -13,11 +13,11 @@
 		<?=err ?>
 	</div>
 	<? end ?>
-	<form class="ui form" action="" method="post" enctype="multipart/form-data">
+	<form class="ui segment form" action="" method="post" enctype="multipart/form-data">
 
-		<div class="four fields">
+		<div class="two fields">
 			<div class="field">
-				<div class="ui labeled input">
+				<div class="ui input">
 					<input placeholder="App name..." name="appname" type="text">
 					<div class="ui corner label">
 						<i class="asterisk icon"></i>
@@ -26,14 +26,16 @@
 			</div>
 
 			<div class="field">
-				<div class="ui labeled input">
+				<div class="ui input">
 					<input placeholder="Version..." name="version" type="text"/>
 					<div class="ui corner label">
 						<i class="asterisk icon"></i>
 					</div>
 				</div>
 			</div>
+		</div>
 
+		<div class="two fields">
 			<div class="inline field">
 				<label><?=_("Type")?>:</label>
 				<div class="ui selection labeled dropdown" onChange="changeType(this);">
@@ -78,7 +80,7 @@
 			</div>
 		</div>
 		<div class="field">
-			<div class="ui label"><?=_("Comments")?></div>
+			<div class="ui label"><?=_("Comments")?> : </div>
 			<textarea class="ui full filled fluid textarea" name="comments"></textarea>
 		</div>
 
@@ -86,13 +88,13 @@
 		<label>Package:</label>
 		<input type="file" name="file"/>
 		<input type="submit" value="Upload"/>
+
+		<div class="ui tiny progress">
+			<div class="bar"></div>
+		</div>
+
+		<div id="status"></div>
 	</form>
-
-	<div class="ui progress">
-		<div class="bar"></div>
-	</div>
-
-	<div id="status"></div>
 
 	<script>
 	(function() {

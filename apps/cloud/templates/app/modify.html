@@ -2,7 +2,7 @@
 <? extend 'layout.html' ?>
 <? include('app/top.html', {lwf=lwf, info=info}) ?>
 <div class="main container">
-	<h2 class="ui dividing header"><?=_("Information")?>:</h2>
+	<h2 class="ui dividing header"><?=_("Edit information")?>:</h2>
 
 	<? if err then ?>
 	<div class="ui warning message">
@@ -19,11 +19,11 @@
 		<? local img_link = '/static/releases/'..info.path..'/icon.png' ?>
 		<img class="rounded ui small image" src="<?=img_link?>">
 
-		<form class="ui form" action="/app/modify" method="post" enctype="multipart/form-data">
+		<form class="ui segment form" action="/app/modify" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="path" value="<?=info.path?>"/>
 			<label>ICON:</label>
 			<input type="file" name="file"/>
-			<input type="submit" class="ui tiny teal submit button" value="<?=_('Change')?>"/>
+			<input type="submit" class="ui teal submit button" value="<?=_('Change')?>"/>
 		</form>
 	</div>
 
@@ -33,23 +33,19 @@
 			<input name="appname" type="hidden" value="<?=info.name?>"/>
 			<input name="action" type="hidden" value="upgrade"/>
 
-			<div class="two fields">
-				<div class="two wide field">
-					<div class="ui label"><?=_("Version")?>:</div>
-				</div>
-				<div class="field">
-					<div class="ui labeled input">
-						<input placeholder="Version..." name="version" type="text" value="<?=info.version ?>"/>
-						<div class="ui corner label">
-							<i class="asterisk icon"></i>
-						</div>
+			<div class="inline field">
+				<div class="ui label"><?=_("Version")?>:</div>
+				<div class="ui corner labeled input">
+					<input placeholder="Version..." name="version" type="text" value="<?=info.version ?>"/>
+					<div class="ui corner label">
+						<i class="asterisk icon"></i>
 					</div>
 				</div>
 			</div>
 
 			<label><?=_("File")?>:</label>
 			<input type="file" name="file"/>
-			<input type="submit" class="ui tiny teal submit button" value="<?=_('Upload')?>"/>
+			<input type="submit" class="ui teal submit button" value="<?=_('Upload')?>"/>
 
 			<div class="field">
 				<div class="ui label"><?=_("Comments")?></div>
@@ -57,7 +53,7 @@
 			</div>
 		</form>
 	</div>
-	<div class="ui progress">
+	<div class="ui small progress">
 		<div class="bar"></div>
 	</div>
 	<div id="status"></div>

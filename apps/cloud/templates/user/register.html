@@ -1,49 +1,28 @@
 
 <? extend 'layout.html' ?>
-<script src="/static/js/validate-form.js"></script>
-<div class="ui two column middle aligned relaxed grid basic segment">
-	<div class="center aligned column">
-		<div class="field">
-			<div class="red ui labeled icon button">
-				<i class="star icon"></i>
-				<?=_("Sign With QQ")?>
-			</div>
-			<div class="blue ui labeled icon button">
-				<i class="star icon"></i>
-				<?=_("Sign With Google")?>
-			</div>
-		</div>
-	</div>
-	<div class="ui vertical divider">
-		Or
-	</div>
-	<div class="column">
-		<form class="ui form segment" action="/user/register" method="post">
-			<p>Let's go ahead and get you signed up.</p>
-			<div class="two fields">
-				<div class="field">
-					<label><?=_("First Name")?></label>
-					<input placeholder="First Name" name="first-name" type="text">
-				</div>
-				<div class="field">
-					<label><?=_("Last Name")?></label>
-					<input placeholder="Last Name" name="last-name" type="text">
-				</div>
-			</div>
-			<div class="field">
-				<label><?=_("Username")?></label>
-				<div class="ui left labeled icon input">
-					<input placeholder="Username" name="username" type="text">
-					<i class="user icon"></i>
-					<div class="ui corner label">
-						<i class="asterisk icon"></i>
-					</div>
-				</div>
+<div class="header segment">
+</div>
+<div class="wide main container">
+	<script src="/static/js/validate-form.js"></script>
 
+
+	<form class="ui compact form segment" action="/user/register" method="post">
+		<p>Let's go ahead and get you signed up.</p>
+		<div class="field">
+			<label><?=_("Username")?></label>
+			<div class="ui left icon input">
+				<input placeholder="Username" name="username" type="text">
+				<i class="user icon"></i>
+				<div class="ui corner label">
+					<i class="asterisk icon"></i>
+				</div>
 			</div>
+
+		</div>
+		<div class="two fields">
 			<div class="field">
 				<label><?=_("Password")?></label>
-				<div class="ui left labeled icon input">
+				<div class="ui left icon input">
 					<input name="password" type="password">
 					<i class="lock icon"></i>
 					<div class="ui corner label">
@@ -51,15 +30,48 @@
 					</div>
 				</div>
 			</div>
-			<div class="inline field">
-				<div class="ui checkbox">
-					<input name="terms" type="checkbox">
-					<label><?=_("I agree to the terms and conditions")?></label>
+			<div class="field">
+				<label><?=_("Re-Password")?></label>
+				<div class="ui left icon input">
+					<input name="password" type="password">
+					<i class="lock icon"></i>
+					<div class="ui corner label">
+						<i class="asterisk icon"></i>
+					</div>
 				</div>
 			</div>
-			<div class="ui field">
-				<input type="submit" value="<?=_('Submit')?>" class="ui blue submit button"/>
+		</div>
+		<div class="two fields">
+			<div class="field">
+				<label><?=_("First Name")?></label>
+				<input placeholder="First Name" name="first-name" type="text">
 			</div>
-		</form>
+			<div class="field">
+				<label><?=_("Last Name")?></label>
+				<input placeholder="Last Name" name="last-name" type="text">
+			</div>
+		</div>
+		<div class="inline field">
+			<div class="ui checkbox">
+				<input name="terms" type="checkbox">
+				<label><?=_("I agree to the terms and conditions")?></label>
+			</div>
+		</div>
+		<div class="ui field">
+			<input type="submit" value="<?=_('Submit')?>" class="ui blue submit button"/>
+		</div>
+	</form>
+
+	<div class="ui disabled compact segment">
+		<div class="red ui labeled icon button">
+			<i class="star icon"></i>
+			<?=_("Sign With QQ")?>
+		</div>
+		<div class="ui divider"></div>
+		<div class="blue ui labeled icon button">
+			<i class="star icon"></i>
+			<?=_("Sign With Google")?>
+		</div>
 	</div>
 </div>
+

@@ -1,5 +1,5 @@
 <? extend 'layout.html' ?>
-<? include 'top.html' ?>
+<? include "top.html" ?>
 <div class="main container">
 
 	<div class="ui tab active" data-tab="news">
@@ -12,7 +12,6 @@
 	</div>
 	<? end ?>
 	<div class="ui tab" data-tab="applications">
-		<? include('widget/sticky.html', {items = { _('Home Automation'), _('Industrial')}}) ?>
 		<? include('widget/cards/app.html', {apps=apps}) ?>
 	</div>
 </div>

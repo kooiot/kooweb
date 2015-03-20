@@ -1,39 +1,41 @@
 
 <? extend 'layout.html' ?>
-<div class="segment">
+<div class="tab header segment">
 	<div class="container">
 		<div class="introduction">
 			<h1 class="ui dividing header">
 				<?=_("Upload System Core")?>
 			</h1>
+			<? if err then ?>
+			<h2 class="ui dividing header"><?=_("Information")?>:</h2>
+			<div class="ui warning message">
+				<i class="close icon"></i>
+				<div class="header">
+				Warning!!
+				</div>
+				<?=err ?>
+			</div>
+			<? end ?>
+			<br>
 		</div>
 	</div>
 </div>
 <div class="main container">
 
-	<? if err then ?>
-	<h2 class="ui dividing header"><?=_("Information")?>:</h2>
-	<div class="ui warning message">
-		<i class="close icon"></i>
-		<div class="header">
-			Warning!!
+	<div class="ui segment">
+		<form class="ui form" action="" method="post" enctype="multipart/form-data">
+			<label> Select File: </label>
+			<input type="file" name="file"/>
+			<input type="submit" value="<?=_('Upload')?>"/>
+		</form>
+
+		<br>
+		<div class="ui tiny progress">
+			<div class="bar"></div>
 		</div>
-		<?=err ?>
+
+		<div id="status"></div>
 	</div>
-	<? end ?>
-
-
-	<form class="ui form" action="" method="post" enctype="multipart/form-data">
-		<input type="file" name="file"/>
-		<input type="submit" value="<?=_('Upload')?>"/>
-	</form>
-
-	<div class="ui progress">
-		<div class="bar"></div>
-	</div>
-
-	<div id="status"></div>
-
 
 	<table id="applist" class="ui sortable table segment">
 		<thead>
