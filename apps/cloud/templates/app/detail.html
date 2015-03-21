@@ -19,73 +19,86 @@
 		<a class="ui tiny blue" href="/users/<?=info.username ?>" ><i class="ui user icon"></i> <?=info.username ?></a>
 	</h2>
 
-	<div class="ui basic segment">
-		<div><i class="ui save icon"></i><i><?=info.version ?> </i> </div>
-		<div><i class="ui comment icon"></i><i><?=info.desc ?></i> </div>
-
-		<div class="ui basic accordion">
-			<div class="active title">
-				<i class="dropdown icon"></i> <?=_("Comments")?>
-			</div>
-			<div class="active content">
-				<div><?=info.comments or ""?></div>
+	<div class="ui segment">
+		<div class="ui divided items">
+			<div class="item">
+				<a class="image" href="/app/detail/<?=info.path?>">
+					<img src="/static/releases/<?=info.path?>/icon.png">
+				</a>
+				<div class="content">
+					<a class="header" href="/app/detail/<?=info.path?>"><?=info.path?></a>
+					<div class="meta">
+						<span class="cinema"><?=info.desc?></span>
+					</div>
+					<div class="description">
+						<div class="ui basic segment" style="word-wrap:break-word"><p><?=info.comments?></p></div>
+					</div>
+					<div class="extra">
+						<div class="ui right floated star rating" data-rating="<?=info.votes or 3?>" data-max-rating="5" id="<?=info.path?>">
+						</div>
+						<div class="ui label"><i class="user icon"></i><?=info.username?></div>
+						<div class="ui label"><i class="marker icon"></i><?=info.version?></div>
+					</div>
+				</div>
 			</div>
 		</div>
 
+		<div>
 		<? if lwf.ctx.user and info.username == lwf.ctx.user.username  then ?>
-		<a href="/app/modify/<?=info.path?>" class="ui small floated right button blue">
+		<a href="/app/modify/<?=info.path?>" class="ui small right floated button blue">
 			<i class="ui settings icon"></i><?=_("Modify")?>
 		</a>
 		<? end ?>
-		<a href="/static/releases/<?=info.path ?>/latest.lpk" class="ui small floated right button red">
+		<a href="/static/releases/<?=info.path ?>/latest.lpk" class="ui small right floated button red">
 			<i class="ui cloud download icon"></i><?=_("Download")?>
 		</a>
-	</div>
-
-	<div class="ui fluid accordion">
-		<div class="active title">
-			<i class="dropdown icon"></i> <?=_("Device Templates")?>
 		</div>
-		<div class="active content">
-			<table class="ui table segment">
-				<thead>
-					<tr>
-						<th><?=_("Name")?></th>
-						<th><?=_("Description")?></th>
-						<th><?=_("Actions")?></th>
-					</tr>
-				</thead>
-				<tbody>
-					<? 
-					local counts = 0
-					for k, v in pairs(tplist) do
-						counts = counts + 1
-					?>
-					<tr>
-						<td><?=k?></td>
-						<td><?=v?></td>
-						<td>
-							<?
-							local username = v:match('^([^/]+)/.+')
-							local user = lwf.ctx.user
-							if user and (user.username == username or user.username == info.username) then
-							?>
-								<div class="ui tiny teal button" onclick="remove_tpl('<?=v?>')"><?=_("Delete")?></div>
-							<? else ?>
-								<div class="ui tiny teal button disabled"><?=_("Delete")?></div>
-							<? end ?>
-						</td>
-					</tr>
-					<? end ?>
-				</tbody>
-				<tfoot>
-					<tr>
-						<th><?=_("Total")?> <?=counts?></th>
-						<th></th>
-						<th></th>
-					</tr>
-				</tfoot>
-			</table>
+
+		<div class="ui fluid accordion">
+			<div class="active title">
+				<i class="dropdown icon"></i> <?=_("Device Templates")?>
+			</div>
+			<div class="active content">
+				<table class="ui table segment">
+					<thead>
+						<tr>
+							<th><?=_("Name")?></th>
+							<th><?=_("Description")?></th>
+							<th><?=_("Actions")?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<? 
+						local counts = 0
+						for k, v in pairs(tplist) do
+							counts = counts + 1
+						?>
+						<tr>
+							<td><?=k?></td>
+							<td><?=v?></td>
+							<td>
+								<?
+								local username = v:match('^([^/]+)/.+')
+								local user = lwf.ctx.user
+								if user and (user.username == username or user.username == info.username) then
+								?>
+									<div class="ui tiny teal button" onclick="remove_tpl('<?=v?>')"><?=_("Delete")?></div>
+								<? else ?>
+									<div class="ui tiny teal button disabled"><?=_("Delete")?></div>
+								<? end ?>
+							</td>
+						</tr>
+						<? end ?>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th><?=_("Total")?> <?=counts?></th>
+							<th></th>
+							<th></th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
 		</div>
 	</div>
 

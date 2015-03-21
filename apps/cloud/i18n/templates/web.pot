@@ -154,10 +154,6 @@ msgid "Device details"
 msgstr ""
 
 
-msgid "Devices"
-msgstr ""
-
-
 msgid "Disable"
 msgstr ""
 

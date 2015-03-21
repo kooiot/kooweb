@@ -115,9 +115,6 @@ msgstr "设备UUID密匙"
 msgid "Device details"
 msgstr "设备详情"
 
-msgid "Devices"
-msgstr "设备列表"
-
 msgid "Disable"
 msgstr "禁用"
 
