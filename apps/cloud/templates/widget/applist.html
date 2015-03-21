@@ -25,12 +25,12 @@ for k, v in pairs(list) do
 		local author, x = string.match(v.path, "(%w+)/(%w+)")
 		local votes = v.votes or 3
 	?>
-	<div class="item" id="<?=v.path?>">
-		<div class="image">
+	<div class="item">
+		<a class="image" href="/app/detail/<?=v.path?>">
 			<img src="<?=img ?>">
-		</div>
+		</a>
 		<div class="content">
-			<a class="header"><?=name?></a>
+			<a class="header" href="/app/detail/<?=v.path?>"><?=name?></a>
 			<div class="meta">
 				<span class="cinema"><?=meta?></span>
 			</div>
@@ -38,7 +38,7 @@ for k, v in pairs(list) do
 				<div class="ui basic segment" style="word-wrap:break-word"><p><?=desc?></p></div>
 			</div>
 			<div class="extra">
-				<div class="ui right floated star rating" data-rating="<?=votes?>" data-max-rating="5">
+				<div class="ui right floated star rating" data-rating="<?=votes?>" data-max-rating="5" id="<?=v.path?>">
 				</div>
 				<div class="ui label"><i class="user icon"></i><?=author?></div>
 				<div class="ui label"><i class="marker icon"></i><?=version?></div>
