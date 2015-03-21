@@ -376,6 +376,9 @@ msgstr "上传新版本"
 msgid "Upload System Core"
 msgstr "上传新的核心程序"
 
+msgid "Upload an new core version"
+msgstr "上传新版本核心程序"
+
 msgid "Upload new application"
 msgstr "上传新应用"
 
@@ -414,4 +417,3 @@ msgstr "您的头像"
 
 msgid "version"
 msgstr "版本"
-

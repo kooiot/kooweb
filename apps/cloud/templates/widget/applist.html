@@ -1,0 +1,50 @@
+
+<? 
+local list = {}
+for user, v in pairs(apps) do 
+	for k, v in pairs(v) do
+		local category = v.info.category
+		list[category] = list[category] or {}
+		table.insert(list[category], v.info)
+	end
+end
+?>
+
+<?
+for k, v in pairs(list) do 
+	local category = k
+	local items = v
+?>
+<h2 class="ui dividing header"><? = category or 'Unkown Category' ?></h2>
+<div class="ui divided items">
+	<? for k, v in pairs(items) do 
+		local img = '/static/releases/'..v.path..'/icon.png'
+		local version = v.version or '0.0.0'
+		local name = v.name
+		local desc = v.desc
+		local author, x = string.match(v.path, "(%w+)/(%w+)")
+		local votes = v.votes or 3
+	?>
+	<div class="item" id="<?=v.path?>">
+		<div class="image">
+			<img src="<?=img ?>">
+		</div>
+		<div class="content">
+			<a class="header"><?=name?></a>
+			<div class="meta">
+				<span class="cinema"><?=meta?></span>
+			</div>
+			<div class="description">
+				<div class="ui basic segment" style="word-wrap:break-word"><p><?=desc?></p></div>
+			</div>
+			<div class="extra">
+				<div class="ui right floated star rating" data-rating="<?=votes?>" data-max-rating="5">
+				</div>
+				<div class="ui label"><i class="user icon"></i><?=author?></div>
+				<div class="ui label"><i class="marker icon"></i><?=version?></div>
+			</div>
+		</div>
+	</div>
+	<? end ?>
+</div>
+<? end ?>

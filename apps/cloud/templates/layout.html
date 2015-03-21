@@ -174,13 +174,13 @@
 				</div>
 			</div>
 			<? else ?>
-			<a class="icon item" data-content="<?=_('Create an new application')?>" href="/app/new">
+			<a class="popup icon item" data-content="<?=_('Create an new application')?>" href="/app/new">
 				<i class="cloud upload icon"></i> <?=_("New App")?>
 			</a>
 			<? end ?>
 
 			<? if lwf.ctx.user.username == 'admin' then ?>
-			<a class="icon item" href="/sys/new">
+			<a class="popup icon item" data-content="<?=_('Upload an new core version')?>" href="/sys/new">
 				<i class="cloud upload icon"></i> <?=_("New Core")?>
 			</a>
 			<? end ?>

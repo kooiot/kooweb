@@ -502,6 +502,10 @@ msgid "Upload System Core"
 msgstr ""
 
 
+msgid "Upload an new core version"
+msgstr ""
+
+
 msgid "Upload new application"
 msgstr ""
 

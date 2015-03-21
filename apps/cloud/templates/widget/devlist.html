@@ -53,6 +53,11 @@
 	</tfoot>
 </table>
 
+<div class="ui segment">
+	<i> Your device not listed here? Add the device auth key first here : </i>
+	<a class="ui tiny teal button" href="/user/devkeys"><i class="ui key icon"></i><?=_("Device Keys")?></a>
+</div>
+
 <script>
 	function clean_device(key) {
 		$.post("/device/clean", {key:key}, function(data) {
