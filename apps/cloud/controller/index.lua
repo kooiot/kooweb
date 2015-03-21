@@ -24,6 +24,7 @@ return {
 			if list then
 				for _, v in ipairs(list) do
 					local l, err = db:is_online(v)
+					--print('is_online', l, err, v) -- be careful about space in your device key
 					local alias = keys:alias(user.username, v)
 					if l then
 						devlist[#devlist + 1] = {key=v, alias=alias, online=true}

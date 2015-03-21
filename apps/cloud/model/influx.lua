@@ -90,8 +90,8 @@ _M.new = function(m)
 end
 
 function class:init()
-	--api.init("http://localhost:8086/db/rtdb/series?u=test&p=test", 2, false)
-	api.init("http://114.215.144.20:8086/db/rtdb/series?u=test&p=test", 2, false)
+	api.init("http://localhost:8086/db/rtdb/series?u=test&p=test", 2, false)
+	--api.init("http://114.215.144.20:8086/db/rtdb/series?u=test&p=test", 2, false)
 end
 
 function class:close()
@@ -112,10 +112,26 @@ function class:list(key, path, len)
 			return nil, 'No value in database'
 		end
 		assert(#jdata == 1)
+		local its = 1
+		local ival = 4
+		local iqual = 3
+		local columns = jdata[1].columns
+		for i, v in ipairs(columns) do
+			if v == 'time' then
+				its = i
+			end
+			if v == 'value' then
+				ival = i
+			end
+			if v == 'quality' then
+				iqual = i
+			end
+		end
+
 		local points = jdata[1].points
 		local rdata = {}
 		for _, v in ipairs(points) do
-			rdata[#rdata + 1] = {timestamp=v[1], value=v[4], quality=v[3]}
+			rdata[#rdata + 1] = {timestamp=v[its], value=v[ival], quality=v[iqual]}
 		end
 		return rdata
 	else
