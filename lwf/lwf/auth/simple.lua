@@ -59,7 +59,7 @@ _M.new = function(lwf, app)
 end
 
 function class:authenticate(username, password)
-	local md5passwd = md5.sumhexa(username..salt)
+	local md5passwd = md5.sumhexa(password..salt)
 	if self.keys[username] and self.keys[username] == md5passwd then
 		return true
 	end
