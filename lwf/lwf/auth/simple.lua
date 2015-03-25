@@ -59,7 +59,8 @@ _M.new = function(lwf, app)
 end
 
 function class:authenticate(username, password)
-	if self.keys[username] and self.keys[username] == password then
+	local md5passwd = md5.sumhexa(username..salt)
+	if self.keys[username] and self.keys[username] == md5passwd then
 		return true
 	end
 	return false, 'Incorrect username or password'
@@ -79,12 +80,12 @@ function class:clear_identity(username)
 end
 
 function class:set_password(username, password)
-	self.keys[username] = password
+	self.keys[username] = md5.sumhexa(password..salt)
 	save_auth_file(self.path, self.keys)
 end
 
 function class:add_user(username, password, mt)
-	self.keys[username] = password
+	self.keys[username] = md5.sumhexa(password..salt)
 	save_auth_file(self.path, self.keys)
 end
 
