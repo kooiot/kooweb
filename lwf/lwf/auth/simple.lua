@@ -67,12 +67,14 @@ function class:authenticate(username, password)
 end
 
 function class:identity(username, identity)
-	local dbidentity = md5.sumhexa(username..salt)
+	local key = username..self.keys[username] or ''
+	local dbidentity = md5.sumhexa(key..salt)
 	return dbidentity == identity
 end
 
 function class:get_identity(username)
-	return  md5.sumhexa(username..salt)
+	local key = username..self.keys[username] or ''
+	return  md5.sumhexa(key..salt)
 end
 
 function class:clear_identity(username)
