@@ -9,7 +9,7 @@ local salt = "SimpleAuth"
 
 local function load_auth_file(path)
 	local keys = {}
-	keys.admin = 'admin'
+	keys.admin = md5.sumhexa('admin'..salt)
 
 	if not path then
 		return keys
