@@ -1,14 +1,13 @@
 PATH=/usr/local/openresty/nginx/sbin:$PATH
 export PATH
 
-if [ ! -d tmp ] ; then
-	mkdir tmp
+TMP_DIR=/tmp/kooweb_tmp
+
+if [ ! -d $TMP_DIR ] ; then
+	mkdir $TMP_DIR
 fi
 
-cd tmp
-if [ ! -d logs ] ; then
-	mkdir logs
-fi
+mkdir -p $TMP_DIR/logs
 
 PAR=$1
 if [ $# != 1 ] ; then
@@ -17,10 +16,9 @@ fi
 
 if [ $PAR = "stop" ] ; then
 	echo "Stoping nginx...."
-	nginx -p `pwd`/ -c ../conf/nginx.conf -s stop
+	nginx -p $TMP_DIR/ -c `pwd`/conf/nginx.conf -s stop
 else
 	echo "Starting nginx...."
-	nginx -p `pwd`/ -c ../conf/nginx.conf
+	nginx -p $TMP_DIR/ -c `pwd`/conf/nginx.conf
 fi
 
-cd ..
