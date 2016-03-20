@@ -11,7 +11,7 @@ return {
 	},
 	i18n = true,
 
-	auth = 'redis',
+	auth = 'mysql',
 
 	debug={
 		on = true,
