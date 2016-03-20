@@ -1,0 +1,124 @@
+-- Authentification module (by using resty.mysql)
+--
+
+local logger = require 'lwf.logger'
+local sql = require 'resty.mysql'
+local cjson = require 'cjson'
+local md5 = require 'md5'
+
+local _M = {}
+local class = {}
+
+_M.new = function(lwf, app)
+	local conn, err = assert(sql:new())
+	conn:set_timeout(500)
+	local ok, err = conn:connect({
+		host = '127.0.0.1',
+		port = 3306,
+		database = 'kooweb',
+		user = 'root',
+		password = '19840310',
+		max_packet_size = 1024 * 1024,
+	})
+	if not ok then
+		logger:error('Authentification module [MYSQL] got Error -'..tostring(err))
+	end
+	local obj = {
+		lwf = lwf,
+		app = app,
+		conn = conn,
+	}
+
+	return setmetatable(obj, {__index=class})
+end
+
+local quote = ngx.quote_sql_str
+
+function class:authenticate(username, password)
+	local qusername = quote(username)
+	local sql = 'select * from users where username='..qusername
+	local res, err = self.conn:query(sql) 
+	if res and #res == 1 then
+		return res.password==password
+	end
+
+	--logger:debug('authenticate: '..username..' Input:'..password..' Error:'..(err or ''))
+
+	if not res or #res ~= 1 then
+		logger:debug('Check for admin')
+		if username == 'admin' and password == 'admin' then
+			return true
+		end
+	end
+	return false, 'Incorrect username or password'
+end
+
+function class:identity(username, identity)
+	local qusername = quote(username)
+	local sql = 'select * from identity where username='..qusername
+	local res, err = self.conn:query(sql) 
+	if res and #res == 1 then
+		--logger:debug('dbidentity '..dbidentity..' identity:'..identity)
+		return res.identity == identity
+	else
+		logger:debug('identity failure ', username, ' ', identity)
+		return false
+	end
+end
+
+function class:get_identity(username)
+	logger:debug('get_identity '..username)
+	local qusername = quote(username)
+	local sql = 'select * from identity where username='..qusername
+	local res, err = self.conn:query(sql) 
+	if res and #res == 1 then
+		return res.identity
+	else
+		local identity = md5.sumhexa(username..os.date())
+		local sql = 'insert into identity (id, identity) values ('..username..', '..identity..')'
+		self.conn:query(sql)
+		return identity
+	end
+end
+
+function class:clear_identity(username)
+	local username = quote(username)
+	self.conn:query('delete from identity where username='..username)
+	return true
+end
+
+function class:set_password(username, password)
+	local username = quote(username)
+	local password = quote(password)
+	local r, err = self.conn:query('update users SET password='..password..' where username='..username)
+	return r, err
+end
+
+function class:add_user(username, password, mt)
+	local username = quote(username)
+	local password = quote(username)
+	local mt = quote(cjson.encode(mt))
+	local sql = "insert into users (username, password, meta) values ("..username..", "..password..", "..mt..")"
+	local r, err = self.conn:query(sql)
+	return r, err
+end
+
+function class:get_metadata(username, key)
+	local username = quote(username)
+	local sql = 'select * from users where username='..username
+	local res, err = self.conn:query(sql) 
+	if res and #res == 1 then
+		return cjson.decode(res.meta)
+	end
+
+	return nil, err
+end
+
+function class:has(username)
+	local username = quote(username)
+	local sql = 'select * from users where username='..username
+	local res, err = self.conn:query(sql) 
+	return not res or #res == 0
+end
+
+return _M
