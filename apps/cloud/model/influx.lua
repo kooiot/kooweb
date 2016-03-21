@@ -91,9 +91,7 @@ end
 
 
 local INF = class('INFLUX_API')
-function INF:initialize(m)
-	self._lwf = m.lwf
-	self._app = m.app
+function INF:initialize()
 end
 
 function INF:init()
@@ -193,4 +191,10 @@ function INF:add(key, path, list)
 	return true
 end
 
-return INF
+--return INF
+
+return {
+	new = function(m, ...)
+		return INF:new()
+	end
+}
