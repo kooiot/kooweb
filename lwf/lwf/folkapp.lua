@@ -6,6 +6,7 @@ local session = require 'lwf.session'
 local model = require 'lwf.model'
 local logger = require 'lwf.logger'
 local i18n = require 'lwf.i18n'
+local unpack = table.unpack or unpack
 
 local class = {}
 

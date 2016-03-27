@@ -1,5 +1,6 @@
 
 local util = require 'lwf.util'
+local unpack = table.unpack or unpack
 local Request = {}
 
 local function new(lwf)
