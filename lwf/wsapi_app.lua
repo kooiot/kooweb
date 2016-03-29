@@ -4,7 +4,6 @@
 -- License: MIT/X 
 -----------------------------------------------------------------------------
 
-local platform = require 'lwf.platform'
 local setup = require 'setup'
 local logger = require 'lwf.logger'
 local wsapi = require 'wsapi'
@@ -72,8 +71,7 @@ end
 -- make_safer_app() to make sure the errors get reported properly.
 -----------------------------------------------------------------------------
 local function make_basic_lwf_app(config)
-	local lwf = platform('wsapi', {})
-	local content = setup(lwf)
+	local lwf, content = setup('wsapi')
 
 	return function (wsapi_env)      
 		lwf.ctx.wsapi_env = wsapi_env

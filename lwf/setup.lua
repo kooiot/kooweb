@@ -4,14 +4,9 @@ local platform = require 'lwf.platform'
 local application = require 'lwf.application'
 local logger = require 'lwf.logger'
 
-local function get_apps(app_name)
-	local inited = inited or {}
-	return inited[app_name]
-end
-
-local function setup(lwf)
-	local lwf = lwf
-	local function setup_app(ctx)
+local function setup(plat)
+	local lwf = platform(plat)
+	local function setup_app()
 		lwf.home = lwf.var.LWF_HOME or os.getenv("LWF_HOME")
 
 		local app_name = lwf.var.LWF_APP_NAME
@@ -44,7 +39,7 @@ local function setup(lwf)
 		end
 	end
 
-	return content
+	return lwf, content
 end
 
 return setup

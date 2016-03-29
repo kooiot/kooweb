@@ -45,8 +45,8 @@ local function create_lwf()
 	return lwf
 end
 
-function _M.init(lwf)
-	lwf = create_lwf()
+function _M.init()
+	local lwf = create_lwf()
 	lwf.create_request = function()
 		return request.new(lwf)
 	end
