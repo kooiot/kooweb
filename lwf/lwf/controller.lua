@@ -6,9 +6,15 @@ local unpack = table.unpack or unpack
 
 local Controller={}
 
-local function new(app, path)
+local function new(app, path, filename, fn)
 	local path = path or app.app_path..'/controller/'
-    local o = {app = app, path = path, __name="Controller"}
+    local o = {
+		__name="Controller",
+		app = app,
+		path = path,
+		filename = filename,
+		fn = fn
+	}
     return setmetatable(o, {__index=Controller})
 end
 
@@ -53,20 +59,18 @@ function Controller:_handler(request,response,...)
 
 	-- Set the context app here used in templates
 	lwf.ctx.app = app
-	--[[
-	local app_name, filename = string.match(table.concat({...}), '^([^/]+)/?(.-)$')
-	app_name = app_name or self.app.app_name
-	assert(app_name == self.app.app_name)
-	if not filename or filename == "" then
-		filename = 'index'
-	end
-	]]--
-	local filename = table.concat({...})
-	if not filename or filename == '/' or filename == '' then
+	local filename = self.filename or table.concat({...}) or ''
+	if filename == '' or filename == '/' then
 		filename = 'index'
 	end
 
 	local fp = self:__load_fp(filename)
+	if self.fn then
+		fp = fp[self.fn] or {}
+		if type(fp) == 'function' then
+			fp = {get = fp}
+		end
+	end
     local handler= fp[method] or function(...) return 
 		self:dummy_handler(...)
 	end

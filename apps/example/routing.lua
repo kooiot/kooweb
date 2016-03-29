@@ -1,6 +1,6 @@
 -----------------------------------------------
 -- 1.simple function mapping
-map('^/1/hello%?name=(.*)',"d1_test:hello")
+map('^/1/hello(.*)',"d1_test:hello")
 map('^/1/ltp$',"d1_test:ltp")
 
 

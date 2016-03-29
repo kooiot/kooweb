@@ -74,10 +74,11 @@ local function make_basic_lwf_app(config)
 	local lwf, content = setup('wsapi')
 
 	return function (wsapi_env)      
-		lwf.ctx.wsapi_env = wsapi_env
-		lwf.ctx._res = wsapi.response.new()
+		local ctx = {}
+		ctx.wsapi_env = wsapi_env
+		ctx._res = wsapi.response.new()
 		lwf.var.REQUEST_URI = wsapi_env.PATH_INFO
-		content()
+		content(ctx)
 		local response = lwf.ctx._res
 		if response.headers["Location"] then
 			if response.status < 300 then

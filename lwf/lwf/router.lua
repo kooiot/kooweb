@@ -15,28 +15,9 @@ local function route_sorter(l, r)
 end
 
 local function _map(app, route_map, uri, func_name)
-    local mod_name, fn = string.match(func_name, '^(.+):?(.-)$')
-	mod_name = mod_name:gsub('%.', '/')
-	local mod_file = app.config.controller..mod_name..'.lua'
-	local env = {
-		app = app,
-		lwf = app.lwf,
-		logger = logger,
-	}
-	setmetatable(env, {__index=_G})
-	local _, h = util.loadfile(mod_file, env)
-	if fn and fn ~= '' then
-		h = h[fn]
-	else
-		h = h and (h.handler or h.get) or nil
-	end
-
-	if h then
-		table.insert(route_map, {uri, h})
-	else
-		local error_info = "LWF URL Mapping Error:[" .. uri .. "=>" .. func_name .. "] function or controller not found in module: " .. mod_file
-		logger:error(error_info)
-	end
+    local mod_name, fn = string.match(func_name, '^(.+)[:%.]([^%.]+)$')
+	mod_name = (mod_name or func_name):gsub('%.', '/')
+	table.insert(route_map, {uri, controller.new(app, app.config.controller, mod_name, fn)})
 end
 
 local function map(app, route_map, uri, func_name)
