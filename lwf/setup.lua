@@ -6,19 +6,14 @@ local logger = require 'lwf.logger'
 
 local function setup(plat)
 	local lwf = platform(plat)
+
 	local function setup_app()
 		lwf.home = lwf.var.LWF_HOME or os.getenv("LWF_HOME")
 
 		local app_name = lwf.var.LWF_APP_NAME
 		local app_path = lwf.var.LWF_APP_PATH
 
-		lwf.master_app = application.new(lwf, app_name, app_path)
-		lwf.folk_app = function(name, path)
-			local lwffolkapp = require 'lwf.folkapp'
-			return lwffolkapp.new(lwf, lwf.master_app, name, path)
-		end
-
-		return lwf.master_app
+		return application.new(lwf, app_name, app_path)
 	end
 
 	local function content()
