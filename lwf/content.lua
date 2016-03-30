@@ -1,8 +1,5 @@
 #!/usr/bin/env lua
-local setup = require 'setup'
 
-local lwf, content = setup('nginx')
----------
-content()
-----------
+local app, lwf = require 'nginx_app'
 
+return app()
