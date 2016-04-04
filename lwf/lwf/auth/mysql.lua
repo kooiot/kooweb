@@ -70,10 +70,11 @@ function class:identity(username, identity)
 	local sql = 'select * from identity where username='..qusername
 	local res, err = self.conn:query(sql) 
 	if res and #res == 1 then
-		--logger:debug('[MYSQL] identity '..dbidentity..' identity:'..identity)
-		return res.identity == identity
+		local dbidentity = res[1].identity
+		logger:debug('[MYSQL] identity '..dbidentity..' identity:'..identity)
+		return dbidentity == identity
 	else
-		--logger:debug('[MYSQL] identity failure ', username, ' ', identity)
+		logger:debug('[MYSQL] identity failure ', username, ' ', identity)
 		return false
 	end
 end
@@ -85,10 +86,15 @@ function class:get_identity(username)
 	local res, err = self.conn:query(sql) 
 	if res and #res == 1 then
 		--logger:debug('[MYSQL] identity from db result'..res.identity)
-		return res.identity
+		return res[1].identity
 	else
 		local identity = md5.sumhexa(username..os.date())
-		local sql = 'insert into identity (id, identity) values ('..username..', '..identity..')'
+		local sql = 'insert into identity (username, identity) values ('..qusername..', '..quote(identity)..')'
+		local r, err = self.conn:query(sql)
+		if not r then
+			logger:error(r, err, sql)
+			return r, err
+		end
 		--logger:debug('[MYSQL] new identity result'..identity)
 		return identity
 	end
@@ -121,7 +127,7 @@ function class:get_metadata(username, key)
 	local sql = 'select * from users where username='..username
 	local res, err = self.conn:query(sql) 
 	if res and #res == 1 then
-		return cjson.decode(res.meta)
+		return cjson.decode(res[1].meta)
 	end
 
 	return nil, err
