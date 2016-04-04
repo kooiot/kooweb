@@ -98,14 +98,7 @@ function class:init()
 	
 	local authconfig = self.config.auth
 	if authconfig then
-		if type(authconfig) == 'string' then
-			--logger:info('Created authentication module['..authconfig..']')
-			self.auth = require('lwf.auth.'..authconfig).new(self.lwf, self)
-		elseif type(authconfig) == 'function' then
-			self.auth = authconfig(self.lwf, self)
-		else
-			assert('Incorrect configuration for auth')
-		end
+		self.auth = require('lwf.auth.wrapper').new(authconfig)
 		assert(self.auth)
 	end
 
