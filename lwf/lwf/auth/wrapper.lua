@@ -1,42 +1,48 @@
 
-local unpack_table = table.unpack or unpack
-
-local function build_func(func)
-	local func = func
-	return function(self, ...) 
-		self._auth:attach()
-		return func(self._auth, ...), self._auth:detach()
-	end
-end
-
-local function new(cfg, lwf, app)
+return function (lwf, app, cfg)
 	assert(cfg)
 	local auth = nil
 	if type(cfg) == 'string' then
-		auth = require('lwf.auth.'..cfg).new(lwf, app)
+		auth = require('lwf.auth.'..cfg)
+	elseif type(cfg) == 'table' then
+		local an = cfg.name
+		auth = require('lwf.auth.'..an)
 	elseif type(cfg) == 'function' then
-		auth = cfg(lwf, app)
+		auth = { new = cfg }
 	else
 		assert('Incorrect configuration for auth')
 	end
 	assert(auth)
+	local authenticate = auth.authenticate
+	auth.authenticate = function(self, username, password, ...)
+		local r, err = authenticate(self, username, password, ...)
+		local identity, err = self:get_identity(username)
+		if not identity then
+			return nil, err
+		end
 
-	local obj = {
-		_auth = auth,
+		local session = lwf.ctx.session
+		session:set('username', username)
+		session:set('identity', identity)
+		--logger:info(username, ', ', identity)
+
+		local user = app:__create_user(username)
+		lwf.ctx.user = user
+		return true
+	end
+
+	return {
+		create = function()
+			local auth = auth.new(lwf, app, cfg)
+			if auth.startup then
+				self._auth:startup()
+			end
+			return auth
+		end,
+		close = function(auth)
+			if auth.teardown then
+				self._auth:teardown()
+			end
+		end
 	}
-
-	obj.authenticate = build_func(auth.authenticate)
-	obj.identity = build_func(auth.identity)
-	obj.get_identity = build_func(auth.get_identity)
-	obj.clear_identity = build_func(auth.clear_identity)
-	obj.set_password = build_func(auth.set_password)
-	obj.add_user = build_func(auth.add_user)
-	obj.get_metadata = build_func(auth.get_metadata)
-	obj.has = build_func(auth.has)
-
-	return obj
 end
-
-return {
-	new = new
-}

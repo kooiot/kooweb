@@ -21,7 +21,7 @@ end
 
 local quote = ngx.quote_sql_str
 
-function class:attach()
+function class:startup()
 	--logger:debug('[MYSQL] Connection Attach!!!!!!!!!!!!!!!!!!!!!!!')
 	local conn, err = assert(sql:new())
 	conn:set_timeout(500)
@@ -39,7 +39,7 @@ function class:attach()
 	self.conn = conn
 end
 
-function class:detach()
+function class:teardown()
 	--logger:debug('[MYSQL] Connection Detach!!!!!!!!!!!!!!!!!!!!!!!')
 	self.conn:set_keepalive(10000, 100)
 	self.conn = nil

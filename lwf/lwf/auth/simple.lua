@@ -47,33 +47,33 @@ local function save_auth_file(path, keys)
 	return true
 end
 
-_M.new = function(lwf, app)
+_M.new = function(lwf, app, cfg)
 	local obj = {
 		lwf = lwf,
 		app = app,
-		path = app.config.auth_file
+		_file = cfg.file,
+		_keys = load_auth_file(cfg.file),
 	}
-	obj.keys = load_auth_file(obj.path)
 
 	return setmetatable(obj, {__index=class})
 end
 
 function class:authenticate(username, password)
 	local md5passwd = md5.sumhexa(password..salt)
-	if self.keys[username] and self.keys[username] == md5passwd then
+	if self._keys[username] and self._keys[username] == md5passwd then
 		return true
 	end
 	return false, 'Incorrect username or password'
 end
 
 function class:identity(username, identity)
-	local key = username..self.keys[username] or ''
+	local key = username..self._keys[username] or ''
 	local dbidentity = md5.sumhexa(key..salt)
 	return dbidentity == identity
 end
 
 function class:get_identity(username)
-	local key = username..self.keys[username] or ''
+	local key = username..self._keys[username] or ''
 	return  md5.sumhexa(key..salt)
 end
 
@@ -82,13 +82,13 @@ function class:clear_identity(username)
 end
 
 function class:set_password(username, password)
-	self.keys[username] = md5.sumhexa(password..salt)
-	save_auth_file(self.path, self.keys)
+	self._keys[username] = md5.sumhexa(password..salt)
+	save_auth_file(self._file, self._keys)
 end
 
 function class:add_user(username, password, mt)
-	self.keys[username] = md5.sumhexa(password..salt)
-	save_auth_file(self.path, self.keys)
+	self._keys[username] = md5.sumhexa(password..salt)
+	save_auth_file(self._file, self._keys)
 end
 
 function class:get_metadata(username, key)
@@ -96,7 +96,7 @@ function class:get_metadata(username, key)
 end
 
 function class:has(username)
-	if self.keys[username] then
+	if self._keys[username] then
 		return true
 	else
 		return false

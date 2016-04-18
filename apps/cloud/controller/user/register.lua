@@ -3,17 +3,18 @@ return {
 		res:ltp('user/register.html', {lwf=lwf, app=app})
 	end,
 	post = function(req, res)
+		local auth = lwf.ctx.auth
 		req:read_body()
 		local username = req:get_post_arg('username')
 		local password = req:get_post_arg('password')
 
 		local r, err
 		if username and password then
-			r, err = app.auth:has(username)
+			r, err = auth:has(username)
 			if r then
 				err = 'User existed, please pickup another name'
 			else
-				r, err = app.auth:add_user(username, password)
+				r, err = auth:add_user(username, password)
 			end
 		else
 			err = 'Incorrect Post Message!!'

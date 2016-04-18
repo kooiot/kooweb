@@ -98,7 +98,7 @@ function class:init()
 	
 	local authconfig = self.config.auth
 	if authconfig then
-		self.auth = require('lwf.auth.wrapper').new(authconfig)
+		self.auth = require('lwf.auth.wrapper')(self.lwf, self, authconfig)
 		assert(self.auth)
 	end
 
@@ -121,13 +121,14 @@ end
 function class:__create_user(username)
 	local user = {
 		app = self,
+		lwf = self.lwf,
 		username = username,
 		-- TODO: more user meta
 		logout = function(self)
-			assert(self and self.app)
-			self.app.lwf.ctx.session:clear()
-			self.app.lwf.ctx.user = nil
-			self.app.auth:clear_identity(self.username)
+			assert(self and self.app and self.lwf)
+			self.lwf.ctx.session:clear()
+			self.lwf.ctx.user = nil
+			self.auth:clear_identity(self.username)
 		end
 	}
 	return user
@@ -135,12 +136,13 @@ end
 
 function class:identity()
 	local ctx = self.lwf.ctx
+	local auth = ctx.auth
 	local session = ctx.session
 	local username = session:get('username')
 	local identity = session:get('identity')
 	if username and identity then
 		--logger:info('Identity '..username..' '..identity)
-		local r, err = self.auth:identity(username, identity)
+		local r, err = auth:identity(username, identity)
 		if r then
 			--logger:info('Identity OK '..username..' '..identity)
 			-- Create user object
@@ -163,32 +165,6 @@ function class:identity()
 		logger:debug(err)
 		]]--
 	end
-end
-
-function class:authenticate(username, password, ...)
-	local auth = self.auth
-	if not auth then
-		--logger:error('No auth module configured in your config.lua')
-		return nil, 'No auth module configured in your config.lua'
-	end
-
-	local r, err = self.auth:authenticate(username, password, ...)
-	if not r then
-		return nil, err
-	end
-	local identity, err = self.auth:get_identity(username)
-	if not identity then
-		return nil, err
-	end
-
-	local session = self.lwf.ctx.session
-	session:set('username', username)
-	session:set('identity', identity)
-	--logger:info(username, ', ', identity)
-
-	local user = self:__create_user(username)
-	self.lwf.ctx.user = user
-	return true
 end
 
 function class:get_translator()
@@ -235,6 +211,7 @@ function class:dispatch()
 			lwf.ctx.session:read(requ)
 
 			if self.auth then
+				ctx.auth = self.auth.create()
 				-- Authentication
 				self:identity()
 			end
@@ -250,6 +227,7 @@ function class:dispatch()
             end
 
 			if self.auth then
+				self.auth.close(ctx.auth)
 				lwf.ctx.user = nil
 			end
 			lwf.ctx.session:write(resp)

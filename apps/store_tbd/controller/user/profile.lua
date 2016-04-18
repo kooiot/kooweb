@@ -14,6 +14,7 @@ return {
 		if lwf.ctx.user then
 			local db = app.model:get('db')
 			db:init()
+			local auth = lwf.ctx.auth
 			local username = lwf.ctx.user.username
 			local cur_key = db:get_user_key(username)
 
@@ -37,11 +38,11 @@ return {
 				if newpass ~= newpass2 then
 					err = 'Password re-type is not same'
 				else
-					local r = app.auth:authenticate(tostring(username), tostring(orgpass))
+					local r = auth:authenticate(tostring(username), tostring(orgpass))
 					if not r then
 						err = 'Original password failure'
 					else
-						r, err = app.auth:set_password(tostring(username), tostring(newpass))
+						r, err = auth:set_password(tostring(username), tostring(newpass))
 					end
 				end
 				res:ltp('user/profile.html', {lwf=lwf, app=app, userkey=cur_key, info=err})
