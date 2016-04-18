@@ -98,7 +98,7 @@ function class:init()
 	
 	local authconfig = self.config.auth
 	if authconfig then
-		self.auth = require('lwf.auth.wrapper')(self.lwf, self, authconfig)
+		self.auth = require('lwf.auth')(self.lwf, self, authconfig)
 		assert(self.auth)
 	end
 
@@ -115,55 +115,6 @@ function class:init()
 		self.translations = po.get_translations()
 	else
 		self.translations = {}
-	end
-end
-
-function class:__create_user(username)
-	local user = {
-		app = self,
-		lwf = self.lwf,
-		username = username,
-		-- TODO: more user meta
-		logout = function(self)
-			assert(self and self.app and self.lwf)
-			self.lwf.ctx.session:clear()
-			self.lwf.ctx.user = nil
-			self.auth:clear_identity(self.username)
-		end
-	}
-	return user
-end
-
-function class:identity()
-	local ctx = self.lwf.ctx
-	local auth = ctx.auth
-	local session = ctx.session
-	local username = session:get('username')
-	local identity = session:get('identity')
-	if username and identity then
-		--logger:info('Identity '..username..' '..identity)
-		local r, err = auth:identity(username, identity)
-		if r then
-			--logger:info('Identity OK '..username..' '..identity)
-			-- Create user object
-			local user = self:__create_user(username)
-			ctx.user = user
-		else
-			--logger:info('Identity Failure '..username..' '..identity)
-			-- Clear session data
-			session:clear()
-		end
-	else
-		--[[
-		local err = 'Identity lack of '
-		if not username then
-			err = err..'username'
-		end
-		if not identity then
-			err = err..'identity'
-		end
-		logger:debug(err)
-		]]--
 	end
 end
 
@@ -212,8 +163,6 @@ function class:dispatch()
 
 			if self.auth then
 				ctx.auth = self.auth.create()
-				-- Authentication
-				self:identity()
 			end
 
             if type(v) == "function" then                
