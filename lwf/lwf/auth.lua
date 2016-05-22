@@ -87,14 +87,14 @@ return function (lwf, app, cfg)
 		create = function()
 			local auth = auth.new(lwf, app, cfg)
 			if auth.startup then
-				self._auth:startup()
+				auth:startup()
 			end
 			identity(lwf, app, auth)
 			return wrapper_auth(lwf, app, auth)
 		end,
 		close = function(auth)
 			if auth.teardown then
-				self._auth:teardown()
+				auth:teardown()
 			end
 		end
 	}
