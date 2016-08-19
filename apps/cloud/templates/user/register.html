@@ -1,5 +1,16 @@
 
 <? extend 'layout.html' ?>
+
+<? if info then ?>
+<div class="ui warning message">
+	<i class="close icon"></i>
+	<div class="header">
+		Warning!!
+	</div>
+	<?=info ?>
+</div>
+<? end ?>
+
 <? if not lwf.ctx.user then ?>
 
 <div class="ui centered stackable grid">
@@ -52,6 +63,7 @@
 					<div class="field">
 						<input type="submit" value="<?=_('Submit')?>" class="ui blue submit button">
 					</div>
+					<div class="ui error message"></div>
 				</form>
 
 				<div class="ui disabled compact segment">

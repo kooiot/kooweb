@@ -1,7 +1,4 @@
-semantic.table = {};
-
-// ready event
-semantic.table.ready = function() {
+$(document).ready(function() {
 
   // selector cache
   var
@@ -16,10 +13,4 @@ semantic.table.ready = function() {
   });
 
 
-};
-
-
-// attach ready event
-$(document)
-  .ready(semantic.table.ready)
-;
+});

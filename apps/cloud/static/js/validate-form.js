@@ -1,11 +1,9 @@
-semantic.validateForm = {};
-
-// ready event
-semantic.validateForm.ready = function() {
+$(document).ready(function() {
 
   // selector cache
   var
-    $form         = $('.ui.form'),
+    $loginForm      = $('.login .ui.form'),
+    $form         = $('.ui.form').not($loginForm),
     $checkbox     = $('.ui.checkbox'),
     // alias
     handler
@@ -45,6 +43,11 @@ semantic.validateForm.ready = function() {
           type   : 'empty',
           prompt : 'Please enter a username'
         }
+        {
+          type   : 'length[4]',
+          prompt : 'Your username must be at least 4 characters'
+        }
+
       ]
     },
     email: {
@@ -102,10 +105,5 @@ semantic.validateForm.ready = function() {
     .form()
   ;
 
-};
+});
 
-
-// attach ready event
-$(document)
-  .ready(semantic.validateForm.ready)
-;

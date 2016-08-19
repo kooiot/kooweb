@@ -1,7 +1,4 @@
-semantic.accordion = {};
-
-// ready event
-semantic.accordion.ready = function() {
+$(document).ready(function() {
 
   // selector cache
   var
@@ -23,10 +20,5 @@ semantic.accordion.ready = function() {
     .checkbox()
   ;
 
-};
+});
 
-
-// attach ready event
-$(document)
-  .ready(semantic.accordion.ready)
-;

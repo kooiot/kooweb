@@ -40,6 +40,6 @@ return {
 		else
 			err = 'Incorrect Post Message!!'
 		end
-		res:ltp('user/login.html', {app=app, lwf=lwf, err=err})
+		res:ltp('user/register.html', {app=app, lwf=lwf, info=err})
 	end,
 }

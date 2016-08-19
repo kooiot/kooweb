@@ -1,8 +1,4 @@
-semantic.modal = {};
-
-// ready event
-semantic.modal.ready = function() {
-
+$(document).ready(function() {
   // selector cache
   var
     // alias
@@ -29,10 +25,4 @@ semantic.modal.ready = function() {
     ;
 
 
-};
-
-
-// attach ready event
-$(document)
-  .ready(semantic.modal.ready)
-;
+});

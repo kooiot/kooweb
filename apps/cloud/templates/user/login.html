@@ -11,7 +11,7 @@
                         <span class="ui header">Welcome in KooIoT Cloud</span>
                     </div>
                     <div class="ui segment">
-                        <form class="ui form" action="/user/login" method="POST">
+                        <form class="ui login form" action="/user/login" method="POST">
                             <div class="field">
                                 <div class="ui left icon input">
                                     <input type="text" name="username" placeholder="Username">
@@ -31,8 +31,9 @@
                                 </div>
                             </div>
                             <button class="ui big fluid blue icon button" type="submit">
-			<?=_('SignIn')?> <i class="sign in icon"></i>
+				<?=_('SignIn')?> <i class="sign in icon"></i>
 			    </button>
+			    <div class="ui error message"></div>
                         </form>
                     </div>
                     <div class="ui secondary segment">
