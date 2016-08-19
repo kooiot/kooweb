@@ -11,7 +11,7 @@
     <link rel="icon" href="static/favicon.ico" mce_href="/static/favicon.ico" type="image/x-icon">
     <link rel="image_src" type="image/jpeg" href="/static/img/logo.png">
 
-    <title>KooIoT | <?=lwf.ctx.user and lwf.ctx.user.username or 'Guest'?> </title>
+    <title>KooIoT Cloud | <?=lwf.ctx.user and lwf.ctx.user.username or 'Guest'?> </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
@@ -26,7 +26,7 @@
     <div class="ui fixed top menu">
         <a href="javascript:void(0)" class="icon active item" id="hideToggle"><h3><i class="chevron left icon"></i></h3></a>
         <a href="javascript:void(0)" class="icon active item" id="showToggle"><h3><i class="chevron right icon"></i></h3></a>
-        <a href="/" data-toggle="slide" class="item"><h3>KooIoT Cloud</h3></a>
+        <a href="/" data-toggle="slide" class="item"><h3>KooIoT</h3></a>
 	<div class="menu right">
 	    <div tabindex="0" class="ui icon dropdown item" data-content="Select Language">
                 <i class="large world icon"></i>
@@ -46,7 +46,6 @@
 	    <? local avatar_path = '/static/upload/avatar/'..lwf.ctx.user.username..'.jpg' ?>
             <a class="icon item pointer" data-toggle="popup" data-content="#mail" data-position="bottom right">
 		    <i class="mail icon"></i>
-		    <div class="ui inverted tiny label">1</div>
 	    </a>
             <div id="mail" class="ui fluid popup" style="min-width:400px;padding-top:30px;">
                 <div class="ui divided items">
@@ -65,7 +64,6 @@
             </div>
             <a class="icon item pointer" data-toggle="popup" data-content="#notif" data-position="bottom right">
 		    <i class="bell icon"></i>
-		    <div class="ui inverted tiny label">1</div>
 	    </a>
             <div id="notif" class="ui fluid popup" style="min-width:400px;padding-top:30px;">
                 <div class="ui divided items">
@@ -88,6 +86,8 @@
                 <div class="ui secondary vertical menu">
                     <a href="/user/profile" class="item">Profile <i class="user icon"></i></a>
                     <a href="/user/setting" class="item">Settings <i class="settings icon"></i></a>
+                    <a href="/user/mail" class="item">Mails <i class="mail icon"></i><div class="ui inverted label">2</div></a>
+                    <a href="/user/msg" class="item">Messages <i class="bell icon"></i><div class="ui inverted label">25</div></a>
                     <div class="ui divider"></div>
                     <a href="/user/logout" class="item">Logout <i class="sign out icon"></i></a>
                 </div>
