@@ -1,62 +1,65 @@
 <script src="/static/js/table.js"></script>
 
-<table class="ui table segment">
-	<thead>
-		<tr>
-			<th><?=_("NO.")?></th>
-			<th><?=_("Status")?></th>
-			<th><?=_("ALIAS")?></th>
-			<th><?=_("SN")?></th>
-			<th><?=_("Controls")?></th>
-		</tr>
-	</thead>
-	<tbody>
-	<?
-	local counts = 0
-	for k, v in pairs(devlist) do 
-		counts = counts + 1
-	?>
-		<tr>
-			<td>
-				<?=tostring(counts)?>
-			</td>
-			<td>
-				<? if v.online then ?>
-				<i class="teal leaf icon"></i>
-				<? else ?>
-				<i class="red attention icon"></i>
-				<? end ?>
-			</td>
-			<td>
-				<i><?=v.alias?></i>
-			</td>
-			<td>
-				<i><?=v.key?></i>
-			</td>
-			<td>
-				<a class="ui mini blue button" href="/devices/<?=v.key?>"> <?=_("Device Tree")?></a>
-				<a class="ui mini teal button" href="/device/ctrl/<?=v.key?>"><?=_("Remote Control")?> </a>
-				<div class="ui mini teal button" onclick="clean_device('<?=v.key?>');"><?=_("Clean")?> </div>
-			</td>
-		</tr>
-	<? end ?>
+<div class="ui styled fluid accordion">
+	<div class="active title">
+		<i class="dropdown icon"></i> <?=_('Devices') ?> <i class="list icon"></i>
+	</div>
+	<div class="active content">
+		<table class="ui small blue selectable celled table">
+			<thead>
+				<tr>
+					<th><?=_("NO.")?></th>
+					<th><?=_("Status")?></th>
+					<th><?=_("ALIAS")?></th>
+					<th><?=_("SN")?></th>
+					<th><?=_("Controls")?></th>
+				</tr>
+			</thead>
+			<tbody>
+			<?
+			local counts = 0
+			for k, v in pairs(list) do 
+				counts = counts + 1
+			?>
+				<tr>
+					<td>
+						<?=tostring(counts)?>
+					</td>
+					<td>
+						<? if v.online then ?>
+						<i class="teal leaf icon"></i>
+						<? else ?>
+						<i class="red attention icon"></i>
+						<? end ?>
+					</td>
+					<td>
+						<i><?=v.alias?></i>
+					</td>
+					<td>
+						<i><?=v.key?></i>
+					</td>
+					<td>
+						<a class="ui mini blue button" href="/devices/<?=v.key?>"> <?=_("Device Tree")?></a>
+						<a class="ui mini teal button" href="/device/ctrl/<?=v.key?>"><?=_("Remote Control")?> </a>
+						<div class="ui mini teal button" onclick="clean_device('<?=v.key?>');"><?=_("Clean")?> </div>
+					</td>
+				</tr>
+			<? end ?>
 
-	</tbody>
-	<tfoot>
-		<tr>
-			<th><?=_("Total")?> <?=counts?></th>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-		</tr>
-	</tfoot>
-</table>
-
-<div class="ui segment">
-	<i> Your device not listed here? Add the device auth key first here : </i>
-	<a class="ui tiny teal button" href="/user/devkeys"><i class="ui key icon"></i><?=_("Device Keys")?></a>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th><?=_("Total")?> <?=counts?></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 </div>
+
 
 <script>
 	function clean_device(key) {

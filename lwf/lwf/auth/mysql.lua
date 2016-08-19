@@ -137,8 +137,13 @@ function class:has(username)
 	local username = quote(username)
 	local sql = 'select * from users where username='..username
 	local res, err = self.conn:query(sql) 
-	logger:debug('[MYSQL] add user to db result:', res, err)
-	return not res or #res == 0
+	if not res then
+		logger:debug('[MYSQL] check failed:', err or 'unknown error')
+		return false
+	else
+		logger:debug('[MYSQL] check return count:', #res)
+		return #res > 0
+	end
 end
 
 return _M

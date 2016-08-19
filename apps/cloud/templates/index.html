@@ -1,5 +1,4 @@
 <? extend 'layout.html' ?>
-<? include "top.html" ?>
 <div class="main container">
 
 	<div class="ui tab active" data-tab="news">
@@ -8,11 +7,11 @@
 	</div>
 	<? if lwf.ctx.user then ?>
 	<div class="ui tab" data-tab="devices">
-		<? include('widget/devlist.html', {devlist = devlist}) ?>
+		<? include('widget/devlist.html', {list=devlist}) ?>
 	</div>
 	<? end ?>
 	<div class="ui tab" data-tab="applications">
-		<? include('widget/applist.html', {apps=apps}) ?>
+		<? include('widget/applist.html', {list=applist}) ?>
 	</div>
 	<div class="ui tab" data-tab="document">
 	</div>

@@ -1,88 +1,90 @@
 
 <? extend 'layout.html' ?>
-<div class="tab header segment">
-	<div class="container">
-		<div class="introduction">
-			<h1 class="ui dividing header">
-				<?=_("User profile edit")?>
-			</h1>
-			<? if info then ?>
-			<div class="ui warning message">
-				<i class="close icon"></i>
-				<div class="header">
-				Warning!!
-				</div>
-				<?=info ?>
-			</div>
-			<? end ?>
-			<br>
+<? if info then ?>
+<h2 class="ui dividing header"><?=_("Tips")?>:</h2>
+<div class="ui warning message">
+	<i class="close icon"></i>
+	<div class="header">
+		Warning!!
+	</div>
+	<?=info ?>
+</div>
+<? end ?>
+<h2 class="ui dividing header"><?=_("Auth Key")?>:</h2>
+<form class="ui basic segment form" action="" method="post">
+	<input type="hidden" name="action" value="userkey"/>
+	<div class="field">
+		<div class="ui right labeled left icon input"> 
+			<i class="key icon"></i>
+			<input placeholder="Enter Auth Key" type="text" name="key" id="authkey" value="<?=userkey or ''?>">
+			<a class="ui tag label"> Auth Key </a>
 		</div>
 	</div>
-</div>
-<div class="main container">
-
-
-	<h2 class="ui dividing header"><?=_("Auth Key")?>:</h2>
-	<form class="ui compact segment form" action="" method="post">
-		<input type="hidden" name="action" value="userkey"/>
-		<label><?=_("Your Auth Key")?>:</label>
-		<input type="text" id="authkey" name="key" value="<?=userkey or ''?>"/>
-		<div class="ui teal button" onclick="generate_authkey();"><?=_("Generate")?></div>
-		<input class="ui right floated submit red button" type="submit" value="<?=_('Apply')?>"/>
-	</form>
-
-	<h2 class="ui dividing header"><?=_("Password")?>:</h2>
-	<form class="ui compact segment form" action="" method="post" >
-		<input type="hidden" name="action" value="passwd"/>
-		<div class="ui input inline field">
-			<label><?=_("Original Password")?>:</label>
-			<input type="password" name="org_pass" placeholder="original password" value=""/>
-		</div>
-		<div class="inline field"?>
-			<label><?=_("New Password")?>:</label>
-			<div class="ui input">
-				<input type="password" name="new_pass" placeholder="new password" value=""/>
-			</div>
-			<div class="ui input inline field">
-				<input type="password" name="new_pass2" placeholder="new password retype" value=""/>
-			</div>
-		</div>
-		<input class="ui submit button" type="submit" value="<?=_('Change')?>"/>
-	</form>
-
-	<h2 class="ui dividing header"><?=_("Current Avatar")?>:</h2>
-	<div class="ui segment">
-		<? local img_link = '/static/upload/avatar/'..lwf.ctx.user.username..'.jpg' ?>
-		<img class="rounded ui small image" src="<?=img_link?>">
-		<img class="circular ui small image" src="<?=img_link?>">
-
-		<form class="ui segment form" action="" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="action" value="avatar"/>
-			<label><?=_("Your Avatar")?>:</label>
-			<input type="file" name="file"/>
-			<input class="ui submit button", type="submit" value="<?=_('Upload')?>"/>
-		</form>
+	<div class="field">
+		<div class="ui button" onclick="generate_authkey();"><?=_("Generate")?></div>
+		<input class="ui submit button" type="submit" value="<?=_('Apply')?>"/>
 	</div>
+</form>
+
+<h2 class="ui dividing header"><?=_("Password")?>:</h2>
+<form class="ui basic compact segment form" action="" method="post" >
+	<input type="hidden" name="action" value="passwd"/>
+
+	<div class="field">
+		<div class="ui right labeled left icon input"> 
+			<i class="password icon"></i>
+			<input placeholder="Original Password" type="password" name="org_pass">
+			<a class="ui tag label"> <?=_("Original Password")?> </a>
+		</div>
+	</div>
+	<div class="inline field">
+		<div class="ui right labeled left icon input"> 
+			<i class="password icon"></i>
+			<input placeholder="Password" type="password" name="new_pass">
+			<a class="ui tag label"> <?=_("New Password")?> </a>
+		</div>
+		<div class="ui right labeled left icon input"> 
+			<i class="password icon"></i>
+			<input placeholder="Password" type="password" name="new_pass2">
+			<a class="ui tag label"> <?=_("New Password")?> </a>
+		</div>
+	</div>
+	<div class="field">
+		<input class="ui submit button" type="submit" value="<?=_('Change')?>">
+	</div>
+</form>
+
+<h2 class="ui dividing header"><?=_("User Avatar")?>:</h2>
+<form class="ui basic segment form" action="" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="action" value="avatar"/>
+	<? local img_link = '/static/upload/avatar/'..lwf.ctx.user.username..'.jpg' ?>
+	<div class="field">
+		<img class="ui avatar image" src="<?=img_link?>" alt="Small Avatar"></a>
+	<img class="ui circular image" src="<?=img_link?>" alt="Avatar" width="150px" height="150px"></a>
+	</div>
+	<div class="field">
+		<input type="file" name="file"/>
+		<input class="ui submit button", type="submit" value="<?=_('Upload')?>"/>
+	</div>
+</form>
 
 
-	<div id="status"></div>
-	<script>
-		function generateUUID() {
-			var d = new Date().getTime();
-			var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-				var r = (d + Math.random()*16)%16 | 0;
-				d = Math.floor(d/16);
-				return (c=='x' ? r : (r&0x7|0x8)).toString(16);
-			});
-			return uuid;
-		};
+<div id="status"></div>
+<script>
+	function generateUUID() {
+		var d = new Date().getTime();
+		var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			var r = (d + Math.random()*16)%16 | 0;
+			d = Math.floor(d/16);
+			return (c=='x' ? r : (r&0x7|0x8)).toString(16);
+		});
+		return uuid;
+	};
 
-		function generate_authkey() {
-			var input = $('#authkey');
-			var uuid = generateUUID();
-			//alert(uuid);
-			input.val(uuid);
-		};
-	</script>
-</div>
-
+	function generate_authkey() {
+		var input = $('#authkey');
+		var uuid = generateUUID();
+		//alert(uuid);
+		input.val(uuid);
+	};
+</script>

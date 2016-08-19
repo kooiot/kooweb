@@ -1,10 +1,11 @@
 local logger = require 'lwf.logger'
 
-local function create_user(lwf, app, username)
+local function create_user(lwf, app, username, meta)
 	local lwf = lwf or app.lwf
 	local user = {
 		app = app,
 		username = username,
+		meta = meta or {},
 		-- TODO: more user meta
 		logout = function(self)
 			assert(self and self.app)
@@ -24,9 +25,10 @@ local function identity(lwf, app, auth)
 		--logger:info('Identity '..username..' '..identity)
 		local r, err = auth:identity(username, identity)
 		if r then
+			local meta = auth:get_metadata(username)
 			--logger:info('Identity OK '..username..' '..identity)
 			-- Create user object
-			local user = create_user(lwf, app, username)
+			local user = create_user(lwf, app, username, meta)
 			lwf.ctx.user = user
 		else
 			--logger:info('Identity Failure '..username..' '..identity)
@@ -52,6 +54,9 @@ local function wrapper_auth(lwf, app, auth)
 	local authenticate = auth.authenticate
 	auth.authenticate = function(self, username, password, ...)
 		local r, err = authenticate(self, username, password, ...)
+		if not r then
+			return nil, err
+		end
 		local identity, err = self:get_identity(username)
 		if not identity then
 			return nil, err
@@ -61,8 +66,9 @@ local function wrapper_auth(lwf, app, auth)
 		session:set('username', username)
 		session:set('identity', identity)
 		--logger:info(username, ', ', identity)
+		local meta = self:get_metadata(username)
 
-		local user = create_user(lwf, app, username)
+		local user = create_user(lwf, app, username, meta)
 		lwf.ctx.user = user
 		return true
 	end

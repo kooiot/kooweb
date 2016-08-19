@@ -2,240 +2,154 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]--> 
 <!DOCTYPE html>
-<html><head>
-  <!-- Standard Meta -->
-<meta charset="utf-8">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-<link rel="icon" href="static/favicon.ico" mce_href="/static/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="static/favicon.ico" mce_href="/static/favicon.ico" type="image/x-icon">
+    <link rel="image_src" type="image/jpeg" href="/static/img/logo.png">
 
-<link rel="image_src" type="image/jpeg" href="/static/img/logo.png">
+    <title>KooIoT | <?=lwf.ctx.user and lwf.ctx.user.username or 'Guest'?> </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<!-- Site Properities -->
-<title>KooIoT Cloud - <? = lwf.ctx.request.path ?></title>
+    <link rel="stylesheet" type="text/css" href="/static/semantic/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/library/animate.css">
 
-<script>
-(function () {
-  var
-    eventSupport = ('querySelector' in document && 'addEventListener' in window)
-    jsonSupport  = (typeof JSON !== 'undefined'),
-    jQuery       = (eventSupport && jsonSupport)
-      ? '/static/library/jquery.min.js'
-      : '/static/library/jquery.legacy.min.js'
-  ;
-  document.write('<script src="' + jQuery + '"><\/script>');
-}());
-</script><script src="/static/library/jquery.form.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/library/github-buttons.css">
+</head>
 
-<script src="/static/library/easing.min.js"></script>
-<script src="/static/library/highlight.min.js"></script>
-<script src="/static/library/highlight.languages.min.js"></script>
-<script src="/static/library/history.min.js"></script>
-<script src="/static/library/tablesort.min.js"></script>
-
-<script src="/static/semantic/semantic.min.js"></script>
-
-<script src="/static/js/docs.js"></script>
-<script src="/static/js/accordion.js"></script>
-<script src="/static/js/rating.js"></script>
-<script src="/static/js/dropdown.js"></script>
-  
-<link rel="stylesheet" type="text/css" class="ui" href="/static/semantic/semantic.min.css">
-
-<link rel="stylesheet" type="text/css" href="/static/css/docs.css">
-<link rel="stylesheet" type="text/css" href="/static/css/rtl.css">
-<link rel="stylesheet" type="text/css" href="/static/library/github-buttons.css">
-
-<!-- Semantic Website uses this for translation -->
-<!--script type="text/javascript" src="/static/library/live.js"></script-->
-
-<body id="example" class="pushable" ontouchstart="">
-
-	<div class="ui vertical inverted sidebar menu left" id="toc">
-		<div class="item">
-			<a class="ui logo icon image" href="http://www.kooiot.com/">
-				<img src="/static/img/logo.png" alt="logo">
-			</a>
-			<a href="http://www.kooiot.com/"><b>KooIoT</b></a>
+<body>
+    <div class="ui fixed top menu">
+        <a href="javascript:void(0)" class="icon active item" id="hideToggle"><h3><i class="chevron left icon"></i></h3></a>
+        <a href="javascript:void(0)" class="icon active item" id="showToggle"><h3><i class="chevron right icon"></i></h3></a>
+        <a href="/" data-toggle="slide" class="item"><h3>KooIoT Cloud</h3></a>
+	<div class="menu right">
+	    <div tabindex="0" class="ui icon dropdown item" data-content="Select Language">
+                <i class="large world icon"></i>
+                <div tabindex="-1" class="menu transition hidden">
+                    <a class="item" href="/lang/en"><i class="leaf icon"></i> English</a>
+		    <a class="item" href="/lang/zh"><i class="leaf icon"></i> 中文(简体)</a>
 		</div>
-		<? if not lwf.ctx.user then ?>
-		<a class="item" href="/user/login">
-			<i class="inverted blue sign in icon"></i><b> <?=_("Login")?></b>
-		</a>
+	    </div>
+	    <? if not lwf.ctx.user then ?>
+	    <a href="/user/login" class="icon item" data-content="Login">
+		<i class="large sign in icon"></i>
+	    </a>
+            <a href="http://www.kooiot.com" class="icon item">
+		    <img src="/static/img/logo.png" class="ui avatar image" alt="logo">
+	    </a>
+	    <? else ?>
+	    <? local avatar_path = '/static/upload/avatar/'..lwf.ctx.user.username..'.jpg' ?>
+            <a class="icon item pointer" data-toggle="popup" data-content="#mail" data-position="bottom right">
+		    <i class="mail icon"></i>
+		    <div class="ui inverted tiny label">1</div>
+	    </a>
+            <div id="mail" class="ui fluid popup" style="min-width:400px;padding-top:30px;">
+                <div class="ui divided items">
+                    <div class="item">
+                        <img src="http://semantic-ui.com/images/avatar/large/stevie.jpg" class="ui avatar image">
+                        <div class="content">
+                            <a class="header">KooIoT</a>
+                            <div class="description">
+                                Welcome to <a>KooIoT Cloud</a>...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+                <a href="/user/mail" class="ui right floated tiny button">All Message</a>
+            </div>
+            <a class="icon item pointer" data-toggle="popup" data-content="#notif" data-position="bottom right">
+		    <i class="bell icon"></i>
+		    <div class="ui inverted tiny label">1</div>
+	    </a>
+            <div id="notif" class="ui fluid popup" style="min-width:400px;padding-top:30px;">
+                <div class="ui divided items">
+                    <div class="item">
+                        <div class="content">
+                            <i class="bell icon"></i> Device appear offline,
+                            <div class="extra content">
+                                Sunday, 20-03-2016
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+                <a href="/user/msg" class="ui right floated tiny button">All Notification</a>
+            </div>
+            <a class="icon item pointer" data-toggle="popup" data-content="#user" data-position="bottom right">
+		<img src="<?=avatar_path?>" class="ui avatar image" alt="">
+	    </a>
+            <div id="user" class="ui popup">
+                <div class="ui secondary vertical menu">
+                    <a href="/user/profile" class="item">Profile <i class="user icon"></i></a>
+                    <a href="/user/setting" class="item">Settings <i class="settings icon"></i></a>
+                    <div class="ui divider"></div>
+                    <a href="/user/logout" class="item">Logout <i class="sign out icon"></i></a>
+                </div>
+            </div>
+	    <? end ?>
+        </div>
+    </div>
+    <div class="pusher">
+        <div class="ui fluid container">
+            <div class="ui two column grid">
+	    	<? if lwf.ctx.user then ?>
+		<? local avatar_path = '/static/upload/avatar/'..lwf.ctx.user.username..'.jpg' ?>
+                <div class="side menu" id="sideMenu">
+                    <div align="center" class="profile">
+                        <br>
+                        <a href="/user/profile"><img src="<?=avatar_path?>" alt="Avatar" class="ui circular image" width="150px" height="150px"></a>
+			<div class="ui white header"><?=lwf.ctx.user.meta['fname'] or lwf.ctx.user.username?></div>
+                        <div class="ui divider"></div>
+                    </div>
+                    <div class="ui fluid vertical menu" id="verticalMenu">
+                        <a href="/dashboard" class="item"><i class="dashboard icon"></i> <span>Dashboard</span></a>
+                        <a href="/app" class="item"><i class="cubes icon"></i> <span>Application</span></a>
+                        <a href="/device" class="item"><i class="list layout icon"></i> <span>Device</span></a>
+                        <a href="/chart" class="item"><i class="bar chart icon"></i> <span>Chart</span></a>
+                        <a href="/card" class="item"><i class="block layout icon"></i> <span>Card</span></a>
+                        <a href="/task" class="item"><i class="tasks icon"></i> <span>Task</span></a>
+                        <a href="http://forum.kooiot.com" class="item"><i class="users icon"></i> <span>Form</span></a>
+                        <a href="/doc" class="item"><i class="file icon"></i> <span>Document</span></a>
+                        <a href="/help" class="item"><i class="help icon"></i> <span>Help</span></a>
+                    </div>
+                </div>
 		<? else ?>
-		<? if lwf.ctx.user.username == 'admin' then ?>
-		<a class="item" href="/sys/new">
-			<i class="inverted teal cloud upload icon"></i><b> <?=_("New Core")?></b>
-		</a>
+                <div class="side menu" id="sideMenu">
+                    <div align="center" class="profile">
+                        <br>
+                        <a href=""><img src="/static/img/logo.png" alt="logo" class="ui circular image" width="150px"></a>
+                        <div class="ui white header">KooIoT Cloud</div>
+                        <div class="ui divider"></div>
+                    </div>
+                    <div class="ui fluid vertical menu" id="verticalMenu">
+                        <a href="/user/login" class="item"><i class="sign in icon"></i> <span>Login</span></a>
+                        <a href="http://forum.kooiot.com" class="item"><i class="users icon"></i> <span>Form</span></a>
+                        <a href="/docs" class="item"><i class="file icon"></i> <span>Documents</span></a>
+                        <a href="/help" class="item"><i class="help icon"></i> <span>Help</span></a>
+                    </div>
+                </div>
 		<? end ?>
-		<? end ?>
-
-		<div class="item">
-			<a href="/apps/"><b><?=_("Applications")?></b></a>
-			<div class="menu">
-				<a class="item" href="/apps/indu"><?=_("Industrial")?></a>
-				<a class="item" href="/apps/smarthome"><?=_("Smart Home")?></a>
-				<a class="item" href="/apps/odm"><?=_("ODM")?></a>
-			</div>
-		</div>
-
-		<? if lwf.ctx.user then ?>
-		<div class="item">
-			<b> <?=lwf.ctx.user.username ?></b>
-			<div class="menu">
-				<a class="item" href="/user/profile">
-					<i class="inverted teal settings icon"></i> <?=_("Edit Profile")?>
-				</a>
-				<a class="item" href="/user/logout">
-					<i class="inverted red sign out icon"></i> <?=_("Logout")?>
-				</a>
-			</div>
-		</div>
-		<? end ?>
-
-		<div class="item">
-			<b> <?=_('Help')?></b>
-			<div class="menu">
-				<a class="item" href="/help/contributing/"><?=_("How To Contributing")?></a>
-				<a class="item" href="/help/development/"><?=_("Development Docs")?></a>
-				<a class="item" href="http://tipsydate.kooiot.com/forum" target="_blank">
-					<i class="inverted teal linkify icon"></i> <?=_("Forum")?>
-				</a>
-				<a class="item" href="/about"> <?=_('About')?></a>
-			</div>
-		</div>
-	</div>
-
-	<div class="ui black big launch right attached fixed button">
-		<i class="content icon"></i>
-		<span class="text"><?=_("Menu")?></span>
-	</div>
-
-	<div class="ui fixed inverted main menu">
-		<div class="container">
-			<a class="launch item">
-				<i class="content icon"></i>
-				<?=_("Menu")?>
-			</a>
-
-			<div class="title item">
-				<b>KooIoT:</b> Cloud
-			</div>
-
-			<a class="popup icon item" data-content="<?=_('Go home')?>" href="/">
-				<i class="home icon"></i> <?=_('Home')?>
-			</a>
-
-		<? if lwf.ctx.user then ?>
-			<? if devlist and #devlist ~= 0 then ?>
-			<div class="section ui page dropdown link item">
-				<i class="folder icon"></i>
-				<span class="count"> <?=_('My Devices')?> </span>
-				<div class="menu">
-					<a class="item" href="/user/devkeys">
-						<i class="qr code icon"></i> <?=_("Add Keys")?>
-					</a>
-					<? for k, v in pairs(devlist) do
-					local path = '/devices/'..v.key
-					?>
-					<a class="item" href="<?=path ?>">
-						<? if v.online then ?>
-						<i class="leaf green icon"></i> <?=v.alias or v.key ?>
-						<? else ?>
-						<i class="leaf red icon"></i> <?=v.alias or v.key ?>
-						<? end ?>
-					</a>
-					<? end ?>
-				</div>
-			</div>
-			<? else ?>
-			<a class="popup icon item" data-content="<?=_('Shows your own devices')?>" href="/#/devices">
-				<i class="list icon"></i> <?=_("My Devices")?>
-			</a>
-			<? end ?>
-
-			<? if applist and #applist ~= 0 then ?>
-			<div class="section ui page dropdown link item">
-				<i class="folder icon"></i>
-				<span class="count"> <?=_('My Apps')?> </span>
-				<div class="menu">
-					<a class="item" href="/app/new">
-						<i class="cloud upload icon"></i> <?=_("New App")?>
-					</a>
-					<? for k, v in pairs(applist) do
-					local path = '/app/detail/'..v.info.path
-					?>
-					<a class="item" href="<?=path ?>">
-						<i class="leaf icon"></i> <?=v.name ?>
-					</a>
-					<? end ?>
-				</div>
-			</div>
-			<? else ?>
-			<a class="popup icon item" data-content="<?=_('Create an new application')?>" href="/app/new">
-				<i class="cloud upload icon"></i> <?=_("New App")?>
-			</a>
-			<? end ?>
-
-			<? if lwf.ctx.user.username == 'admin' then ?>
-			<a class="popup icon item" data-content="<?=_('Upload an new core version')?>" href="/sys/new">
-				<i class="cloud upload icon"></i> <?=_("New Core")?>
-			</a>
-			<? end ?>
-		<? end ?>
-
-			<div class="right menu">
-				<div class="ui language dropdown item" id="languages" data-content="Select Language">
-					<i class="world icon"></i>
-					<div class="menu">
-						<a class="item" href="/lang/en">
-							<i class="leaf icon"></i> English
-						</a>
-						<a class="item" href="/lang/zh">
-							<i class="leaf icon"></i> 中文(简体)
-						</a>
-					</div>
-				</div>
-				<? if lwf.ctx.user then ?>
-				<div class="section ui page dropdown link item">
-					<i class="icon user"></i><?=lwf.ctx.user.username ?>
-					<div class="ui tiny label">25</div>
-					<div class="menu">
-						<a class="item" href="/msg">
-							<i class="mail icon"></i> <?=_("Messages")?>
-							<div class="ui inverted tiny label">25</div>
-						</a>
-
-						<a class="item" href="/user/profile"><i class="edit icon"></i> <?=_("Edit Profile")?></a>
-						<a class="item" href="/user/devkeys"><i class="key icon"></i> <?=_("Device Keys")?></a>
-						<a class="item" href="/user/logout"><i class="sign out icon"></i> <?=_("Logout")?></a>
-					</div>
-				</div>
-				<? else ?>
-				<a class="icon item" href="/user/login">
-					<i class="sign in icon"></i><?=_('Sign In')?>
-				</a>
-				<? end ?>
-			</div>
-		</div>
-	</div>
-<div class="pusher">
-	<div class="full height">
-		<? =content() ?>
-	</div>
-	<div class="ui inverted black footer vertical segment">
-		<div class="container">
-			<div class="ui stackable inverted divided relaxed grid">
+                <div class="sixteen wide column" id="content">
+		    <div style="min-height:450px;padding-top:10px;">
+		    	<? =content() ?>
+		    </div>
+                    <div class="ui divider"></div>
+                    <div align="center">
+			<div class="ui stackable divided relaxed grid">
 				<div class="eight wide column">
-					<h3 class="ui inverted header"><?=_('Help Make KooIoT Better')?></h3>
+					<h3 class="ui header"><?=_('Help Make KooIoT Better')?></h3>
 					<p><?=_('KooIoT is an open source platform for internet of things stuff. Please follow us on GitHub!!!')?></p>
-					<span class="github-btn" data-user="zeromq" data-repo="lzmq" data-type="follow" data-count="1"></span>
+					<span class="github-btn" data-user="kooiot" data-repo="" data-type="follow" data-count="1"></span>
 				</div>
 				<div class="four wide column">
-					<h5 class="ui teal inverted header"><?=_('Contribute')?></h5>
-					<div class="ui inverted link list">
+					<h5 class="ui teal header"><?=_('Contribute')?></h5>
+					<div class="ui link list">
 						<a class="item" href="https://www.transifex.com/organization/tipsydate/" target="_blank"><?=_('Translation Hub')?></a>
 						<a class="item" href="http://tipsydate.kooiot.com/core" target="_blank"><?=_('Issue Tracker')?></a>
 						<a class="item" href="http://tipsydate.kooiot.com/core/cla.html" target="_blank"><?=_('CLA')?></a>
@@ -243,30 +157,29 @@
 					</div>
 				</div>
 				<div class="four wide column">
-					<h5 class="ui teal inverted header"><?=_('KooIoT Network')?></h5>
-					<div class="ui inverted link list">
+					<h5 class="ui teal header"><?=_('KooIoT Network')?></h5>
+					<div class="ui link list">
 						<a class="item" href="http://tipsydate.kooiot.com/" target="_blank"><?=_('User Documents')?></a>
 						<a class="item" href="http://tipsydate.kooiot.com/" target="_blank"><?=_('Development Reference')?></a>
-						<a class="disabled item"><?=_('Applications')?></a>
-						<a class="disabled item"><?=_('Device Templates')?></a>
+						<a class="disabled item"><?=_('Application')?></a>
+						<a class="disabled item"><?=_('Device Template')?></a>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/static/library/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/semantic/semantic.min.js"></script>
+    <script type="text/javascript" src="/static/library/jquery.nicescroll.min.js"></script>
 
-<script>
-window.less = {
-	async        : true,
-	environment  : 'production',
-	fileAsync    : false,
-	onReady      : false,
-	useFileCache : true
-};
-</script>
+    <script type="text/javascript" src="/static/js/main.js"></script>
+    <script type="text/javascript" src="/static/js/graph.js"></script>
+    <script type="text/javascript" src="/static/js/validate-form.js"></script>
 
-<script src="/static/library/less.min.js"></script>
-<script src="/static/library/github-buttons.js"></script>
-
-</body></html>
+    <script type="text/javascript" src="/static/library/less.min.js"></script>
+    <script type="text/javascript" src="/static/library/github-buttons.js"></script>
+</body>
+</html>

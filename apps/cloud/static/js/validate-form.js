@@ -5,10 +5,7 @@ semantic.validateForm.ready = function() {
 
   // selector cache
   var
-    $dogForm      = $('.dog.example .ui.form'),
-    $dropdownForm = $('.dropdown.example .ui.form'),
-    $inlineForm   = $('.inline.example .ui.form'),
-    $form         = $('.ui.form').not($dogForm).not($inlineForm).not($dropdownForm),
+    $form         = $('.ui.form'),
     $checkbox     = $('.ui.checkbox'),
     // alias
     handler
@@ -100,62 +97,6 @@ semantic.validateForm.ready = function() {
       ]
     }
   };
-
-
-  $inlineForm
-    .form({}, {
-      inline : true,
-      on: 'blur'
-    })
-  ;
-
-  $dropdownForm
-    .form({
-      gender: {
-        identifier  : 'gender',
-        rules: [
-          {
-            type   : 'empty',
-            prompt : 'Please enter a gender'
-          }
-        ]
-      },
-      name: {
-        identifier  : 'name',
-        rules: [
-          {
-            type   : 'empty',
-            prompt : 'Please enter your name'
-          }
-        ]
-      },
-    })
-    .find('.dropdown')
-      .dropdown()
-  ;
-
-
-  $dogForm
-    .form({
-      dog: {
-        identifier: 'dog',
-        rules: [
-          {
-            type: 'empty',
-            prompt: 'You must have a dog to add'
-          },
-          {
-            type: 'contains[fluffy]',
-            prompt: 'I only want you to add fluffy dogs!'
-          },
-          {
-            type: 'not[mean]',
-            prompt: 'Why would you add a mean dog to the list?'
-          }
-        ]
-      }
-    })
-  ;
 
   $form
     .form()
