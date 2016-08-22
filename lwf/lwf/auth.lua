@@ -78,11 +78,13 @@ end
 return function (lwf, app, cfg)
 	assert(cfg)
 	local auth = nil
+	local cfgt = {}
 	if type(cfg) == 'string' then
 		auth = require('lwf.auth.'..cfg)
 	elseif type(cfg) == 'table' then
 		local an = cfg.name
 		auth = require('lwf.auth.'..an)
+		cfgt = cfg
 	elseif type(cfg) == 'function' then
 		auth = { new = cfg }
 	else
@@ -91,7 +93,7 @@ return function (lwf, app, cfg)
 	assert(auth)
 	return {
 		create = function()
-			local auth = auth.new(lwf, app, cfg)
+			local auth = auth.new(lwf, app, cfgt)
 			if auth.startup then
 				auth:startup()
 			end

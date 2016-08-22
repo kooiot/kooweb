@@ -1,0 +1,6 @@
+<? extend 'layout.html' ?>
+<div class="device container">
+	<? if lwf.ctx.user then ?>
+		<? include('widget/devlist.html', {list=devlist, title=_('Your Devices')}) ?>
+	<? end ?>
+</div>

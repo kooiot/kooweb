@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="ui divider"></div>
-                <a href="/user/mail" class="ui right floated tiny button">All Message</a>
+		<a href="/user/mail" class="ui right floated tiny button"><?=_('All Message')?></a>
             </div>
             <a class="icon item pointer" data-toggle="popup" data-content="#notif" data-position="bottom right">
 		    <i class="bell icon"></i>
@@ -77,19 +77,19 @@
                     </div>
                 </div>
                 <div class="ui divider"></div>
-                <a href="/user/msg" class="ui right floated tiny button">All Notification</a>
+		<a href="/user/msg" class="ui right floated tiny button"><?=_('All Notification')?></a>
             </div>
             <a class="icon item pointer" data-toggle="popup" data-content="#user" data-position="bottom right">
 		<img src="<?=avatar_path?>" class="ui avatar image" alt="">
 	    </a>
             <div id="user" class="ui popup">
                 <div class="ui secondary vertical menu">
-                    <a href="/user/profile" class="item">Profile <i class="user icon"></i></a>
-                    <a href="/user/setting" class="item">Settings <i class="settings icon"></i></a>
-                    <a href="/user/mail" class="item">Mails <i class="mail icon"></i><div class="ui inverted label">2</div></a>
-                    <a href="/user/msg" class="item">Messages <i class="bell icon"></i><div class="ui inverted label">25</div></a>
+		    <a href="/user/profile" class="item"><?=_('Profile')?> <i class="user icon"></i></a>
+		    <a href="/user/setting" class="item"><?=_('Settings')?> <i class="settings icon"></i></a>
+		    <a href="/user/mail" class="item"><?=_('Mails')?> <i class="mail icon"></i><div class="ui inverted label">2</div></a>
+		    <a href="/user/msg" class="item"><?=_('Messages')?> <i class="bell icon"></i><div class="ui inverted label">25</div></a>
                     <div class="ui divider"></div>
-                    <a href="/user/logout" class="item">Logout <i class="sign out icon"></i></a>
+		    <a href="/user/logout" class="item"><?=_('Logout')?> <i class="sign out icon"></i></a>
                 </div>
             </div>
 	    <? end ?>
@@ -108,15 +108,15 @@
                         <div class="ui divider"></div>
                     </div>
                     <div class="ui fluid vertical menu" id="verticalMenu">
-                        <a href="/dashboard" class="item"><i class="dashboard icon"></i> <span>Dashboard</span></a>
-                        <a href="/app" class="item"><i class="cubes icon"></i> <span>Application</span></a>
-                        <a href="/device" class="item"><i class="list layout icon"></i> <span>Device</span></a>
-                        <a href="/chart" class="item"><i class="bar chart icon"></i> <span>Chart</span></a>
-                        <a href="/card" class="item"><i class="block layout icon"></i> <span>Card</span></a>
-                        <a href="/task" class="item"><i class="tasks icon"></i> <span>Task</span></a>
-                        <a href="http://forum.kooiot.com" class="item"><i class="users icon"></i> <span>Form</span></a>
-                        <a href="/doc" class="item"><i class="file icon"></i> <span>Document</span></a>
-                        <a href="/help" class="item"><i class="help icon"></i> <span>Help</span></a>
+                        <a href="/dashboard" class="item"><i class="dashboard icon"></i> <span><?=_('Dashboard')?></span></a>
+			<a href="/app" class="item"><i class="cubes icon"></i> <span><?=_('Application')?></span></a>
+                        <a href="/device" class="item"><i class="list layout icon"></i> <span><?=_('Device')?></span></a>
+                        <a href="/chart" class="item"><i class="bar chart icon"></i> <span><?=_('Chart')?></span></a>
+                        <a href="/card" class="item"><i class="block layout icon"></i> <span><?=_('Card')?></span></a>
+                        <a href="/task" class="item"><i class="tasks icon"></i> <span><?=_('Task')?></span></a>
+                        <a href="http://forum.kooiot.com" class="item"><i class="users icon"></i> <span><?=_('Form')?></span></a>
+                        <a href="/doc" class="item"><i class="file icon"></i> <span><?=_('Document')?></span></a>
+                        <a href="/help" class="item"><i class="help icon"></i> <span><?=_('Help')?></span></a>
                     </div>
                 </div>
 		<? else ?>
@@ -128,10 +128,10 @@
                         <div class="ui divider"></div>
                     </div>
                     <div class="ui fluid vertical menu" id="verticalMenu">
-                        <a href="/user/login" class="item"><i class="sign in icon"></i> <span>Login</span></a>
-                        <a href="http://forum.kooiot.com" class="item"><i class="users icon"></i> <span>Form</span></a>
-                        <a href="/docs" class="item"><i class="file icon"></i> <span>Documents</span></a>
-                        <a href="/help" class="item"><i class="help icon"></i> <span>Help</span></a>
+			<a href="/user/login" class="item"><i class="sign in icon"></i> <span><?=_('Login')?></span></a>
+                        <a href="http://forum.kooiot.com" class="item"><i class="users icon"></i> <span><?=_('Form')?></span></a>
+                        <a href="/docs" class="item"><i class="file icon"></i> <span><?=_('Documents')?></span></a>
+                        <a href="/help" class="item"><i class="help icon"></i> <span><?=_('Help')?></span></a>
                     </div>
                 </div>
 		<? end ?>

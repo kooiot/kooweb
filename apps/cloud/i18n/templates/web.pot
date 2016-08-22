@@ -10,10 +10,6 @@ msgid "Abort"
 msgstr ""
 
 
-msgid "About"
-msgstr ""
-
-
 msgid "Actions"
 msgstr ""
 
@@ -22,11 +18,15 @@ msgid "Add"
 msgstr ""
 
 
-msgid "Add Keys"
+msgid "Alias"
 msgstr ""
 
 
-msgid "Alias"
+msgid "All Message"
+msgstr ""
+
+
+msgid "All Notification"
 msgstr ""
 
 
@@ -35,6 +35,10 @@ msgstr ""
 
 
 msgid "AppPath"
+msgstr ""
+
+
+msgid "Application"
 msgstr ""
 
 
@@ -66,11 +70,19 @@ msgid "CLA"
 msgstr ""
 
 
+msgid "Card"
+msgstr ""
+
+
 msgid "Category"
 msgstr ""
 
 
 msgid "Change"
+msgstr ""
+
+
+msgid "Chart"
 msgstr ""
 
 
@@ -102,11 +114,7 @@ msgid "Create Applicatoin"
 msgstr ""
 
 
-msgid "Create an new application"
-msgstr ""
-
-
-msgid "Current Avatar"
+msgid "Dashboard"
 msgstr ""
 
 
@@ -115,10 +123,6 @@ msgstr ""
 
 
 msgid "Description"
-msgstr ""
-
-
-msgid "Development Docs"
 msgstr ""
 
 
@@ -134,7 +138,7 @@ msgid "Device Data"
 msgstr ""
 
 
-msgid "Device Keys"
+msgid "Device Template"
 msgstr ""
 
 
@@ -154,6 +158,10 @@ msgid "Device details"
 msgstr ""
 
 
+msgid "Devices"
+msgstr ""
+
+
 msgid "Disable"
 msgstr ""
 
@@ -162,7 +170,7 @@ msgid "Document"
 msgstr ""
 
 
-msgid "Documentation"
+msgid "Documents"
 msgstr ""
 
 
@@ -171,10 +179,6 @@ msgstr ""
 
 
 msgid "Dump to JSON"
-msgstr ""
-
-
-msgid "Edit Profile"
 msgstr ""
 
 
@@ -198,15 +202,11 @@ msgid "First Name"
 msgstr ""
 
 
-msgid "Forum"
+msgid "Form"
 msgstr ""
 
 
 msgid "Generate"
-msgstr ""
-
-
-msgid "Go home"
 msgstr ""
 
 
@@ -227,10 +227,6 @@ msgstr ""
 
 
 msgid "Home Automation"
-msgstr ""
-
-
-msgid "How To Contributing"
 msgstr ""
 
 
@@ -306,11 +302,11 @@ msgid "Logs"
 msgstr ""
 
 
-msgid "Manage Device Keys"
+msgid "Mails"
 msgstr ""
 
 
-msgid "Menu"
+msgid "Manage Device Keys"
 msgstr ""
 
 
@@ -322,14 +318,6 @@ msgid "Modify"
 msgstr ""
 
 
-msgid "My Apps"
-msgstr ""
-
-
-msgid "My Devices"
-msgstr ""
-
-
 msgid "NO."
 msgstr ""
 
@@ -338,27 +326,11 @@ msgid "Name"
 msgstr ""
 
 
-msgid "New App"
-msgstr ""
-
-
-msgid "New Core"
-msgstr ""
-
-
 msgid "New Password"
 msgstr ""
 
 
 msgid "New Value"
-msgstr ""
-
-
-msgid "News"
-msgstr ""
-
-
-msgid "ODM"
 msgstr ""
 
 
@@ -387,6 +359,10 @@ msgstr ""
 
 
 msgid "Path"
+msgstr ""
+
+
+msgid "Profile"
 msgstr ""
 
 
@@ -430,11 +406,7 @@ msgid "Services"
 msgstr ""
 
 
-msgid "Shows your own devices"
-msgstr ""
-
-
-msgid "Sign In"
+msgid "Settings"
 msgstr ""
 
 
@@ -450,7 +422,7 @@ msgid "Sign With QQ"
 msgstr ""
 
 
-msgid "Smart Home"
+msgid "SignIn"
 msgstr ""
 
 
@@ -466,7 +438,15 @@ msgid "Submit"
 msgstr ""
 
 
+msgid "Task"
+msgstr ""
+
+
 msgid "Timestamp"
+msgstr ""
+
+
+msgid "Tips"
 msgstr ""
 
 
@@ -498,11 +478,11 @@ msgid "Upload System Core"
 msgstr ""
 
 
-msgid "Upload an new core version"
+msgid "Upload new application"
 msgstr ""
 
 
-msgid "Upload new application"
+msgid "User Avatar"
 msgstr ""
 
 
@@ -511,10 +491,6 @@ msgstr ""
 
 
 msgid "User details"
-msgstr ""
-
-
-msgid "User profile edit"
 msgstr ""
 
 
@@ -542,11 +518,11 @@ msgid "Write"
 msgstr ""
 
 
-msgid "Your Auth Key"
+msgid "Your Applications"
 msgstr ""
 
 
-msgid "Your Avatar"
+msgid "Your Devices"
 msgstr ""
 
 

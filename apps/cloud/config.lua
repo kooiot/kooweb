@@ -11,7 +11,9 @@ return {
 	},
 	i18n = true,
 
-	auth = 'mysql',
+	auth = {
+		name = 'mysql',
+	},
 
 	debug={
 		on = true,

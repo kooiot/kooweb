@@ -1,4 +1,9 @@
 
+<div class="ui styled fluid accordion">
+	<div class="active title">
+		<i class="dropdown icon"></i> <?=title or _('Applications') ?> <i class="list icon"></i>
+	</div>
+	<div class="active content">
 <? 
 local apps = {}
 for user, v in pairs(list) do 
@@ -49,3 +54,6 @@ for k, v in pairs(apps) do
 	<? end ?>
 </div>
 <? end ?>
+
+	</div>
+</div>

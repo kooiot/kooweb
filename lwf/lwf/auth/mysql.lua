@@ -9,11 +9,12 @@ local md5 = require 'md5'
 local _M = {}
 local class = {}
 
-_M.new = function(lwf, app)
+_M.new = function(lwf, app, cfg)
 	local obj = {
 		lwf = lwf,
 		app = app,
 		conn = conn,
+		cfg = cfg
 	}
 
 	return setmetatable(obj, {__index=class})
@@ -28,9 +29,9 @@ function class:startup()
 	local ok, err = conn:connect({
 		host = '127.0.0.1',
 		port = 3306,
-		database = 'kooweb',
-		user = 'root',
-		password = '19840310',
+		database = self.cfg.database or 'kooweb',
+		user = self.cfg.username or 'root',
+		password = self.cfg.password or '111111',
 		max_packet_size = 1024 * 1024,
 	})
 	if not ok then

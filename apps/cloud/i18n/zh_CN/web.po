@@ -7,26 +7,29 @@ msgstr "别名"
 msgid "Abort"
 msgstr "停止"
 
-msgid "About"
-msgstr "关于"
-
 msgid "Actions"
 msgstr "动作"
 
 msgid "Add"
 msgstr "添加"
 
-msgid "Add Keys"
-msgstr "增加密匙"
-
 msgid "Alias"
 msgstr "别名"
+
+msgid "All Message"
+msgstr "所有信息"
+
+msgid "All Notification"
+msgstr "所有通知"
 
 msgid "App"
 msgstr "应用"
 
 msgid "AppPath"
 msgstr "应用路径"
+
+msgid "Application"
+msgstr "应用"
 
 msgid "Applications"
 msgstr "应用列表"
@@ -49,11 +52,17 @@ msgstr "作者"
 msgid "CLA"
 msgstr ""
 
+msgid "Card"
+msgstr "卡片"
+
 msgid "Category"
 msgstr "分类"
 
 msgid "Change"
 msgstr "更改"
+
+msgid "Chart"
+msgstr "报表"
 
 msgid "Clean"
 msgstr "清理"
@@ -76,20 +85,14 @@ msgstr "控制"
 msgid "Create Applicatoin"
 msgstr "创建应用"
 
-msgid "Create an new application"
-msgstr "创新一个新的应用"
-
-msgid "Current Avatar"
-msgstr "当前头像"
+msgid "Dashboard"
+msgstr "主控面板"
 
 msgid "Delete"
 msgstr "删除"
 
 msgid "Description"
 msgstr "描述"
-
-msgid "Development Docs"
-msgstr "开发者文档"
 
 msgid "Development Reference"
 msgstr "开发手册"
@@ -100,8 +103,8 @@ msgstr "设备"
 msgid "Device Data"
 msgstr "设备数据"
 
-msgid "Device Keys"
-msgstr "设备密匙"
+msgid "Device Template"
+msgstr "设备模板"
 
 msgid "Device Templates"
 msgstr "设备模版"
@@ -115,13 +118,16 @@ msgstr "设备UUID密匙"
 msgid "Device details"
 msgstr "设备详情"
 
+msgid "Devices"
+msgstr "设备"
+
 msgid "Disable"
 msgstr "禁用"
 
 msgid "Document"
 msgstr "文档"
 
-msgid "Documentation"
+msgid "Documents"
 msgstr "文档"
 
 msgid "Download"
@@ -129,9 +135,6 @@ msgstr "下载"
 
 msgid "Dump to JSON"
 msgstr "获取数据(JSON)"
-
-msgid "Edit Profile"
-msgstr "档案编辑"
 
 msgid "Edit information"
 msgstr "编辑信息"
@@ -148,14 +151,11 @@ msgstr "文件"
 msgid "First Name"
 msgstr "名字"
 
-msgid "Forum"
+msgid "Form"
 msgstr "论坛"
 
 msgid "Generate"
 msgstr "生成"
-
-msgid "Go home"
-msgstr "下班回家收衣服了"
 
 msgid "Help"
 msgstr "帮助"
@@ -171,9 +171,6 @@ msgstr "主页"
 
 msgid "Home Automation"
 msgstr "家居自动化"
-
-msgid "How To Contributing"
-msgstr "如何加入"
 
 msgid "I agree to the terms and conditions"
 msgstr "我同意使用条款"
@@ -229,11 +226,11 @@ msgstr "登出"
 msgid "Logs"
 msgstr "日志"
 
+msgid "Mails"
+msgstr "邮件"
+
 msgid "Manage Device Keys"
 msgstr "管理设备密匙"
-
-msgid "Menu"
-msgstr "菜单"
 
 msgid "Messages"
 msgstr "信息"
@@ -241,35 +238,17 @@ msgstr "信息"
 msgid "Modify"
 msgstr "更新"
 
-msgid "My Apps"
-msgstr "我的应用"
-
-msgid "My Devices"
-msgstr "我的设备"
-
 msgid "NO."
 msgstr "序号"
 
 msgid "Name"
 msgstr "名称"
 
-msgid "New App"
-msgstr "新应用"
-
-msgid "New Core"
-msgstr "更新内核"
-
 msgid "New Password"
 msgstr "新密码"
 
 msgid "New Value"
 msgstr "新的值"
-
-msgid "News"
-msgstr "新闻"
-
-msgid "ODM"
-msgstr "客户定制"
 
 msgid "Original Password"
 msgstr "旧密码"
@@ -291,6 +270,9 @@ msgstr "密码"
 
 msgid "Path"
 msgstr "路径"
+
+msgid "Profile"
+msgstr "配置"
 
 msgid "Quality"
 msgstr "质量戳"
@@ -322,11 +304,8 @@ msgstr "发送"
 msgid "Services"
 msgstr "服务列表"
 
-msgid "Shows your own devices"
-msgstr "显示你的设备列表"
-
-msgid "Sign In"
-msgstr "登入"
+msgid "Settings"
+msgstr "设定"
 
 msgid "Sign Up"
 msgstr "注册"
@@ -337,8 +316,8 @@ msgstr "使用谷歌账户登入"
 msgid "Sign With QQ"
 msgstr "使用QQ账户登入"
 
-msgid "Smart Home"
-msgstr "智能家庭"
+msgid "SignIn"
+msgstr "登录"
 
 msgid "Source"
 msgstr "源"
@@ -349,8 +328,14 @@ msgstr "状态"
 msgid "Submit"
 msgstr "提交"
 
+msgid "Task"
+msgstr "任务"
+
 msgid "Timestamp"
 msgstr "时间戳"
+
+msgid "Tips"
+msgstr "提示"
 
 msgid "Total"
 msgstr "总共"
@@ -373,20 +358,17 @@ msgstr "上传新版本"
 msgid "Upload System Core"
 msgstr "上传新的核心程序"
 
-msgid "Upload an new core version"
-msgstr "上传新版本核心程序"
-
 msgid "Upload new application"
 msgstr "上传新应用"
+
+msgid "User Avatar"
+msgstr "用户头像"
 
 msgid "User Documents"
 msgstr "用户手册"
 
 msgid "User details"
 msgstr "用户详情"
-
-msgid "User profile edit"
-msgstr "用户档案编辑"
 
 msgid "Username"
 msgstr "用户名"
@@ -406,11 +388,86 @@ msgstr "欢迎"
 msgid "Write"
 msgstr "写入"
 
-msgid "Your Auth Key"
-msgstr "您的认证密匙"
+msgid "Your Applications"
+msgstr "您的应用列表"
 
-msgid "Your Avatar"
-msgstr "您的头像"
+msgid "Your Devices"
+msgstr "您的设备"
 
 msgid "version"
 msgstr "版本"
+
+#~ msgid "About"
+#~ msgstr "关于"
+
+#~ msgid "Add Keys"
+#~ msgstr "增加密匙"
+
+#~ msgid "Create an new application"
+#~ msgstr "创新一个新的应用"
+
+#~ msgid "Current Avatar"
+#~ msgstr "当前头像"
+
+#~ msgid "Development Docs"
+#~ msgstr "开发者文档"
+
+#~ msgid "Device Keys"
+#~ msgstr "设备密匙"
+
+#~ msgid "Documentation"
+#~ msgstr "文档"
+
+#~ msgid "Edit Profile"
+#~ msgstr "档案编辑"
+
+#~ msgid "Forum"
+#~ msgstr "论坛"
+
+#~ msgid "Go home"
+#~ msgstr "下班回家收衣服了"
+
+#~ msgid "How To Contributing"
+#~ msgstr "如何加入"
+
+#~ msgid "Menu"
+#~ msgstr "菜单"
+
+#~ msgid "My Apps"
+#~ msgstr "我的应用"
+
+#~ msgid "My Devices"
+#~ msgstr "我的设备"
+
+#~ msgid "New App"
+#~ msgstr "新应用"
+
+#~ msgid "New Core"
+#~ msgstr "更新内核"
+
+#~ msgid "News"
+#~ msgstr "新闻"
+
+#~ msgid "ODM"
+#~ msgstr "客户定制"
+
+#~ msgid "Shows your own devices"
+#~ msgstr "显示你的设备列表"
+
+#~ msgid "Sign In"
+#~ msgstr "登入"
+
+#~ msgid "Smart Home"
+#~ msgstr "智能家庭"
+
+#~ msgid "Upload an new core version"
+#~ msgstr "上传新版本核心程序"
+
+#~ msgid "User profile edit"
+#~ msgstr "用户档案编辑"
+
+#~ msgid "Your Auth Key"
+#~ msgstr "您的认证密匙"
+
+#~ msgid "Your Avatar"
+#~ msgstr "您的头像"
