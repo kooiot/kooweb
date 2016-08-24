@@ -7,7 +7,7 @@ return {
 		local db = app.model:get('keys')
 		db:init()
 		local username = lwf.ctx.user.username
-		local userkeys = db:list(username)
+		local userkeys = db:list(username) or {}
 		local alias_list = {}
 		for _, key in ipairs(userkeys) do
 			local r, err = db:alias(username, key)

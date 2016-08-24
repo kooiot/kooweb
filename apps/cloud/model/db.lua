@@ -1,4 +1,4 @@
-local redis = require 'resty.redis'
+local mysql = require 'resty.redis'
 local logger = require 'lwf.logger'
 local cjson = require 'cjson'
 

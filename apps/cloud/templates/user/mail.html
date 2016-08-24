@@ -1,8 +1,16 @@
 
 <? extend 'layout.html' ?>
-<h2><i class="table icon"></i> <?=_("Manage Device Keys")?> </h2>
-<div class="ui divider"></div>
-
+<div class="tab header segment">
+	<div class="container">
+		<div class="introduction">
+			<h1 class="ui dividing header">
+				<?=_("Your Mails")?>
+			</h1>
+			<br>
+		</div>
+	</div>
+</div>
+<div class="main container">
 	<form class="ui form" method="post">
 		<input type="hidden" name="action" value="add"/>
 		<div class="inline fields">
@@ -39,20 +47,10 @@
 				<?=key?>
 			</td>
 			<td>
-				<form class="ui small fluid form" method="post">
-					<div class="inline fields">
-						<input name="action" type="hidden" value="alias"/>
-						<input name="key" type="hidden" value="<?=key?>"/>
-						<div class="field">
-							<div class="ui mini input">
-								<input name="alias" type="text" value="<?=alias_list[key]?>"/>
-							</div>
-						</div>
-						<div class="field">
-							<input type="submit" class="ui mini teal submit button" value="<?=_('Change')?>"/>
-						</div>
-					</div>
-				</form>
+				<div class="ui action input">
+					<input type="text" value="<?=alias_list[key]?>"/>
+					<button class="ui button" onclick="change_alias('<?=key?')"> <?=_("Change")?> </button>
+				</div>
 			</td>
 			<td>
 				<a class="ui tiny button" onclick="delete_key('<?=key?>')"> <?=_("Delete")?></a>
@@ -108,4 +106,5 @@
 		});
 
 	</script>
+</div>
 

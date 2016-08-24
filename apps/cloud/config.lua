@@ -13,6 +13,7 @@ return {
 
 	auth = {
 		name = 'mysql',
+		password = '19840310',
 	},
 
 	debug={
