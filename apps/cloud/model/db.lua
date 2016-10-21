@@ -1,4 +1,4 @@
-local mysql = require 'resty.redis'
+local mysql = require 'resty.mysql'
 local logger = require 'lwf.logger'
 local cjson = require 'cjson'
 
@@ -20,9 +20,16 @@ function class:init()
 		return true
 	end
 
-	local con = redis:new()
+	local con = mysql:new()
 	con:set_timeout(500)
-	local ok, err = con:connect('127.0.0.1', 6379)
+	local ccfg = {
+		database='kooweb',
+		host='127.0.0.1',
+		port=3306,
+		user='root',
+		password='19840310'
+	}
+	local ok, err = con:connect(ccfg)
 	if not ok then
 		print(err)
 		logger:error(err)
@@ -41,14 +48,12 @@ function class:list_apps(username)
 	assert(username)
 	local con = self.con
 	if con then
-		local r, err = con:smembers('app.set.of.'..username)
-		if r and r ~= ngx.null then
+		local sql = 'select * from gapps where owner=`'..username..'`'
+		local r, err = con:query(sql)
+		if r then
 			local apps = {}
 			for k, v in pairs(r) do
-				local appinfo, err = self:get_app(username, v)
-				if appinfo then
-					apps[k] = {name=v, info=appinfo}
-				end
+				apps[k] = {name=r.name, info=r}
 			end
 			return apps
 		else
@@ -62,13 +67,10 @@ function class:list_all()
 	local apps = {}
 	local con = self.con
 	if con then
-		local users, err = con:keys('app.set.of.*')
-		for _, user in pairs(users) do
-			local user = user:match('^app%.set%.of%.(.+)$')
-			if user then
-				--print(user)
-				apps[user] = self:list_apps(user)
-			end
+		local sql = 'select * from gapps order by pop limit 10'
+		local r, err = con:query(sql)
+		if r then
+			apps = r
 		end
 	end
 	return apps
