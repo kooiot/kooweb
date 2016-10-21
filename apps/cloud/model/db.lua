@@ -47,27 +47,28 @@ end
 function class:list_apps(username)
 	assert(username)
 	local con = self.con
-	if con then
-		local sql = 'select * from gapps where owner=`'..username..'`'
-		local r, err = con:query(sql)
-		if r then
-			local apps = {}
-			for k, v in pairs(r) do
-				apps[k] = {name=r.name, info=r}
-			end
-			return apps
-		else
-			return nil, err
-		end
+	if not con then
+		return nil, 'Database connection is not initialized'
 	end
-	return nil, 'Database connection is not initialized'
+
+	local sql = "select * from gapps where owner='"..username.."'"
+	local r, err = con:query(sql)
+	if r then
+		local apps = {}
+		for k, v in pairs(r) do
+			apps[k] = {name=r.name, info=r}
+		end
+		return apps
+	else
+		return nil, err
+	end
 end
 
 function class:list_all()
 	local apps = {}
 	local con = self.con
 	if con then
-		local sql = 'select * from gapps order by pop limit 10'
+		local sql = 'select * from apps order by votes limit 50'
 		local r, err = con:query(sql)
 		if r then
 			apps = r
@@ -79,39 +80,61 @@ end
 function class:get_app(username, appname)
 	assert(appname)
 	local con = self.con
-	if con then
-		local info, err = con:get('appinfo.'..username..'.'..appname)
-		if info and info ~= ngx.null then
-			return cjson.decode(info)
-		end
+	if not con then
+		return nil, 'Database connection is not initialized'
 	end
-	return nil, 'Database connection is not initialized'
+
+	local sql = "select * from apps where owner='"..username.."'and name='"..appname.."'"
+	local r, err = con:query(sql)
+
+	if r then
+		return r[1]
+	else
+		return nil, err
+	end
 end
 
-function class:create_app(username, appname, info)
+function class:create_app(info)
 	local con = self.con
-	if con then
-		con:sadd('app.set.of.'..username, appname)
-		return con:set('appinfo.'..username..'.'..appname, cjson.encode(info))
+	if not con then
+		return nil, 'Database connection is not initialized'
 	end
-	return nil, 'Database connection is not initialized'
+
+	local fmt = "insert into apps (name, owner, desc, version, votes, comments) values ('%s', '%s', '%s', '%s', %f, '%s'"
+	local res, err = con:query(string.format(fmt, info.name, info.owner, info.desc, info.version, info.votes, info.comments))
+
+	print(res.affected_rows, " rows inserted into table cats ", "(last insert id: ", res.insert_id, ")")
+	return res, err
 end
 
 function class:delete_app(username, appname)
 	local con = self.con
-	if con then
-		con:srem('app.set.of.'..username, appname)
-		return con:set('appinfo.'..username..'.'..appname, cjson.encode(info))
+	if not con then
+		return nil, 'Database connection is not initialized'
 	end
 
-	return nil, 'Database connection is not initialized'
+	local fmt = "delete from apps where name='%s' and owner='%s'"
+	return con:query(string.format(fmt, appname, username))
 end
 
-function class:update_app(username, appname, info)
+function class:delete_app_by_id(id)
 	local con = self.con
-	if con then
-		return con:set('appinfo.'..username..'.'..appname, cjson.encode(info))
+	if not con then
+		return nil, 'Database connection is not initialized'
 	end
+
+	local fmt = "delete from apps where id=%d"
+	return con:query(string.format(fmt, id))
+end
+
+function class:update_app(info)
+	local con = self.con
+	if not con then
+		return nil, 'Database connection is not initialized'
+	end
+
+	local fmt = "update apps set name='%s', owner='%s', desc='%s', version='%s', votes=%f, comments='%s' where id=%d"
+	return con:query(string.format(fmt, info.name, info.owner, info.desc, info.version, info.votes, info.comments, info.id))
 end
 
 function class:check_user_key(key)
