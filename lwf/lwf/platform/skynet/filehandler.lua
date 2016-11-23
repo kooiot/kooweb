@@ -2,7 +2,6 @@ local lfs = require "lfs"
 local util = require "lwf.util"
 local mime = require "lwf.platform.skynet.mime"
 local enc = require "lwf.platform.skynet.encoding"
-local err = require "lwf.platform.skynet.err"
 
 -- gets the mimetype from the filename's extension
 local function mimefrompath (path)
@@ -67,7 +66,8 @@ local function sendfile (f, res, numbytes)
 			left = left - string.len (block)
 			blocksize = math.min (blocksize, left)
 		end
-		res:send_data (block)
+		--res:send_data (block)
+		res:write(block)
 	end
 end
 
@@ -88,15 +88,12 @@ end
 -- main handler
 local function filehandler (app, baseDir, req, res, relpath)
 	local lwf = app.lwf
-	print('filehandler relpath', relpath)
 
 	if req.method ~= "GET" and req.method ~= "HEAD" then
-		print('405')
 		return lwf.exit(405)
 	end
 
 	if not in_base(relpath) then
-		print('403')
 		return lwf.exit(403)
 	end
 
@@ -105,13 +102,11 @@ local function filehandler (app, baseDir, req, res, relpath)
 	res.headers ["Content-Type"] = mimefrompath (path)
 	res.headers ["Content-Encoding"] = encodingfrompath (path)
 
-	print('filehandler path', path)
 	local attr = lfs.attributes (path)
 	if not attr then
 		return lwf.exit(404)
 	end
 	assert (type(attr) == "table")
-	print('send....')
 
 	if attr.mode == "directory" then
 		req.parsed_url.path = req.parsed_url.path .. "/"
