@@ -1,5 +1,6 @@
 
 local util = require 'lwf.util'
+local req = require 'lwf.platform.skynet.req'
 local Request = {}
 
 local get_headers = function(env)
@@ -19,6 +20,7 @@ end
 
 local function new(lwf)
 	local env = lwf.ctx.sky_env
+	local t = req.new(env)
 
 	local ret = {
 		lwf		= lwf,
@@ -36,8 +38,8 @@ local function new(lwf)
 		remote_port     = env.REMOTE_PORT,
 		content_type    = env.CONTENT_TYPE,
 		content_length  = env.CONTENT_LENGTH,
-		uri_args        = env.GET,
-		post_args	= env.POST,
+		uri_args        = t.GET,
+		post_args	= t.POST,
 		socket          = env.socket,
 		cookies		= env.cookies,
 	}

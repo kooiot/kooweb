@@ -41,7 +41,6 @@ local function static(app, route_map, uri, basedir)
 	local lwf = app.lwf
 
 	if lwf.static_handler then
-		print('Create static', uri, basedir)
 		local s = lwf.static_handler(app, basedir)
 		table.insert(route_map, {uri, s})
 	end
