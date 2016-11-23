@@ -14,8 +14,8 @@ local function setup_app(lwf)
 end
 
 
-local function setup(plat)
-	local lwf = platform(plat)
+local function setup(plat, ...)
+	local lwf = platform(plat, ...)
 	local ok, app = pcall(setup_app, lwf)
 
 	local function content(ctx)

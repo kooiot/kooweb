@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------------
--- Wraps lws into a WSAPI app with error handling.
+-- Wraps skynet into a WSAPI app with error handling.
 -- Author: Dirk Chang (dirk@kooiot.com)
 -- License: MIT/X 
 -----------------------------------------------------------------------------

@@ -38,7 +38,7 @@ function encode(to_encode)
     local byte_as_int
     local function byte_to_bits(byte)
         byte_as_int = string.byte(byte)
-        return hex_to_binary[string.format("%x", byte_as_int/16)]
+        return hex_to_binary[string.format("%x", math.floor(byte_as_int/16))]
                ..hex_to_binary[string.format("%x", byte_as_int%16)]
     end
     local bit_pattern = to_encode:gsub(".", byte_to_bits)
@@ -76,7 +76,7 @@ function decode(to_decode)
     local code
     local function letter_to_bits(char)
        code = letter_to_int[char]
-       return string.sub(hex_to_binary[string.format("%x", code/16)]
+       return string.sub(hex_to_binary[string.format("%x", math.floor(code/16))]
                          ..hex_to_binary[string.format("%x", code%16)], 3)
     end
     -- convert the unpadded input into bits using gsub
