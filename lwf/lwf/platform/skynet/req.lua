@@ -196,7 +196,7 @@ function _M.new(wsapi_env, options)
     return var
   end})
   req.cookies = {}
-  local cookies = string.gsub(";" .. (wsapi_env.HTTP_COOKIE or "") .. ";",
+  local cookies = string.gsub(";" .. (wsapi_env.header["cookie"] or "") .. ";",
             "%s*;%s*", ";")
   setmetatable(req.cookies, { __index = function (tab, name)
     name = name

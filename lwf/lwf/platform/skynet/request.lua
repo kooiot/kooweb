@@ -33,15 +33,14 @@ local function new(lwf)
 		filename        = env.script_name,
 		query_string    = env.query,
 		headers         = get_headers(env),
-		user_agent      = env.HTTP_USER_AGENT,
-		remote_addr     = env.REMOTE_ADDR,
-		remote_port     = env.REMOTE_PORT,
-		content_type    = env.CONTENT_TYPE,
-		content_length  = env.CONTENT_LENGTH,
+		user_agent      = env.header["user-agent"],
+		--remote_addr     = env.REMOTE_ADDR,
+		--remote_port     = env.REMOTE_PORT,
+		content_type    = env.header["content-type"],
+		content_length  = tonumber(env.header["content-length"]) or 0,
 		uri_args        = t.GET,
 		post_args	= t.POST,
-		socket          = env.socket,
-		cookies		= env.cookies,
+		cookies		= t.cookies,
 	}
 
 	return setmetatable(ret, {__index=Request})
