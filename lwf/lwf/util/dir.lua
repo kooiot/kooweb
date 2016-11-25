@@ -1,20 +1,32 @@
 local _M = {}
 
+local lfs_loaded, lfs = pcall(require, 'lfs')
+
 function _M.scan(directory)
-	local t = {}
-	local f, err = io.popen('ls -a "'..directory..'"')
-	if not f then
-		return nil, err
-	end
-
-	for filename in f:lines() do
-		if filename ~= '.' and filename ~= '..' then
-			t[#t + 1] = directory..'/'..filename
+	if lfs_loaded then 
+		local t = {}
+		for k,v in pairs(lfs.dir(directory)) do
+			if filename ~= '.' and filename ~= '..' then
+				t[#t + 1] = directory..'/'..filename
+			end
 		end
-	end
-	f:close()
+		return t
+	else
+		local t = {}
+		local f, err = io.popen('ls -a "'..directory..'"')
+		if not f then
+			return nil, err
+		end
 
-	return t
+		for filename in f:lines() do
+			if filename ~= '.' and filename ~= '..' then
+				t[#t + 1] = directory..'/'..filename
+			end
+		end
+		f:close()
+
+		return t
+	end
 end
 
 function _M.scan_file(directory, ext)
