@@ -5,7 +5,7 @@ local lfs_loaded, lfs = pcall(require, 'lfs')
 function _M.scan(directory)
 	if lfs_loaded then 
 		local t = {}
-		for k,v in pairs(lfs.dir(directory)) do
+		for filename in lfs.dir(directory) do
 			if filename ~= '.' and filename ~= '..' then
 				t[#t + 1] = directory..'/'..filename
 			end
