@@ -55,7 +55,7 @@ end
 
 function Response:write(content)
     if self._eof==true then
-        local error_info = "Moochine WARNING: The response has been explicitly finished before."
+        local error_info = "Kooweb WARNING: The response has been explicitly finished before."
         logger:warn(error_info)
         return
     end
@@ -65,7 +65,7 @@ end
 
 function Response:writeln(content)
     if self._eof==true then
-        local error_info = "Moochine WARNING: The response has been explicitly finished before."
+        local error_info = "Kooweb WARNING: The response has been explicitly finished before."
         logger:warn(error_info)
         return
     end
