@@ -16,11 +16,11 @@ msgstr "添加"
 msgid "Alias"
 msgstr "别名"
 
-msgid "All Message"
-msgstr "所有信息"
+msgid "All Mails"
+msgstr ""
 
-msgid "All Notification"
-msgstr "所有通知"
+msgid "All Messages"
+msgstr ""
 
 msgid "App"
 msgstr "应用"
@@ -394,8 +394,17 @@ msgstr "您的应用列表"
 msgid "Your Devices"
 msgstr "您的设备"
 
+msgid "Your Mails"
+msgstr ""
+
 msgid "version"
 msgstr "版本"
+
+#~ msgid "All Message"
+#~ msgstr "所有信息"
+
+#~ msgid "All Notification"
+#~ msgstr "所有通知"
 
 #~ msgid "About"
 #~ msgstr "关于"

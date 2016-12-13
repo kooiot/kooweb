@@ -5,16 +5,19 @@ local Request = {}
 
 local get_headers = function(env)
 	local headers = {}
-	headers['Host']= env.HTTP_HOST
-	headers['User-Agent'] = env.HTTP_USER_AGENT
-	headers['Accept'] = env.HTTP_ACCEPT
-	headers['Accept-Language'] = env.HTTP_ACCEPT_LANGUAGE
-	headers['Accept-Encodeing'] = env.HTTP_ACCEPT_ENCODING
-	headers['Cookie'] = env.HTTP_COOKIE
-	headers['Connection'] = env.HTTP_CONNECTION
-	headers['if-modified-since'] = env.IF_MODIFIED_SINCE
-	headers['last-modified'] = env.LAST_MODIFIED
-	headers['Referer'] = env.HTTP_REFERER
+	local header = env.header
+	headers['Host']= header.host
+	headers['User-Agent'] = header['user-agent']
+	headers['Accept'] = header.accept
+	headers['Accept-Language'] = header['accept-language']
+	headers['Accept-Encoding'] = header['accept-encoding']
+	headers['Cookie'] = header.cookie
+	headers['Connection'] = header.connection
+	headers['if-modified-since'] = header['if-modified-since']
+	headers['last-modified'] = header['last-modified']
+	headers['Referer'] = header.referer
+	headers['Content-Type'] = header['content-type']
+	headers['Content-Length'] = header['content-length']
 	return headers
 end
 

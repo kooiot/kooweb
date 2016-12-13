@@ -3,7 +3,7 @@
 if #arg < 1 then
 	print( "Usage: "..arg[0].." <source direcory>")
 end
-local find_cmd = "find "..table.concat(arg).." -type f '(' -name '*.html' -o -name '*.lua' ')'"
+local find_cmd = "find "..table.concat(arg).."/ -type f '(' -name '*.html' -o -name '*.lua' ')'"
 local f = io.popen(find_cmd)
 
 local stringtable = {}

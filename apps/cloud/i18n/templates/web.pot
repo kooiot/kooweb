@@ -22,11 +22,11 @@ msgid "Alias"
 msgstr ""
 
 
-msgid "All Message"
+msgid "All Mails"
 msgstr ""
 
 
-msgid "All Notification"
+msgid "All Messages"
 msgstr ""
 
 
@@ -523,6 +523,10 @@ msgstr ""
 
 
 msgid "Your Devices"
+msgstr ""
+
+
+msgid "Your Mails"
 msgstr ""
 
 
