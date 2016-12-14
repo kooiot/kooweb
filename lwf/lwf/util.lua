@@ -301,16 +301,16 @@ function _M.loadfile(file, env)
 	end
 
 	------------- for skynet loading -------------
+	--[[
 	local ff, err = io.open(file, "r")
 	if not ff then
 		return nil, err
 	end
 	local f, err = load(ff:read('*a'), nil, nil, env)
 	ff:close()
-	------------------ else ----------------------
-	--[[
-	local f, err = loadfile(file, nil, env)
 	]]
+	------------------ else ----------------------
+	local f, err = loadfile(file, nil, env)
 	-------------------end------------------------
 	if not f then
 		return nil, err
