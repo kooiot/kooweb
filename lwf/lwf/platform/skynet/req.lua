@@ -114,20 +114,20 @@ local function parse_multipart_data(input, input_type, tab, overwrite)
   return tab
 end
 
-local function parse_post_data(wsapi_env, tab, overwrite)
+local function parse_post_data(sky_env, tab, overwrite)
   tab = tab or {}
-  local input_type = wsapi_env.header["content-type"] or ""
+  local input_type = sky_env.header["content-type"] or ""
   if string.find(input_type, "x-www-form-urlencoded", 1, true) then
-    local length = tonumber(wsapi_env.header["content-length"]) or 0
-    parse_qs(wsapi_env.body_data:sub(1, length) or "", tab, overwrite)
+    local length = tonumber(sky_env.header["content-length"]) or 0
+    parse_qs(sky_env.body_data:sub(1, length) or "", tab, overwrite)
   elseif string.find(input_type, "multipart/form-data", 1, true) then
-    local length = tonumber(wsapi_env.header["content-length"]) or 0
+    local length = tonumber(sky_env.header["content-length"]) or 0
     if length > 0 then
-       parse_multipart_data(wsapi_env.body_data:sub(1, length) or "", input_type, tab, overwrite)
+       parse_multipart_data(sky_env.body_data:sub(1, length) or "", input_type, tab, overwrite)
     end
   else
-    local length = tonumber(wsapi_env.header["content-length"]) or 0
-    tab.post_data = wsapi_env.body_data:sub(1, length) or ""
+    local length = tonumber(sky_env.header["content-length"]) or 0
+    tab.post_data = sky_env.body_data:sub(1, length) or ""
   end
   return tab
 end
@@ -172,21 +172,21 @@ function methods:empty_param(param)
   return self:empty(self.params[param])
 end
 
-function _M.new(wsapi_env, options)
+function _M.new(sky_env, options)
   options = options or {}
   local req = {
     GET          = {},
     POST         = {},
   }
-  parse_qs(wsapi_env.query, req.GET, options.overwrite)
+  parse_qs(sky_env.query, req.GET, options.overwrite)
   if options.delay_post then
     req.parse_post = function (self)
-      parse_post_data(wsapi_env, self.POST, options.overwrite)
+      parse_post_data(sky_env, self.POST, options.overwrite)
       self.parse_post = function () return nil, "postdata already parsed" end
       return self.POST
     end
   else
-    parse_post_data(wsapi_env, req.POST, options.overwrite)
+    parse_post_data(sky_env, req.POST, options.overwrite)
     req.parse_post = function () return nil, "postdata already parsed" end
   end
   req.params = {}
@@ -196,12 +196,10 @@ function _M.new(wsapi_env, options)
     return var
   end})
   req.cookies = {}
-  local cookies = string.gsub(";" .. (wsapi_env.header["cookie"] or "") .. ";",
-            "%s*;%s*", ";")
+  local cookies = string.gsub(";" .. (sky_env.header["cookie"] or "") .. ";", "%s*;%s*", ";")
   setmetatable(req.cookies, { __index = function (tab, name)
     name = name
-    local pattern = ";" .. name ..
-      "=(.-);"
+    local pattern = ";" .. name .. "=(.-);"
     local cookie = string.match(cookies, pattern)
     cookie = util.url_decode(cookie)
     rawset(tab, name, cookie)
